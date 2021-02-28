@@ -34,6 +34,11 @@ get_cbioportal_db <- function(db = NULL) {
       You can also specify `db = 'public'` to connect to https://www.cbioportal.org/")
     }
   } else {
+    if(stringr::str_detect(db, c("mskcc")) &
+       !stringr::str_detect(db, c("api"))) {
+      db <- paste0(db, "\api")
+    }
+
     db <- db
 
     db_url <- dplyr::case_when(
