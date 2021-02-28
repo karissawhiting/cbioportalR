@@ -34,9 +34,19 @@ get_cbioportal_db <- function(db = NULL) {
       You can also specify `db = 'public'` to connect to https://www.cbioportal.org/")
     }
   } else {
-    if(stringr::str_detect(db, c("mskcc")) &
-       !stringr::str_detect(db, c("api"))) {
-      db <- paste0(db, "\api")
+
+    # For MSK users ------
+    if (stringr::str_detect(db, c("mskcc"))) {
+      if (!stringr::str_detect(db, c("api"))) {
+        db <- paste0(db, "/api")
+      }
+
+      if (stringr::str_detect(db, "https://")) {
+
+        # if a user passes https://, remove it. this will be added automatically
+        # in the API calls themselves
+        db <- stringr::str_remove(db, "https://")
+      }
     }
 
     db <- db
@@ -48,7 +58,6 @@ get_cbioportal_db <- function(db = NULL) {
   }
 
   assign("base_url", db_url, envir = .GlobalEnv)
-
 }
 
 #' Check for cBioPortal DB
