@@ -11,16 +11,18 @@ get_genetics(
   panel = NULL,
   mutations = TRUE,
   fusions = TRUE,
-  cna = TRUE,
-  seg = FALSE
+  cna = TRUE
 )
 }
 \arguments{
-\item{sample_ids}{A character vector of sample ids}
+\item{sample_ids}{A character vector of sample ids. Can be NULL if a \code{study_id} is passed. If sample IDs are
+passed with no \code{study_id}, IMPACT studies will be queried by default.
+If non IMPACT ID samples passed, a \code{study_id} is required as well to retrieve data.}
 
-\item{study_id}{A character vector of length 1 specifying study to query. See \code{get_studies()} to see list of available studies.}
+\item{study_id}{A character vector study IDs. See \code{get_studies()} to see available studies. If passed with no specified \code{sample_id}
+all samples for specified studies will be returned.}
 
-\item{genes}{A list of genes to query. default is all impact genes.}
+\item{genes}{A vector of Entrez IDs of genes to query. default is all impact genes.}
 
 \item{panel}{OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
 the panel will be looked up with \code{get_panel()} and only genes in that panel will be returned.}
@@ -30,8 +32,6 @@ the panel will be looked up with \code{get_panel()} and only genes in that panel
 \item{fusions}{Boolean specifying if fusion data should be fetched. Default is TRUE.}
 
 \item{cna}{Boolean specifying if cna data should be fetched. Default is TRUE.}
-
-\item{seg}{Boolean specifying if segmentation data should be fectched. Default is FALSE.}
 }
 \value{
 A list of dataframes containing genetic data.
@@ -40,13 +40,6 @@ A list of dataframes containing genetic data.
 Get all genetic data for a study or list of IDs
 }
 \examples{
-\dontrun{
-# IMPACT #
-get_genetics(sample_ids = c("P-0000004-T01-IM3", "P-0000012-T02-IM3"),
-genes = 207)
-
-# TCGA #
-get_genetics(sample_ids =  c("TCGA-17-Z023-01","TCGA-02-0003-01","TCGA-02-0055-01"),
- database = "tcga")
-}
+get_cbioportal_db("public")
+get_genetics(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"))
 }

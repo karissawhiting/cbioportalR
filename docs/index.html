@@ -69,7 +69,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#cbioportalr" class="anchor"></a>cbioportalR</h1></div>
 <p>{cbioportalR} allows you to access cBioPortal’s genomic and clinical data directly through R. The package wraps cBioPortal’s existing API endpoints in R so R users can easily leverage cBioPortal’s API. Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study).</p>
-<p>This package was created to work with both <a href="https://www.cbioportal.org/">the public cBioPortal website</a>, as well as MSK’s private institutional cbioportal database. To connect to a private database, you must first get an access token and supply the specific API url at the beginning of your session (details below).</p>
+<p>This package was created to work with both <a href="https://www.cbioportal.org/">the public cBioPortal website</a>, as well as MSK’s private institutional cbioportal database. To connect to a private database, you must first get an access token (or whatever credentials your institution requires) and supply the specific API url at the beginning of your session (details below).</p>
 <p>For more information on cBioPortal, see the following publications:</p>
 <ul>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/23550210/">Gao et al. Sci. Signal. 2013</a></li>
@@ -125,18 +125,18 @@
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="reference/get_studies.html">get_studies</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 10 x 13</span>
-<span class="co">#&gt;    name  shortName description publicStudy pmid  citation groups status</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt;</span>
-<span class="co">#&gt;  1 Oral… Head &amp; n… Comprehens… TRUE        2361… Pickeri… ""          0</span>
-<span class="co">#&gt;  2 Hepa… HCC (Ins… Whole-exom… TRUE        2582… Schulze… "PUBL…      0</span>
-<span class="co">#&gt;  3 Uvea… UM (QIMR) Whole-geno… TRUE        2668… Johanss… "PUBL…      0</span>
-<span class="co">#&gt;  4 Neur… NBL (AMC) Whole geno… TRUE        2236… Molenaa… "PUBL…      0</span>
-<span class="co">#&gt;  5 Naso… NPC (Sin… Whole exom… TRUE        2495… Lin et … "PUBL…      0</span>
-<span class="co">#&gt;  6 Neur… NBL (Col… Whole-geno… TRUE        2646… Peifer … ""          0</span>
-<span class="co">#&gt;  7 Myel… MDS (Tok… Whole exom… TRUE        2190… Yoshida… ""          0</span>
-<span class="co">#&gt;  8 Insu… Panet (S… Whole exom… TRUE        2432… Cao et … ""          0</span>
-<span class="co">#&gt;  9 Pleu… PLMESO (… Whole-exom… TRUE        2548… Guo et … ""          0</span>
-<span class="co">#&gt; 10 Pilo… PAST (Na… Whole-geno… TRUE        2381… Jones e… "PUBL…      0</span>
+<span class="co">#&gt;    name     shortName  description     publicStudy pmid  citation  groups status</span>
+<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;           &lt;lgl&gt;       &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;</span>
+<span class="co">#&gt;  1 Oral Sq… Head &amp; ne… Comprehensive … TRUE        2361… Pickerin… ""          0</span>
+<span class="co">#&gt;  2 Hepatoc… HCC (Inse… Whole-exome se… TRUE        2582… Schulze … "PUBL…      0</span>
+<span class="co">#&gt;  3 Uveal M… UM (QIMR)  Whole-genome o… TRUE        2668… Johansso… "PUBL…      0</span>
+<span class="co">#&gt;  4 Neurobl… NBL (AMC)  Whole genome s… TRUE        2236… Molenaar… "PUBL…      0</span>
+<span class="co">#&gt;  5 Nasopha… NPC (Sing… Whole exome se… TRUE        2495… Lin et a… "PUBL…      0</span>
+<span class="co">#&gt;  6 Neurobl… NBL (Colo… Whole-genome s… TRUE        2646… Peifer e… ""          0</span>
+<span class="co">#&gt;  7 Myelody… MDS (Toky… Whole exome se… TRUE        2190… Yoshida … ""          0</span>
+<span class="co">#&gt;  8 Insulin… Panet (Sh… Whole exome se… TRUE        2432… Cao et a… ""          0</span>
+<span class="co">#&gt;  9 Pleural… PLMESO (N… Whole-exome se… TRUE        2548… Guo et a… ""          0</span>
+<span class="co">#&gt; 10 Pilocyt… PAST (Nat… Whole-genome s… TRUE        2381… Jones et… "PUBL…      0</span>
 <span class="co">#&gt; # … with 5 more variables: importDate &lt;chr&gt;, allSampleCount &lt;int&gt;,</span>
 <span class="co">#&gt; #   studyId &lt;chr&gt;, cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></pre></div>
 <p>To pull mutation data for a particular study ID you can use:</p>
@@ -152,18 +152,18 @@
 <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; $mut</span>
 <span class="co">#&gt; # A tibble: 562 x 31</span>
-<span class="co">#&gt;    uniqueSampleKey uniquePatientKey molecularProfil… Tumor_Sample_Ba… patientId</span>
-<span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    </span>
-<span class="co">#&gt;  1 TjU5NVQ6bmJsX2… TjU5NTpuYmxfYW1… nbl_amc_2012_mu… N595T            N595     </span>
-<span class="co">#&gt;  2 TjYwOFQ6bmJsX2… TjYwODpuYmxfYW1… nbl_amc_2012_mu… N608T            N608     </span>
-<span class="co">#&gt;  3 TjcxOFQ6bmJsX2… TjcxODpuYmxfYW1… nbl_amc_2012_mu… N718T            N718     </span>
-<span class="co">#&gt;  4 TjU3MlQ6bmJsX2… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     </span>
-<span class="co">#&gt;  5 Tjc0NFQ6bmJsX2… Tjc0NDpuYmxfYW1… nbl_amc_2012_mu… N744T            N744     </span>
-<span class="co">#&gt;  6 TjU2MVQ6bmJsX2… TjU2MTpuYmxfYW1… nbl_amc_2012_mu… N561T            N561     </span>
-<span class="co">#&gt;  7 TjU0OFQ6bmJsX2… TjU0ODpuYmxfYW1… nbl_amc_2012_mu… N548T            N548     </span>
-<span class="co">#&gt;  8 TjU3MlQ6bmJsX2… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     </span>
-<span class="co">#&gt;  9 TjU3NVQ6bmJsX2… TjU3NTpuYmxfYW1… nbl_amc_2012_mu… N575T            N575     </span>
-<span class="co">#&gt; 10 TjUwOFQ6bmJsX2… TjUwODpuYmxfYW1… nbl_amc_2012_mu… N508T            N508     </span>
+<span class="co">#&gt;    uniqueSampleKey  uniquePatientKey molecularProfil… Tumor_Sample_Ba… patientId</span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    </span>
+<span class="co">#&gt;  1 TjU5NVQ6bmJsX2F… TjU5NTpuYmxfYW1… nbl_amc_2012_mu… N595T            N595     </span>
+<span class="co">#&gt;  2 TjYwOFQ6bmJsX2F… TjYwODpuYmxfYW1… nbl_amc_2012_mu… N608T            N608     </span>
+<span class="co">#&gt;  3 TjcxOFQ6bmJsX2F… TjcxODpuYmxfYW1… nbl_amc_2012_mu… N718T            N718     </span>
+<span class="co">#&gt;  4 TjU3MlQ6bmJsX2F… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     </span>
+<span class="co">#&gt;  5 Tjc0NFQ6bmJsX2F… Tjc0NDpuYmxfYW1… nbl_amc_2012_mu… N744T            N744     </span>
+<span class="co">#&gt;  6 TjU2MVQ6bmJsX2F… TjU2MTpuYmxfYW1… nbl_amc_2012_mu… N561T            N561     </span>
+<span class="co">#&gt;  7 TjU0OFQ6bmJsX2F… TjU0ODpuYmxfYW1… nbl_amc_2012_mu… N548T            N548     </span>
+<span class="co">#&gt;  8 TjU3MlQ6bmJsX2F… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     </span>
+<span class="co">#&gt;  9 TjU3NVQ6bmJsX2F… TjU3NTpuYmxfYW1… nbl_amc_2012_mu… N575T            N575     </span>
+<span class="co">#&gt; 10 TjUwOFQ6bmJsX2F… TjUwODpuYmxfYW1… nbl_amc_2012_mu… N508T            N508     </span>
 <span class="co">#&gt; # … with 552 more rows, and 26 more variables: entrezGeneId &lt;int&gt;,</span>
 <span class="co">#&gt; #   studyId &lt;chr&gt;, center &lt;chr&gt;, Mutation_Status &lt;chr&gt;, validationStatus &lt;chr&gt;,</span>
 <span class="co">#&gt; #   startPosition &lt;int&gt;, endPosition &lt;int&gt;, referenceAllele &lt;chr&gt;,</span>

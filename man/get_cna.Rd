@@ -4,12 +4,15 @@
 \alias{get_cna}
 \title{Get copy number alterations by sample ID or study ID}
 \usage{
-get_cna(study_id = NULL, sample_ids = NULL, panel = NULL, genes = "all_impact")
+get_cna(sample_id = NULL, study_id = NULL, panel = NULL, genes = NULL)
 }
 \arguments{
-\item{study_id}{A character vector of lenth 1 indicating study_id. See \code{get_studies()} to see available studies.}
+\item{sample_id}{A character vector of sample ids. Can be NULL if a \code{study_id} is passed. If sample IDs are
+passed with no \code{study_id}, IMPACT studies will be queried by default.
+If non IMPACT ID samples passed, a \code{study_id} is required as well to retrieve data.}
 
-\item{sample_ids}{A character vector of sample ids}
+\item{study_id}{A character vector study IDs. See \code{get_studies()} to see available studies. If passed with no specified \code{sample_id}
+all samples for specified studies will be returned.}
 
 \item{panel}{OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
 the panel will be looked up with \code{get_panel()} and only genes in that panel will be returned.}
@@ -23,9 +26,7 @@ A dataframe of CNA for each sample ID (in maf file format)
 Get copy number alterations by sample ID or study ID
 }
 \examples{
-\dontrun{
 get_cbioportal_db('public')
-get_cna(sample_ids = c("TCGA-19-5959-01", "TCGA-18-4083-01"))
-}
+get_cna(sample_id = c("P-0000004-T01-IM3", "P-0000015-T01-IM3"))
 
 }

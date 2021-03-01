@@ -14,8 +14,9 @@ points (depending on the study).
 This package was created to work with both [the public cBioPortal
 website](https://www.cbioportal.org/), as well as MSK’s private
 institutional cbioportal database. To connect to a private database, you
-must first get an access token and supply the specific API url at the
-beginning of your session (details below).
+must first get an access token (or whatever credentials your institution
+requires) and supply the specific API url at the beginning of your
+session (details below).
 
 For more information on cBioPortal, see the following publications:
 
@@ -114,18 +115,18 @@ are connected to), you can use:
 ``` r
 get_studies() %>% head(n = 10)
 #> # A tibble: 10 x 13
-#>    name  shortName description publicStudy pmid  citation groups status
-#>    <chr> <chr>     <chr>       <lgl>       <chr> <chr>    <chr>   <int>
-#>  1 Oral… Head & n… Comprehens… TRUE        2361… Pickeri… ""          0
-#>  2 Hepa… HCC (Ins… Whole-exom… TRUE        2582… Schulze… "PUBL…      0
-#>  3 Uvea… UM (QIMR) Whole-geno… TRUE        2668… Johanss… "PUBL…      0
-#>  4 Neur… NBL (AMC) Whole geno… TRUE        2236… Molenaa… "PUBL…      0
-#>  5 Naso… NPC (Sin… Whole exom… TRUE        2495… Lin et … "PUBL…      0
-#>  6 Neur… NBL (Col… Whole-geno… TRUE        2646… Peifer … ""          0
-#>  7 Myel… MDS (Tok… Whole exom… TRUE        2190… Yoshida… ""          0
-#>  8 Insu… Panet (S… Whole exom… TRUE        2432… Cao et … ""          0
-#>  9 Pleu… PLMESO (… Whole-exom… TRUE        2548… Guo et … ""          0
-#> 10 Pilo… PAST (Na… Whole-geno… TRUE        2381… Jones e… "PUBL…      0
+#>    name     shortName  description     publicStudy pmid  citation  groups status
+#>    <chr>    <chr>      <chr>           <lgl>       <chr> <chr>     <chr>   <int>
+#>  1 Oral Sq… Head & ne… Comprehensive … TRUE        2361… Pickerin… ""          0
+#>  2 Hepatoc… HCC (Inse… Whole-exome se… TRUE        2582… Schulze … "PUBL…      0
+#>  3 Uveal M… UM (QIMR)  Whole-genome o… TRUE        2668… Johansso… "PUBL…      0
+#>  4 Neurobl… NBL (AMC)  Whole genome s… TRUE        2236… Molenaar… "PUBL…      0
+#>  5 Nasopha… NPC (Sing… Whole exome se… TRUE        2495… Lin et a… "PUBL…      0
+#>  6 Neurobl… NBL (Colo… Whole-genome s… TRUE        2646… Peifer e… ""          0
+#>  7 Myelody… MDS (Toky… Whole exome se… TRUE        2190… Yoshida … ""          0
+#>  8 Insulin… Panet (Sh… Whole exome se… TRUE        2432… Cao et a… ""          0
+#>  9 Pleural… PLMESO (N… Whole-exome se… TRUE        2548… Guo et a… ""          0
+#> 10 Pilocyt… PAST (Nat… Whole-genome s… TRUE        2381… Jones et… "PUBL…      0
 #> # … with 5 more variables: importDate <chr>, allSampleCount <int>,
 #> #   studyId <chr>, cancerTypeId <chr>, referenceGenome <chr>
 ```
@@ -144,18 +145,18 @@ mutations <- df$mut
 df %>% head()
 #> $mut
 #> # A tibble: 562 x 31
-#>    uniqueSampleKey uniquePatientKey molecularProfil… Tumor_Sample_Ba… patientId
-#>    <chr>           <chr>            <chr>            <chr>            <chr>    
-#>  1 TjU5NVQ6bmJsX2… TjU5NTpuYmxfYW1… nbl_amc_2012_mu… N595T            N595     
-#>  2 TjYwOFQ6bmJsX2… TjYwODpuYmxfYW1… nbl_amc_2012_mu… N608T            N608     
-#>  3 TjcxOFQ6bmJsX2… TjcxODpuYmxfYW1… nbl_amc_2012_mu… N718T            N718     
-#>  4 TjU3MlQ6bmJsX2… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     
-#>  5 Tjc0NFQ6bmJsX2… Tjc0NDpuYmxfYW1… nbl_amc_2012_mu… N744T            N744     
-#>  6 TjU2MVQ6bmJsX2… TjU2MTpuYmxfYW1… nbl_amc_2012_mu… N561T            N561     
-#>  7 TjU0OFQ6bmJsX2… TjU0ODpuYmxfYW1… nbl_amc_2012_mu… N548T            N548     
-#>  8 TjU3MlQ6bmJsX2… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     
-#>  9 TjU3NVQ6bmJsX2… TjU3NTpuYmxfYW1… nbl_amc_2012_mu… N575T            N575     
-#> 10 TjUwOFQ6bmJsX2… TjUwODpuYmxfYW1… nbl_amc_2012_mu… N508T            N508     
+#>    uniqueSampleKey  uniquePatientKey molecularProfil… Tumor_Sample_Ba… patientId
+#>    <chr>            <chr>            <chr>            <chr>            <chr>    
+#>  1 TjU5NVQ6bmJsX2F… TjU5NTpuYmxfYW1… nbl_amc_2012_mu… N595T            N595     
+#>  2 TjYwOFQ6bmJsX2F… TjYwODpuYmxfYW1… nbl_amc_2012_mu… N608T            N608     
+#>  3 TjcxOFQ6bmJsX2F… TjcxODpuYmxfYW1… nbl_amc_2012_mu… N718T            N718     
+#>  4 TjU3MlQ6bmJsX2F… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     
+#>  5 Tjc0NFQ6bmJsX2F… Tjc0NDpuYmxfYW1… nbl_amc_2012_mu… N744T            N744     
+#>  6 TjU2MVQ6bmJsX2F… TjU2MTpuYmxfYW1… nbl_amc_2012_mu… N561T            N561     
+#>  7 TjU0OFQ6bmJsX2F… TjU0ODpuYmxfYW1… nbl_amc_2012_mu… N548T            N548     
+#>  8 TjU3MlQ6bmJsX2F… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     
+#>  9 TjU3NVQ6bmJsX2F… TjU3NTpuYmxfYW1… nbl_amc_2012_mu… N575T            N575     
+#> 10 TjUwOFQ6bmJsX2F… TjUwODpuYmxfYW1… nbl_amc_2012_mu… N508T            N508     
 #> # … with 552 more rows, and 26 more variables: entrezGeneId <int>,
 #> #   studyId <chr>, center <chr>, Mutation_Status <chr>, validationStatus <chr>,
 #> #   startPosition <int>, endPosition <int>, referenceAllele <chr>,

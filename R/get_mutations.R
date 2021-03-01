@@ -1,27 +1,49 @@
 
 
-get_mutations_by_sample_id <- function(sample_ids = NULL,
+get_mutations_by_sample_id <- function(sample_id = NULL,
+                                       study_id = NULL,
                                        genes,
                                        panel) {
 
+  input_study_id <- study_id
 
-  # separate impact samples from tcga
-  impact_ids <- sample_ids[stringr::str_detect(sample_ids, "P-0")]
-  tcga_ids <- sample_ids[stringr::str_detect(sample_ids, "TCGA")]
+  # separate impact samples
+  impact_ids <- sample_id[stringr::str_detect(sample_id, "P-0")]
+  non_impact_ids <-sample_id[!stringr::str_detect(sample_id, "P-0")]
 
-
-  if (is.null(sample_ids)) {
-    stop("You must provide at least one sample id (e.g. 'TCGA-19-5959-01')")
+  if(length(impact_ids) == 0 & is.null(study_id)) {
+    stop("All non-IMPACT samples passed with no default `study_id`. Need to specify `study_id` to query non IMPACT")
   }
 
-  # if IMPACT ------------------------------------------------------------------
+  # if no study ID and MSK db, default to IMPACT study ID
+  if (is.null(study_id) & stringr::str_detect(base_url, "mskcc")) {
+    study_id = "mskimpact"
+    warning(paste0("no `study_id` provided, defaulting to searching within `mskimpact` study. The following non IMPACT IDs will be ignored:\n ",
+                   paste0(non_impact_ids, collapse = ", ")))
+  }
 
-  if (length(impact_ids) >= 1) {
-    url_path <- paste0("molecular-profiles/mskimpact_mutations/mutations/fetch?")
+  if (is.null(study_id) & base_url == "www.cbioportal.org/api") {
+
+    study_id = "msk_impact_2017"
+    warning("If you are an MSK researcher, for most up to date IMPACT data you should connect to MSK cbioportal. \nThis function is using limited public IMPACT data (study_id = 'msk_impact_2017')")
+
+    } else {
+
+      study_id <- study_id
+      if(is.null(study_id)) stop("you need to specify a `study_id` to look for samples.")
+
+    }
+
+  if(length(study_id) > 3) stop("Must specify 3 or less study_ids in one call. Try separating into different calls. ")
+
+  # Function to search sample IDs within multiple studies
+  search_mult_studies <- function(study_id, sample_id) {
+
+    url_path <- paste0("molecular-profiles/", study_id, "_mutations/mutations/fetch?")
 
     body <- list(
       entrezGeneIds = genes,
-      sampleIds = sample_ids
+      sampleIds = sample_id
     )
 
     res <- cbp_api(url_path,
@@ -29,62 +51,43 @@ get_mutations_by_sample_id <- function(sample_ids = NULL,
       body = body
     )
 
-    df_impact <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
+   purrr::map_df(res$content, ~ tibble::as_tibble(.x))
+
   }
 
-  # if TCGA ------------------------------------------------------------------
+  all_study_ids <- c(study_id, ifelse(stringr::str_detect(base_url, "mskcc"),
+                                      "mskimpact", "msk_impact_2017")) %>%
+    unique()
 
-  if (length(tcga_ids) >= 1) {
+  all <- purrr::map_df(all_study_ids,
+                       ~search_mult_studies(sample_id = sample_id,
+                                                        study_id = .x))
 
-    # gets necessary sites for your sample IDs
-    samples_and_sites <- cbioportalR::tcga_samples %>%
-      dplyr::filter(.data$patient_id %in% tcga_ids) %>%
-      dplyr::transmute(
-        sample_ids = .data$patient_id,
-        cancer_code = tolower(.data$Cancer_Code)
-      ) %>%
-      distinct()
+  # if(any(str_detect(all$studyId, c("mskimpact|msk_impact_2017"))) &
+  #   (!("mskimpact" %in% input_study_id) | !("msk_impact_2017" %in% input_study_id))) {
+  #   warning("Some sample_id not in your specified studies (,", study_id, ") had data available in MSK IMPACT which is returned. If you would like to only keep results from your study, filter results by `study_id`, e.g. `filter(df, studyId != 'msk_impact')`")
+  # }
 
-    url_path <- paste0(
-      "molecular-profiles/",
-      samples_and_sites$cancer_code,
-      "_tcga_pan_can_atlas_2018_mutations/mutations/fetch?"
-    )
+  # Check if certain samples are in multiple studies
 
-    body <- purrr::map(
-      samples_and_sites$sample_ids,
-      ~ list(
-        entrezGeneIds = genes,
-        sampleIds = .x
-      )
-    )
+  if(nrow(all) > 0) {
+    in_multiple_studies <- all  %>%
+      select(.data$studyId, .data$sampleId) %>%
+      distinct() %>%
+      group_by(.data$sampleId) %>%
+      mutate(n = n()) %>%
+      filter(n >= 2)
 
-    df_tcga <- purrr::map2_df(
-      url_path, body,
-      ~ cbp_api(.x,
-        method = "post",
-        body = .y
-      )$content
-    ) %>%
+  if(nrow(in_multiple_studies) > 0) {
 
-      # add mutation status to TCGA results
-      mutate(mutationStatus = "SOMATIC")
+    warning(paste0("WARNING! The following samples are in multiple studies, therefore are duplicated in results: ",
+                                                     paste0(in_multiple_studies$sampleId, collapse = ", ")))
+  }
   }
 
-  # May Need to Combine results if TCGA/IMPACT Mixed List----------------------
-
-  # Combine TCGA and IMPACT if needed
-  if (exists("df_tcga") & exists("df_impact")) {
-    df <- bind_rows(df_impact, df_tcga)
-    return(df)
-  } else if (exists("df_tcga")) {
-    df <- df_tcga
-  } else if (exists("df_impact")) {
-    df <- df_impact
+    return(all)
   }
 
-  return(df)
-}
 
 
 get_mutations_by_study_id <- function(study_id = NULL, ...) {
@@ -95,14 +98,19 @@ get_mutations_by_study_id <- function(study_id = NULL, ...) {
   }
 
   # query ---------------------------------------------------------------------
-  url_path <- paste0(
-    "molecular-profiles/", study_id,
-    "_mutations/mutations?sampleListId=", study_id, "_all"
-  )
 
-#  body <- list(entrezGeneIds = genes)
-  res <- cbp_api(url_path)
-  df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
+
+  df <- purrr::map_df(study_id, function(x) {
+    url_path <- paste0(
+      "molecular-profiles/", x,
+      "_mutations/mutations?sampleListId=", x, "_all"
+    )
+    #  body <- list(entrezGeneIds = genes)
+    res <- cbp_api(url_path)
+    df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
+  })
+
+  message(paste0("Returning mutations from the following studies: ", paste0(study_id, collapse = ", ")))
 
   return(df)
 
@@ -111,8 +119,11 @@ get_mutations_by_study_id <- function(study_id = NULL, ...) {
 
 #' Get gene mutations by sample ID or Study
 #'
-#' @param sample_ids A character vector of sample ids
-#' @param study_id A character vector of length 1 indicating study_id. See `get_studies()` to see available studies.
+#' @param sample_id A character vector of sample ids. Can be NULL if a `study_id` is passed. If sample IDs are
+#' passed with no `study_id`, IMPACT studies will be queried by default.
+#' If non IMPACT ID samples passed, a `study_id` is required as well to retrieve data.
+#' @param study_id A character vector study IDs. See `get_studies()` to see available studies. If passed with no specified `sample_id`
+#' all samples for specified studies will be returned.
 #' @param panel OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
 #' the panel will be looked up with `get_panel()` and only genes in that panel will be returned.
 #' @param genes A list of genes to query. default is all impact genes.
@@ -122,24 +133,18 @@ get_mutations_by_study_id <- function(study_id = NULL, ...) {
 #'
 #' @examples
 #' get_cbioportal_db("public")
-#' get_mutations(sample_ids = c("TCGA-19-5959-01", "TCGA-18-4083-01"))
-
+#' get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"))
 #'
-get_mutations <- function(sample_ids = NULL,
+get_mutations <- function(sample_id = NULL,
                           study_id = NULL,
                           panel = NULL,
                           genes = NULL) {
 
   # checks ---------------------------------------------------------------------
 
-  if (all(is.null(sample_ids), is.null(study_id))) {
-    stop("Must specify either a list of sample ids (TCGA or MSK), or
+  if (all(is.null(sample_id), is.null(study_id))) {
+    stop("Must specify either a list of sample ids, and/or
        a study id. See `get_studies()` to view available studies. ")
-  }
-
-    if (!is.null(sample_ids) & !is.null(study_id)) {
-    stop("Must specify either a list of sample ids (TCGA or MSK), or
-       a study id, not both.")
   }
 
 
@@ -147,22 +152,13 @@ get_mutations <- function(sample_ids = NULL,
 
   # If user specified a panel---
     if (!is.null(panel)) {
-    # if (panel %in% c(
-    #   "IMPACT341", "IMPACT410", "IMPACT468",
-    #   "MSK-IMPACT341", "MSK-IMPACT410", "MSK-IMPACT468"
-    # )) {
-    #   genes <- "all_impact"
-    #   panel <- NULL
-    #   message("Querying curated list of impact genes. To view queried gene list run `cbioportalr::impact_gene_info`")
-    # } else {
       all_ids_df <- get_panel(panel)
 
       genes <- all_ids_df %>%
         pull(.data$entrezGeneId)
-   # }
   }
 
-
+  # else default to IMPACT Panel
   ent_id <- cbioportalR::impact_gene_info %>%
     dplyr::select(.data$hugo_symbol, .data$entrez_id, .data$alias) %>%
     tidyr::unnest(c(.data$entrez_id, .data$alias))
@@ -190,9 +186,9 @@ get_mutations <- function(sample_ids = NULL,
 
   # queries -------------------------------------------------------------------
 
-  if (!is.null(sample_ids)) {
+  if (!is.null(sample_id)) {
 
-    if (!is.null(sample_ids) & is.null(genes)) {
+    if (!is.null(sample_id) & is.null(genes)) {
       message("No genes specified by user, so querying curated list of impact genes.
               To view queried gene list run `cbioportalR::impact_gene_info`")
 
@@ -200,12 +196,13 @@ get_mutations <- function(sample_ids = NULL,
 
     if(is.null(genes))  {genes <- all_impact_ids}
 
-    df <- get_mutations_by_sample_id(sample_ids = sample_ids,
+    df <- get_mutations_by_sample_id(sample_id = sample_id,
+                                     study_id = study_id,
                                      genes = genes,
                                      panel = panel)
   }
 
-  if (!is.null(study_id)) {
+  if (!is.null(study_id) & is.null(sample_id)) {
 
     # by default it returns all genes for that study and filters later
     df <- get_mutations_by_study_id(study_id = study_id)
@@ -215,6 +212,7 @@ get_mutations <- function(sample_ids = NULL,
       df <- df %>% filter(.data$entrezGeneId %in% genes)
 
     }
+
   }
 
   if (nrow(df) > 0) {
