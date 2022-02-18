@@ -38,6 +38,6 @@ Imports:
     dplyr,
     stringr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 Config/testthat/edition: 3

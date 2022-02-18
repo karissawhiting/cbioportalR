@@ -4,10 +4,12 @@
 \alias{get_alias}
 \title{Get Gene Name Alias for a Given Hugo Symbol}
 \usage{
-get_alias(hugo_symbol)
+get_alias(hugo_symbol, ...)
 }
 \arguments{
 \item{hugo_symbol}{a hugo symbol for which to return aliases}
+
+\item{...}{Not used}
 }
 \value{
 A character string with all aliases

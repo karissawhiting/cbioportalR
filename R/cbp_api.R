@@ -2,43 +2,42 @@
 #'
 #'
 #' @param url_path The url path for API call
-#' @param method Which API method to use. Default is GET.
+#' @param method Which API method to use. Must be "get" or "post". Default is "get".
 #' @param token Authentication token, if needed. Default is `get_cbioportal_token()`
 #' @param body Arguments passed to API call (e.g. sample ID or gene IDs)
 #' @param extra_box Some functions require an additional list() wrapping around body idk why
+#' @param quiet Returns queried URL. Default is TRUE
+#' @param ... Not used
 #'
 #' @return A parsed API response
 #' @export
 #' @import httr
-#'
 #' @examples
-#' get_cbioportal_db("public")
+#'
+#' b_url <- get_cbioportal_db("public")
 #' cbp_api(url_path = "genes/TP53")
 #'
 cbp_api <- function(url_path,
-                    method = c("get", "post"),
+                    method = NULL,
                     token = get_cbioportal_token(),
                     body = NULL,
-  extra_box = FALSE) {
+                    extra_box = FALSE,
+                    quiet = TRUE,
+                    ...) {
 
-  method = match.arg(method)
+  method = match.arg(method, choices = c("get", "post"))
 
-  # get base URL for DB
-  if(exists("base_url", envir = .GlobalEnv)) {
-    hostname = base_url
-  } else {
-    saved_db <-  suppressWarnings(check_for_saved_db())
-    if(is.null(saved_db)) rlang::abort("Please specify a database e.g. `get_cbioportal_db('public')`")
-    base_url <- Sys.getenv("CBIOPORTAL_URL")
-  }
+  final_base_url <- .determine_base_url(...)
 
   url <- httr::modify_url(url = "",
                     scheme = "https",
-                    hostname = base_url,
+                    hostname = final_base_url,
     path = url_path
     )
 
-#  print(url)
+  if(quiet == FALSE) {
+    print(url)
+  }
 
   if(method == "get") {
 

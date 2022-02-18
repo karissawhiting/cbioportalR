@@ -4,7 +4,13 @@
 \alias{get_mutations}
 \title{Get gene mutations by sample ID or Study}
 \usage{
-get_mutations(sample_id = NULL, study_id = NULL, panel = NULL, genes = NULL)
+get_mutations(
+  sample_id = NULL,
+  study_id = NULL,
+  panel = NULL,
+  genes = NULL,
+  ...
+)
 }
 \arguments{
 \item{sample_id}{A character vector of sample ids. Can be NULL if a \code{study_id} is passed. If sample IDs are
@@ -18,6 +24,8 @@ all samples for specified studies will be returned.}
 the panel will be looked up with \code{get_panel()} and only genes in that panel will be returned.}
 
 \item{genes}{A list of genes to query. default is all impact genes.}
+
+\item{...}{Not used}
 }
 \value{
 A dataframe of mutations for each sample ID (in maf file format)

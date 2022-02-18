@@ -8,8 +8,8 @@
 #'
 #' @examples
 #' get_cbioportal_db('public')
-#' available_profiles("acc_tcga")
 #'
+
 available_profiles <- function(study_id = NULL) {
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {

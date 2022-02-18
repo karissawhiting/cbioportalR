@@ -1,9 +1,33 @@
 
+# Mutations by sample  -----------------------------------------------------
 
-get_mutations_by_sample_id <- function(sample_id = NULL,
+#' Function pulls mutation data by sample ID
+#'
+#' @param sample_id A vector of sample ids
+#' @param study_id A study id indicating where samples are housed
+#' @param genes A list of genes to query
+#' @param panel A specified gene panel
+#' @param ... Not used
+#'
+#' @return A dataframe of mutations
+#' @keywords internal
+#' @noRd
+.get_mutations_by_sample_id <- function(sample_id = NULL,
                                        study_id = NULL,
                                        genes,
-                                       panel) {
+                                       panel, ...) {
+
+  # args <- list(...)
+  #
+  #
+  #
+  # if (length(args) > 0) {
+  #   for(i in 1:length(args)) {
+  #     assign(x = names(args)[i], value = args[[i]])
+  #   }
+  # }
+
+  final_base_url <- .determine_base_url(...)
 
   input_study_id <- study_id
 
@@ -15,14 +39,15 @@ get_mutations_by_sample_id <- function(sample_id = NULL,
     stop("All non-IMPACT samples passed with no default `study_id`. Need to specify `study_id` to query non IMPACT")
   }
 
+
   # if no study ID and MSK db, default to IMPACT study ID
-  if (is.null(study_id) & stringr::str_detect(base_url, "mskcc")) {
+  if (is.null(study_id) & stringr::str_detect(final_base_url, "mskcc")) {
     study_id = "mskimpact"
     warning(paste0("no `study_id` provided, defaulting to searching within `mskimpact` study. The following non IMPACT IDs will be ignored:\n ",
                    paste0(non_impact_ids, collapse = ", ")))
   }
 
-  if (is.null(study_id) & base_url == "www.cbioportal.org/api") {
+  if (is.null(study_id) & final_base_url == "www.cbioportal.org/api") {
 
     study_id = "msk_impact_2017"
     warning("If you are an MSK researcher, for most up to date IMPACT data you should connect to MSK cbioportal. \nThis function is using limited public IMPACT data (study_id = 'msk_impact_2017')")
@@ -33,6 +58,7 @@ get_mutations_by_sample_id <- function(sample_id = NULL,
       if(is.null(study_id)) stop("you need to specify a `study_id` to look for samples.")
 
     }
+
 
   if(length(study_id) > 3) stop("Must specify 3 or less study_ids in one call. Try separating into different calls. ")
 
@@ -48,14 +74,15 @@ get_mutations_by_sample_id <- function(sample_id = NULL,
 
     res <- cbp_api(url_path,
       method = "post",
-      body = body
+      body = body,
+      base_url = final_base_url,
     )
 
    purrr::map_df(res$content, ~ tibble::as_tibble(.x))
 
   }
 
-  all_study_ids <- c(study_id, ifelse(stringr::str_detect(base_url, "mskcc"),
+  all_study_ids <- c(study_id, ifelse(stringr::str_detect(final_base_url, "mskcc"),
                                       "mskimpact", "msk_impact_2017")) %>%
     unique()
 
@@ -90,15 +117,37 @@ get_mutations_by_sample_id <- function(sample_id = NULL,
 
 
 
-get_mutations_by_study_id <- function(study_id = NULL, ...) {
+# Mutations by sample ID  -----------------------------------------------------
+
+#' Function pulls mutation data by cBioPortal study ID
+#'
+#' @param study_id A study id to query
+#' @param ... Other arguments passed on to `cbp_api()`
+#'
+#' @return A dataframe of all mutations from specified study. all available data will be returned for all genes in study
+#' @keywords internal
+#' @noRd
+
+.get_mutations_by_study_id <- function(study_id = NULL, ...) {
+
+  # arguments ------------------------------------------------------------------
+  args <- list(...)
+
+  if (length(args) > 0) {
+    for(i in 1:length(args)) {
+      assign(x = names(args)[i], value = args[[i]])
+    }
+  }
+
+  final_base_url <- .determine_base_url()
 
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")
   }
 
-  # query ---------------------------------------------------------------------
 
+  # query ---------------------------------------------------------------------
 
   df <- purrr::map_df(study_id, function(x) {
     url_path <- paste0(
@@ -106,7 +155,7 @@ get_mutations_by_study_id <- function(study_id = NULL, ...) {
       "_mutations/mutations?sampleListId=", x, "_all"
     )
     #  body <- list(entrezGeneIds = genes)
-    res <- cbp_api(url_path)
+    res <- cbp_api(url_path, base_url = final_base_url)
     df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   })
 
@@ -127,7 +176,7 @@ get_mutations_by_study_id <- function(study_id = NULL, ...) {
 #' @param panel OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
 #' the panel will be looked up with `get_panel()` and only genes in that panel will be returned.
 #' @param genes A list of genes to query. default is all impact genes.
-#'
+#' @param ... Not used
 #' @return A dataframe of mutations for each sample ID (in maf file format)
 #' @export
 #'
@@ -138,7 +187,7 @@ get_mutations_by_study_id <- function(study_id = NULL, ...) {
 get_mutations <- function(sample_id = NULL,
                           study_id = NULL,
                           panel = NULL,
-                          genes = NULL) {
+                          genes = NULL, ...) {
 
   # checks ---------------------------------------------------------------------
 
@@ -196,7 +245,7 @@ get_mutations <- function(sample_id = NULL,
 
     if(is.null(genes))  {genes <- all_impact_ids}
 
-    df <- get_mutations_by_sample_id(sample_id = sample_id,
+    df <- .get_mutations_by_sample_id(sample_id = sample_id,
                                      study_id = study_id,
                                      genes = genes,
                                      panel = panel)
@@ -205,7 +254,7 @@ get_mutations <- function(sample_id = NULL,
   if (!is.null(study_id) & is.null(sample_id)) {
 
     # by default it returns all genes for that study and filters later
-    df <- get_mutations_by_study_id(study_id = study_id)
+    df <- .get_mutations_by_study_id(study_id = study_id)
 
     if (!is.null(genes)) {
 

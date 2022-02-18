@@ -12,8 +12,3 @@ a dataframe of metadata regarding each available panel
 \description{
 Get all available gene panels in a database
 }
-\examples{
-get_cbioportal_db("public")
-all_available_panels()
-
-}

@@ -4,9 +4,6 @@
 #' @return a dataframe of metadata regarding each available panel
 #' @export
 #'
-#' @examples
-#' get_cbioportal_db("public")
-#' all_available_panels()
 #'
 all_available_panels <- function() {
 
@@ -27,7 +24,7 @@ all_available_panels <- function() {
 #' @return A dataframe of genes in a specified panel
 #' @export
 #'
-#' @examples
+#'
 get_panel <- function(panel_id) {
 
   url_path <- paste0("gene-panels/", panel_id)

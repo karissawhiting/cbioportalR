@@ -6,22 +6,28 @@
 \usage{
 cbp_api(
   url_path,
-  method = c("get", "post"),
+  method = NULL,
   token = get_cbioportal_token(),
   body = NULL,
-  extra_box = FALSE
+  extra_box = FALSE,
+  quiet = TRUE,
+  ...
 )
 }
 \arguments{
 \item{url_path}{The url path for API call}
 
-\item{method}{Which API method to use. Default is GET.}
+\item{method}{Which API method to use. Must be "get" or "post". Default is "get".}
 
 \item{token}{Authentication token, if needed. Default is \code{get_cbioportal_token()}}
 
 \item{body}{Arguments passed to API call (e.g. sample ID or gene IDs)}
 
 \item{extra_box}{Some functions require an additional list() wrapping around body idk why}
+
+\item{quiet}{Returns queried URL. Default is TRUE}
+
+\item{...}{Not used}
 }
 \value{
 A parsed API response
@@ -30,7 +36,8 @@ A parsed API response
 Core function to retrieve data from cBioPortal API.
 }
 \examples{
-get_cbioportal_db("public")
+
+b_url <- get_cbioportal_db("public")
 cbp_api(url_path = "genes/TP53")
 
 }

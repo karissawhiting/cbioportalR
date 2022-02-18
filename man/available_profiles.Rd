@@ -17,6 +17,5 @@ See what genetic data is available for a given study
 }
 \examples{
 get_cbioportal_db('public')
-available_profiles("acc_tcga")
 
 }
