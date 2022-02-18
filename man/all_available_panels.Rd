@@ -4,7 +4,7 @@
 \alias{all_available_panels}
 \title{Get all available gene panels in a database}
 \usage{
-all_available_panels()
+all_available_panels(base_url = NULL)
 }
 \value{
 a dataframe of metadata regarding each available panel

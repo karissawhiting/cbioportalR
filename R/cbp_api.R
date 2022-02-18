@@ -14,8 +14,7 @@
 #' @import httr
 #' @examples
 #'
-#' b_url <- get_cbioportal_db("public")
-#' cbp_api(url_path = "genes/TP53")
+#' cbp_api(url_path = "genes/TP53", base_url = "www.cbioportal.org/api")
 #'
 cbp_api <- function(url_path,
                     method = NULL,
@@ -23,11 +22,14 @@ cbp_api <- function(url_path,
                     body = NULL,
                     extra_box = FALSE,
                     quiet = TRUE,
-                    ...) {
+                    base_url = NULL) {
 
   method = match.arg(method, choices = c("get", "post"))
 
-  final_base_url <- .determine_base_url(...)
+  final_base_url <- base_url %||%
+    getOption("session_base_url") %||%
+    abort(message = "must supply a url. Try `get_cbioportal_db()`")
+
 
   url <- httr::modify_url(url = "",
                     scheme = "https",

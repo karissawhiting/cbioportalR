@@ -4,7 +4,7 @@
 \alias{get_cna}
 \title{Get copy number alterations by sample ID or study ID}
 \usage{
-get_cna(sample_id = NULL, study_id = NULL, panel = NULL, genes = NULL)
+get_cna(sample_id = NULL, study_id = NULL, panel = NULL, genes = NULL, ...)
 }
 \arguments{
 \item{sample_id}{A character vector of sample ids. Can be NULL if a \code{study_id} is passed. If sample IDs are
@@ -26,7 +26,7 @@ A dataframe of CNA for each sample ID (in maf file format)
 Get copy number alterations by sample ID or study ID
 }
 \examples{
-get_cbioportal_db('public')
-get_cna(sample_id = c("P-0000004-T01-IM3", "P-0000015-T01-IM3"))
+
+get_cna(sample_id = c("P-0000004-T01-IM3", "P-0000015-T01-IM3"), base_url = 'www.cbioportal.org/api')
 
 }

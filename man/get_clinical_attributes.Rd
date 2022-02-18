@@ -4,7 +4,7 @@
 \alias{get_clinical_attributes}
 \title{Get all clinical attributes available for a study}
 \usage{
-get_clinical_attributes(study_id = NULL)
+get_clinical_attributes(study_id = NULL, ...)
 }
 \arguments{
 \item{study_id}{cbioportal study ID}
@@ -16,6 +16,6 @@ a data frame of available clinical attributes for that study
 Get all clinical attributes available for a study
 }
 \examples{
-get_cbioportal_db('public')
-get_clinical_attributes("acc_tcga")
+get_clinical_attributes("acc_tcga", base_url = 'www.cbioportal.org/api')
+
 }

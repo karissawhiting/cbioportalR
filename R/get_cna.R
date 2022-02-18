@@ -1,7 +1,7 @@
 get_cna_by_sample_id  <- function(sample_id = NULL,
                                        study_id = NULL,
                                        genes,
-                                       panel) {
+                                       panel, ...) {
 
   input_study_id <- study_id
 
@@ -45,7 +45,7 @@ get_cna_by_sample_id  <- function(sample_id = NULL,
 
     res <- cbp_api(url_path,
       method = "post",
-      body = body
+      body = body, ...
     )
 
     purrr::map_df(res$content, ~ tibble::as_tibble(.x))
@@ -112,7 +112,7 @@ get_cna_by_study_id <- function(study_id = NULL, ...) {
 
 
 #  body <- list(entrezGeneIds = genes)
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path, ...)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
 
   return(df)
@@ -134,14 +134,14 @@ get_cna_by_study_id <- function(study_id = NULL, ...) {
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db('public')
-#' get_cna(sample_id = c("P-0000004-T01-IM3", "P-0000015-T01-IM3"))
+#'
+#' get_cna(sample_id = c("P-0000004-T01-IM3", "P-0000015-T01-IM3"), base_url = 'www.cbioportal.org/api')
 #'
 
 get_cna <- function(sample_id = NULL,
                           study_id = NULL,
                           panel = NULL,
-                          genes = NULL) {
+                          genes = NULL, ...) {
 
   # checks ---------------------------------------------------------------------
 
@@ -203,7 +203,7 @@ get_cna <- function(sample_id = NULL,
     df <- get_cna_by_sample_id(sample_id = sample_id,
                                      study_id = study_id,
                                      genes = genes,
-                                     panel = panel)
+                                     panel = panel, ...)
   }
 
   if (!is.null(study_id) & is.null(sample_id)) {

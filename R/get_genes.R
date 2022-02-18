@@ -5,15 +5,14 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' get_cbioportal_db('public')
-#' get_genes()
+#' get_genes(base_url = 'www.cbioportal.org/api')
 #' }
-get_genes <- function() {
+get_genes <- function(...) {
 
   url_path <- paste0("genes")
 
 
-  res <- cbp_api(url_path = url_path)
+  res <- cbp_api(url_path = url_path, ...)
 
   purrr::map_df(res$content, ~tibble::as_tibble(.x))
 }
@@ -29,14 +28,14 @@ get_genes <- function() {
 #' @return A dataframe with Entrez Gene IDs and Hugo Symbols
 #' @export
 #' @examples
-#' get_cbioportal_db('public')
-#' get_gene_id("FGFR3")
 #'
-get_gene_id <- function(hugo_symbol = NULL) {
+#' get_gene_id("FGFR3", base_url = 'www.cbioportal.org/api')
+#'
+get_gene_id <- function(hugo_symbol = NULL, ...) {
 
   if(is.null(hugo_symbol)) rlang::abort("Must specify a `hugo_symbol`")
   url_path = paste0("genes/", hugo_symbol)
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path,...)
   tibble::as_tibble(res$content)
 }
 
@@ -60,8 +59,8 @@ get_gene_id <- function(hugo_symbol = NULL) {
 #' @return A character string with all aliases
 #' @export
 #' @examples
-#' get_cbioportal_db('public')
-#' get_alias("FGFR3")
+#'
+#' get_alias("FGFR3", base_url = 'www.cbioportal.org/api')
 #'
 get_alias <- function(hugo_symbol, ...) {
   url_path = paste0("genes/", hugo_symbol, "/aliases")

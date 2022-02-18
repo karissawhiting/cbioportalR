@@ -11,7 +11,7 @@ cbp_api(
   body = NULL,
   extra_box = FALSE,
   quiet = TRUE,
-  ...
+  base_url = NULL
 )
 }
 \arguments{
@@ -37,7 +37,6 @@ Core function to retrieve data from cBioPortal API.
 }
 \examples{
 
-b_url <- get_cbioportal_db("public")
-cbp_api(url_path = "genes/TP53")
+cbp_api(url_path = "genes/TP53", base_url = "www.cbioportal.org/api")
 
 }

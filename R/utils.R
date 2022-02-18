@@ -28,4 +28,5 @@
 
 }
 
-utils::globalVariables(c("base_url"))
+
+

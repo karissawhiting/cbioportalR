@@ -5,12 +5,12 @@
 #' @export
 #'
 #'
-all_available_panels <- function() {
+all_available_panels <- function(base_url = NULL) {
 
     # query ---------------------------------------------------------------------
   url_path <- "gene-panels??"
 
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path, base_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }

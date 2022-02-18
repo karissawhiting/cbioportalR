@@ -18,7 +18,7 @@ A character string with all aliases
 This only works 1 gene at a time right now
 }
 \examples{
-get_cbioportal_db('public')
-get_alias("FGFR3")
+
+get_alias("FGFR3", base_url = 'www.cbioportal.org/api')
 
 }

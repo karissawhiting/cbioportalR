@@ -7,9 +7,9 @@
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db('public')
-#' get_clinical_attributes("acc_tcga")
-get_clinical_attributes <- function(study_id = NULL) {
+#' get_clinical_attributes("acc_tcga", base_url = 'www.cbioportal.org/api')
+#'
+get_clinical_attributes <- function(study_id = NULL, ...) {
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")
@@ -23,7 +23,7 @@ get_clinical_attributes <- function(study_id = NULL) {
 
   print(url_path)
 
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path, ...)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }
@@ -39,12 +39,11 @@ get_clinical_attributes <- function(study_id = NULL) {
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db('public')
 #' get_clinical_by_patient(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
-#'  clinical_attribute = "CANCER_TYPE")
+#'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 get_clinical_by_patient <- function(study_id = NULL,
                               sample_id = NULL,
-                              clinical_attribute = "CANCER_TYPE") {
+                              clinical_attribute = "CANCER_TYPE", ...) {
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")
@@ -60,7 +59,7 @@ get_clinical_by_patient <- function(study_id = NULL,
   )
 
   print(url_path)
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path, ...)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }
@@ -75,10 +74,9 @@ get_clinical_by_patient <- function(study_id = NULL,
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db('public')
-#' get_clinical_by_study(study_id = "acc_tcga")
+#' get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')
 #'
-get_clinical_by_study <- function(study_id = NULL) {
+get_clinical_by_study <- function(study_id = NULL, ...) {
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")
@@ -91,7 +89,7 @@ get_clinical_by_study <- function(study_id = NULL) {
   )
 
   print(url_path)
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path, ...)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }

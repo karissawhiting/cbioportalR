@@ -4,7 +4,7 @@
 \alias{get_gene_id}
 \title{Get Entrez Gene ID for a given set of Hugo Symbols}
 \usage{
-get_gene_id(hugo_symbol = NULL)
+get_gene_id(hugo_symbol = NULL, ...)
 }
 \arguments{
 \item{hugo_symbol}{a hugo symbol for which to return an Entrez Gene ID}
@@ -16,7 +16,7 @@ A dataframe with Entrez Gene IDs and Hugo Symbols
 This only works 1 gene at a time right now
 }
 \examples{
-get_cbioportal_db('public')
-get_gene_id("FGFR3")
+
+get_gene_id("FGFR3", base_url = 'www.cbioportal.org/api')
 
 }

@@ -7,7 +7,8 @@
 get_clinical_by_patient(
   study_id = NULL,
   sample_id = NULL,
-  clinical_attribute = "CANCER_TYPE"
+  clinical_attribute = "CANCER_TYPE",
+  ...
 )
 }
 \arguments{
@@ -24,7 +25,6 @@ a dataframe of a specific clinical attribute
 Get clinical data by attribute study ID and sample ID
 }
 \examples{
-get_cbioportal_db('public')
 get_clinical_by_patient(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
- clinical_attribute = "CANCER_TYPE")
+ clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 }

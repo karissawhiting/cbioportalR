@@ -139,7 +139,7 @@
     }
   }
 
-  final_base_url <- .determine_base_url()
+  final_base_url <- .determine_base_url(...)
 
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
@@ -181,8 +181,7 @@
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db("public")
-#' get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"))
+#' get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"), base_url = 'www.cbioportal.org/api')
 #'
 get_mutations <- function(sample_id = NULL,
                           study_id = NULL,
@@ -248,13 +247,13 @@ get_mutations <- function(sample_id = NULL,
     df <- .get_mutations_by_sample_id(sample_id = sample_id,
                                      study_id = study_id,
                                      genes = genes,
-                                     panel = panel)
+                                     panel = panel, ...)
   }
 
   if (!is.null(study_id) & is.null(sample_id)) {
 
     # by default it returns all genes for that study and filters later
-    df <- .get_mutations_by_study_id(study_id = study_id)
+    df <- .get_mutations_by_study_id(study_id = study_id, ...)
 
     if (!is.null(genes)) {
 

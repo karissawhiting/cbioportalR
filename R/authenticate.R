@@ -26,38 +26,39 @@ get_cbioportal_token <- function() {
 #' }
 #'
 get_cbioportal_db <- function(db = NULL) {
-  if (is.null(db)) {
-    x <- Sys.getenv("CBIOPORTAL_URL")
-    if (identical(x, "")) {
-      rlang::abort("No `db` specified and no CBIOPORTAL_URL in `.Renviron`.
+
+  # if no db passed, check environment db
+  db_set <- db %||% Sys.getenv("CBIOPORTAL_URL")
+
+  if (identical(db_set, "")) {
+    rlang::abort("No `db` specified and no CBIOPORTAL_URL in `.Renviron`.
       Try specifying `db` or use `usethis::edit_r_environ()` to add a database URL.
       You can also specify `db = 'public'` to connect to https://www.cbioportal.org/")
-    }
-  } else {
-
-    # For MSK users ------
-    if (stringr::str_detect(db, c("mskcc"))) {
-      if (!stringr::str_detect(db, c("api"))) {
-        db <- paste0(db, "/api")
-      }
-
-      if (stringr::str_detect(db, "https://")) {
-
-        # if a user passes https://, remove it. this will be added automatically
-        # in the API calls themselves
-        db <- stringr::str_remove(db, "https://")
-      }
-    }
-
-    db <- db
-
-    db_url <- dplyr::case_when(
-      db == "public" ~ "www.cbioportal.org/api",
-      TRUE ~ db
-    )
   }
 
-  assign("base_url", db_url, envir = .GlobalEnv)
+
+  if(!is.null(db)) {
+
+    # could httr::parse_url() here maybe instead
+    db <- stringr::str_remove(db, "https://")
+
+    db_set <- dplyr::case_when(
+      db %in% c("MSK", "msk") ~ "cbioportal.mskcc.org",
+      db == "public" ~ "www.cbioportal.org",
+      TRUE ~ db
+    )
+
+    if (!stringr::str_detect(db_set, c("api"))) {
+      db_set <- paste0(db_set, "/api")
+    }
+
+  }
+
+#  assign("base_url", db_url, envir = .GlobalEnv)
+  options(session_base_url = db_set)
+
+  ui_done("{ui_field('base_url')} for this R session is {ui_value(getOption('session_base_url'))}")
+
 }
 
 #' Check for cBioPortal DB

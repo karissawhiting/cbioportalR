@@ -34,7 +34,6 @@ A dataframe of mutations for each sample ID (in maf file format)
 Get gene mutations by sample ID or Study
 }
 \examples{
-get_cbioportal_db("public")
-get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"))
+get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"), base_url = 'www.cbioportal.org/api')
 
 }
