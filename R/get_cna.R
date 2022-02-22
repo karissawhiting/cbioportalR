@@ -1,7 +1,10 @@
 get_cna_by_sample_id  <- function(sample_id = NULL,
                                        study_id = NULL,
                                        genes,
-                                       panel, ...) {
+                                       panel,
+                                  base_url =NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   input_study_id <- study_id
 
@@ -14,13 +17,13 @@ get_cna_by_sample_id  <- function(sample_id = NULL,
   }
 
   # if no study ID and MSK db, default to IMPACT study ID
-  if (is.null(study_id) & stringr::str_detect(base_url, "mskcc")) {
+  if (is.null(study_id) & stringr::str_detect(final_url, "mskcc")) {
     study_id = "mskimpact"
     warning(paste0("no `study_id` provided, defaulting to searching within `mskimpact` study. The following non IMPACT IDs will be ignored:\n ",
                    paste0(non_impact_ids, collapse = ", ")))
   }
 
-  if (is.null(study_id) & base_url == "www.cbioportal.org/api") {
+  if (is.null(study_id) & final_url == "www.cbioportal.org/api") {
 
     study_id = "msk_impact_2017"
     warning("If you are an MSK researcher, for most up to date IMPACT data you should connect to MSK cbioportal. \nThis function is using limited public IMPACT data (study_id = 'msk_impact_2017')")
@@ -45,13 +48,13 @@ get_cna_by_sample_id  <- function(sample_id = NULL,
 
     res <- cbp_api(url_path,
       method = "post",
-      body = body, ...
+      body = body, base_url = final_url
     )
 
     purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   }
 
-    all_study_ids <- c(study_id, ifelse(stringr::str_detect(base_url, "mskcc"),
+    all_study_ids <- c(study_id, ifelse(stringr::str_detect(final_url, "mskcc"),
                                       "mskimpact", "msk_impact_2017")) %>%
     unique()
 
@@ -77,7 +80,9 @@ get_cna_by_sample_id  <- function(sample_id = NULL,
 }
 
 
-get_cna_by_study_id <- function(study_id = NULL, ...) {
+get_cna_by_study_id <- function(study_id = NULL, base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
@@ -112,7 +117,7 @@ get_cna_by_study_id <- function(study_id = NULL, ...) {
 
 
 #  body <- list(entrezGeneIds = genes)
-  res <- cbp_api(url_path, ...)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
 
   return(df)
@@ -135,13 +140,17 @@ get_cna_by_study_id <- function(study_id = NULL, ...) {
 #'
 #' @examples
 #'
-#' get_cna(sample_id = c("P-0000004-T01-IM3", "P-0000015-T01-IM3"), base_url = 'www.cbioportal.org/api')
+#' get_cna(sample_id = c("P-0000004-T01-IM3", "P-0000015-T01-IM3"),
+#'  base_url = 'www.cbioportal.org/api')
 #'
 
 get_cna <- function(sample_id = NULL,
                           study_id = NULL,
                           panel = NULL,
-                          genes = NULL, ...) {
+                          genes = NULL,
+                    base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
 
@@ -203,7 +212,8 @@ get_cna <- function(sample_id = NULL,
     df <- get_cna_by_sample_id(sample_id = sample_id,
                                      study_id = study_id,
                                      genes = genes,
-                                     panel = panel, ...)
+                                     panel = panel,
+                               base_url = final_url)
   }
 
   if (!is.null(study_id) & is.null(sample_id)) {

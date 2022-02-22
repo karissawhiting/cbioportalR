@@ -4,7 +4,7 @@
 \alias{get_clinical_by_study}
 \title{Get all available clinical data for a specified study}
 \usage{
-get_clinical_by_study(study_id = NULL, ...)
+get_clinical_by_study(study_id = NULL, base_url = NULL)
 }
 \arguments{
 \item{study_id}{study ID}

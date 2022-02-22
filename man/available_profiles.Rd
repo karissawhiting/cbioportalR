@@ -4,7 +4,7 @@
 \alias{available_profiles}
 \title{See what genetic data is available for a given study}
 \usage{
-available_profiles(study_id = NULL, ...)
+available_profiles(study_id = NULL, base_url = NULL)
 }
 \arguments{
 \item{study_id}{A character vector of lenth 1 indicating study_id. See \code{get_studies()} to see available studies.}

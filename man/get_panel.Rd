@@ -4,7 +4,7 @@
 \alias{get_panel}
 \title{Retrieve data for a specific panel}
 \usage{
-get_panel(panel_id)
+get_panel(panel_id, base_url = NULL)
 }
 \arguments{
 \item{panel_id}{name of panel}

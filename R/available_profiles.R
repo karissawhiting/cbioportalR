@@ -8,7 +8,12 @@
 #'
 #'
 
-available_profiles <- function(study_id = NULL, ...) {
+available_profiles <- function(study_id = NULL,
+                               base_url =  NULL) {
+
+
+  final_url <- base_url %||% get_cbioportal_url()
+
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")
@@ -20,19 +25,21 @@ available_profiles <- function(study_id = NULL, ...) {
     "/molecular-profiles?"
   )
 
-  res <- cbp_api(url_path, ...)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }
 
 
 
-all_available_profiles <- function(...) {
+all_available_profiles <- function(base_url =  NULL) {
 
-    # query ---------------------------------------------------------------------
+  final_url <- base_url %||% get_cbioportal_url()
+
+  # query ---------------------------------------------------------------------
   url_path <- "molecular-profiles?"
 
-  res <- cbp_api(url_path, ...)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }

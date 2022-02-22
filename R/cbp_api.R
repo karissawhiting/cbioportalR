@@ -27,7 +27,7 @@ cbp_api <- function(url_path,
   method = match.arg(method, choices = c("get", "post"))
 
   final_base_url <- base_url %||%
-    getOption("session_base_url") %||%
+    get_portal_url() %||%
     abort(message = "must supply a url. Try `get_cbioportal_db()`")
 
 

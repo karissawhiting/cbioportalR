@@ -13,16 +13,19 @@
 #' get_sample_ids(patient_ids = c("P-0000034", "P-0000036"))
 #' }
 #'
-get_sample_ids <- function(patient_ids = NULL, study_id = NULL) {
+get_sample_ids <- function(patient_ids = NULL, study_id = NULL,
+                           base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   if(is.null(patient_ids)) stop("Must specify at least one `patient_id`")
 
   # if no study ID and MSK
-  if (is.null(study_id) & stringr::str_detect(base_url, "mskcc.org")) {
+  if (is.null(study_id) & stringr::str_detect(final_url, "mskcc.org")) {
     study_id = "mskimpact"
   }
 
-  if (is.null(study_id) & base_url == "www.cbioportal.org/api") {
+  if (is.null(study_id) & final_url == "www.cbioportal.org/api") {
     study_id = "msk_impact_2017"
     warning("If you are an MSK researcher, for most up to date IMPACT data you should connect to MSK cbioportal. This function is using limited public IMPACT data (study_id = 'msk_impact_2017')")
     } else {

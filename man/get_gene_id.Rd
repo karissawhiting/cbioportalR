@@ -4,7 +4,7 @@
 \alias{get_gene_id}
 \title{Get Entrez Gene ID for a given set of Hugo Symbols}
 \usage{
-get_gene_id(hugo_symbol = NULL, ...)
+get_gene_id(hugo_symbol = NULL, base_url = NULL)
 }
 \arguments{
 \item{hugo_symbol}{a hugo symbol for which to return an Entrez Gene ID}

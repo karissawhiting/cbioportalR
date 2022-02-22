@@ -4,7 +4,7 @@
 \alias{get_clinical_attributes}
 \title{Get all clinical attributes available for a study}
 \usage{
-get_clinical_attributes(study_id = NULL, ...)
+get_clinical_attributes(study_id = NULL, base_url = NULL)
 }
 \arguments{
 \item{study_id}{cbioportal study ID}

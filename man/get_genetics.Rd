@@ -11,7 +11,8 @@ get_genetics(
   panel = NULL,
   mutations = TRUE,
   fusions = TRUE,
-  cna = TRUE
+  cna = TRUE,
+  base_url = NULL
 )
 }
 \arguments{

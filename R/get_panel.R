@@ -7,10 +7,12 @@
 #'
 all_available_panels <- function(base_url = NULL) {
 
+  final_url <- base_url %||% get_cbioportal_url()
+
     # query ---------------------------------------------------------------------
   url_path <- "gene-panels??"
 
-  res <- cbp_api(url_path, base_url)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }
@@ -25,11 +27,13 @@ all_available_panels <- function(base_url = NULL) {
 #' @export
 #'
 #'
-get_panel <- function(panel_id) {
+get_panel <- function(panel_id, base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   url_path <- paste0("gene-panels/", panel_id)
 
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- tibble::as_tibble(res$content) %>%
     mutate(data = purrr::map(.data$genes, ~as_tibble(.x))) %>%
     select(.data$data) %>%

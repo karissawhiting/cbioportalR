@@ -4,7 +4,7 @@
 \alias{get_studies}
 \title{Get information about available studies in a cBioPortal instance}
 \usage{
-get_studies(study_id = NULL)
+get_studies(study_id = NULL, base_url = NULL)
 }
 \arguments{
 \item{study_id}{Character vector of one single study ID (e.g. \code{"mskimpact"}) or NULL.

@@ -25,8 +25,11 @@ get_genetics <- function(
   panel = NULL,
   mutations = TRUE,
   fusions = TRUE,
-  cna = TRUE) {
+  cna = TRUE,
+  base_url = NULL) {
 
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
 
@@ -42,7 +45,8 @@ get_genetics <- function(
       cna.dat <- get_cna(sample_id = sample_ids,
                          study_id = study_id,
                          panel = panel,
-                         genes = genes)
+                         genes = genes,
+                         base_url = final_url)
       if(!is.null(cna.dat)) {
         class(cna.dat) <- c("api", "tbl_df", "tbl", "data.frame")
       }
@@ -53,7 +57,8 @@ get_genetics <- function(
       mut.dat <- get_mutations(sample_id = sample_ids,
                               study_id = study_id,
                               panel = panel,
-                               genes = genes)
+                               genes = genes,
+                              base_url = final_url)
 
       if(!is.null(mut.dat)) {
         mut.dat <- mut.dat %>%

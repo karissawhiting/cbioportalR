@@ -4,9 +4,9 @@
 \alias{get_sample_ids}
 \title{Get sample IDs for a given set of patient IDs}
 \usage{
-get_sample_ids(patient_ids = NULL, study_id = NULL)
+get_sample_ids(patient_ids = NULL, study_id = NULL, base_url = NULL)
 
-get_sample_ids(patient_ids = NULL, study_id = NULL)
+get_sample_ids(patient_ids = NULL, study_id = NULL, base_url = NULL)
 }
 \arguments{
 \item{patient_ids}{A character string of sample IDs to query}

@@ -4,7 +4,7 @@
 \alias{get_alias}
 \title{Get Gene Name Alias for a Given Hugo Symbol}
 \usage{
-get_alias(hugo_symbol, ...)
+get_alias(hugo_symbol, base_url = NULL)
 }
 \arguments{
 \item{hugo_symbol}{a hugo symbol for which to return aliases}
@@ -19,6 +19,6 @@ This only works 1 gene at a time right now
 }
 \examples{
 
-get_alias("FGFR3", base_url = 'www.cbioportal.org/api')
+get_alias(hugo_symbol = "FGFR3", base_url = 'www.cbioportal.org/api')
 
 }

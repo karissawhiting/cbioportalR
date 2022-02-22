@@ -7,12 +7,14 @@
 #' \dontrun{
 #' get_genes(base_url = 'www.cbioportal.org/api')
 #' }
-get_genes <- function(...) {
+get_genes <- function(base_url  =  NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   url_path <- paste0("genes")
 
 
-  res <- cbp_api(url_path = url_path, ...)
+  res <- cbp_api(url_path = url_path, base_url = final_url)
 
   purrr::map_df(res$content, ~tibble::as_tibble(.x))
 }
@@ -31,23 +33,17 @@ get_genes <- function(...) {
 #'
 #' get_gene_id("FGFR3", base_url = 'www.cbioportal.org/api')
 #'
-get_gene_id <- function(hugo_symbol = NULL, ...) {
+get_gene_id <- function(hugo_symbol = NULL, base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   if(is.null(hugo_symbol)) rlang::abort("Must specify a `hugo_symbol`")
   url_path = paste0("genes/", hugo_symbol)
-  res <- cbp_api(url_path,...)
+  res <- cbp_api(url_path, base_url = final_url)
   tibble::as_tibble(res$content)
 }
 
 
-#
-# available_genes <- function(hugo_symbol = NULL) {
-#
-#   if(is.null(hugo_symbol)) rlang::abort("Must specify a `hugo_symbol`")
-#   url_path = paste0("genes/", hugo_symbol)
-#   res <- cbp_api(url_path)
-#   tibble::as_tibble(res$content)
-# }
 
 
 #' Get Gene Name Alias for a Given Hugo Symbol
@@ -60,11 +56,14 @@ get_gene_id <- function(hugo_symbol = NULL, ...) {
 #' @export
 #' @examples
 #'
-#' get_alias("FGFR3", base_url = 'www.cbioportal.org/api')
+#' get_alias(hugo_symbol = "FGFR3", base_url = 'www.cbioportal.org/api')
 #'
-get_alias <- function(hugo_symbol, ...) {
+get_alias <- function(hugo_symbol, base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
+
   url_path = paste0("genes/", hugo_symbol, "/aliases")
-  res <- cbp_api(url_path, ...)
+  res <- cbp_api(url_path, base_url=  final_url)
 
   res <- res$content
   unlist(res)

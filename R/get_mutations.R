@@ -7,7 +7,6 @@
 #' @param study_id A study id indicating where samples are housed
 #' @param genes A list of genes to query
 #' @param panel A specified gene panel
-#' @param ... Not used
 #'
 #' @return A dataframe of mutations
 #' @keywords internal
@@ -15,19 +14,12 @@
 .get_mutations_by_sample_id <- function(sample_id = NULL,
                                        study_id = NULL,
                                        genes,
-                                       panel, ...) {
+                                       panel,
+                                       base_url = NULL) {
 
-  # args <- list(...)
-  #
-  #
-  #
-  # if (length(args) > 0) {
-  #   for(i in 1:length(args)) {
-  #     assign(x = names(args)[i], value = args[[i]])
-  #   }
-  # }
 
-  final_base_url <- .determine_base_url(...)
+  final_url <- base_url %||% get_cbioportal_url()
+
 
   input_study_id <- study_id
 
@@ -41,13 +33,13 @@
 
 
   # if no study ID and MSK db, default to IMPACT study ID
-  if (is.null(study_id) & stringr::str_detect(final_base_url, "mskcc")) {
+  if (is.null(study_id) & stringr::str_detect(final_url, "mskcc")) {
     study_id = "mskimpact"
     warning(paste0("no `study_id` provided, defaulting to searching within `mskimpact` study. The following non IMPACT IDs will be ignored:\n ",
                    paste0(non_impact_ids, collapse = ", ")))
   }
 
-  if (is.null(study_id) & final_base_url == "www.cbioportal.org/api") {
+  if (is.null(study_id) & final_url == "www.cbioportal.org/api") {
 
     study_id = "msk_impact_2017"
     warning("If you are an MSK researcher, for most up to date IMPACT data you should connect to MSK cbioportal. \nThis function is using limited public IMPACT data (study_id = 'msk_impact_2017')")
@@ -75,14 +67,14 @@
     res <- cbp_api(url_path,
       method = "post",
       body = body,
-      base_url = final_base_url,
+      base_url = final_url,
     )
 
    purrr::map_df(res$content, ~ tibble::as_tibble(.x))
 
   }
 
-  all_study_ids <- c(study_id, ifelse(stringr::str_detect(final_base_url, "mskcc"),
+  all_study_ids <- c(study_id, ifelse(stringr::str_detect(final_url, "mskcc"),
                                       "mskimpact", "msk_impact_2017")) %>%
     unique()
 
@@ -122,24 +114,15 @@
 #' Function pulls mutation data by cBioPortal study ID
 #'
 #' @param study_id A study id to query
-#' @param ... Other arguments passed on to `cbp_api()`
 #'
 #' @return A dataframe of all mutations from specified study. all available data will be returned for all genes in study
 #' @keywords internal
 #' @noRd
 
-.get_mutations_by_study_id <- function(study_id = NULL, ...) {
+.get_mutations_by_study_id <- function(study_id = NULL, base_url = NULL) {
 
   # arguments ------------------------------------------------------------------
-  args <- list(...)
-
-  if (length(args) > 0) {
-    for(i in 1:length(args)) {
-      assign(x = names(args)[i], value = args[[i]])
-    }
-  }
-
-  final_base_url <- .determine_base_url(...)
+  final_url <- base_url %||% get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
@@ -155,7 +138,7 @@
       "_mutations/mutations?sampleListId=", x, "_all"
     )
     #  body <- list(entrezGeneIds = genes)
-    res <- cbp_api(url_path, base_url = final_base_url)
+    res <- cbp_api(url_path, base_url = final_url)
     df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   })
 
@@ -176,7 +159,6 @@
 #' @param panel OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
 #' the panel will be looked up with `get_panel()` and only genes in that panel will be returned.
 #' @param genes A list of genes to query. default is all impact genes.
-#' @param ... Not used
 #' @return A dataframe of mutations for each sample ID (in maf file format)
 #' @export
 #'
@@ -186,7 +168,10 @@
 get_mutations <- function(sample_id = NULL,
                           study_id = NULL,
                           panel = NULL,
-                          genes = NULL, ...) {
+                          genes = NULL,
+                          base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
 
@@ -247,13 +232,14 @@ get_mutations <- function(sample_id = NULL,
     df <- .get_mutations_by_sample_id(sample_id = sample_id,
                                      study_id = study_id,
                                      genes = genes,
-                                     panel = panel, ...)
+                                     panel = panel, base_url = final_url)
   }
 
   if (!is.null(study_id) & is.null(sample_id)) {
 
     # by default it returns all genes for that study and filters later
-    df <- .get_mutations_by_study_id(study_id = study_id, ...)
+    df <- .get_mutations_by_study_id(study_id = study_id,
+                                     base_url = final_url)
 
     if (!is.null(genes)) {
 

@@ -10,10 +10,12 @@
 #' get_studies()
 #' get_studies(study_id = "msk_impact_2017")
 #'
-get_studies <- function(study_id = NULL) {
+get_studies <- function(study_id = NULL, base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
 
   url_path <- paste0("studies/", study_id)
-  res <- cbp_api(url_path)
+  res <- cbp_api(url_path, base_url = final_url)
 
   if(is.null(study_id)) {
     x <- purrr::map_df(res$content, ~tibble::as_tibble(.x))

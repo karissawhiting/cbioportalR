@@ -9,7 +9,10 @@
 #' @examples
 #' get_clinical_attributes("acc_tcga", base_url = 'www.cbioportal.org/api')
 #'
-get_clinical_attributes <- function(study_id = NULL, ...) {
+get_clinical_attributes <- function(study_id = NULL, base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
+
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")
@@ -23,7 +26,7 @@ get_clinical_attributes <- function(study_id = NULL, ...) {
 
   print(url_path)
 
-  res <- cbp_api(url_path, ...)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }
@@ -43,7 +46,11 @@ get_clinical_attributes <- function(study_id = NULL, ...) {
 #'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 get_clinical_by_patient <- function(study_id = NULL,
                               sample_id = NULL,
-                              clinical_attribute = "CANCER_TYPE", ...) {
+                              clinical_attribute = "CANCER_TYPE",
+                              base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
+
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")
@@ -59,7 +66,7 @@ get_clinical_by_patient <- function(study_id = NULL,
   )
 
   print(url_path)
-  res <- cbp_api(url_path, ...)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }
@@ -76,7 +83,10 @@ get_clinical_by_patient <- function(study_id = NULL,
 #' @examples
 #' get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')
 #'
-get_clinical_by_study <- function(study_id = NULL, ...) {
+get_clinical_by_study <- function(study_id = NULL, base_url = NULL) {
+
+  final_url <- base_url %||% get_cbioportal_url()
+
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
     stop("You must provide a study id. See `get_studies()` to view available studies on database")

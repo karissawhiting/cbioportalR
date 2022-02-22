@@ -1,3 +1,8 @@
+
+# set environment in which to store URL variable that persists
+cbioportal_env <- rlang::new_environment()
+
+
 #' Get cBioPortal Access Token
 #'
 #' This function retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
@@ -6,6 +11,7 @@
 #' \dontrun{
 #' get_cbioportal_token()
 #' }
+#'
 #'
 get_cbioportal_token <- function() {
   x <- Sys.getenv("CBIOPORTAL_TOKEN")
@@ -22,10 +28,10 @@ get_cbioportal_token <- function() {
 #' @export
 #' @examples
 #' \dontrun{
-#' get_cbioportal_db(db = "public")
+#' set_cbioportal_db(db = "public")
 #' }
 #'
-get_cbioportal_db <- function(db = NULL) {
+set_cbioportal_db <- function(db = NULL) {
 
   # if no db passed, check environment db
   db_set <- db %||% Sys.getenv("CBIOPORTAL_URL")
@@ -54,12 +60,14 @@ get_cbioportal_db <- function(db = NULL) {
 
   }
 
-#  assign("base_url", db_url, envir = .GlobalEnv)
-  options(session_base_url = db_set)
+  assign("portal_url",
+         value = db_set,
+         envir = cbioportal_env)
 
-  ui_done("{ui_field('base_url')} for this R session is {ui_value(getOption('session_base_url'))}")
+  ui_done("{ui_field('base_url')} for this R session is {ui_value(get_cbioportal_url())}")
 
 }
+
 
 #' Check for cBioPortal DB
 #'
@@ -78,5 +86,21 @@ check_for_saved_db <- function() {
     return(x)
   }
 }
+
+
+
+#' Get Database URL to Use in Functions
+#'
+#' Pulls the set URL from the internal package environement
+#'
+#' @return
+#' @export
+#'
+#' @examples
+get_cbioportal_url <- function() {
+  get0("portal_url",
+       envir = cbioportal_env,
+      ifnotfound = "No Database URL Found. Have you set your database URL? Try `set_cbioportal_db(<your_url>)`")
+  }
 
 

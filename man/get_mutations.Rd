@@ -9,7 +9,7 @@ get_mutations(
   study_id = NULL,
   panel = NULL,
   genes = NULL,
-  ...
+  base_url = NULL
 )
 }
 \arguments{
@@ -24,8 +24,6 @@ all samples for specified studies will be returned.}
 the panel will be looked up with \code{get_panel()} and only genes in that panel will be returned.}
 
 \item{genes}{A list of genes to query. default is all impact genes.}
-
-\item{...}{Not used}
 }
 \value{
 A dataframe of mutations for each sample ID (in maf file format)

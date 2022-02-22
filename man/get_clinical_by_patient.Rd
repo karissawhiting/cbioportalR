@@ -8,7 +8,7 @@ get_clinical_by_patient(
   study_id = NULL,
   sample_id = NULL,
   clinical_attribute = "CANCER_TYPE",
-  ...
+  base_url = NULL
 )
 }
 \arguments{

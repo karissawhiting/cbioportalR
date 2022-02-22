@@ -4,7 +4,7 @@
 \alias{get_genes}
 \title{Get a list of all available genes}
 \usage{
-get_genes(...)
+get_genes(base_url = NULL)
 }
 \value{
 A dataframe of gene ids, hugo dymbols, and gene types
