@@ -62,7 +62,9 @@ get_gene_id <- function(hugo_symbol = NULL, base_url = NULL) {
 #'
 get_alias <- function(hugo_symbol, base_url = NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
+  final_url <- base_url %||%
+    .resolve_url() %||%
+    get_cbioportal_url()
 
   url_path = paste0("genes/", hugo_symbol, "/aliases")
   res <- cbp_api(url_path, base_url=  final_url)

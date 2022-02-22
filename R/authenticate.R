@@ -25,31 +25,36 @@ get_cbioportal_token <- function() {
 
 #' Figure out which base URL to use
 #'
-#' @param base_url_passed The URL passed to a funtion by a user
+#' @param raw_url The URL passed to a funtion by a user
 #'
 #' @return A string with a final URL chosen
 #' @keywords internal
 #' @noRd
 #'
 #'
-.determine_base_url <- function(base_url_passed = NULL) {
+.resolve_url <- function(raw_url = NULL) {
+
+  if(!is.null(raw_url)) {
+
+    # could httr::parse_url() here maybe instead
+    url <- stringr::str_remove(raw_url, "https://")
+
+    url_resolved <- dplyr::case_when(
+      url %in% c("MSK", "msk") ~ "cbioportal.mskcc.org",
+      url == "public" ~ "www.cbioportal.org",
+      TRUE ~ url
+    )
+
+    if (!stringr::str_detect(url_resolved, c("api"))) {
+      url_resolved <- paste0(url_resolved, "/api")
+    }
+
+    return(url_resolved)
+  }
 
 
-  # get correct base_url -------------
-  global_base_url <- switch(
-    exists("base_url", envir = .GlobalEnv) +1,
-    NULL,
-    base_url)
-
-  saved_db <-  suppressWarnings(check_for_saved_db())
-  final_base_url <- base_url_passed %||% global_base_url %||% saved_db
-
-  if(is.null(final_base_url)) rlang::abort("Please specify a database e.g. `set_cbioportal_db('public')`")
-
-  final_base_url
-
+  return(NULL)
 }
-
 
 
 
@@ -66,31 +71,16 @@ get_cbioportal_token <- function() {
 set_cbioportal_db <- function(db = NULL) {
 
   # if no db passed, check environment db
-  db_set <- db %||% Sys.getenv("CBIOPORTAL_URL")
+  db_set <- .resolve_url(db)
+  db_set <- db_set %||% Sys.getenv("CBIOPORTAL_URL")
 
   if (identical(db_set, "")) {
     rlang::abort("No `db` specified and no CBIOPORTAL_URL in `.Renviron`.
       Try specifying `db` or use `usethis::edit_r_environ()` to add a database URL.
       You can also specify `db = 'public'` to connect to https://www.cbioportal.org/")
-  }
-
-
-  if(!is.null(db)) {
-
-    # could httr::parse_url() here maybe instead
-    db <- stringr::str_remove(db, "https://")
-
-    db_set <- dplyr::case_when(
-      db %in% c("MSK", "msk") ~ "cbioportal.mskcc.org",
-      db == "public" ~ "www.cbioportal.org",
-      TRUE ~ db
-    )
-
-    if (!stringr::str_detect(db_set, c("api"))) {
-      db_set <- paste0(db_set, "/api")
-    }
 
   }
+
 
   assign("portal_url",
          value = db_set,
