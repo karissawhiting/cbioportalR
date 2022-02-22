@@ -33,6 +33,8 @@ the panel will be looked up with \code{get_panel()} and only genes in that panel
 \item{fusions}{Boolean specifying if fusion data should be fetched. Default is TRUE.}
 
 \item{cna}{Boolean specifying if cna data should be fetched. Default is TRUE.}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 A list of dataframes containing genetic data.
@@ -41,6 +43,6 @@ A list of dataframes containing genetic data.
 Get all genetic data for a study or list of IDs
 }
 \examples{
-get_cbioportal_db("public")
+set_cbioportal_db("public")
 get_genetics(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"))
 }

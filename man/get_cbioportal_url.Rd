@@ -7,8 +7,12 @@
 get_cbioportal_url()
 }
 \value{
-
+saved url in the \code{cbioportal_env} environment
 }
 \description{
 Pulls the set URL from the internal package environement
+}
+\examples{
+get_cbioportal_url
+
 }

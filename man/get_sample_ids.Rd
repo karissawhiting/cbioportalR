@@ -15,6 +15,8 @@ get_sample_ids(patient_ids = NULL, study_id = NULL, base_url = NULL)
 look for samples in. Is NULL by default and looks in msk_impact_2017 study if you
 do no specify a study and are using public cbioportal. If you are connected to MSK
 cbioportal it will look in the most up to date IMPACT study (which is not public).}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 A dataframe of patient IDs and corresponding sample IDs. If patient
@@ -30,12 +32,12 @@ Get sample IDs for a given set of patient IDs
 }
 \examples{
 \dontrun{
-get_cbioportal_db("public")
+set_cbioportal_db("public")
 get_sample_ids(patient_ids = c("P-0000034", "P-0000036"))
 }
 
 \dontrun{
-get_cbioportal_db("public")
+set_cbioportal_db("public")
 get_sample_ids(patient_ids = c("P-0000034", "P-0000036"))
 }
 

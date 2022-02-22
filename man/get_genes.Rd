@@ -6,6 +6,9 @@
 \usage{
 get_genes(base_url = NULL)
 }
+\arguments{
+\item{base_url}{The database URL to query}
+}
 \value{
 A dataframe of gene ids, hugo dymbols, and gene types
 }

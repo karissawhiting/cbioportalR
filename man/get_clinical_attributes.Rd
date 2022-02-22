@@ -8,6 +8,8 @@ get_clinical_attributes(study_id = NULL, base_url = NULL)
 }
 \arguments{
 \item{study_id}{cbioportal study ID}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 a data frame of available clinical attributes for that study

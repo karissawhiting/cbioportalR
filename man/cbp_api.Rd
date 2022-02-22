@@ -27,7 +27,7 @@ cbp_api(
 
 \item{quiet}{Returns queried URL. Default is TRUE}
 
-\item{...}{Not used}
+\item{base_url}{The database URL to query}
 }
 \value{
 A parsed API response

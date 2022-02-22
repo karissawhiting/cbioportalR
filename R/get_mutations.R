@@ -7,6 +7,7 @@
 #' @param study_id A study id indicating where samples are housed
 #' @param genes A list of genes to query
 #' @param panel A specified gene panel
+#' @param base_url The database URL to query
 #'
 #' @return A dataframe of mutations
 #' @keywords internal
@@ -114,7 +115,7 @@
 #' Function pulls mutation data by cBioPortal study ID
 #'
 #' @param study_id A study id to query
-#'
+#' @param base_url The database URL to query
 #' @return A dataframe of all mutations from specified study. all available data will be returned for all genes in study
 #' @keywords internal
 #' @noRd
@@ -159,11 +160,13 @@
 #' @param panel OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
 #' the panel will be looked up with `get_panel()` and only genes in that panel will be returned.
 #' @param genes A list of genes to query. default is all impact genes.
+#' @param base_url The database URL to query
 #' @return A dataframe of mutations for each sample ID (in maf file format)
 #' @export
 #'
 #' @examples
-#' get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"), base_url = 'www.cbioportal.org/api')
+#' get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"),
+#'  base_url = 'www.cbioportal.org/api')
 #'
 get_mutations <- function(sample_id = NULL,
                           study_id = NULL,

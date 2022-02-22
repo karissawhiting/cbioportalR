@@ -2,6 +2,7 @@
 #' Get all clinical attributes available for a study
 #'
 #' @param study_id cbioportal study ID
+#' @param base_url The database URL to query
 #'
 #' @return a data frame of available clinical attributes for that study
 #' @export
@@ -37,6 +38,7 @@ get_clinical_attributes <- function(study_id = NULL, base_url = NULL) {
 #' @param study_id study ID
 #' @param sample_id a single tumor sample ID
 #' @param clinical_attribute a specific clinical attribute
+#' @param base_url The database URL to query
 #'
 #' @return a dataframe of a specific clinical attribute
 #' @export
@@ -76,6 +78,7 @@ get_clinical_by_patient <- function(study_id = NULL,
 #' Get all available clinical data for a specified study
 #'
 #' @param study_id study ID
+#' @param base_url The database URL to query
 #'
 #' @return a dataframe of all available clinical attributes and their values
 #' @export
@@ -99,7 +102,7 @@ get_clinical_by_study <- function(study_id = NULL, base_url = NULL) {
   )
 
   print(url_path)
-  res <- cbp_api(url_path, ...)
+  res <- cbp_api(url_path, base_url = final_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
   return(df)
 }

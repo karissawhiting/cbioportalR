@@ -2,11 +2,12 @@
 #'
 #' @param study_id Character vector of one single study ID (e.g. `"mskimpact"`) or NULL.
 #' Default is NULL which returns all available studies. Currently multiple study ids are not supported.
+#' @param base_url The database URL to query
 #' @return A tibble of study meta data
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db("public")
+#' set_cbioportal_db("public")
 #' get_studies()
 #' get_studies(study_id = "msk_impact_2017")
 #'

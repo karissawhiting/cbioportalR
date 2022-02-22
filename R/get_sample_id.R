@@ -1,6 +1,7 @@
 #' Get sample IDs for a given set of patient IDs
 #'
 #' @param patient_ids A character string of sample IDs to query
+#' @param base_url The database URL to query
 #'
 #' @return A dataframe of patient IDs and corresponding sample IDs. If patient
 #' has multiple samples, there will be multiple rows per patient.
@@ -9,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_cbioportal_db("public")
+#' set_cbioportal_db("public")
 #' get_sample_ids(patient_ids = c("P-0000034", "P-0000036"))
 #' }
 #'

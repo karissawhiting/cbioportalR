@@ -2,6 +2,7 @@
 #' Get all available gene panels in a database
 #'
 #' @return a dataframe of metadata regarding each available panel
+#' @param base_url The database URL to query
 #' @export
 #'
 #'
@@ -22,7 +23,7 @@ all_available_panels <- function(base_url = NULL) {
 #' Retrieve data for a specific panel
 #'
 #' @param panel_id name of panel
-#'
+#' @param base_url The database URL to query
 #' @return A dataframe of genes in a specified panel
 #' @export
 #'

@@ -17,6 +17,8 @@ get_clinical_by_patient(
 \item{sample_id}{a single tumor sample ID}
 
 \item{clinical_attribute}{a specific clinical attribute}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 a dataframe of a specific clinical attribute

@@ -4,10 +4,10 @@ test_base_url <- "www.cbioportal.org/api"
 
 # Test determine base URL ------------------------
 
-test_that("determine base url", {
-  expect_equal(.determine_base_url("www.cbioportal.org/api"),
-               "www.cbioportal.org/api")
-  })
+# test_that("determine base url", {
+#   expect_equal(.determine_base_url("www.cbioportal.org/api"),
+#                "www.cbioportal.org/api")
+#   })
 
 # Test pull by sample ID -------------------------------------------------------
 test_that("pull mutation by sample- works with default study_id", {

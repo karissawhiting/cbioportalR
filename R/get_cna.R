@@ -134,7 +134,7 @@ get_cna_by_study_id <- function(study_id = NULL, base_url = NULL) {
 #' @param panel OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
 #' the panel will be looked up with `get_panel()` and only genes in that panel will be returned.
 #' @param genes A list of genes to query. default is all impact genes.
-#'
+#' @param base_url The database URL to query
 #' @return A dataframe of CNA for each sample ID (in maf file format)
 #' @export
 #'

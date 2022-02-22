@@ -2,6 +2,7 @@
 #' Get a list of all available genes
 #'
 #' @return A dataframe of gene ids, hugo dymbols, and gene types
+#' @param base_url The database URL to query
 #' @export
 #' @examples
 #' \dontrun{
@@ -27,6 +28,7 @@ get_genes <- function(base_url  =  NULL) {
 #' This only works 1 gene at a time right now
 #'
 #' @param hugo_symbol a hugo symbol for which to return an Entrez Gene ID
+#' @param base_url The database URL to query
 #' @return A dataframe with Entrez Gene IDs and Hugo Symbols
 #' @export
 #' @examples
@@ -51,7 +53,7 @@ get_gene_id <- function(hugo_symbol = NULL, base_url = NULL) {
 #' This only works 1 gene at a time right now
 #'
 #' @param hugo_symbol a hugo symbol for which to return aliases
-#' @param ... Not used
+#' @param base_url The database URL to query
 #' @return A character string with all aliases
 #' @export
 #' @examples

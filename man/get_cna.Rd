@@ -24,6 +24,8 @@ all samples for specified studies will be returned.}
 the panel will be looked up with \code{get_panel()} and only genes in that panel will be returned.}
 
 \item{genes}{A list of genes to query. default is all impact genes.}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 A dataframe of CNA for each sample ID (in maf file format)

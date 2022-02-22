@@ -8,6 +8,8 @@ get_gene_id(hugo_symbol = NULL, base_url = NULL)
 }
 \arguments{
 \item{hugo_symbol}{a hugo symbol for which to return an Entrez Gene ID}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 A dataframe with Entrez Gene IDs and Hugo Symbols

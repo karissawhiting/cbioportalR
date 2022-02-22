@@ -9,6 +9,8 @@ get_studies(study_id = NULL, base_url = NULL)
 \arguments{
 \item{study_id}{Character vector of one single study ID (e.g. \code{"mskimpact"}) or NULL.
 Default is NULL which returns all available studies. Currently multiple study ids are not supported.}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 A tibble of study meta data
@@ -17,7 +19,7 @@ A tibble of study meta data
 Get information about available studies in a cBioPortal instance
 }
 \examples{
-get_cbioportal_db("public")
+set_cbioportal_db("public")
 get_studies()
 get_studies(study_id = "msk_impact_2017")
 

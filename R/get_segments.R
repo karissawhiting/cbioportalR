@@ -4,12 +4,13 @@
 #' @param study_id A character vector of lenght 1 indicating study_id.
 #' Default is "all_tcga_studies" which queries all TCGA cancer studies, unless you
 #' are connected to MSKCC host in which case default is "mskimpact".
+#' @param base_url The database URL to query
 #'
 #' @return Returns a dataframe of segmentation data
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db('public')
+#' set_cbioportal_db('public')
 #' get_segments(sample_ids = "TCGA-OR-A5J2-01", study_id = "acc_tcga")
 #'
 # get_segments <- function(sample_ids = NULL,

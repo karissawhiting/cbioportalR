@@ -7,7 +7,7 @@
 #' @param body Arguments passed to API call (e.g. sample ID or gene IDs)
 #' @param extra_box Some functions require an additional list() wrapping around body idk why
 #' @param quiet Returns queried URL. Default is TRUE
-#' @param ... Not used
+#' @param base_url The database URL to query
 #'
 #' @return A parsed API response
 #' @export
@@ -27,8 +27,8 @@ cbp_api <- function(url_path,
   method = match.arg(method, choices = c("get", "post"))
 
   final_base_url <- base_url %||%
-    get_portal_url() %||%
-    abort(message = "must supply a url. Try `get_cbioportal_db()`")
+    get_cbioportal_url() %||%
+    abort(message = "must supply a url. Try `set_cbioportal_db()`")
 
 
   url <- httr::modify_url(url = "",

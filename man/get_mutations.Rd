@@ -24,6 +24,8 @@ all samples for specified studies will be returned.}
 the panel will be looked up with \code{get_panel()} and only genes in that panel will be returned.}
 
 \item{genes}{A list of genes to query. default is all impact genes.}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 A dataframe of mutations for each sample ID (in maf file format)
@@ -32,6 +34,7 @@ A dataframe of mutations for each sample ID (in maf file format)
 Get gene mutations by sample ID or Study
 }
 \examples{
-get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"), base_url = 'www.cbioportal.org/api')
+get_mutations(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"),
+ base_url = 'www.cbioportal.org/api')
 
 }

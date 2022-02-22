@@ -9,7 +9,7 @@ get_alias(hugo_symbol, base_url = NULL)
 \arguments{
 \item{hugo_symbol}{a hugo symbol for which to return aliases}
 
-\item{...}{Not used}
+\item{base_url}{The database URL to query}
 }
 \value{
 A character string with all aliases

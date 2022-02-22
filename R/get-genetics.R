@@ -11,11 +11,12 @@
 #' @param mutations Boolean specifying if mutation data should be fetched. Default is TRUE.
 #' @param fusions Boolean specifying if fusion data should be fetched. Default is TRUE.
 #' @param cna Boolean specifying if cna data should be fetched. Default is TRUE.
+#' @param base_url The database URL to query
 #' @return A list of dataframes containing genetic data.
 #' @export
 #'
 #' @examples
-#' get_cbioportal_db("public")
+#' set_cbioportal_db("public")
 #' get_genetics(sample_id = c("P-0005217-T03-IM5", "P-0038798-T01-IM6"))
 
 get_genetics <- function(

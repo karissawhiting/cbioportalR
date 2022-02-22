@@ -36,7 +36,8 @@ Imports:
     jsonlite,
     tidyr,
     dplyr,
-    stringr
+    stringr,
+    usethis
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr

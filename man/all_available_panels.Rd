@@ -6,6 +6,9 @@
 \usage{
 all_available_panels(base_url = NULL)
 }
+\arguments{
+\item{base_url}{The database URL to query}
+}
 \value{
 a dataframe of metadata regarding each available panel
 }

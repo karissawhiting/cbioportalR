@@ -2,7 +2,7 @@
 #' See what genetic data is available for a given study
 #'
 #' @param study_id A character vector of lenth 1 indicating study_id. See `get_studies()` to see available studies.
-#'
+#' @param base_url The database URL to query
 #' @return A dataframe of available genetic profiles and their names
 #' @export
 #'

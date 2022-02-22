@@ -8,6 +8,8 @@ get_panel(panel_id, base_url = NULL)
 }
 \arguments{
 \item{panel_id}{name of panel}
+
+\item{base_url}{The database URL to query}
 }
 \value{
 A dataframe of genes in a specified panel
