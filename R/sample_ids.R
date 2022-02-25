@@ -1,8 +1,10 @@
 #' Get sample IDs for a given set of patient IDs
 #'
-#' @param patient_ids A character string of sample IDs to query
+#' @param patient_id A character string of sample IDs to query
+#' @param study_id A character string indicating which study ID should be searched.
+#' Only 1 study allowed. If NULL, we will guess a default study ID based on your database URL.
 #' @param base_url The database URL to query
-#'
+#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #' @return A dataframe of patient IDs and corresponding sample IDs. If patient
 #' has multiple samples, there will be multiple rows per patient.
 #'
@@ -30,7 +32,7 @@ get_sample_id <- function(patient_id = NULL,
   study_id <- .guess_study_id(study_id, resolved_url)
 
   # query --------------------------------------------------------------------
-  list_of_urls <- purrr::map(patient_ids,
+  list_of_urls <- purrr::map(patient_id,
                              ~paste0("studies/", study_id,
                                      "/patients/",
                                      .x, "/samples?"))
@@ -40,7 +42,8 @@ get_sample_id <- function(patient_id = NULL,
     res <- cbp_api(url_path = x, base_url = base_url)
     res$content
     df <- as.data.frame(res$content) %>%
-      select(patientId, sampleId, sampleType, studyId)
+      select(.data$patientId, .data$sampleId,
+             .data$sampleType, .data$studyId)
     df
     })
 

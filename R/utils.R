@@ -15,7 +15,7 @@
 
 #' Check for Sample ID
 #'
-#' @param study_id
+#' @param sample_id
 #'
 #' @return stop if no sample_id arg
 #' @keywords internal
@@ -28,9 +28,9 @@
   }
 }
 
-#' Check for Sample ID
+#' Check for Patient ID
 #'
-#' @param study_id
+#' @param patient_id
 #'
 #' @return stop if no sample_id arg
 #' @keywords internal
@@ -44,6 +44,16 @@
 }
 
 
+#' Check for Patient ID
+#'
+#' @param study_id
+#' @param resolved_url
+#'
+#' @return a guess at which study_id a user may want to use
+#' @keywords internal
+#' @noRd
+#' @export
+#'
 .guess_study_id <- function(study_id, resolved_url) {
 
   study_id_guess <- study_id %||%

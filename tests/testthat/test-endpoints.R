@@ -7,6 +7,7 @@ test_that("test endpoints", {
 
   endpoint_funs <- c(available_profiles = available_profiles,
                      available_gene_panels = available_gene_panels,
+                     available_studies = available_studies,
                      get_genes = get_genes)
 
   res <- expect_error(purrr::map(endpoint_funs,
@@ -27,7 +28,8 @@ test_that("test endpoints - with study_id", {
 
   endpoint_funs <- c(available_profiles = available_profiles,
                      available_clinical_attributes = available_clinical_attributes,
-                     get_clinical_by_study = get_clinical_by_study)
+                     get_clinical_by_study = get_clinical_by_study,
+                     get_study_info = get_study_info)
 
   res <- expect_error(purrr::map(endpoint_funs,
        function(fn) rlang::exec(fn, study_id = study_id)), NA)
@@ -127,3 +129,42 @@ test_that("test get panels", {
 })
 
 
+#  Test Getting Genes -------------------------------------------------
+
+test_that("test get genes", {
+
+  set_cbioportal_db("public")
+
+  expect_error(
+    get_entrez_id(),
+    "Must specify at least one*")
+
+  expect_error(
+    get_hugo_symbol(),
+    "Must specify at least one*")
+
+  expect_error(
+    get_hugo_symbol(),
+    "Must specify at least one*")
+
+  # capital and lowercase - becomes capital (this actually happens in the API itself)
+  expect_equal(
+    get_entrez_id(c("tp53", "FGFR3"))$hugoGeneSymbol,
+    get_hugo_symbol(get_entrez_id(c("tp53", "FGFR3"))$entrezGeneId)$hugoGeneSymbol)
+
+  # single or multiple args work
+  expect_equal(
+    get_entrez_id(c("APC"))$hugoGeneSymbol,
+    get_hugo_symbol(get_entrez_id(c("APC"))$entrezGeneId)$hugoGeneSymbol)
+
+  # passing character as entrez(also happens in API)
+  x <- get_hugo_symbol(324)
+  y <- get_hugo_symbol("324")
+  expect_equal(x, y)
+
+  # get alias
+  expect_true("MLL2" %in% get_alias("KMT2D")$alias)
+
+
+
+})
