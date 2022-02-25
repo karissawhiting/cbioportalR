@@ -7,7 +7,7 @@
 get_cbioportal_token()
 }
 \description{
-This function retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
+Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 }
 \examples{
 \dontrun{

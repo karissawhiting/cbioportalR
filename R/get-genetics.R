@@ -30,7 +30,7 @@ get_genetics <- function(
   base_url = NULL) {
 
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
 

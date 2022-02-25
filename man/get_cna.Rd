@@ -21,7 +21,7 @@ If non IMPACT ID samples passed, a \code{study_id} is required as well to retrie
 all samples for specified studies will be returned.}
 
 \item{panel}{OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
-the panel will be looked up with \code{get_panel()} and only genes in that panel will be returned.}
+the panel will be looked up with \code{get_gene_panel()} and only genes in that panel will be returned.}
 
 \item{genes}{A list of genes to query. default is all impact genes.}
 

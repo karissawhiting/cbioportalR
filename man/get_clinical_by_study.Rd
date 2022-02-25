@@ -9,7 +9,8 @@ get_clinical_by_study(study_id = NULL, base_url = NULL)
 \arguments{
 \item{study_id}{study ID}
 
-\item{base_url}{The database URL to query}
+\item{base_url}{The database URL to query.
+If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
 a dataframe of all available clinical attributes and their values

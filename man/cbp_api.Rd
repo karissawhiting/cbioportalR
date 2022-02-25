@@ -37,6 +37,6 @@ Core function to retrieve data from cBioPortal API.
 }
 \examples{
 
-cbp_api(url_path = "genes/TP53", base_url = "www.cbioportal.org/api")
+cbp_api(url_path = "genes/TP53", base_url = "public")
 
 }

@@ -13,7 +13,7 @@
 #'
 get_studies <- function(study_id = NULL, base_url = NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   url_path <- paste0("studies/", study_id)
   res <- cbp_api(url_path, base_url = final_url)

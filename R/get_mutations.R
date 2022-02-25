@@ -19,7 +19,7 @@
                                        base_url = NULL) {
 
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
 
   input_study_id <- study_id
@@ -123,7 +123,7 @@
 .get_mutations_by_study_id <- function(study_id = NULL, base_url = NULL) {
 
   # arguments ------------------------------------------------------------------
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
@@ -174,7 +174,7 @@ get_mutations <- function(sample_id = NULL,
                           genes = NULL,
                           base_url = NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
 
@@ -188,7 +188,7 @@ get_mutations <- function(sample_id = NULL,
 
   # If user specified a panel---
     if (!is.null(panel)) {
-      all_ids_df <- get_panel(panel)
+      all_ids_df <- get_gene_panel(panel_id)
 
       genes <- all_ids_df %>%
         pull(.data$entrezGeneId)

@@ -2,18 +2,21 @@
 % Please edit documentation in R/available_profiles.R
 \name{available_profiles}
 \alias{available_profiles}
-\title{See what genetic data is available for a given study}
+\title{Get Available Genomic Profiles For a Study or Database}
 \usage{
 available_profiles(study_id = NULL, base_url = NULL)
 }
 \arguments{
-\item{study_id}{A character vector of lenth 1 indicating study_id. See \code{get_studies()} to see available studies.}
+\item{study_id}{A character vector of length 1 indicating study_id.
+See \code{get_studies()} to see all available studies for your URL. If \code{NULL}, it will
+return all profiles for your current database url}
 
-\item{base_url}{The database URL to query}
+\item{base_url}{The database URL to query.
+If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
-A dataframe of available genetic profiles and their names
+A dataframe of available genetic profiles and their profile ids
 }
 \description{
-See what genetic data is available for a given study
+Get Available Genomic Profiles For a Study or Database
 }

@@ -1,63 +1,8 @@
-
+# ------------------------------------------------------------------------------
 # set environment in which to store URL variable that persists
 cbioportal_env <- rlang::new_environment()
 
-
-#' Get cBioPortal Access Token
-#'
-#' This function retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
-#' @export
-#' @examples
-#' \dontrun{
-#' get_cbioportal_token()
-#' }
-#'
-#'
-get_cbioportal_token <- function() {
-  x <- Sys.getenv("CBIOPORTAL_TOKEN")
-  if (identical(x, "")) {
-    rlang::warn("No CBIOPORTAL_TOKEN in `.Renviron`. Try `usethis::edit_r_environ()` to add a token")
-  }
-  x
-}
-
-# Default Base URL  -----------------------------------------------------
-
-#' Figure out which base URL to use
-#'
-#' @param raw_url The URL passed to a funtion by a user
-#'
-#' @return A string with a final URL chosen
-#' @keywords internal
-#' @noRd
-#'
-#'
-.resolve_url <- function(raw_url = NULL) {
-
-  if(!is.null(raw_url)) {
-
-    # could httr::parse_url() here maybe instead
-    url <- stringr::str_remove(raw_url, "https://")
-
-    url_resolved <- dplyr::case_when(
-      url %in% c("MSK", "msk") ~ "cbioportal.mskcc.org",
-      url == "public" ~ "www.cbioportal.org",
-      TRUE ~ url
-    )
-
-    if (!stringr::str_detect(url_resolved, c("api"))) {
-      url_resolved <- paste0(url_resolved, "/api")
-    }
-
-    return(url_resolved)
-  }
-
-
-  return(NULL)
-}
-
-
-
+# ------------------------------------------------------------------------------
 #' Connect to cBioPortal DB
 #'
 #' This function sets a base cBioPortal url
@@ -86,44 +31,81 @@ set_cbioportal_db <- function(db = NULL) {
          value = db_set,
          envir = cbioportal_env)
 
-  ui_done("{ui_field('base_url')} for this R session is {ui_value(get_cbioportal_url())}")
-
+  cli_alert_success(" {.field {'portal_url'}} for this R session is {.val {.get_cbioportal_url()}} ")
 }
 
-
-#' Check for cBioPortal DB
+# ------------------------------------------------------------------------------
+#' Get cBioPortal Access Token
 #'
-#' This function  checks for and retrieves cBioPortal URL System Environment variable "CBIOPORTAL_URL"
-#' @return a saved data base URLir NULL if none exists
+#' Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 #' @export
 #' @examples
-#' check_for_saved_db()
+#' \dontrun{
+#' get_cbioportal_token()
+#' }
 #'
-check_for_saved_db <- function() {
-  x <- Sys.getenv("CBIOPORTAL_URL")
+#'
+get_cbioportal_token <- function() {
+  x <- Sys.getenv("CBIOPORTAL_TOKEN")
   if (identical(x, "")) {
-    rlang::warn("No CBIOPORTAL_URL in `.Renviron`. Try `usethis::edit_r_environ()` to add a database URL")
-    return(NULL)
-  } else {
-    return(x)
+    rlang::warn("No CBIOPORTAL_TOKEN in `.Renviron`. Try `usethis::edit_r_environ()` to add a token")
   }
+  x
 }
 
 
-
+# ------------------------------------------------------------------------------
 #' Get Database URL to Use in Functions
 #'
-#' Pulls the set URL from the internal package environement
+#' Pulls the set URL from the internal package environment
 #'
 #' @return saved url in the `cbioportal_env` environment
 #' @export
+#' @keywords internal
+#' @noRd
 #' @examples
-#' get_cbioportal_url
+#' .get_cbioportal_url()
 #'
-get_cbioportal_url <- function() {
+.get_cbioportal_url <- function() {
   get0("portal_url",
        envir = cbioportal_env,
       ifnotfound = "No Database URL Found. Have you set your database URL? Try `set_cbioportal_db(<your_url>)`")
+}
+
+
+# ------------------------------------------------------------------------------
+#' Process and make a best guess of URL string passed to authentication functions
+#'
+#' @param raw_url The URL passed to a function by a user
+#'
+#' @return A string with a final URL to be used
+#' @export
+#' @keywords internal
+#' @noRd
+#'
+#'
+.resolve_url <- function(raw_url = NULL) {
+
+  if(!is.null(raw_url)) {
+
+    # could httr::parse_url() here maybe instead
+    url <- stringr::str_remove(raw_url, "https://")
+
+    url_resolved <- dplyr::case_when(
+      tolower(url) %in% c("msk", "mskcc") ~ "cbioportal.mskcc.org",
+      url == "public" ~ "www.cbioportal.org",
+      TRUE ~ url
+    )
+
+    if (!stringr::str_detect(url_resolved, c("api"))) {
+      url_resolved <- paste0(url_resolved, "/api")
+    }
+
+    return(url_resolved)
   }
+
+
+  return(NULL)
+}
 
 

@@ -4,12 +4,12 @@
 #' @keywords internal
 "_PACKAGE"
 
-# The following block is used by usethis to automatically manage
-# roxygen namespace tags. Modify with care!
+# allowing for the use of the dot when piping
+utils::globalVariables(".")
+
 ## usethis namespace: start
+#' @importFrom cli cli_alert_success
+#' @importFrom cli cli_alert_warning
 #' @importFrom rlang abort
-#' @importFrom usethis ui_done
-#' @importFrom usethis ui_field
-#' @importFrom usethis ui_value
 ## usethis namespace: end
 NULL

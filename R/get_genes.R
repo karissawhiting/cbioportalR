@@ -1,7 +1,7 @@
 
-#' Get a list of all available genes
+#' Get A List of Genes for a Specified Database
 #'
-#' @return A dataframe of gene ids, hugo dymbols, and gene types
+#' @return A dataframe of gene ids, hugo symbols, and gene types
 #' @param base_url The database URL to query
 #' @export
 #' @examples
@@ -10,14 +10,11 @@
 #' }
 get_genes <- function(base_url  =  NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
-
   url_path <- paste0("genes")
 
-
-  res <- cbp_api(url_path = url_path, base_url = final_url)
-
+  res <- cbp_api(url_path = url_path, base_url = base_url)
   purrr::map_df(res$content, ~tibble::as_tibble(.x))
+
 }
 
 
@@ -37,7 +34,7 @@ get_genes <- function(base_url  =  NULL) {
 #'
 get_gene_id <- function(hugo_symbol = NULL, base_url = NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   if(is.null(hugo_symbol)) rlang::abort("Must specify a `hugo_symbol`")
   url_path = paste0("genes/", hugo_symbol)
@@ -64,7 +61,7 @@ get_alias <- function(hugo_symbol, base_url = NULL) {
 
   final_url <- base_url %||%
     .resolve_url() %||%
-    get_cbioportal_url()
+    .get_cbioportal_url()
 
   url_path = paste0("genes/", hugo_symbol, "/aliases")
   res <- cbp_api(url_path, base_url=  final_url)

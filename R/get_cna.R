@@ -4,7 +4,7 @@ get_cna_by_sample_id  <- function(sample_id = NULL,
                                        panel,
                                   base_url =NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   input_study_id <- study_id
 
@@ -82,7 +82,7 @@ get_cna_by_sample_id  <- function(sample_id = NULL,
 
 get_cna_by_study_id <- function(study_id = NULL, base_url = NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
   if (is.null(study_id)) {
@@ -132,7 +132,7 @@ get_cna_by_study_id <- function(study_id = NULL, base_url = NULL) {
 #' @param study_id A character vector study IDs. See `get_studies()` to see available studies. If passed with no specified `sample_id`
 #' all samples for specified studies will be returned.
 #' @param panel OPTIONAL argument. A character vector of length 1 indicating a specific panel to be used. If not NULL,
-#' the panel will be looked up with `get_panel()` and only genes in that panel will be returned.
+#' the panel will be looked up with `get_gene_panel()` and only genes in that panel will be returned.
 #' @param genes A list of genes to query. default is all impact genes.
 #' @param base_url The database URL to query
 #' @return A dataframe of CNA for each sample ID (in maf file format)
@@ -150,7 +150,7 @@ get_cna <- function(sample_id = NULL,
                           genes = NULL,
                     base_url = NULL) {
 
-  final_url <- base_url %||% get_cbioportal_url()
+    final_url <- base_url %>% .resolve_url() %||% .get_cbioportal_url()
 
   # checks ---------------------------------------------------------------------
 

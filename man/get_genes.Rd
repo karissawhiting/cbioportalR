@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_genes.R
 \name{get_genes}
 \alias{get_genes}
-\title{Get a list of all available genes}
+\title{Get A List of Genes for a Specified Database}
 \usage{
 get_genes(base_url = NULL)
 }
@@ -10,10 +10,10 @@ get_genes(base_url = NULL)
 \item{base_url}{The database URL to query}
 }
 \value{
-A dataframe of gene ids, hugo dymbols, and gene types
+A dataframe of gene ids, hugo symbols, and gene types
 }
 \description{
-Get a list of all available genes
+Get A List of Genes for a Specified Database
 }
 \examples{
 \dontrun{
