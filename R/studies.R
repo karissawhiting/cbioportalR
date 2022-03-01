@@ -5,7 +5,7 @@
 #' @return A dataframe of available studies and their metadata
 #' @export
 #'
-#' @example
+#' @examples
 #' set_cbioportal_db("public")
 #' available_studies()
 
@@ -29,7 +29,7 @@ available_studies <- function(base_url =  NULL) {
 #' @return A dataframe of study metadata
 #' @export
 #'
-#' @example
+#' @examples
 #' set_cbioportal_db("public")
 #' get_study_info("acc_tcga")
 

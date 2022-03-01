@@ -29,7 +29,8 @@ test_that("test endpoints - with study_id", {
   endpoint_funs <- c(available_profiles = available_profiles,
                      available_clinical_attributes = available_clinical_attributes,
                      get_clinical_by_study = get_clinical_by_study,
-                     get_study_info = get_study_info)
+                     get_study_info = get_study_info,
+                     get_mutation_by_study = get_mutation_by_study)
 
   res <- expect_error(purrr::map(endpoint_funs,
        function(fn) rlang::exec(fn, study_id = study_id)), NA)
@@ -53,16 +54,6 @@ test_that("test endpoints - missing study_id arg", {
 
 })
 
-test_that("test endpoints - with study_id & base_url", {
-
-  db_test <- "public"
-  set_cbioportal_db(db = db_test)
-
-  res <- expect_error(available_profiles(study_id = "brca_jup_msk_2020",
-                            base_url = "public"), NA)
-
-})
-
 
 # Sample ID AND Study ID Endpoints -----------------------------------------------------------
 
@@ -73,7 +64,8 @@ test_that("test endpoints - with study_id", {
 
   study_id = "acc_tcga"
   endpoint_funs <- c(available_profiles = available_profiles,
-                     available_clinical_attributes = available_clinical_attributes)
+                     available_clinical_attributes = available_clinical_attributes,
+                     get_sample_by_study = get_sample_by_study)
 
   res <- purrr::map(endpoint_funs,
                     function(fn) rlang::exec(fn, study_id = "acc_tcga"))

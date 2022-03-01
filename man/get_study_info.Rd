@@ -18,3 +18,7 @@ A dataframe of study metadata
 \description{
 Get Metadata on All Available Studies in Database or a Specified Study
 }
+\examples{
+set_cbioportal_db("public")
+get_study_info("acc_tcga")
+}

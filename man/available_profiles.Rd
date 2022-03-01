@@ -20,3 +20,7 @@ A dataframe of available genetic profiles and their profile ids
 \description{
 Get Available Genomic Profiles For a Study or Database
 }
+\examples{
+set_cbioportal_db("public")
+available_profiles()
+}

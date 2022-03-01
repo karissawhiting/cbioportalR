@@ -9,7 +9,7 @@
 #' @return A dataframe of available genetic profiles and their profile ids
 #' @export
 #'
-#' @example
+#' @examples
 #' set_cbioportal_db("public")
 #' available_profiles()
 

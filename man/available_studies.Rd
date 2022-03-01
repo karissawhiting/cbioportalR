@@ -16,3 +16,7 @@ A dataframe of available studies and their metadata
 \description{
 Get Metadata on All Available Studies in a Database
 }
+\examples{
+set_cbioportal_db("public")
+available_studies()
+}

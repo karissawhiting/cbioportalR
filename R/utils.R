@@ -13,6 +13,23 @@
   }
 }
 
+#' Check for Molecular Profile ID
+#'
+#' @param molecular_profile_id
+#'
+#' @return stop if no arg
+#' @keywords internal
+#' @noRd
+#' @export
+#'
+.check_for_molecular_profile_id <- function(molecular_profile_id) {
+
+  if (is.null(molecular_profile_id)) {
+    stop("You must provide a molecular_profile_id. See `available_profiles(<study_id>)` to view available profiles for a study")
+  }
+}
+
+
 #' Check for Sample ID
 #'
 #' @param sample_id
@@ -46,8 +63,8 @@
 
 #' Check for Patient ID
 #'
-#' @param study_id
-#' @param resolved_url
+#' @param study_id a study id passed by a user
+#' @param resolved_url the database URL
 #'
 #' @return a guess at which study_id a user may want to use
 #' @keywords internal
