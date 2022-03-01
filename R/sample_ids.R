@@ -55,7 +55,7 @@ get_sample_by_patient <- function(patient_id = NULL,
 
 }
 
-#' Get All Aample IDs in a Study
+#' Get All Sample IDs in a Study
 #'
 #' @param study_id A character string indicating which study ID should be searched.
 #' Only 1 study allowed. If NULL, we will guess a default study ID based on your database URL.
@@ -68,10 +68,10 @@ get_sample_by_patient <- function(patient_id = NULL,
 #' @examples
 #' \dontrun{
 #' set_cbioportal_db("public")
-#' get_sample_by_study(study_id = "acc_tcga")
+#' get_samples_by_study(study_id = "acc_tcga")
 #' }
 #'
-get_sample_by_study<- function(study_id = NULL,
+get_samples_by_study<- function(study_id = NULL,
                                base_url = NULL) {
 
   .check_for_study_id(study_id)

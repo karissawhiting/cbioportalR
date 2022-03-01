@@ -1,5 +1,7 @@
 
-#' Get Mutations or CNA By Sample ID
+# Generalized Data Pull Function ------------------------------------------------------------
+
+#' Internal Function to Get Mutations/CNA/Fusion By Sample ID
 #'
 #' @param sample_id a vector of sample IDs (character)
 #' @param study_id A string indicating the study ID from which to pull data. If no study ID, will
@@ -11,9 +13,9 @@
 #' @param sample_study_pairs A dataframe with columns: `sample_id`, `study_id` and `molecular_profile_id` (optional).
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
-#' @param data_type specify what type of data to return. Options are`mutations` or `cna`.
+#' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion`
 #' @param genes A vector of entrez ids. If NULL, will return results for all
-#' IMPACT genes (see `gnomeR::impact_gene_info`)
+#' IMPACT genes (see `cbioportalR::impact_gene_info`)
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
@@ -22,23 +24,43 @@
 #'
 #' @examples
 #' set_cbioportal_db("public")
-#' get_data_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
-#'  study_id = "acc_tcga", data_type = "mutations")
+#' .get_data_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
+#'  study_id = "acc_tcga", data_type = "mutation")
+#'
+#'
+#' .get_data_by_sample(sample_id = c("DS-sig-010-P2"),
+#'  molecular_profile_id = "blca_plasmacytoid_mskcc_2016_cna", data_type = "cna")
+#'
+#' .get_data_by_sample(sample_id = c("P-0002146-T01-IM3"),
+#'  molecular_profile_id = "blca_plasmacytoid_mskcc_2016_mutations", data_type = "mutation")
+#'
+#' .get_data_by_sample(sample_id = c("P-0002146-T01-IM3"),
+#'  study_id = "blca_plasmacytoid_mskcc_2016", data_type = "fusion")
 #'
 #' df_pairs <- data.frame(
 #' "sample_id" = c("s_C_36924L_P001_d",
 #' "s_C_03LNU8_P001_d"),
 #' "study_id" = c("prad_msk_2019"))
 #'
-#' get_data_by_sample(sample_study_pairs = df_pairs)
-#' get_data_by_sample(sample_study_pairs = df_pairs, genes = 7157)
-#' get_data_by_sample(sample_study_pairs = df_pairs, data_type = "cna")
+#' .get_data_by_sample(sample_study_pairs = df_pairs, data_type = "mutation")
+#' .get_data_by_sample(sample_study_pairs = df_pairs, genes = 7157, data_type = "mutation")
+#' .get_data_by_sample(sample_study_pairs = df_pairs, data_type = "cna")
+#' .get_data_by_sample(sample_study_pairs = df_pairs, data_type = "fusion")
 #'
-get_data_by_sample <- function(sample_id = NULL,
+#' df_pairs2 <- data.frame(
+#' "sample_id" = c("P-0002146-T01-IM3", "s_C_CAUWT7_P001_d"),
+#'  "study_id" = c("blca_plasmacytoid_mskcc_2016", "prad_msk_2019"))
+#'
+#' .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "mutation")
+#' .get_data_by_sample(sample_study_pairs = df_pairs2, genes = 7157)
+#' .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "cna")
+#' .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "fusion")
+#'
+.get_data_by_sample <- function(sample_id = NULL,
                                 study_id = NULL,
                                 molecular_profile_id = NULL,
                                 sample_study_pairs = NULL,
-                                data_type = c("mutations", "cna"),
+                               data_type = c("mutation", "cna", "fusion"),
 
                                 genes = NULL,
                                 base_url = NULL) {
@@ -47,10 +69,16 @@ get_data_by_sample <- function(sample_id = NULL,
 
 
   data_type <- match.arg(data_type)
-  und_data_type <- paste0("_", data_type)
-  url_data_type <- ifelse(data_type == "mutations",
-                          "mutations",
-                          "discrete-copy-number")
+
+  url_data_type <- case_when(
+    data_type == "mutation" ~ "mutations",
+    data_type == "fusion" ~ "fusion",
+    data_type == "cna" ~ "discrete-copy-number")
+
+  und_data_type <- case_when(
+    url_data_type %in% c("mutations", "fusion") ~ url_data_type,
+    url_data_type == "discrete-copy-number" ~ "cna") %>%
+    paste0("_", .)
 
   # `sample_study_pairs` gets priority. If that is NULL then consider other args
   if(is.null(sample_study_pairs)) {
@@ -117,49 +145,97 @@ get_data_by_sample <- function(sample_id = NULL,
   }
 
 
-  sample_study_pairs_nest_raw <- sample_study_pairs %>%
-    group_by(.data$study_id, .data$molecular_profile_id) %>%
-    tidyr::nest(sample_id_nest = .data$sample_id) %>%
-    mutate(url_path = paste0("molecular-profiles/",
-                             .data$molecular_profile_id,
-                             "/", url_data_type, "/fetch?"))
+  # MUTATION/CNA query ----------------------------------------------------------------------
 
-  sample_study_pairs_nest <- sample_study_pairs_nest_raw %>%
-    ungroup() %>%
-    select(.data$url_path, .data$sample_id_nest)
-
-  # query ---------------------------------------------------------------------
-  quer_res <- purrr::map2(
-    sample_study_pairs_nest$url_path,
-    sample_study_pairs_nest$sample_id_nest,
-
-    function(x, y) {
-
-      body_n = list(
-        entrezGeneIds = resolved_genes,
-        sampleIds = y$sample_id)
-
-      res <- cbp_api(url_path = x,
-                     method = "post",
-                     body = body_n, base_url = base_url)
+  if(data_type %in% c("mutation", "cna")) {
 
 
-      bind_rows(res$content)
+    sample_study_pairs_nest <- sample_study_pairs %>%
+      group_by(.data$study_id, .data$molecular_profile_id) %>%
+      tidyr::nest(sample_id_nest = .data$sample_id) %>%
+      mutate(url_path = paste0("molecular-profiles/",
+                               .data$molecular_profile_id,
+                               "/", url_data_type, "/fetch?")) %>%
+      ungroup() %>%
+      select(.data$url_path, .data$sample_id_nest)
 
-    })
+    quer_res <- purrr::map2(
+      sample_study_pairs_nest$url_path,
+      sample_study_pairs_nest$sample_id_nest,
 
+      function(x, y) {
+
+        body_n = list(
+          entrezGeneIds = resolved_genes,
+          sampleIds = y$sample_id)
+
+        res <- cbp_api(url_path = x,
+                       method = "post",
+                       body = body_n, base_url = base_url)
+
+
+        bind_rows(res$content)
+
+      })
+
+    df <- quer_res %>% bind_rows()
+
+  }
+
+  # FUSIONS query ----------------------------------------------------------------------
+
+  # Fusions endpoint works a little differently than Mut and CNA
+  # Instead of passing a sample list, you pass individual sample IDs (retrieved using list)
+  # Main Goal in this function is to return all results without specifying specific genes to query (as is needed in other endpoints).
+
+  if(data_type == "fusion") {
+
+    quer_res <- purrr::map2(
+      sample_study_pairs$sample_id,
+      sample_study_pairs$molecular_profile_id,
+
+      function(x, y) {
+
+
+        body_n <- list(
+          sampleMolecularIdentifiers = as.data.frame(list(
+            molecularProfileId = jsonlite::unbox(y),
+            sampleId = x
+          ))
+        )
+
+
+        res <- cbp_api(url_path = "structural-variant/fetch?",
+                       method = "post",
+                       body = body_n,
+                       base_url = base_url)
+
+        res$content
+
+      })
+
+    df_fus <- quer_res %>% bind_rows()
+
+    df <- df_fus %>%
+      purrr::when(
+        nrow(.) > 0 ~ filter(., .data$site1EntrezGeneId %in% resolved_genes),
+        TRUE ~ .)
+
+    # Since you don't query by genes, filter genes at end so behaviour is consistent
+    # with mutation/cna endpoints where you have to specify genes to query
+
+
+  }
 
   genes_msg <- genes %||%
     "all IMPACT genes (see `gnomeR::impact_gene_info`)"
 
   cli::cli_text("The following parameters were used in query:")
-  cli::cli_dl(c("{.field Study ID}" = "{.val {unique(sample_study_pairs_nest_raw$study_id)}}",
-                "{.field Molecular Profile ID}" = "{.val {unique(sample_study_pairs_nest_raw$molecular_profile_id)}}",
+  cli::cli_dl(c("{.field Study ID}" = "{.val {unique(sample_study_pairs$study_id)}}",
+                "{.field Molecular Profile ID}" = "{.val {unique(sample_study_pairs$molecular_profile_id)}}",
                 "{.field Genes}" = "{.val {genes_msg}}"
   ))
 
-
-  df <- quer_res %>% bind_rows()
 
   return(df)
 
@@ -169,7 +245,7 @@ get_data_by_sample <- function(sample_id = NULL,
 
 #' Get Mutations By Sample ID
 #'
-#' @inheritParams get_data_by_sample
+#' @inheritParams .get_data_by_sample
 #' @return A data frame of mutations (maf file format)
 #' @export
 #'
@@ -185,11 +261,11 @@ get_mutation_by_sample <- function(sample_id = NULL,
                                    sample_study_pairs = NULL,
                                    base_url = NULL) {
 
-  get_data_by_sample(sample_id = sample_id,
+  .get_data_by_sample(sample_id = sample_id,
                     study_id = study_id,
                     molecular_profile_id = molecular_profile_id,
                     sample_study_pairs = sample_study_pairs,
-                    data_type = c("mutations"),
+                    data_type = c("mutation"),
                     base_url = base_url)
 
 
@@ -200,7 +276,7 @@ get_mutation_by_sample <- function(sample_id = NULL,
 
 #' Get CNA By Sample ID
 #'
-#' @inheritParams get_data_by_sample
+#' @inheritParams .get_data_by_sample
 #' @return A data frame of CNAs
 #' @export
 #'
@@ -216,7 +292,7 @@ get_cna_by_sample <- function(sample_id = NULL,
                                    sample_study_pairs = NULL,
                                    base_url = NULL) {
 
-  get_data_by_sample(sample_id = sample_id,
+  .get_data_by_sample(sample_id = sample_id,
                      study_id = study_id,
                      molecular_profile_id = molecular_profile_id,
                      sample_study_pairs = sample_study_pairs,
@@ -227,4 +303,31 @@ get_cna_by_sample <- function(sample_id = NULL,
 }
 
 
+#' Get Fusions By Sample ID
+#'
+#' @inheritParams .get_data_by_sample
+#' @return A data frame of Fusions
+#' @export
+#'
+#'
+#' @examples
+#' set_cbioportal_db("public")
+#' get_fusion_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
+#'                  study_id = "prad_msk_2019")
+#'
+get_fusion_by_sample <- function(sample_id = NULL,
+                              study_id = NULL,
+                              molecular_profile_id = NULL,
+                              sample_study_pairs = NULL,
+                              base_url = NULL) {
+
+  .get_data_by_sample(sample_id = sample_id,
+                     study_id = study_id,
+                     molecular_profile_id = molecular_profile_id,
+                     sample_study_pairs = sample_study_pairs,
+                     data_type = c("fusion"),
+                     base_url = base_url)
+
+
+}
 

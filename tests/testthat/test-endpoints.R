@@ -1,6 +1,6 @@
 
 # No Parameter Endpoints -------------------------------------------------------
-test_that("test endpoints", {
+test_that("test endpoints- no parameters", {
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -30,7 +30,10 @@ test_that("test endpoints - with study_id", {
                      available_clinical_attributes = available_clinical_attributes,
                      get_clinical_by_study = get_clinical_by_study,
                      get_study_info = get_study_info,
-                     get_mutation_by_study = get_mutation_by_study)
+                     .get_data_by_study = .get_data_by_study,
+                     get_samples_by_study = get_samples_by_study,
+                     get_mutation_by_study = get_mutation_by_study
+                     )
 
   res <- expect_error(purrr::map(endpoint_funs,
        function(fn) rlang::exec(fn, study_id = study_id)), NA)
@@ -57,20 +60,35 @@ test_that("test endpoints - missing study_id arg", {
 
 # Sample ID AND Study ID Endpoints -----------------------------------------------------------
 
-test_that("test endpoints - with study_id", {
+test_that("test endpoints - with sample ID", {
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
+  study_id = "prad_msk_2019"
+  sample_id = c("s_C_36924L_P001_d")
 
-  study_id = "acc_tcga"
-  endpoint_funs <- c(available_profiles = available_profiles,
-                     available_clinical_attributes = available_clinical_attributes,
-                     get_sample_by_study = get_sample_by_study)
+  endpoint_funs <- c(
+                     get_mutation_by_sample = get_mutation_by_sample,
+                     get_cna_by_sample = get_cna_by_sample,
+                     get_clinical_by_sample = get_clinical_by_sample)
 
   res <- purrr::map(endpoint_funs,
-                    function(fn) rlang::exec(fn, study_id = "acc_tcga"))
+                    function(fn) rlang::exec(fn, study_id = study_id,
+                                             sample_id = sample_id))
+
+
 
   expect_equal(names(res), names(endpoint_funs))
+
+  # These should be the same (mutation is default data_type)
+ # expect_equal(res$.get_data_by_sample, res$get_mutation_by_sample)
+#
+#   cna_res <- .get_data_by_sample(study_id = study_id,
+#                                sample_id = sample_id,
+#                                data_type = "cna")
+#
+#   expect_equal(cna_res, res$get_cna_by_sample)
+
 
 })
 
