@@ -9,10 +9,11 @@
 #' on molecular_profile_id.
 #' @param molecular_profile_id a molecular profile to query mutations.
 #' If NULL, guesses molecular_profile_id based on study ID.
+#' @param data_type specify what type of data to return. Options are`mutations` or `cna`.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
-#' @return
+#' @return a dataframe of mutations or CNAs
 #' @export
 #'
 #' @examples
@@ -70,12 +71,13 @@ get_data_by_study <- function(study_id = NULL,
 
 }
 
+# Wrapper Functions ------------------------------------------------------------
 
 #' Get Mutations By Study ID
 #'
 #' @inheritParams get_data_by_sample
 #'
-#' @return
+#' @return A dataframe of mutations (maf file format)
 #' @export
 #' @examples
 #' get_mutation_by_study(study_id = "prad_msk_2019")
@@ -95,8 +97,7 @@ get_mutation_by_study <- function(study_id = NULL,
 #' Get CNA By Study
 #'
 #' @inheritParams get_data_by_study
-#'
-#' @return
+#' @return A dataframe of CNAs
 #' @export
 #'
 #'

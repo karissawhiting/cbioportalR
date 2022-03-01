@@ -37,7 +37,9 @@
 #'   IMPACT platform 468. Options are `included` and `not included`}
 #'   \item{alias}{A nested dataframe of aliases for each gene and corresponding entrez gene ids for aliases if they exist}
 #' }
+#'
 #' @source \url{https://cbioportal.org/}
+#'
 "impact_gene_info"
 
 

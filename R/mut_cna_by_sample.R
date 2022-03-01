@@ -11,12 +11,13 @@
 #' @param sample_study_pairs A dataframe with columns: `sample_id`, `study_id` and `molecular_profile_id` (optional).
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
+#' @param data_type specify what type of data to return. Options are`mutations` or `cna`.
 #' @param genes A vector of entrez ids. If NULL, will return results for all
 #' IMPACT genes (see `gnomeR::impact_gene_info`)
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
-#' @return
+#' @return A dataframe of mutations or CNAs
 #' @export
 #'
 #' @examples
@@ -101,7 +102,7 @@ get_data_by_sample <- function(sample_id = NULL,
 
   # default to IMPACT genes if `genes` are NULL
   resolved_genes <- genes %||%
-    gnomeR::impact_gene_info$entrez_id %>% unlist()
+    cbioportalR::impact_gene_info$entrez_id %>% unlist()
 
 
   # Prep Data for Query -------------------------------------------------------
@@ -140,7 +141,7 @@ get_data_by_sample <- function(sample_id = NULL,
 
       res <- cbp_api(url_path = x,
                      method = "post",
-                     body = body_n)
+                     body = body_n, base_url = base_url)
 
 
       bind_rows(res$content)
@@ -164,12 +165,12 @@ get_data_by_sample <- function(sample_id = NULL,
 
 }
 
+# Wrapper Functions ------------------------------------------------------------
 
 #' Get Mutations By Sample ID
 #'
 #' @inheritParams get_data_by_sample
-#'
-#' @return
+#' @return A data frame of mutations (maf file format)
 #' @export
 #'
 #'
@@ -193,5 +194,37 @@ get_mutation_by_sample <- function(sample_id = NULL,
 
 
 }
+
+
+
+
+#' Get CNA By Sample ID
+#'
+#' @inheritParams get_data_by_sample
+#' @return A data frame of CNAs
+#' @export
+#'
+#'
+#' @examples
+#' set_cbioportal_db("public")
+#' get_cna_by_sample(sample_id = c("s_C_36924L_P001_d"),
+#'                  study_id = "prad_msk_2019")
+#'
+get_cna_by_sample <- function(sample_id = NULL,
+                                   study_id = NULL,
+                                   molecular_profile_id = NULL,
+                                   sample_study_pairs = NULL,
+                                   base_url = NULL) {
+
+  get_data_by_sample(sample_id = sample_id,
+                     study_id = study_id,
+                     molecular_profile_id = molecular_profile_id,
+                     sample_study_pairs = sample_study_pairs,
+                     data_type = c("cna"),
+                     base_url = base_url)
+
+
+}
+
 
 

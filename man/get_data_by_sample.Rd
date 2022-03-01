@@ -29,6 +29,8 @@ more than 1 study needed, see \code{sample_study_pairs}}
 This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
 
+\item{data_type}{specify what type of data to return. Options are\code{mutations} or \code{cna}.}
+
 \item{genes}{A vector of entrez ids. If NULL, will return results for all
 IMPACT genes (see \code{gnomeR::impact_gene_info})}
 
@@ -36,7 +38,7 @@ IMPACT genes (see \code{gnomeR::impact_gene_info})}
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
-
+A dataframe of mutations or CNAs
 }
 \description{
 Get Mutations or CNA By Sample ID

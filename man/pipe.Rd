@@ -3,9 +3,6 @@
 \name{\%>\%}
 \alias{\%>\%}
 \title{Pipe operator}
-\usage{
-lhs \%>\% rhs
-}
 \arguments{
 \item{lhs}{A value or the magrittr placeholder.}
 

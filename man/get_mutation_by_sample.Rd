@@ -31,7 +31,7 @@ need to pull samples from several different studies at once. If passed this will
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
-
+A data frame of mutations (maf file format)
 }
 \description{
 Get Mutations By Sample ID
