@@ -21,3 +21,4 @@
 ^CRAN-RELEASE$
 ^\.covrignore$
 ^bench$
+^_pkgdown\.yml$
