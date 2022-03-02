@@ -26,12 +26,13 @@ set_cbioportal_db <- function(db = NULL) {
 
   }
 
-
   assign("portal_url",
          value = db_set,
          envir = cbioportal_env)
 
-  cli_alert_success(" {.field {'portal_url'}} for this R session is {.val {.get_cbioportal_url()}} ")
+  test_cbioportal_db()
+
+  cli_alert_success("{.field {'base_url'}} for this R session is now set to {.val {.get_cbioportal_url()}} ")
 }
 
 # ------------------------------------------------------------------------------
@@ -47,10 +48,38 @@ set_cbioportal_db <- function(db = NULL) {
 #'
 get_cbioportal_token <- function() {
   x <- Sys.getenv("CBIOPORTAL_TOKEN")
+
   if (identical(x, "")) {
     rlang::warn("No CBIOPORTAL_TOKEN in `.Renviron`. Try `usethis::edit_r_environ()` to add a token")
   }
   x
+}
+
+# ------------------------------------------------------------------------------
+#' Test the Database Connection Anytime During your R Session
+#'
+#' Helps troubleshoot API issues during an R session
+#' @export
+#' @examples
+#' set_cbioportal_db("public")
+#' test_cbioportal_db()
+#'
+#'
+test_cbioportal_db <- function() {
+
+  db_to_test <- .get_cbioportal_url()
+
+  y <- tryCatch({
+    cbp_api(url_path = "/cancer-types?", base_url = db_to_test) },
+    error = function(e) {
+      cli::cli_abort("Not able to connect to {.val {db_to_test}}")})
+
+
+  if (y$response$status_code == 200) {
+    db_return <- stringr::str_remove(db_to_test, "/api")
+
+  cli_alert_success("You are successfully connected!")
+  }
 }
 
 
@@ -67,9 +96,14 @@ get_cbioportal_token <- function() {
 #' .get_cbioportal_url()
 #'
 .get_cbioportal_url <- function() {
-  get0("portal_url",
-       envir = cbioportal_env,
-      ifnotfound = "No Database URL Found. Have you set your database URL? Try `set_cbioportal_db(<your_url>)`")
+
+  url <- tryCatch({
+    get("portal_url",
+        envir = cbioportal_env)},
+    error = function(e) {
+      cli::cli_abort("No Database URL Found. Have you set your database? Try {.code set_cbioportal_db(<your_url>)} ?")})
+
+  url
 }
 
 

@@ -22,6 +22,7 @@
 #' @return A dataframe of mutations or CNAs
 #' @export
 #'
+#' @keywords internal
 #' @examples
 #' set_cbioportal_db("public")
 #' .get_data_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),

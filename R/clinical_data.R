@@ -1,31 +1,4 @@
 
-#' Get all available clinical attribute IDs for a study
-#'
-#' @param study_id cbioportal study ID
-#' @param base_url The database URL to query.
-#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
-#' @return a data frame of available clinical attributes for that study
-#' @export
-#'
-#' @examples
-#' available_clinical_attributes("acc_tcga", base_url = 'www.cbioportal.org/api')
-#'
-available_clinical_attributes <- function(study_id = NULL, base_url = NULL) {
-
-  # checks ---------------------------------------------------------------------
-   .check_for_study_id(study_id)
-
-  # query ---------------------------------------------------------------------
-  url_path <- paste0(
-    "studies/", study_id,
-    "/clinical-attributes?"
-  )
-
-  res <- cbp_api(url_path, base_url = base_url)
-  df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
-  return(df)
-}
-
 
 #' Get clinical data by attribute, study ID and sample ID
 #'
@@ -86,30 +59,4 @@ get_clinical_by_sample <- function(study_id = NULL,
 
 
 
-#' Get all available clinical data for a specified study
-#'
-#' @param study_id study ID
-#' @param base_url The database URL to query.
-#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
-#' @return a dataframe of all available clinical attributes and their values
-#' @export
-#'
-#' @examples
-#' get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')
-#'
-get_clinical_by_study <- function(study_id = NULL, base_url = NULL) {
-
-  # checks ---------------------------------------------------------------------
-    .check_for_study_id(study_id)
-
-    # query ---------------------------------------------------------------------
-  url_path <- paste0(
-    "studies/", study_id,
-    "/clinical-data?"
-  )
-
-  res <- cbp_api(url_path, base_url = base_url)
-  df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
-  return(df)
-}
 

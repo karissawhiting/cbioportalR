@@ -21,9 +21,9 @@ test_that("set url- public", {
 
 })
 
-test_that("set url- strip https and add api", {
+test_that("set url-  add api", {
 
-  db_test <-"https://test"
+  db_test <-"www.cbioportal.org"
   set_cbioportal_db(db = db_test)
 
   x <- get("portal_url", envir = cbioportal_env)
@@ -38,3 +38,4 @@ test_that("set url-nothing passed", {
   expect_error(set_cbioportal_db(db = db_test), "*")
 
 })
+

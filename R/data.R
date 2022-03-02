@@ -1,24 +1,5 @@
 
 
-#'A vector of 19441 hugo symbols in TCGA
-#'
-#' @format A data frame with 19441 genes
-#' \describe{
-#'     }
-"tcga_genes"
-
-
-#' Data frame of all TCGA sample ids and their corresponding cancer type
-#'
-#' Data frame of all TCGA sample ids and their corresponding cancer type
-#'
-#' @format A data frame with 10275 samples
-#' \describe{
-#'     \item{patient_id}{Sample ID}
-#'     \item{Cancer_Code}{Cancer site following TCGA abbreviations}
-#'     }
-"tcga_samples"
-
 #' IMPACT Gene Meta Data
 #'
 #' Dataframe labeling all genes found in IMPACT along with their corresponding

@@ -40,3 +40,4 @@ Core function to retrieve data from cBioPortal API.
 cbp_api(url_path = "genes/TP53", base_url = "public")
 
 }
+\keyword{internal}

@@ -12,6 +12,7 @@
 #' @return A parsed API response
 #' @export
 #' @import httr
+#' @keywords internal
 #' @examples
 #'
 #' cbp_api(url_path = "genes/TP53", base_url = "public")
@@ -76,7 +77,7 @@ cbp_api <- function(url_path,
   if (statuscode >= 400) {
     stop(
       glue::glue(
-        'GitHub API request failed: ',
+        'API request failed: ',
         httr::status_code(resp)
       ),
       call. = FALSE

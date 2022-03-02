@@ -16,5 +16,6 @@ NULL
 #'
 #' @name null-default
 #' @aliases %||%
+#' @keywords internal
 #' @importFrom purrr %||%
 NULL

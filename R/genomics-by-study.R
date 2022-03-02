@@ -17,6 +17,7 @@
 #'
 #' @return a dataframe of mutations or CNAs
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' set_cbioportal_db("public")

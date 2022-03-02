@@ -7,3 +7,4 @@
 \description{
 Default value for \code{NULL}.
 }
+\keyword{internal}
