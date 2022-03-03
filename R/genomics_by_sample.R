@@ -66,20 +66,19 @@
                                 genes = NULL,
                                 base_url = NULL) {
 
-  # Check Arguments ------------------------------------------------------------
-
+  # Data Type Arguments ---------------------------------------------------------
 
   data_type <- match.arg(data_type)
 
-  url_data_type <- case_when(
-    data_type == "mutation" ~ "mutations",
-    data_type == "fusion" ~ "fusion",
-    data_type == "cna" ~ "discrete-copy-number")
+  # this goes in URL
+  url_data_type <- switch(
+    data_type,
+    "mutation" = "mutations",
+    "fusion" = "fusion",
+    "cna" = "discrete-copy-number")
 
-  und_data_type <- case_when(
-    url_data_type %in% c("mutations", "fusion") ~ url_data_type,
-    url_data_type == "discrete-copy-number" ~ "cna") %>%
-    paste0("_", .)
+  # Make Informed guesses on parameters -------------------------------------
+  # **Maybe turn this into a function? - this code could be simplified/improved
 
   # `sample_study_pairs` gets priority. If that is NULL then consider other args
   if(is.null(sample_study_pairs)) {
@@ -101,11 +100,11 @@
         rlang::abort("More than 1 `study_id` passed. Please
                    use `sample_study_pairs` argument instead")) %||%
 
-      # guess based on molec profile
+      # if molecular profile provided, guess based on that
       switch((is.null(study_id) & !is.null(molecular_profile_id)),
-             stringr::str_remove(molecular_profile_id, und_data_type)) %||%
+             .lookup_study_name(molecular_profile_id, base_url = base_url)) %||%
 
-      # guess based on URL
+      # else, guess based on URL
       suppressMessages(.guess_study_id(study_id, resolved_url))
 
     # Get molecular profile ID ---------
@@ -117,8 +116,9 @@
         rlang::abort("More than 1 `molecular_profile_id` passed. Please
                    use `sample_study_pairs` argument instead")) %||%
 
+      # if not passed, lookup based on study_id
       molecular_profile_id %||%
-      paste0(resolved_study_id, und_data_type)
+      .lookup_profile_name(data_type, study_id = resolved_study_id, base_url)
 
 
     # create lookup dataframe ------
@@ -134,15 +134,25 @@
     cbioportalR::impact_gene_info$entrez_id %>% unlist()
 
 
-  # Prep Data for Query -------------------------------------------------------
+  # Prep data frame for Query -------------------------------------------------------
 
   if(!("data.frame" %in% class(sample_study_pairs))) {
     rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id`, `study_id`")
   }
 
+  # If user passes study_id and data_type we can pull the correct molecular ID
   if(!("molecular_profile_id" %in% colnames(sample_study_pairs))) {
+
+    unique_study_id <- distinct(select(sample_study_pairs, .data$study_id)) %>%
+      mutate(molecular_profile_id =
+               purrr::map(.data$study_id,
+                           ~.lookup_profile_name(.x,
+                                                 data_type = data_type,
+                                                 base_url = base_url)))
+
     sample_study_pairs <- sample_study_pairs %>%
-      mutate(molecular_profile_id = paste0(.data$study_id, und_data_type))
+      left_join(unique_study_id)
+
   }
 
 
@@ -331,4 +341,49 @@ get_fusion_by_sample <- function(sample_id = NULL,
 
 
 }
+
+
+#' Get All Genomic Information By Sample IDs
+#'
+#' @inheritParams .get_data_by_sample
+#' @return A list of mutations, cna and fusions (if available)
+#' @export
+#'
+#'
+#' @examples
+#' get_genetics_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
+#'  study_id = "acc_tcga")
+#'
+#
+get_genetics_by_sample <- function(sample_id = NULL,
+                                   study_id = NULL,
+                                   sample_study_pairs = NULL,
+                                   base_url = NULL) {
+
+  safe_get_data <- purrr::safely(.get_data_by_sample, quiet = TRUE)
+
+  res <-  c("mutation", "cna", "fusion") %>%
+    purrr::set_names() %>%
+    purrr::map(., function(x) {
+      safe_get_data(sample_id = sample_id,
+                    study_id = study_id,
+
+                    molecular_profile_id = NULL,
+                    sample_study_pairs = sample_study_pairs,
+                    base_url = base_url,
+                    data_type = x)
+    })
+
+  genetics <- purrr::compact(purrr::map(res, "result"))
+  errors <- purrr::compact(purrr::map(res, "error"))
+
+  switch(!purrr::is_empty(errors),
+         purrr::imap(errors, ~cli_alert_warning(c("No {.val {.y}} data returned. Error:  ",
+                                                  # why no red :(
+                                                  cli::col_red('{.x$message}'))))
+  )
+
+  genetics
+}
+
 

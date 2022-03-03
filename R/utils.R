@@ -61,7 +61,7 @@
 }
 
 
-#' Check for Patient ID
+#' Guess Study ID based on URL
 #'
 #' @param study_id a study id passed by a user
 #' @param resolved_url the database URL
@@ -85,5 +85,74 @@
 
   return(study_id_guess)
 }
+
+
+#' Get Molecular Profile Name for Data Type
+#'
+#'@description See: https://docs.cbioportal.org/5.1-data-loading/data-loading/file-formats#discrete-copy-number-data
+# for definition of molecular profiles. CNA can have _cna, _gistic, _rae molecular profile names
+
+#' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`.
+#' @param study_id study id for which to lookup profiles
+#' @param base_url The database URL to query
+#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
+#'
+#' @return find molecular profile name for a specified data type
+#' @keywords internal
+#' @noRd
+#' @export
+#'
+.lookup_profile_name <- function(data_type, study_id, base_url) {
+
+  profs <- available_profiles(study_id = study_id, base_url = base_url)
+
+  resolved_profile <- switch(data_type,
+                             mutation = filter(profs, .data$molecularAlterationType == "MUTATION_EXTENDED") %>%
+                               pull(.data$molecularProfileId),
+                             fusion = filter(profs, .data$molecularAlterationType == "STRUCTURAL_VARIANT") %>%
+                               pull(.data$molecularProfileId),
+                             cna = filter(profs, .data$molecularAlterationType == "COPY_NUMBER_ALTERATION" &
+                                            .data$datatype == "DISCRETE") %>%
+                               pull(.data$molecularProfileId))
+
+
+  if(length(resolved_profile) == 0) {
+    cli::cli_abort("No molecular profile for {.code data_type = {data_type}} found in {.val {study_id}}.  See {.code available_profiles('{study_id}')}")
+  }
+
+  resolved_profile
+}
+
+#' Get Study ID From Passed Mutation Profile ID
+#'
+
+#' @param molecular_profile_id Molecular profile name
+#' @param base_url The database URL to query
+#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
+#'
+#' @return find study ID for a specified molecular profile
+#' @keywords internal
+#' @noRd
+#' @export
+#'
+.lookup_study_name <- function(molecular_profile_id, base_url) {
+
+  # study_id = NULL- will return all studies
+  quiet_available_profiles <- purrr::quietly(available_profiles)
+  profs <- quiet_available_profiles(study_id = NULL, base_url = base_url)
+
+  resolved_study_id <- profs$result %>%
+    filter(.data$molecularProfileId == molecular_profile_id) %>%
+    pull(.data$studyId)
+
+  if(length(resolved_study_id) == 0) {
+    cli::cli_abort("No molecular profile {.val {molecular_profile_id}} found. See {.code available_profiles() }")
+  }
+
+  resolved_study_id
+
+}
+
+
 
 

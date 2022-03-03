@@ -59,4 +59,33 @@ get_clinical_by_sample <- function(study_id = NULL,
 
 
 
+#' Get Gene Panel by study ID and sample ID
+#'
+#' @inheritParams get_clinical_by_sample
+#' @return a dataframe of a specific clinical attribute
+#' @export
+#'
+#' @examples
+#' get_panel_by_sample(study_id = "blca_plasmacytoid_mskcc_2016",
+#'  sample_id = "DS-sig-010-P2",
+#'  base_url = 'www.cbioportal.org/api')
+#'
+get_panel_by_sample <- function(study_id = NULL,
+                                   sample_id = NULL,
+                                   base_url = NULL) {
+
+  res <- get_clinical_by_sample(study_id = study_id,
+                         sample_id = sample_id,
+                         clinical_attribute = "GENE_PANEL",
+                         base_url = base_url)
+
+  res %>%
+    purrr::when(nrow(.) < 1 ~ cli::cli_abort("No gene panel data found. Did you specify the correct {.code study_id} for your {.code sample_id}?
+                                        Is {.val GENE_PANEL} an available clinical attribute in {.var {study_id}} "),
+
+              TRUE ~ transmute(.,  .data$sampleId, .data$studyId, genePanel = .data$value))
+
+
+
+}
 

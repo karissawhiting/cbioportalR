@@ -1,0 +1,125 @@
+---
+title: "Tutorial: Overview of Data Retrieval Workflow"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{case-study}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE
+)
+```
+
+```{r message = FALSE, warning=FALSE}
+library(cbioportalR)
+library(dplyr)
+```
+
+## Introduction
+
+We will outline the main data retrieval workflow and functions using a case study based on a public set of data on 105 samples in high risk nonmuscle invasive bladder cancer patients [(Pietzak et al. 2017)](https://pubmed.ncbi.nlm.nih.gov/28583311/).
+
+## Setup
+
+Before accessing data you will need to connect to a cBioPortal database and set your base URL for the R session. In this example we will use data from the public cBioPortal database instance (<https://www.cbioportal.org>). You do not need a token to access this public website. If you are using a private instance of cbioportal (like MSK's institutional database), you will need to acquire a token and save it to your .Renviron file (see Authentication vignetted for more details -coming soon)
+
+
+*Note: If you are a MSK researcher working on IMPACT, you should connect to MSK's cBioPortal instance to get the most up to date IMPACT data, and you must follow MSK-IMPACT publication guidelines when using the data.*
+
+
+To set the database urlfor your current R session use the `set_cbioportal_db()` function. To set it to the public instance you can either provide the full URL to the function, or just `public` as a shortcut. 
+
+This function will both check your connection to the database and set the database url (`www.cbioportal.org/api`) as your base url to connect to for all future API calls during your session.
+
+```{r}
+
+set_cbioportal_db("public")
+
+```
+
+You can use `test_cbioportal_db` at any time throughout your session to check your connection. This can be helpful when troubleshooting issues with your API calls.
+
+```{r}
+test_cbioportal_db()
+```
+
+
+## Get Study Metadata
+
+Now that we are successfully connected, we may want to view all studies available for our chosen database to find the correct `study_id` corresponding to the data we want to pull. All studies have a unique identifier in the database. You can view all studies available in your database with the following:
+
+```{r}
+all_studies <- available_studies()
+all_studies
+```
+
+By inspecting this dataframe, we see the unique `study_id` we want is  `"blca_nmibc_2017"` To get more information on our study we can do the following:
+
+*Note: the transpose function `t()` just used here to better view results*
+
+```{r}
+all_studies %>% 
+  filter(studyId == "blca_nmibc_2017") %>%
+  t()
+```
+More in-depth information about the study can be found with `get_study_info()`
+
+```{r  }
+get_study_info("blca_nmibc_2017")%>% 
+  t() 
+```
+
+Lastly, it is important to know what genomic data is available for our study. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions. 
+
+We can check available genomic data with `available_profiles()`. 
+
+```{r}
+available_profiles(study_id = "blca_nmibc_2017")
+```
+
+Luckily, our study has mutation, copy number alteration and  fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`. 
+
+```{r}
+available_profiles(study_id = "blca_nmibc_2017") %>%
+  pull(molecularProfileId)
+
+```
+
+## Pulling Genomic Data
+
+Now that we have inspected our study and confirmed the genomic data that is available, we will pull the data into our R environment. 
+
+Since we are working with only one study, the easiest way to do this is by study_id. We can pull each data type individually:
+
+```{r}
+
+mut <- get_mutation_by_study(study_id = "blca_nmibc_2017")
+cna <- get_cna_by_study(study_id = "blca_nmibc_2017")
+fus <- get_fusion_by_study(study_id = "blca_nmibc_2017")
+
+```
+
+Or we can pull all genomic data at the same time with `get_genetics_by_study()`
+
+```{r}
+all_genomic <- get_genetics_by_study("blca_nmibc_2017")
+```
+
+```{r}
+all_equal(mut, all_genomic$mutation)
+all_equal(cna, all_genomic$cna)
+all_equal(fus, all_genomic$fusion)
+```
+
+```{r}
+#get_panel_by_sample
+
+```
+
+## Pulling Clinical Data
+

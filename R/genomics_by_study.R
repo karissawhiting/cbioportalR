@@ -35,29 +35,30 @@
                               base_url = NULL) {
 
 
-  data_type <- match.arg(data_type)
-
-  url_data_type <- case_when(
-    data_type == "mutation" ~ "mutations",
-    data_type == "fusion" ~ "fusion",
-    data_type == "cna" ~ "discrete-copy-number")
-
-  und_data_type <- case_when(
-    url_data_type %in% c("mutations", "fusion") ~ url_data_type,
-    url_data_type == "discrete-copy-number" ~ "cna") %>%
-    paste0("_", .)
 
   # Check Arguments  -----------------------------------------------------------
   if(is.null(study_id) & is.null(molecular_profile_id)) {
-    rlang::abort("You must provide a `study_id` or a `molecular_profile_id`. See `available_profiles(<study_id>)` to view available profiles for a study")
+   cli::cli_abort("You must provide a {.code study_id} or a {.code molecular_profile_id}. See {.code available_profiles(<study_id>)} to view available profiles for a study")
   }
 
+  data_type <- match.arg(data_type)
 
+  # if profile is NULL study_id can't be NULL
   molecular_profile_id <- molecular_profile_id %||%
-    paste0(study_id, und_data_type)
+    .lookup_profile_name(data_type, study_id, base_url = base_url)
 
+
+  # if study_id is NULL molecular profile ID can't be NULL
   study_id <- study_id %||%
-    stringr::str_remove(molecular_profile_id, und_data_type)
+    .lookup_study_name(molecular_profile_id, base_url = base_url)
+
+
+  # this goes in URL
+  url_data_type <- switch(
+    data_type,
+    "mutation" = "mutations",
+    "fusion" = "fusion",
+    "cna" = "discrete-copy-number")
 
   # Some API endpoints require that you pass a sample list ID. All studies should have an "all" list which is the default for this function
   sample_list_id <- paste0(study_id, "_all")
@@ -166,7 +167,7 @@ get_mutation_by_study <- function(study_id = NULL,
 #' @examples
 #' get_cna_by_study(study_id = "prad_msk_2019")
 #' get_cna_by_study(molecular_profile_id = "prad_msk_2019_cna")
-#'
+#' get_cna_by_study(molecular_profile_id = "acc_tcga_gistic")
 
 get_cna_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
@@ -201,5 +202,37 @@ get_fusion_by_study <- function(study_id = NULL,
                     base_url = base_url)
 }
 
+#' Get All Genomic Information By Study
+#'
+#' @inheritParams .get_data_by_study
+#' @return A list of mutations, cna and fusions (if available)
+#' @export
+#'
+#'
+#' @examples
+#' get_genetics_by_study(study_id = "prad_msk_2019")
+#'
+#
+get_genetics_by_study <- function(study_id = NULL, base_url = NULL) {
 
+  safe_get_data <- purrr::safely(.get_data_by_study, quiet = TRUE)
 
+ res <-  c("mutation", "cna", "fusion") %>%
+   purrr::set_names() %>%
+   purrr::map(., function(x) {
+                       safe_get_data(study_id = study_id,
+                                          molecular_profile_id = NULL,
+                                          data_type = x, base_url = base_url)
+                       })
+
+ genetics <- purrr::compact(purrr::map(res, "result"))
+ errors <- purrr::compact(purrr::map(res, "error"))
+
+ switch(!purrr::is_empty(errors),
+        purrr::imap(errors, ~cli_alert_warning(c("No {.val {.y}} data returned. Error:  ",
+                                          # why no red :(
+                                        cli::col_red('{.x$message}'))))
+        )
+
+ genetics
+}

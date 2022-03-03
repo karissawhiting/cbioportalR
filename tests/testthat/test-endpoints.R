@@ -30,7 +30,6 @@ test_that("test endpoints - with study_id", {
                      available_clinical_attributes = available_clinical_attributes,
                      get_clinical_by_study = get_clinical_by_study,
                      get_study_info = get_study_info,
-                     .get_data_by_study = .get_data_by_study,
                      get_samples_by_study = get_samples_by_study,
                      get_mutation_by_study = get_mutation_by_study
                      )
