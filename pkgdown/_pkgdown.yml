@@ -22,12 +22,15 @@ reference:
     - get_cna_by_study
     - get_fusion_by_study
     - get_samples_by_study
+    - get_genetics_by_study
   - subtitle: Sample Level
   - contents:
     - get_clinical_by_sample
     - get_mutation_by_sample
     - get_cna_by_sample
-    - get_fusions_by_sample
+    - get_fusion_by_sample
+    - get_genetics_by_sample
+    - get_panel_by_sample
   - subtitle: Gene & Gene Panel Level
   - contents:
     - get_alias
