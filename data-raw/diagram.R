@@ -1,17 +1,17 @@
 #install.packages("DiagrammeR")
 library(DiagrammeR)
 
-grViz(diagram = "digraph flowchart {
+tmp <- grViz(diagram = "digraph flowchart {
 
       # define node aesthetics
       node [fontname = Arial, shape = rectangle,
-        color = DarkSlateBlue,
+        color = BlueViolet,
         style = filled,
         fontcolor = White]
       tab1 [label = '@@1']
 
       node [fontname = Arial, shape = rectangle,
-        color = RoyalBlue,
+        color = SlateBlue,
         style = filled,
         fontcolor = White]
       tab2 [label = '@@2']
@@ -48,7 +48,7 @@ grViz(diagram = "digraph flowchart {
       tab7 [label = '@@7']
 
       node [fontname = Arial, shape = rectangle,
-        color = Bisque,
+        color = SandyBrown,
         style = filled,
         width = 4,
         height = .5,
@@ -77,4 +77,11 @@ grViz(diagram = "digraph flowchart {
       [7]: 'CNA'
       [8]: 'Sample IDs'
       ")
+
+# 2. Convert to SVG, then save as png
+tmp = DiagrammeRsvg::export_svg(tmp)
+tmp = charToRaw(tmp) # flatten
+rsvg::rsvg_png(tmp, here::here("man", "figures", "cbp-diagram.png"))
+
+
 

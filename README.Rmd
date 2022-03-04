@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+library(tidyverse)
 ```
 
 # cbioportalR
@@ -33,7 +35,46 @@ For full documentation on the cBioPortal API, please see the following links:
 - [cBioPortal API and API Clients documentation](https://docs.cbioportal.org/6.-web-api-and-clients/api-and-api-clients)
 - [full reference documentation for API](https://www.cbioportal.org/api/swagger-ui.html#/)
 
+```{r out.width = "60%", fig.align='center', echo = FALSE}
 
+knitr::include_graphics("man/figures/cbp-diagram.png")
+ 
+
+```
+
+```{r}
+x <- tibble::tibble(
+  level = c("Database", "Study", "Molecular Profile", "Sample"),
+  
+  functions = c("`available_studies()`", "`get_genetics_by_study()`", "`get_genetics_by_study()`", "`get_genetics_by_sample`")) %>%
+  mutate(level = forcats::fct_relevel(level, "Database",
+                                      "Study", "Molecular Profile", "Sample"))
+
+x %>%
+  gt::gt() %>%
+  gt::fmt_markdown(columns = everything()) %>%
+  gt::cols_label(level = gt::md("**Level**"),
+             functions = gt::md("**Functions**")) %>%
+  gt::tab_options(table.font.size = 'small') %>%
+  gt::data_color(
+    columns = level,
+    colors = scales::col_factor(
+      palette = c("BlueViolet", "SlateBlue", "DodgerBlue", "LightSeaGreen", "SandyBrown"),
+      domain = NULL,
+#      reverse = TRUE
+    ),
+    alpha = 0.6
+  ) %>%
+  gt::tab_style(
+    style = list(
+      gt::cell_text(weight = "bold")
+      ),
+    locations = gt::cells_body(
+      columns = level,
+      rows = everything()
+    )
+  )
+```
 
 ## Installation
 
@@ -82,7 +123,7 @@ You can set it to point to the public database with this shortcut:
 
 ```{r}
 library(cbioportalR)
-get_cbioportal_db("public")
+set_cbioportal_db("public")
 ```
 
 or you can set it to a specific institution database with:
@@ -98,7 +139,7 @@ Once you've set your preferred db connection, you can pull data via study ID or 
 To see available studies (this depends on what cBioPortal database you are connected to), you can use:
 
 ```{r}
-get_studies() %>% head(n = 10)
+available_studies() %>% head(n = 10)
 ```
 
 To pull mutation data for a particular study ID you can use:
@@ -106,10 +147,7 @@ To pull mutation data for a particular study ID you can use:
 ```{r }
 
 # As a result you will get a list of dataframes of 1) mutation + fusion and 2) cna.
-df <- get_genetics(study_id = "nbl_amc_2012",
-                   mutations = TRUE, 
-                   cna = FALSE, 
-                   fusions = TRUE)
+df <- get_genetics_by_study(study_id = "nbl_amc_2012")
 
 mutations <- df$mut 
 df %>% head()
