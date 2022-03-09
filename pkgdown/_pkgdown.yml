@@ -1,3 +1,11 @@
+url: ~
+
+template:
+  bootstrap: 5
+
+development:
+  mode: auto
+  version_label: default
 
 reference:
   - subtitle: Authentication
