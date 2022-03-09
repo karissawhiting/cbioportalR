@@ -53,7 +53,7 @@ x <- tibble::tibble(
 
 table_funs <- x %>%
    gt::gt() %>%
-  gt::fmt_markdown(columns = everything()) %>%
+#  gt::fmt_markdown(columns = everything()) %>%
   gt::cols_label(level = gt::md("**Level**"),
              functions = gt::md("**Functions**")) %>%
   gt::tab_options(table.font.size = 'small') %>%
