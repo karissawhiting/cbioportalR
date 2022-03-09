@@ -81,43 +81,12 @@ table_funs <- x %>%
 
 ```
 
-
-
-```{r, results=FALSE, echo = FALSE}
-# Generation of SVG
-# See: https://twitter.com/riannone/status/1320876224374280193
-tbl_w = 260
-tbl_h = 177
-
-svg_object <-
-  glue::glue(
-    "<svg fill=\"none\" viewBox=\"0 0 {tbl_w} {tbl_h}\" width=\"{tbl_w}\" height=\"{tbl_h}\" xmlns=\"http://www.w3.org/2000/svg\">
-     <foreignObject width=\"100%\" height=\"100%\">
-     <div xmlns=\"http://www.w3.org/1999/xhtml\">
-    {gt::as_raw_html(table_funs)}
-    </div>
-    </foreignObject>
-    </svg>
-    "
-  ) %>%
-  as.character() %>%
-  gsub("style>", ">", ., fixed = TRUE) %>%
-  gsub("<p>", "<p style='margin:0'>", ., fixed = TRUE) %>%
-  gsub(
-    "; width: 0px\">", 
-"; width: 0px; 
-@-webkit-keyframes AnimationName {0% {background-position:50% 0%} 50% {background-position:51% 100%} 100% {background-position:50% 0%}}
-@-moz-keyframes AnimationName {0% {background-position:50% 0%} 50% {background-position:51% 100%} 100% {background-position:50% 0%}}
-@-o-keyframes AnimationName {0% {background-position:50% 0%} 50% {background-position:51% 100%} 100% {background-position:50% 0%}}
-@keyframes AnimationName {0% {background-position:50% 0%} 50% {background-position:51% 100%} 100% {background-position:50% 0%}}
-\">
-",
-., fixed = TRUE)
-
-x <- cat(svg_object, file = "./man/figures/svg_object.svg")
+```{r}
+table_funs %>% gt::as_raw_html()
 ```
 
-<img src="man/figures/svg_object.svg" width="50%">
+
+
 
 ## Installation
 
