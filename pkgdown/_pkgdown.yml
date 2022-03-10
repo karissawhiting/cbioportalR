@@ -2,6 +2,7 @@ url: https://karissawhiting.github.io/cbioportalR/
 
 template:
   bootstrap: 5
+  bootswatch: cosmo
 
 development:
   mode: auto
