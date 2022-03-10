@@ -75,13 +75,14 @@ tmp <- grViz(diagram = "digraph flowchart {
       [5]: 'Mutations'
       [6]: 'Fusions'
       [7]: 'CNA'
-      [8]: 'Sample IDs'
+      [8]: 'Patients & Samples'
       ")
 
 # 2. Convert to SVG, then save as png
 tmp = DiagrammeRsvg::export_svg(tmp)
 tmp = charToRaw(tmp) # flatten
-rsvg::rsvg_png(tmp, here::here("man", "figures", "cbp-diagram.png"))
+rsvg::rsvg_png(tmp, here::here("man", "figures", "cbp-diagram.png"),
+               width = 750, height = 750)
 
 
 
