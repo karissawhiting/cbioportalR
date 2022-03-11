@@ -3,7 +3,7 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   overview-of-workflow: overview-of-workflow.html
-last_built: 2022-03-11T19:00Z
+last_built: 2022-03-11T19:29Z
 urls:
   reference: https://karissawhiting.github.io/cbioportalR/reference
   article: https://karissawhiting.github.io/cbioportalR/articles
