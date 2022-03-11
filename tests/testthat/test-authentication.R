@@ -1,16 +1,6 @@
 
 
 
-test_that("set url- MSK", {
-
-  db_test <- "MSK"
-  set_cbioportal_db(db = db_test)
-
-  x <- get("portal_url", envir = cbioportal_env)
-  expect_equal(x, paste0("cbioportal.mskcc.org/api"))
-
-})
-
 test_that("set url- public", {
 
   db_test <- "public"
