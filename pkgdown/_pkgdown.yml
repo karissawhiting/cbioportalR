@@ -30,7 +30,7 @@ reference:
     - get_mutation_by_study
     - get_cna_by_study
     - get_fusion_by_study
-    - get_samples_by_study
+    - available_samples
     - get_genetics_by_study
   - subtitle: Sample Level
   - contents:
