@@ -37,23 +37,28 @@
 
 
   # Check Arguments  -----------------------------------------------------------
+
+  # both study_id & molecular_profile_id are NULL
   if(is.null(study_id) & is.null(molecular_profile_id)) {
-   cli::cli_abort("You must provide a {.code study_id} or a {.code molecular_profile_id}. See {.code available_profiles(<study_id>)} to view available profiles for a study")
+    cli::cli_abort("You must provide a {.code study_id} or a {.code molecular_profile_id}. See {.code available_profiles(<study_id>)} to view available profiles for a study")
   }
+
 
   data_type <- match.arg(data_type)
 
-  # if profile is NULL study_id can't be NULL
+  # study ID provided and profile is NULL
+  # If study ID is not correct, informative error thrown
   molecular_profile_id <- molecular_profile_id %||%
     .lookup_profile_name(data_type, study_id, base_url = base_url)
 
 
-  # if study_id is NULL molecular profile ID can't be NULL
-  study_id <- study_id %||%
-    .lookup_study_name(molecular_profile_id, base_url = base_url)
+  # if study_id is NULL or not NULL molecular profile ID can't be NULL
+  study_id <- .lookup_study_name(molecular_profile_id = molecular_profile_id,
+                       study_id = study_id,
+                       base_url = base_url)
 
 
-  # this goes in URL
+  # this text goes in query URL path
   url_data_type <- switch(
     data_type,
     "mutation" = "mutations",
@@ -214,6 +219,13 @@ get_fusion_by_study <- function(study_id = NULL,
 #'
 #
 get_genetics_by_study <- function(study_id = NULL, base_url = NULL) {
+
+  # ** Not using `.check_for_study_id()` here because we allow no study ID to be passed,
+  # but still don't allow study_id > 1. Maybe generalized that check function to
+  # Make each check optional?
+  if(length(study_id) > 1) {
+    cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time"))}
+
 
   safe_get_data <- purrr::safely(.get_data_by_study, quiet = TRUE)
 

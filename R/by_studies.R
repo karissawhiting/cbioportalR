@@ -17,7 +17,8 @@ get_study_info <- function(study_id = NULL, base_url = NULL) {
 
   url_path <- purrr::map(study_id, ~ paste0("studies/", .x))
 
-  # ** Maybe improve?
+  # ** This technically works already with multiple studies but limiting to one for consistency
+  # If multiple studies passed (which they can't be as of now):
   # have to do as.data.frame() with map_df() to return one row
   # per study (map_df/bind_rows returns multiple rows per study
   # as.data.frame deals with nested lists better it seems. Is there a better way?
@@ -60,28 +61,40 @@ available_clinical_attributes <- function(study_id = NULL, base_url = NULL) {
 #' @param study_id study ID
 #' @param base_url The database URL to query.
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
+#' @param clinical_attribute one or more clinical attributes for your study.
+#' If none provided, will return all attributes available for
+#' that study (`available_clinical_attributes(<study_id>)`)
 #' @return a dataframe of all available clinical attributes and their values
 #' @export
 #'
 #' @examples
 #' get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')
-#'
-get_clinical_by_study <- function(study_id = NULL, base_url = NULL) {
+#' get_clinical_by_study(study_id = "acc_tcga",
+#'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
+get_clinical_by_study <- function(study_id = NULL,
+                                  clinical_attribute = NULL,
+                                  base_url = NULL) {
 
   # checks ---------------------------------------------------------------------
   .check_for_study_id(study_id)
 
-  # query ---------------------------------------------------------------------
   url_path <- paste0(
-    "studies/", study_id,
-    "/clinical-data?"
-  )
+    "studies/",
+    study_id,
+    "/clinical-data?")
 
   res <- cbp_api(url_path, base_url = base_url)
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
-  return(df)
-}
 
+  # Filter selected clinical attributes if not NULL
+  df_return <- df %>%
+    purrr::when(
+      !is.null(clinical_attribute) ~ filter(., clinicalAttributeId %in% clinical_attribute),
+      ~{cli_alert_warning("No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
+      .})
+
+  return(df_return)
+}
 
 #' Get All Sample IDs in a Study
 #'
@@ -96,10 +109,10 @@ get_clinical_by_study <- function(study_id = NULL, base_url = NULL) {
 #' @examples
 #' \dontrun{
 #' set_cbioportal_db("public")
-#' get_samples_by_study(study_id = "acc_tcga")
+#' available_samples(study_id = "acc_tcga")
 #' }
 #'
-get_samples_by_study<- function(study_id = NULL,
+available_samples<- function(study_id = NULL,
                                 base_url = NULL) {
 
   .check_for_study_id(study_id)

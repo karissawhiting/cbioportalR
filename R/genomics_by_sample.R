@@ -102,7 +102,9 @@
 
       # if molecular profile provided, guess based on that
       switch((is.null(study_id) & !is.null(molecular_profile_id)),
-             .lookup_study_name(molecular_profile_id, base_url = base_url)) %||%
+             .lookup_study_name(molecular_profile_id = molecular_profile_id,
+                                study_id = study_id,
+                                base_url = base_url)) %||%
 
       # else, guess based on URL
       suppressMessages(.guess_study_id(study_id, resolved_url))

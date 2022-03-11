@@ -4,10 +4,18 @@
 \alias{get_clinical_by_study}
 \title{Get all available clinical data for a specified study}
 \usage{
-get_clinical_by_study(study_id = NULL, base_url = NULL)
+get_clinical_by_study(
+  study_id = NULL,
+  clinical_attribute = NULL,
+  base_url = NULL
+)
 }
 \arguments{
 \item{study_id}{study ID}
+
+\item{clinical_attribute}{one or more clinical attributes for your study.
+If none provided, will return all attributes available for
+that study (\verb{available_clinical_attributes(<study_id>)})}
 
 \item{base_url}{The database URL to query.
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
@@ -20,5 +28,6 @@ Get all available clinical data for a specified study
 }
 \examples{
 get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')
-
+get_clinical_by_study(study_id = "acc_tcga",
+ clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 }

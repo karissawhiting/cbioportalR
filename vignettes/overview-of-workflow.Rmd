@@ -1,8 +1,8 @@
 ---
-title: "Tutorial: Overview of Data Retrieval Workflow"
+title: "Overview of Data Retrieval Workflow"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial: Overview of Data Retrieval Workflow}
+  %\VignetteIndexEntry{Overview of Data Retrieval Workflow}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -22,24 +22,24 @@ library(dplyr)
 
 ## Introduction
 
-We will outline the main data retrieval workflow and functions using a case study based on a public set of data on 105 samples in high risk nonmuscle invasive bladder cancer patients [(Pietzak et al. 2017)](https://pubmed.ncbi.nlm.nih.gov/28583311/).
+We will outline the main data retrieval workflow and functions using a case study based on two public sets of data:
+
+1) on 105 samples in high risk nonmuscle invasive bladder cancer patients [(Pietzak et al. 2017)](https://pubmed.ncbi.nlm.nih.gov/28583311/).
+2) 
+
 
 ## Setup
 
-Before accessing data you will need to connect to a cBioPortal database and set your base URL for the R session. In this example we will use data from the public cBioPortal database instance (<https://www.cbioportal.org>). You do not need a token to access this public website. If you are using a private instance of cbioportal (like MSK's institutional database), you will need to acquire a token and save it to your .Renviron file (see Authentication vignetted for more details -coming soon)
-
+Before accessing data you will need to connect to a cBioPortal database and set your base URL for the R session. In this example we will use data from the public cBioPortal database instance (<https://www.cbioportal.org>). You do not need a token to access this public website. If you are using a private instance of cbioportal (like MSK's institutional database), you will need to acquire a token and save it to your .Renviron file.
 
 *Note: If you are a MSK researcher working on IMPACT, you should connect to MSK's cBioPortal instance to get the most up to date IMPACT data, and you must follow MSK-IMPACT publication guidelines when using the data.*
 
 
-To set the database urlfor your current R session use the `set_cbioportal_db()` function. To set it to the public instance you can either provide the full URL to the function, or just `public` as a shortcut. 
+To set the database url for your current R session use the `set_cbioportal_db()` function. To set it to the public instance you can either provide the full URL to the function, or just `public` as a shortcut. This function will both check your connection to the database and set the url (`www.cbioportal.org/api`) as your base url to connect to for all future API calls during your session.
 
-This function will both check your connection to the database and set the database url (`www.cbioportal.org/api`) as your base url to connect to for all future API calls during your session.
 
 ```{r}
-
 set_cbioportal_db("public")
-
 ```
 
 You can use `test_cbioportal_db` at any time throughout your session to check your connection. This can be helpful when troubleshooting issues with your API calls.

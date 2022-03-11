@@ -8,9 +8,13 @@
 #' @export
 #'
 .check_for_study_id <- function(study_id) {
-  if (is.null(study_id)) {
-    stop("You must provide a study id. See `get_studies()` to view available studies on your database")
-  }
+
+  study_id %>% purrr::when(
+    is.null(.) ~ cli::cli_abort(c("You must provide a {.code study_id}. See {.code get_studies()} to view available studies on your database")),
+    length(.) > 1 ~ cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time")),
+    ~ NULL
+  )
+
 }
 
 #' Check for Molecular Profile ID
@@ -135,24 +139,29 @@
 #' @noRd
 #' @export
 #'
-.lookup_study_name <- function(molecular_profile_id, base_url) {
+.lookup_study_name <- function(molecular_profile_id, study_id, base_url) {
 
-  # study_id = NULL- will return all studies
+  # study_id = NULL- will return all studies quietly
+  # If study ID is supplied but wrong (doesn't exist in database) this will fail
   quiet_available_profiles <- purrr::quietly(available_profiles)
-  profs <- quiet_available_profiles(study_id = NULL, base_url = base_url)
+  profs <- tryCatch(
+
+    # ** Maybe there can be a better API fail message that propogates thorughout because base_url should  always be checked/throw error before
+    #  any parameter issues.
+    quiet_available_profiles(study_id = study_id, base_url = base_url),
+                     error = function(e) cli::cli_abort("API Failed, check your database connection ({.code test_cbioportal_db()}) and make sure {.val study_id:}{.code {study_id}} exists ({.code available_studies()})"))
+
 
   resolved_study_id <- profs$result %>%
     filter(.data$molecularProfileId == molecular_profile_id) %>%
     pull(.data$studyId)
 
   if(length(resolved_study_id) == 0) {
-    cli::cli_abort("No molecular profile {.val {molecular_profile_id}} found. See {.code available_profiles() }")
+    cli::cli_abort("No molecular profile {.val {molecular_profile_id}}. Are you sure that study or molecular profile exists? See {.code available_profiles()} or {.code available_studies()}")
   }
 
   resolved_study_id
 
 }
-
-
 
 

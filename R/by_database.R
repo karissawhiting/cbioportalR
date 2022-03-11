@@ -74,11 +74,19 @@ get_genes <- function(base_url  =  NULL) {
 #' @examples
 #' set_cbioportal_db("public")
 #' available_profiles()
+#' available_profiles(study_id = "acc_tcga")
 
 available_profiles <- function(study_id = NULL,
                                base_url =  NULL) {
 
   # checks ---------------------------------------------------------------------
+
+  # ** Not using `.check_for_study_id()` here because we allow no study ID to be passed,
+  # but still don't allow study_id > 1. Maybe generalized that check function to
+  # Make each check optional?
+  if(length(study_id) > 1) {
+    cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time"))}
+
   if(is.null(study_id)) {
     url_path <- "molecular-profiles?"
 

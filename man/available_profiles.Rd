@@ -23,4 +23,5 @@ Get Available Genomic Profiles For a Study or Database
 \examples{
 set_cbioportal_db("public")
 available_profiles()
+available_profiles(study_id = "acc_tcga")
 }

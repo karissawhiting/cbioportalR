@@ -19,7 +19,7 @@ on tumor mutational burden (TMB), microsatellite instability status
 This package was created to work with both the public [cBioPortal
 website](https://www.cbioportal.org/), as well as private institutional
 cBioPortal instances (e.g. MSKCC, GENIE) with appropriate credentials
-and authentication (see Getting Started).
+and [authentication](#authentication).
 
 For more information on cBioPortal, see the following publications:
 
@@ -40,7 +40,7 @@ links:
 connect to MSK’s cBioPortal instance to get the most up to date IMPACT
 data, and you must follow [MSK-IMPACT publication
 guidelines](https://cmo.mskcc.org/cmo/initiatives/msk-impact/) when
-using the data*
+using this data*
 
 ## Installation
 
@@ -56,14 +56,14 @@ library(cbioportalR)
 
 ## Authentication
 
-If you are using the public domain <https://www.cbioportal.org/>, you do
-not need a token to start pulling data. If you are using a private
+If you are using the public domain <https://www.cbioportal.org/>, you
+don’t need a token to start pulling data. If you are using a private
 instance of cBioPortal (like MSKCC’s institutional database), you will
 need to acquire a token and save it to your `.Renviron` file (or
 wherever you store credentials). Simply log in to your institution’s
 cBioPortal site, acquire a token (Usually through the ‘Web API’ tab) and
 save it in your `.Renviron` file. This will save the token as an
-environmental variable so you do not have to hard code the secret key in
+environmental variable so you don’t have to hard code the secret key in
 your scripts.
 
 *Tip: The following {usethis} function can easily find and open the
@@ -119,16 +119,14 @@ is organized in cBioPortal will help you determine which functions you
 need. The figure below outlines the general data schema for cBioPortal
 and which functions access which levels of the schema:
 
-    #> Warning: Unknown levels in `f`: Study, Molecular Profile, Sample
-
 <table>
 <tbody>
 <tr>
 <td>
-<img src="man/figures/cbp-diagram.png" width="300" height="300">
+<img src="man/figures/svg-cbp-diagram.svg" width="90%">
 </td>
 <td>
-<table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: small; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 550px; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;">
+<table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: small; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 500px; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;">
   
   <thead style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
     <tr>
@@ -138,12 +136,12 @@ and which functions access which levels of the schema:
   </thead>
   <tbody style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
     <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(138,43,226,0.6); color: #FFFFFF; font-weight: bold;">Database</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`available_studies()`, `available_profiles()`, `available_gene_panels()`, `available_studies()`, `get_genes()`</td></tr>
-    <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(244,164,96,0.6); color: #000000; font-weight: bold;">Studies</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`available_profiles()`, `get_study_info()`, `available_clinical_attributes()`, `get_genetics_by_study()`, `get_mutation_by_study()`, `get_cna_by_study()`, `get_fusion_by_study()`, `get_clinical_by_study()`, `get_samples_by_study()`</td></tr>
-    <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(93,109,221,0.6); color: #FFFFFF; font-weight: bold;">Molecular Profiles</td>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`available_studies()`, `available_profiles()`, `available_gene_panels()`, `get_genes()`</td></tr>
+    <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(93,109,221,0.6); color: #FFFFFF; font-weight: bold;">Studies</td>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`available_profiles()`, `get_study_info()`, `available_clinical_attributes()`, `get_genetics_by_study()`, `get_mutation_by_study()`, `get_cna_by_study()`, `get_fusion_by_study()`, `get_clinical_by_study()`, `available_samples()`</td></tr>
+    <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(48,167,198,0.6); color: #000000; font-weight: bold;">Molecular Profiles</td>
 <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`get_genetics_by_study()`, `get_mutation_by_study()`, `get_cna_by_study()`, `get_fusion_by_study()`</td></tr>
-    <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(48,167,198,0.6); color: #000000; font-weight: bold;">Samples</td>
+    <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(244,164,96,0.6); color: #000000; font-weight: bold;">Samples</td>
 <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`get_genetics_by_sample()`, `get_mutation_by_study()`, `get_cna_by_sample()`, `get_fusion_by_sample()`, `get_clinical_by_sample()`, `get_panel_by_sample()`, `get_sample_by_patient()`</td></tr>
   </tbody>
   
@@ -156,8 +154,7 @@ and which functions access which levels of the schema:
 
 ## Examples
 
-To see available studies (this depends on what cBioPortal database you
-are connected to), you can use:
+To see available studies in your database you can use:
 
 ``` r
 available_studies() %>% 
@@ -179,7 +176,7 @@ available_studies() %>%
 #> #   cancerTypeId <chr>, referenceGenome <chr>
 ```
 
-To view study metadata you can use:
+To view study metadata on a particular study you can use:
 
 ``` r
 get_study_info("acc_tcga") %>% 
@@ -213,7 +210,7 @@ get_study_info("acc_tcga") %>%
 #> referenceGenome             "hg19"
 ```
 
-To pull all genomic data for a particular study ID you can use:
+To pull all genomic data for a particular study you can use:
 
 ``` r
 # As a result you will get a list of dataframes of 1) mutation + fusion and 2) cna.
@@ -250,16 +247,21 @@ df$mut %>%
 #> #   ncbiBuild <chr>, variantType <chr>, keyword <chr>, chr <chr>, …
 ```
 
-You can also pull data by specific sample IDs but the API queries
-require you also specify the corresponding study_id in which the samples
-are house and the specific genes you wish to query. When these pieces of
-information are not provided, {cbioportalR} makes an informed guess
-based on your connection and will throw an informative message to
-clarify exactly what is being queried (in this case, the public version
-of the IMPACT database).
+You can also pull data by specific sample IDs but the API requires a bit
+more information from you (unlike pulling by study ID which returns
+everything available for that study). This can be useful when working
+within a very large database or working across samples housed in
+multiple different studies. When querying by `sample_id` you must also
+specify the corresponding `study_id` in which the samples are housed and
+the specific genes for which you wish to return results. When these
+pieces of information are not provided, {cbioportalR} makes an informed
+guess based on your connection and will throw an informative message to
+clarify exactly what is being queried. In the example below, the
+function defaults to the public version of the IMPACT database
+(`study_id = "msk_impact_2017"`).
 
 ``` r
-samples <- get_samples_by_study(study_id = "acc_tcga") %>%
+samples <- available_samples(study_id = "acc_tcga") %>%
   pull(sampleId) %>%
   head(n = 10)
 
@@ -274,7 +276,10 @@ length(mutations) == 0
 #> [1] TRUE
 ```
 
-When we specify the correct study, we get accurate results.
+No results were returned because the samples are not stored in this
+study. When we specify the correct study (`study_id = "acc_tcga"`), we
+get accurate results. You can check which samples are stored in a study
+using `available_samples(study_id = "acc_tcga")`.
 
 ``` r
 mutations <- get_mutation_by_sample(sample_id =  samples,
@@ -324,6 +329,7 @@ available_clinical_attributes(study_id = "acc_tcga") %>%
 
 ``` r
 get_clinical_by_study("acc_tcga")
+#> ! No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study
 #> # A tibble: 1,558 × 7
 #>    uniqueSampleKey  uniquePatientKey sampleId patientId studyId clinicalAttribu…
 #>    <chr>            <chr>            <chr>    <chr>     <chr>   <chr>           
@@ -341,10 +347,11 @@ get_clinical_by_study("acc_tcga")
 ```
 
 ``` r
-get_clinical_by_sample(sample_id = samples, study_id = "acc_tcga")
+get_clinical_by_sample(sample_id = samples, study_id = "acc_tcga") %>%
+  head(10)
 #> ! No `clinical_attribute` passed. Defaulting to returning
 #> all clinical attributes in "acc_tcga" study
-#> # A tibble: 170 × 7
+#> # A tibble: 10 × 7
 #>    uniqueSampleKey  uniquePatientKey sampleId patientId studyId clinicalAttribu…
 #>    <chr>            <chr>            <chr>    <chr>     <chr>   <chr>           
 #>  1 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE     
@@ -357,5 +364,13 @@ get_clinical_by_sample(sample_id = samples, study_id = "acc_tcga")
 #>  8 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… ONCOTREE_CODE   
 #>  9 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OTHER_SAMPLE_ID 
 #> 10 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… PATHOLOGY_REPOR…
-#> # … with 160 more rows, and 1 more variable: value <chr>
+#> # … with 1 more variable: value <chr>
 ```
+
+All functions that pull by study IDs are limited to pulling data from
+one study at a time. If you need to pull specific samples from multiple
+studies, you likely want to pull by sample ID (instead of study ID) and
+supply the function with a dataframe of `sample_study_pairs` that
+specify where the function should look for each study. For more
+information see the [Overview of Workflow
+Vignette](https://karissawhiting.github.io/cbioportalR/articles/overview-of-workflow.html).
