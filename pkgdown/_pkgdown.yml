@@ -2,7 +2,54 @@ url: https://karissawhiting.github.io/cbioportalR/
 
 template:
   bootstrap: 5
+  bootswatch: cosmo
 
 development:
   mode: auto
   version_label: default
+
+reference:
+  - subtitle: Authentication
+  - contents:
+    - set_cbioportal_db
+    - get_cbioportal_token
+    - test_cbioportal_db
+  - subtitle: Database Level
+  - contents:
+    - available_gene_panels
+    - available_studies
+    - get_genes
+  - subtitle: Database or Study Level
+  - contents:
+    - available_profiles
+    - get_study_info
+  - subtitle: Study Level
+  - contents:
+    - available_clinical_attributes
+    - get_clinical_by_study
+    - get_mutation_by_study
+    - get_cna_by_study
+    - get_fusion_by_study
+    - available_samples
+    - get_genetics_by_study
+  - subtitle: Sample Level
+  - contents:
+    - get_clinical_by_sample
+    - get_mutation_by_sample
+    - get_cna_by_sample
+    - get_fusion_by_sample
+    - get_genetics_by_sample
+    - get_panel_by_sample
+  - subtitle: Gene & Gene Panel Level
+  - contents:
+    - get_alias
+    - get_entrez_id
+    - get_gene_panel
+    - get_hugo_symbol
+  - subtitle: Patient Level
+  - contents:
+    - get_sample_by_patient
+  - subtitle: Data
+  - contents:
+    - all_genes_lookup
+    - impact_gene_info

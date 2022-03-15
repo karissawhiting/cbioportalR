@@ -6,10 +6,15 @@
 \alias{cbioportalR-package}
 \title{cbioportalR: An R package to access data on cBioPortal}
 \description{
-allows you to access cBioPortal's genomic and clinical data directly through R.
-    The package wraps cBioPortal's existing API endpoints in R so R users can easily leverage cBioPortal's API.
-    Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB),
-    microsatellite instability status (MSI) and select clinical data points (depending on the study).
+allows you to access cBioPortal's genomic and clinical data directly through R. The package wraps cBioPortal's existing API endpoints in R so R users can easily leverage cBioPortal's API. Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study).
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/karissawhiting/cbioportalR}
+  \item Report bugs at \url{https://github.com/karissawhiting/cbioportalR/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Karissa Whiting \email{karissa.whiting@gmail.com} (\href{https://orcid.org/0000-0002-4683-1868}{ORCID})
