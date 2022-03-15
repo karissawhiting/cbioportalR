@@ -28,11 +28,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,13 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
+    <a class="dropdown-item" href="articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
@@ -52,18 +59,26 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/karissawhiting/cbioportalR/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
+  <main id="main" class="col-md-9">
+<div class="section level1">
 <div class="page-header"><h1 id="cbioportalr">cbioportalR<a class="anchor" aria-label="anchor" href="#cbioportalr"></a>
 </h1></div>
-<p>{cbioportalR} allows you to access cBioPortal’s genomic and clinical data directly through R. The package wraps cBioPortal’s existing API endpoints in R so R users can easily leverage cBioPortal’s API. Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study).</p>
-<p>This package was created to work with both <a href="https://www.cbioportal.org/" class="external-link">the public cBioPortal website</a>, as well as MSK’s private institutional cbioportal database. To connect to a private database, you must first get an access token (or whatever credentials your institution requires) and supply the specific API url at the beginning of your session (details below).</p>
+<p>{cbioportalR} allows you to access <a href="https://www.cbioportal.org/" class="external-link">cBioPortal’s</a> genomic and clinical data sets directly through R. The package wraps cBioPortal’s API endpoints so R users can easily leverage the <a href="https://www.cbioportal.org/api/swagger-ui.html" class="external-link">existing API</a> to access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study).</p>
+<p>This package was created to work with both the public <a href="https://www.cbioportal.org/" class="external-link">cBioPortal website</a>, as well as private institutional cBioPortal instances (e.g. MSKCC, GENIE) with appropriate credentials and <a href="#authentication">authentication</a>.</p>
 <p>For more information on cBioPortal, see the following publications:</p>
 <ul>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/23550210/" class="external-link">Gao et al. Sci. Signal. 2013</a></li>
@@ -72,107 +87,283 @@
 <p>For full documentation on the cBioPortal API, please see the following links:</p>
 <ul>
 <li><a href="https://docs.cbioportal.org/6.-web-api-and-clients/api-and-api-clients" class="external-link">cBioPortal API and API Clients documentation</a></li>
-<li><a href="https://www.cbioportal.org/api/swagger-ui.html#/" class="external-link">full reference documentation for API</a></li>
+<li><a href="https://www.cbioportal.org/api/swagger-ui.html#/" class="external-link">Full reference documentation for API</a></li>
 </ul>
+<p><em>Note: If you are a MSK researcher working on IMPACT data, you should connect to MSK’s cBioPortal instance to get the most up to date IMPACT data, and you must follow <a href="https://cmo.mskcc.org/cmo/initiatives/msk-impact/" class="external-link">MSK-IMPACT publication guidelines</a> when using this data</em></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of {cbioportalR} with:</p>
+<p>You can install {cbioportalR} with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"karissawhiting/cbioportalR"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/karissawhiting/cbioportalR" class="external-link">cbioportalR</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="setting-up-the-api">Setting up the API<a class="anchor" aria-label="anchor" href="#setting-up-the-api"></a>
+<h2 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h2>
-<p>If you are using the public domain <a href="https://www.cbioportal.org/" class="external-link uri">https://www.cbioportal.org/</a>, you do not need a token to access data. If you are using a private instance of cbioportal (like MSK’s institutional database), you will need to acquire a token and save it to your <code>.Renviron</code> file (or wherever you store credentials).</p>
-<p>Simply log in to your institution’s cbioportal website, acquire a token (Usually through the ‘Web API’ tab) and save it in your <code>.Renviron</code> file. This will save the token as an environmental variable so you do not have to hard code the secret key in your scripts.</p>
+<p>If you are using the public domain <a href="https://www.cbioportal.org/" class="external-link uri">https://www.cbioportal.org/</a>, you don’t need a token to start pulling data. If you are using a private instance of cBioPortal (like MSKCC’s institutional database), you will need to acquire a token and save it to your <code>.Renviron</code> file (or wherever you store credentials). Simply log in to your institution’s cBioPortal site, acquire a token (Usually through the ‘Web API’ tab) and save it in your <code>.Renviron</code> file. This will save the token as an environmental variable so you don’t have to hard code the secret key in your scripts.</p>
 <p><em>Tip: The following {usethis} function can easily find and open the <code>.Renviron</code> for you:</em></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu">edit_r_environ</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>Paste the token you were given (using the format below) in the .Renviron file and save the file changes. You may want to save and restart your R session to ensure the token is saved and recognized.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">edit_r_environ</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>Paste the token you were given (using the format below) in the .Renviron file and save the file changes. <em>After saving you should restart your R session to ensure the token is saved and recognized.</em></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">CBIOPORTAL_TOKEN</span> <span class="op">=</span> <span class="st">'YOUR_TOKEN'</span></code></pre></div>
 <p>You can test that your token was saved using:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cbioportalR</span><span class="op">)</span>
-<span class="fu"><a href="reference/get_cbioportal_token.html">get_cbioportal_token</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>To reiterate, if you are planning to retrieve data using public cBioPortal, you do not need a token. If you need to access data on an institutional cBioPortal page you must get a token first.</p>
-<p><em>Note: If you are a MSK researcher working on IMPACT, you should connect to MSK’s cBioPortal instance to get the most up to date IMPACT data, and you must follow MSK-IMPACT publication guidelines when using the data</em></p>
-</div>
-<div class="section level2">
-<h2 id="setting-the-database">Setting the database<a class="anchor" aria-label="anchor" href="#setting-the-database"></a>
-</h2>
-<p>For every new R session, you need to set your database URL. The <code><a href="reference/get_cbioportal_db.html">get_cbioportal_db()</a></code> function will set an environmental variable for your session that tells the package which database to point to for all API calls.</p>
-<p>You can set it to point to the public database with this shortcut:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cbioportalR</span><span class="op">)</span>
-<span class="fu"><a href="reference/get_cbioportal_db.html">get_cbioportal_db</a></span><span class="op">(</span><span class="st">"public"</span><span class="op">)</span></code></pre></div>
-<p>or you can set it to a specific institution database with:</p>
+<code class="sourceCode R"><span class="fu"><a href="reference/get_cbioportal_token.html">get_cbioportal_token</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>For every new R session, you need to set your database URL. The <code><a href="reference/set_cbioportal_db.html">set_cbioportal_db()</a></code> function will set an environmental variable for your session that tells the package which database to point to for all API calls. You can set it to point to the public database with <code>db = 'www.cbioportal.org'</code> or <code>db = 'public'</code>. If using a private database you will pass your institutions cBioPortal URL as <code>db</code>. This function will both set your URL and check the connection.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/get_cbioportal_db.html">get_cbioportal_db</a></span><span class="op">(</span><span class="st">"&lt;&lt;your institution's url&gt;&gt;/api"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span>db <span class="op">=</span> <span class="st">"public"</span><span class="op">)</span>
+<span class="co">#&gt; ✓ You are successfully connected!</span>
+<span class="co">#&gt; ✓ base_url for this R session is now set to "www.cbioportal.org/api"</span></code></pre></div>
+<p>You are now set up for the remainder of your session! API calls depend on your internet connection and possibly a VPN connection so you can use the following to check your connection at any time throughout your session:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/test_cbioportal_db.html">test_cbioportal_db</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; ✓ You are successfully connected!</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="retrieving-data">Retrieving data<a class="anchor" aria-label="anchor" href="#retrieving-data"></a>
+<h2 id="cbioportal-data-model">cBioPortal Data Model<a class="anchor" aria-label="anchor" href="#cbioportal-data-model"></a>
 </h2>
-<p>Once you’ve set your preferred db connection, you can pull data via study ID or sample ID.</p>
-<p>To see available studies (this depends on what cBioPortal database you are connected to), you can use:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/get_studies.html">get_studies</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 13</span>
-<span class="co">#&gt;    name     shortName  description     publicStudy pmid  citation  groups status</span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;           &lt;lgl&gt;       &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;</span>
-<span class="co">#&gt;  1 Oral Sq… Head &amp; ne… Comprehensive … TRUE        2361… Pickerin… ""          0</span>
-<span class="co">#&gt;  2 Hepatoc… HCC (Inse… Whole-exome se… TRUE        2582… Schulze … "PUBL…      0</span>
-<span class="co">#&gt;  3 Uveal M… UM (QIMR)  Whole-genome o… TRUE        2668… Johansso… "PUBL…      0</span>
-<span class="co">#&gt;  4 Neurobl… NBL (AMC)  Whole genome s… TRUE        2236… Molenaar… "PUBL…      0</span>
-<span class="co">#&gt;  5 Nasopha… NPC (Sing… Whole exome se… TRUE        2495… Lin et a… "PUBL…      0</span>
-<span class="co">#&gt;  6 Neurobl… NBL (Colo… Whole-genome s… TRUE        2646… Peifer e… ""          0</span>
-<span class="co">#&gt;  7 Myelody… MDS (Toky… Whole exome se… TRUE        2190… Yoshida … ""          0</span>
-<span class="co">#&gt;  8 Insulin… Panet (Sh… Whole exome se… TRUE        2432… Cao et a… ""          0</span>
-<span class="co">#&gt;  9 Pleural… PLMESO (N… Whole-exome se… TRUE        2548… Guo et a… ""          0</span>
-<span class="co">#&gt; 10 Pilocyt… PAST (Nat… Whole-genome s… TRUE        2381… Jones et… "PUBL…      0</span>
-<span class="co">#&gt; # … with 5 more variables: importDate &lt;chr&gt;, allSampleCount &lt;int&gt;,</span>
-<span class="co">#&gt; #   studyId &lt;chr&gt;, cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></code></pre></div>
-<p>To pull mutation data for a particular study ID you can use:</p>
+<p>There are many ways to identify and pull data (e.g. by study ID, by sample ID, by molecular profile ID). Having an understanding of how data is organized in cBioPortal will help you determine which functions you need. The figure below outlines the general data schema for cBioPortal and which functions access which levels of the schema:</p>
+<table class="table"><tbody><tr>
+<td>
+<img src="reference/figures/svg-cbp-diagram.svg" width="90%">
+</td>
+<td>
+<table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: small; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 500px; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" class="table">
+<thead style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;"><tr>
+<th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" rowspan="1" colspan="1">
+<strong>Level</strong>
+</th>
+<th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" rowspan="1" colspan="1">
+<strong>Functions</strong>
+</th>
+</tr></thead>
+<tbody style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
+<tr>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(138,43,226,0.6); color: #FFFFFF; font-weight: bold;">
+Database
+</td>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
+<code><a href="reference/available_studies.html">available_studies()</a></code>, <code><a href="reference/available_profiles.html">available_profiles()</a></code>, <code><a href="reference/available_gene_panels.html">available_gene_panels()</a></code>, <code><a href="reference/get_genes.html">get_genes()</a></code>
+</td>
+</tr>
+<tr>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(93,109,221,0.6); color: #FFFFFF; font-weight: bold;">
+Studies
+</td>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
+<code><a href="reference/available_profiles.html">available_profiles()</a></code>, <code><a href="reference/get_study_info.html">get_study_info()</a></code>, <code><a href="reference/available_clinical_attributes.html">available_clinical_attributes()</a></code>, <code><a href="reference/get_genetics_by_study.html">get_genetics_by_study()</a></code>, <code><a href="reference/get_mutation_by_study.html">get_mutation_by_study()</a></code>, <code><a href="reference/get_cna_by_study.html">get_cna_by_study()</a></code>, <code><a href="reference/get_fusion_by_study.html">get_fusion_by_study()</a></code>, <code><a href="reference/get_clinical_by_study.html">get_clinical_by_study()</a></code>, <code><a href="reference/available_samples.html">available_samples()</a></code>
+</td>
+</tr>
+<tr>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(48,167,198,0.6); color: #000000; font-weight: bold;">
+Molecular Profiles
+</td>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
+<code><a href="reference/get_genetics_by_study.html">get_genetics_by_study()</a></code>, <code><a href="reference/get_mutation_by_study.html">get_mutation_by_study()</a></code>, <code><a href="reference/get_cna_by_study.html">get_cna_by_study()</a></code>, <code><a href="reference/get_fusion_by_study.html">get_fusion_by_study()</a></code>
+</td>
+</tr>
+<tr>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(244,164,96,0.6); color: #000000; font-weight: bold;">
+Samples
+</td>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
+<code><a href="reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code>, <code><a href="reference/get_mutation_by_study.html">get_mutation_by_study()</a></code>, <code><a href="reference/get_cna_by_sample.html">get_cna_by_sample()</a></code>, <code><a href="reference/get_fusion_by_sample.html">get_fusion_by_sample()</a></code>, <code><a href="reference/get_clinical_by_sample.html">get_clinical_by_sample()</a></code>, <code><a href="reference/get_panel_by_sample.html">get_panel_by_sample()</a></code>, <code><a href="reference/get_sample_by_patient.html">get_sample_by_patient()</a></code>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr></tbody></table>
+</div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<p>To see available studies in your database you can use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># As a result you will get a list of dataframes of 1) mutation + fusion and 2) cna.</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_genetics.html">get_genetics</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"nbl_amc_2012"</span>,
-                   mutations <span class="op">=</span> <span class="cn">TRUE</span>, 
-                   cna <span class="op">=</span> <span class="cn">FALSE</span>, 
-                   fusions <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">mutations</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">mut</span> 
-<span class="va">df</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; $mut</span>
-<span class="co">#&gt; # A tibble: 562 x 31</span>
-<span class="co">#&gt;    uniqueSampleKey  uniquePatientKey molecularProfil… Tumor_Sample_Ba… patientId</span>
-<span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    </span>
-<span class="co">#&gt;  1 TjU5NVQ6bmJsX2F… TjU5NTpuYmxfYW1… nbl_amc_2012_mu… N595T            N595     </span>
-<span class="co">#&gt;  2 TjYwOFQ6bmJsX2F… TjYwODpuYmxfYW1… nbl_amc_2012_mu… N608T            N608     </span>
-<span class="co">#&gt;  3 TjcxOFQ6bmJsX2F… TjcxODpuYmxfYW1… nbl_amc_2012_mu… N718T            N718     </span>
-<span class="co">#&gt;  4 TjU3MlQ6bmJsX2F… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     </span>
-<span class="co">#&gt;  5 Tjc0NFQ6bmJsX2F… Tjc0NDpuYmxfYW1… nbl_amc_2012_mu… N744T            N744     </span>
-<span class="co">#&gt;  6 TjU2MVQ6bmJsX2F… TjU2MTpuYmxfYW1… nbl_amc_2012_mu… N561T            N561     </span>
-<span class="co">#&gt;  7 TjU0OFQ6bmJsX2F… TjU0ODpuYmxfYW1… nbl_amc_2012_mu… N548T            N548     </span>
-<span class="co">#&gt;  8 TjU3MlQ6bmJsX2F… TjU3MjpuYmxfYW1… nbl_amc_2012_mu… N572T            N572     </span>
-<span class="co">#&gt;  9 TjU3NVQ6bmJsX2F… TjU3NTpuYmxfYW1… nbl_amc_2012_mu… N575T            N575     </span>
-<span class="co">#&gt; 10 TjUwOFQ6bmJsX2F… TjUwODpuYmxfYW1… nbl_amc_2012_mu… N508T            N508     </span>
-<span class="co">#&gt; # … with 552 more rows, and 26 more variables: entrezGeneId &lt;int&gt;,</span>
-<span class="co">#&gt; #   studyId &lt;chr&gt;, center &lt;chr&gt;, Mutation_Status &lt;chr&gt;, validationStatus &lt;chr&gt;,</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/available_studies.html">available_studies</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 10 × 13</span>
+<span class="co">#&gt;    studyId name  description publicStudy pmid  citation groups status importDate</span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;     </span>
+<span class="co">#&gt;  1 prad_m… Pros… "Genome-wi… TRUE        2502… Hierony… "PUBL…      0 2021-04-2…</span>
+<span class="co">#&gt;  2 pan_or… Chin… "Landscape… TRUE        &lt;NA&gt;  &lt;NA&gt;     ""          0 2021-09-2…</span>
+<span class="co">#&gt;  3 crc_ni… Disp… "Targeted … TRUE        &lt;NA&gt;  &lt;NA&gt;     ""          0 2021-10-2…</span>
+<span class="co">#&gt;  4 acc_tc… Adre… "TCGA Adre… TRUE        &lt;NA&gt;  &lt;NA&gt;     "PUBL…      0 2021-10-2…</span>
+<span class="co">#&gt;  5 acyc_s… Aden… "Whole exo… TRUE        2377… Stephen… "ACYC…      0 2021-10-2…</span>
+<span class="co">#&gt;  6 all_st… Acut… "Whole-gen… TRUE        2777… Zhang e… "PUBL…      0 2021-10-2…</span>
+<span class="co">#&gt;  7 all_ph… Pedi… "Whole gen… TRUE        &lt;NA&gt;  &lt;NA&gt;     "NCI-…      0 2021-10-2…</span>
+<span class="co">#&gt;  8 all_st… Acut… "Comprehen… TRUE        2573… Anderss… "PUBL…      0 2021-11-0…</span>
+<span class="co">#&gt;  9 acbc_m… Aden… "Whole exo… TRUE        2609… Martelo… "ACYC…      0 2021-11-0…</span>
+<span class="co">#&gt; 10 acyc_j… Aden… "Whole-gen… TRUE        2686… Rettig … "ACYC…      0 2021-11-0…</span>
+<span class="co">#&gt; # … with 4 more variables: allSampleCount &lt;int&gt;, readPermission &lt;lgl&gt;,</span>
+<span class="co">#&gt; #   cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></code></pre></div>
+<p>To view study metadata on a particular study you can use:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt;                             [,1]                                                                                                                                                                                             </span>
+<span class="co">#&gt; name                        "Adrenocortical Carcinoma (TCGA, Firehose Legacy)"                                                                                                                                               </span>
+<span class="co">#&gt; description                 "TCGA Adrenocortical Carcinoma. Source data from &lt;A HREF=\"http://gdac.broadinstitute.org/runs/stddata__2016_01_28/data/ACC/20160128/\"&gt;GDAC Firehose&lt;/A&gt;. Previously known as TCGA Provisional."</span>
+<span class="co">#&gt; publicStudy                 "TRUE"                                                                                                                                                                                           </span>
+<span class="co">#&gt; groups                      "PUBLIC"                                                                                                                                                                                         </span>
+<span class="co">#&gt; status                      "0"                                                                                                                                                                                              </span>
+<span class="co">#&gt; importDate                  "2021-10-29 00:00:00"                                                                                                                                                                            </span>
+<span class="co">#&gt; allSampleCount              "92"                                                                                                                                                                                             </span>
+<span class="co">#&gt; sequencedSampleCount        "90"                                                                                                                                                                                             </span>
+<span class="co">#&gt; cnaSampleCount              "90"                                                                                                                                                                                             </span>
+<span class="co">#&gt; mrnaRnaSeqSampleCount       "0"                                                                                                                                                                                              </span>
+<span class="co">#&gt; mrnaRnaSeqV2SampleCount     "79"                                                                                                                                                                                             </span>
+<span class="co">#&gt; mrnaMicroarraySampleCount   "0"                                                                                                                                                                                              </span>
+<span class="co">#&gt; miRnaSampleCount            "0"                                                                                                                                                                                              </span>
+<span class="co">#&gt; methylationHm27SampleCount  "0"                                                                                                                                                                                              </span>
+<span class="co">#&gt; rppaSampleCount             "46"                                                                                                                                                                                             </span>
+<span class="co">#&gt; massSpectrometrySampleCount "0"                                                                                                                                                                                              </span>
+<span class="co">#&gt; completeSampleCount         "75"                                                                                                                                                                                             </span>
+<span class="co">#&gt; readPermission              "TRUE"                                                                                                                                                                                           </span>
+<span class="co">#&gt; studyId                     "acc_tcga"                                                                                                                                                                                       </span>
+<span class="co">#&gt; cancerTypeId                "acc"                                                                                                                                                                                            </span>
+<span class="co">#&gt; cancerType.name             "Adrenocortical Carcinoma"                                                                                                                                                                       </span>
+<span class="co">#&gt; cancerType.dedicatedColor   "Purple"                                                                                                                                                                                         </span>
+<span class="co">#&gt; cancerType.shortName        "ACC"                                                                                                                                                                                            </span>
+<span class="co">#&gt; cancerType.parent           "adrenal_gland"                                                                                                                                                                                  </span>
+<span class="co">#&gt; cancerType.cancerTypeId     "acc"                                                                                                                                                                                            </span>
+<span class="co">#&gt; referenceGenome             "hg19"</span></code></pre></div>
+<p>To pull all genomic data for a particular study you can use:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># As a result you will get a list of dataframes of 1) mutation + fusion and 2) cna.</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_genetics_by_study.html">get_genetics_by_study</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span>
+<span class="co">#&gt; ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study</span>
+<span class="co">#&gt; ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study</span>
+<span class="co">#&gt; ! No "fusion" data returned. Error:  No molecular profile for `data_type = fusion` found in "acc_tcga".  See</span>
+<span class="co">#&gt; `available_profiles('acc_tcga')`</span></code></pre></div>
+<p>As you can see, there is no fusion data available for this study, only mutations and cna. Alternatively, you can use <code>get_mutation_by_study(study_id = "acc_tcga")</code> and <code>get_cna_by_study(study_id = "acc_tcga")</code></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span><span class="op">$</span><span class="va">mut</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 × 32</span>
+<span class="co">#&gt;   uniqueSampleKey           uniquePatientKey molecularProfil… sampleId patientId</span>
+<span class="co">#&gt;   &lt;chr&gt;                     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;    </span>
+<span class="co">#&gt; 1 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 2 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 3 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 4 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 5 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 6 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; # … with 27 more variables: entrezGeneId &lt;int&gt;, studyId &lt;chr&gt;, center &lt;chr&gt;,</span>
+<span class="co">#&gt; #   mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;, tumorAltCount &lt;int&gt;,</span>
+<span class="co">#&gt; #   tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;, normalRefCount &lt;int&gt;,</span>
 <span class="co">#&gt; #   startPosition &lt;int&gt;, endPosition &lt;int&gt;, referenceAllele &lt;chr&gt;,</span>
-<span class="co">#&gt; #   proteinChange &lt;chr&gt;, Variant_Classification &lt;chr&gt;,</span>
-<span class="co">#&gt; #   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span>
-<span class="co">#&gt; #   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, Variant_Type &lt;chr&gt;, keyword &lt;chr&gt;,</span>
-<span class="co">#&gt; #   chr &lt;chr&gt;, variantAllele &lt;chr&gt;, refseqMrnaId &lt;chr&gt;, proteinPosStart &lt;int&gt;,</span>
-<span class="co">#&gt; #   proteinPosEnd &lt;int&gt;, HGVSp_Short &lt;chr&gt;, Protein_position &lt;int&gt;,</span>
-<span class="co">#&gt; #   Hugo_Symbol &lt;chr&gt;</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $cna</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<span class="co">#&gt; #   proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;, functionalImpactScore &lt;chr&gt;,</span>
+<span class="co">#&gt; #   fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;, linkMsa &lt;chr&gt;,</span>
+<span class="co">#&gt; #   ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, chr &lt;chr&gt;, …</span></code></pre></div>
+<p>You can also pull data by specific sample IDs but the API requires a bit more information from you (unlike pulling by study ID which returns everything available for that study). This can be useful when working within a very large database or working across samples housed in multiple different studies. When querying by <code>sample_id</code> you must also specify the corresponding <code>study_id</code> in which the samples are housed and the specific genes for which you wish to return results. When these pieces of information are not provided, {cbioportalR} makes an informed guess based on your connection and will throw an informative message to clarify exactly what is being queried. In the example below, the function defaults to the public version of the IMPACT database (<code>study_id = "msk_impact_2017"</code>).</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/available_samples.html">available_samples</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">pull</span><span class="op">(</span><span class="va">sampleId</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+
+<span class="va">mutations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_mutation_by_sample.html">get_mutation_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span>  <span class="va">samples</span><span class="op">)</span>
+<span class="co">#&gt; The following parameters were used in query:</span>
+<span class="co">#&gt; Study ID: "msk_impact_2017"</span>
+<span class="co">#&gt; Molecular Profile ID: "msk_impact_2017_mutations"</span>
+<span class="co">#&gt; Genes: "all IMPACT genes (see `gnomeR::impact_gene_info`)"</span>
+
+<span class="co"># no results returned because these samples are not in this study</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mutations</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<p>No results were returned because the samples are not stored in this study. When we specify the correct study (<code>study_id = "acc_tcga"</code>), we get accurate results. You can check which samples are stored in a study using <code>available_samples(study_id = "acc_tcga")</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mutations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_mutation_by_sample.html">get_mutation_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span>  <span class="va">samples</span>,
+                                    study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span>
+<span class="co">#&gt; The following parameters were used in query:</span>
+<span class="co">#&gt; Study ID: "acc_tcga"</span>
+<span class="co">#&gt; Molecular Profile ID: "acc_tcga_mutations"</span>
+<span class="co">#&gt; Genes: "all IMPACT genes (see `gnomeR::impact_gene_info`)"</span>
+
+<span class="va">mutations</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 × 32</span>
+<span class="co">#&gt;   uniqueSampleKey           uniquePatientKey molecularProfil… sampleId patientId</span>
+<span class="co">#&gt;   &lt;chr&gt;                     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;    </span>
+<span class="co">#&gt; 1 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 2 VENHQS1PUi1BNUoyLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 3 VENHQS1PUi1BNUoyLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 4 VENHQS1PUi1BNUoyLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 5 VENHQS1PUi1BNUoyLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; 6 VENHQS1PUi1BNUoyLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…</span>
+<span class="co">#&gt; # … with 27 more variables: entrezGeneId &lt;int&gt;, studyId &lt;chr&gt;, center &lt;chr&gt;,</span>
+<span class="co">#&gt; #   mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;, tumorAltCount &lt;int&gt;,</span>
+<span class="co">#&gt; #   tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;, normalRefCount &lt;int&gt;,</span>
+<span class="co">#&gt; #   startPosition &lt;int&gt;, endPosition &lt;int&gt;, referenceAllele &lt;chr&gt;,</span>
+<span class="co">#&gt; #   proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;, functionalImpactScore &lt;chr&gt;,</span>
+<span class="co">#&gt; #   fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;, linkMsa &lt;chr&gt;,</span>
+<span class="co">#&gt; #   ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, chr &lt;chr&gt;, …</span></code></pre></div>
+<p>Lastly, you can also pull clinical data by study_id or sample ID. To see what data is available, you can use:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 × 7</span>
+<span class="co">#&gt;   displayName    description datatype patientAttribute priority clinicalAttribu…</span>
+<span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt;    &lt;lgl&gt;            &lt;chr&gt;    &lt;chr&gt;           </span>
+<span class="co">#&gt; 1 Diagnosis Age  Age at whi… NUMBER   TRUE             1        AGE             </span>
+<span class="co">#&gt; 2 Neoplasm Dise… The extent… STRING   TRUE             1        AJCC_PATHOLOGIC…</span>
+<span class="co">#&gt; 3 American Join… The versio… STRING   TRUE             1        AJCC_STAGING_ED…</span>
+<span class="co">#&gt; 4 Atypical Mito… Atypical M… STRING   TRUE             1        ATYPICAL_MITOTI…</span>
+<span class="co">#&gt; 5 Cancer Type    Cancer type STRING   FALSE            1        CANCER_TYPE     </span>
+<span class="co">#&gt; 6 Cancer Type D… Cancer typ… STRING   FALSE            1        CANCER_TYPE_DET…</span>
+<span class="co">#&gt; # … with 1 more variable: studyId &lt;chr&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/get_clinical_by_study.html">get_clinical_by_study</a></span><span class="op">(</span><span class="st">"acc_tcga"</span><span class="op">)</span>
+<span class="co">#&gt; ! No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study</span>
+<span class="co">#&gt; # A tibble: 1,558 × 7</span>
+<span class="co">#&gt;    uniqueSampleKey  uniquePatientKey sampleId patientId studyId clinicalAttribu…</span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;           </span>
+<span class="co">#&gt;  1 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE     </span>
+<span class="co">#&gt;  2 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE_DET…</span>
+<span class="co">#&gt;  3 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… DAYS_TO_COLLECT…</span>
+<span class="co">#&gt;  4 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… FRACTION_GENOME…</span>
+<span class="co">#&gt;  5 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… IS_FFPE         </span>
+<span class="co">#&gt;  6 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… MUTATION_COUNT  </span>
+<span class="co">#&gt;  7 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OCT_EMBEDDED    </span>
+<span class="co">#&gt;  8 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… ONCOTREE_CODE   </span>
+<span class="co">#&gt;  9 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OTHER_SAMPLE_ID </span>
+<span class="co">#&gt; 10 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… PATHOLOGY_REPOR…</span>
+<span class="co">#&gt; # … with 1,548 more rows, and 1 more variable: value &lt;chr&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">samples</span>, study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="co">#&gt; ! No `clinical_attribute` passed. Defaulting to returning</span>
+<span class="co">#&gt; all clinical attributes in "acc_tcga" study</span>
+<span class="co">#&gt; # A tibble: 10 × 7</span>
+<span class="co">#&gt;    uniqueSampleKey  uniquePatientKey sampleId patientId studyId clinicalAttribu…</span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;           </span>
+<span class="co">#&gt;  1 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE     </span>
+<span class="co">#&gt;  2 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE_DET…</span>
+<span class="co">#&gt;  3 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… DAYS_TO_COLLECT…</span>
+<span class="co">#&gt;  4 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… FRACTION_GENOME…</span>
+<span class="co">#&gt;  5 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… IS_FFPE         </span>
+<span class="co">#&gt;  6 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… MUTATION_COUNT  </span>
+<span class="co">#&gt;  7 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OCT_EMBEDDED    </span>
+<span class="co">#&gt;  8 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… ONCOTREE_CODE   </span>
+<span class="co">#&gt;  9 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OTHER_SAMPLE_ID </span>
+<span class="co">#&gt; 10 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… PATHOLOGY_REPOR…</span>
+<span class="co">#&gt; # … with 1 more variable: value &lt;chr&gt;</span></code></pre></div>
+<p>All functions that pull by study IDs are limited to pulling data from one study at a time. If you need to pull specific samples from multiple studies, you likely want to pull by sample ID (instead of study ID) and supply the function with a dataframe of <code>sample_study_pairs</code> that specify where the function should look for each study. For more information see the <a href="https://karissawhiting.github.io/cbioportalR/articles/overview-of-workflow.html">Overview of Workflow Vignette</a>.</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/karissawhiting/cbioportalR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/karissawhiting/cbioportalR/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -197,7 +388,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/karissawhiting/cbioportalR/actions" class="external-link"><img src="https://github.com/karissawhiting/cbioportalR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

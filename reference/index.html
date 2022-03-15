@@ -6,11 +6,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,13 +21,26 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
+    <a class="dropdown-item" href="../articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/karissawhiting/cbioportalR/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -38,8 +51,8 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
       
+      <h3 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a></h3>
       
 
       
@@ -50,37 +63,7 @@
 
       <dl><dt>
           
-          <code><a href="all_available_panels.html">all_available_panels()</a></code> 
-        </dt>
-        <dd>Get all available gene panels in a database</dd>
-      </dl><dl><dt>
-          
-          <code><a href="all_genes_lookup.html">all_genes_lookup</a></code> 
-        </dt>
-        <dd>A table to lookup Hugo Symbol by Entrez ID</dd>
-      </dl><dl><dt>
-          
-          <code><a href="available_profiles.html">available_profiles()</a></code> 
-        </dt>
-        <dd>See what genetic data is available for a given study</dd>
-      </dl><dl><dt>
-          
-          <code><a href="cbp_api.html">cbp_api()</a></code> 
-        </dt>
-        <dd>Core function to retrieve data from cBioPortal API.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="check_for_saved_db.html">check_for_saved_db()</a></code> 
-        </dt>
-        <dd>Check for cBioPortal DB</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_alias.html">get_alias()</a></code> 
-        </dt>
-        <dd>Get Gene Name Alias for a Given Hugo Symbol</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_cbioportal_db.html">get_cbioportal_db()</a></code> 
+          <code><a href="set_cbioportal_db.html">set_cbioportal_db()</a></code> 
         </dt>
         <dd>Connect to cBioPortal DB</dd>
       </dl><dl><dt>
@@ -90,14 +73,72 @@
         <dd>Get cBioPortal Access Token</dd>
       </dl><dl><dt>
           
-          <code><a href="get_clinical_attributes.html">get_clinical_attributes()</a></code> 
+          <code><a href="test_cbioportal_db.html">test_cbioportal_db()</a></code> 
         </dt>
-        <dd>Get all clinical attributes available for a study</dd>
+        <dd>Test the Database Connection Anytime During your R Session</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="database-level">Database Level<a class="anchor" aria-label="anchor" href="#database-level"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="available_gene_panels.html">available_gene_panels()</a></code> 
+        </dt>
+        <dd>Get Available Gene Panels For a Database</dd>
       </dl><dl><dt>
           
-          <code><a href="get_clinical_by_patient.html">get_clinical_by_patient()</a></code> 
+          <code><a href="available_studies.html">available_studies()</a></code> 
         </dt>
-        <dd>Get clinical data by attribute study ID and sample ID</dd>
+        <dd>Get Metadata on All Available Studies in a Database</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_genes.html">get_genes()</a></code> 
+        </dt>
+        <dd>Get A List of Genes for a Specified Database</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="database-or-study-level">Database or Study Level<a class="anchor" aria-label="anchor" href="#database-or-study-level"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="available_profiles.html">available_profiles()</a></code> 
+        </dt>
+        <dd>Get Available Genomic Profiles For a Study or Database</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_study_info.html">get_study_info()</a></code> 
+        </dt>
+        <dd>Get Metadata on All Available Studies in Database or a Specified Study</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="study-level">Study Level<a class="anchor" aria-label="anchor" href="#study-level"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="available_clinical_attributes.html">available_clinical_attributes()</a></code> 
+        </dt>
+        <dd>Get all available clinical attribute IDs for a study</dd>
       </dl><dl><dt>
           
           <code><a href="get_clinical_by_study.html">get_clinical_by_study()</a></code> 
@@ -105,66 +146,141 @@
         <dd>Get all available clinical data for a specified study</dd>
       </dl><dl><dt>
           
-          <code><a href="get_cna.html">get_cna()</a></code> 
+          <code><a href="get_mutation_by_study.html">get_mutation_by_study()</a></code> 
         </dt>
-        <dd>Get copy number alterations by sample ID or study ID</dd>
+        <dd>Get Mutations By Study ID</dd>
       </dl><dl><dt>
           
-          <code><a href="get_gene_id.html">get_gene_id()</a></code> 
+          <code><a href="get_cna_by_study.html">get_cna_by_study()</a></code> 
+        </dt>
+        <dd>Get CNA By Study</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_fusion_by_study.html">get_fusion_by_study()</a></code> 
+        </dt>
+        <dd>Get Fusions By Study</dd>
+      </dl><dl><dt>
+          
+          <code><a href="available_samples.html">available_samples()</a></code> 
+        </dt>
+        <dd>Get All Sample IDs in a Study</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_genetics_by_study.html">get_genetics_by_study()</a></code> 
+        </dt>
+        <dd>Get All Genomic Information By Study</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="sample-level">Sample Level<a class="anchor" aria-label="anchor" href="#sample-level"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="get_clinical_by_sample.html">get_clinical_by_sample()</a></code> 
+        </dt>
+        <dd>Get clinical data by attribute, study ID and sample ID</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_mutation_by_sample.html">get_mutation_by_sample()</a></code> 
+        </dt>
+        <dd>Get Mutations By Sample ID</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_cna_by_sample.html">get_cna_by_sample()</a></code> 
+        </dt>
+        <dd>Get CNA By Sample ID</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_fusion_by_sample.html">get_fusion_by_sample()</a></code> 
+        </dt>
+        <dd>Get Fusions By Sample ID</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_genetics_by_sample.html">get_genetics_by_sample()</a></code> 
+        </dt>
+        <dd>Get All Genomic Information By Sample IDs</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_panel_by_sample.html">get_panel_by_sample()</a></code> 
+        </dt>
+        <dd>Get Gene Panel by study ID and sample ID</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="gene-gene-panel-level">Gene &amp; Gene Panel Level<a class="anchor" aria-label="anchor" href="#gene-gene-panel-level"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="get_alias.html">get_alias()</a></code> 
+        </dt>
+        <dd>Get Gene Name Alias for a Given Hugo Symbol</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_entrez_id.html">get_entrez_id()</a></code> 
         </dt>
         <dd>Get Entrez Gene ID for a given set of Hugo Symbols</dd>
       </dl><dl><dt>
           
-          <code><a href="get_genes.html">get_genes()</a></code> 
+          <code><a href="get_gene_panel.html">get_gene_panel()</a></code> 
         </dt>
-        <dd>Get a list of all available genes</dd>
+        <dd>Retrieve Genes Included For a Specified Panel ID</dd>
       </dl><dl><dt>
           
-          <code><a href="get_genetics.html">get_genetics()</a></code> 
+          <code><a href="get_hugo_symbol.html">get_hugo_symbol()</a></code> 
         </dt>
-        <dd>Get all genetic data for a study or list of IDs</dd>
-      </dl><dl><dt>
+        <dd>Get Hugo Symbol for a given set of Entrez IDs</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="patient-level">Patient Level<a class="anchor" aria-label="anchor" href="#patient-level"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
-          <code><a href="get_mutations.html">get_mutations()</a></code> 
-        </dt>
-        <dd>Get gene mutations by sample ID or Study</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_panel.html">get_panel()</a></code> 
-        </dt>
-        <dd>Retrieve data for a specific panel</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_sample_ids.html">get_sample_ids()</a></code> <code><a href="get_sample_ids.html">get_sample_ids()</a></code> 
+          <code><a href="get_sample_by_patient.html">get_sample_by_patient()</a></code> 
         </dt>
         <dd>Get sample IDs for a given set of patient IDs</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      
+      <h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
-          <code><a href="get_segments.html">get_segments()</a></code> 
+          <code><a href="all_genes_lookup.html">all_genes_lookup</a></code> 
         </dt>
-        <dd>Get segmentation data</dd>
-      </dl><dl><dt>
-          
-          <code><a href="get_studies.html">get_studies()</a></code> 
-        </dt>
-        <dd>Get information about available studies in a cBioPortal instance</dd>
+        <dd>A table to lookup Hugo Symbol by Entrez ID</dd>
       </dl><dl><dt>
           
           <code><a href="impact_gene_info.html">impact_gene_info</a></code> 
         </dt>
         <dd>IMPACT Gene Meta Data</dd>
-      </dl><dl><dt>
-          
-          <code><a href="tcga_genes.html">tcga_genes</a></code> 
-        </dt>
-        <dd>A vector of 19441 hugo symbols in TCGA</dd>
-      </dl><dl><dt>
-          
-          <code><a href="tcga_samples.html">tcga_samples</a></code> 
-        </dt>
-        <dd>Data frame of all TCGA sample ids and their corresponding cancer type</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

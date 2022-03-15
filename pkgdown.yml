@@ -1,8 +1,10 @@
 pandoc: 2.7.3
 pkgdown: 2.0.2
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-03-09T16:57Z
+articles:
+  internal-structure: internal-structure.html
+  overview-of-workflow: overview-of-workflow.html
+last_built: 2022-03-15T22:01Z
 urls:
   reference: https://karissawhiting.github.io/cbioportalR/reference
   article: https://karissawhiting.github.io/cbioportalR/articles
