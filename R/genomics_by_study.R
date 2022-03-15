@@ -38,7 +38,9 @@
 
   # Check Arguments  -----------------------------------------------------------
 
-  # both study_id & molecular_profile_id are NULL
+  # For queries, you need both study_id and molecular_profile_id
+
+  # If both study_id & molecular_profile_id are NULL- stop
   if(is.null(study_id) & is.null(molecular_profile_id)) {
     cli::cli_abort("You must provide a {.code study_id} or a {.code molecular_profile_id}. See {.code available_profiles(<study_id>)} to view available profiles for a study")
   }

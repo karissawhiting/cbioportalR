@@ -82,8 +82,8 @@
     switch(resolved_url == "www.cbioportal.org/api",
            "msk_impact_2017")
 
-  study_id_guess %||% rlang::abort("Unable to guess a study_id for your database.
-                                   You must provide a study_id")
+  study_id_guess %||% cli::cli_abort("Unable to guess a {.code study_id} for your database.
+                                   Please provide a {.code study_id}.")
 
   cli::cli_alert_info("No {.code study_id} provided. Using {.val {study_id_guess}} as default study")
 
@@ -157,7 +157,7 @@
     pull(.data$studyId)
 
   if(length(resolved_study_id) == 0) {
-    cli::cli_abort("No molecular profile {.val {molecular_profile_id}}. Are you sure that study or molecular profile exists? See {.code available_profiles()} or {.code available_studies()}")
+    cli::cli_abort("Molecular profile {.val {molecular_profile_id}} doesn't exist, or molecular profile doesn't match the {.val study_id} you passed. See {.code available_profiles()} or {.code available_studies()}")
   }
 
   resolved_study_id

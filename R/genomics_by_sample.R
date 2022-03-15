@@ -61,16 +61,30 @@
                                 study_id = NULL,
                                 molecular_profile_id = NULL,
                                 sample_study_pairs = NULL,
-                               data_type = c("mutation", "cna", "fusion"),
+                                data_type = c("mutation", "cna", "fusion"),
 
                                 genes = NULL,
                                 base_url = NULL) {
 
-  # Data Type Arguments ---------------------------------------------------------
+  # Check Arguments ---------------------------------------------------------
 
+  if(is.null(sample_id) & is.null(sample_study_pairs))  {
+    cli::cli_abort("You must pass either {.code sample_id} or {.code sample_study_pairs}")
+  }
+
+  if(!is.null(study_id) & !is.null(molecular_profile_id))  {
+    cli::cli_alert_warning("You have passed both a {.code study_id} AND {.code molecular_profile_id}. Ignoring {.code study_id}")
+
+    study_id <- NULL
+  }
+
+  # make sure length = 1
+  if(length(study_id) > 1 | length(molecular_profile_id) > 1) {
+     cli::cli_abort("More than 1 {.code study_id} or {.code molecular_profile_id} was passed. Please use the {.code sample_study_pairs} argument instead")
+  }
   data_type <- match.arg(data_type)
 
-  # this goes in URL
+  # this has to go in query URL
   url_data_type <- switch(
     data_type,
     "mutation" = "mutations",
@@ -78,13 +92,11 @@
     "cna" = "discrete-copy-number")
 
   # Make Informed guesses on parameters -------------------------------------
-  # **Maybe turn this into a function? - this code could be simplified/improved
 
   # `sample_study_pairs` gets priority. If that is NULL then consider other args
   if(is.null(sample_study_pairs)) {
 
-
-    # Need this to guess default study
+    # Need final URL to guess default study
     resolved_url <- base_url %>%
       .resolve_url() %||%
       .get_cbioportal_url()  %||%
@@ -92,35 +104,21 @@
 
 
     # Get study ID ---------
-    resolved_study_id <-
+    resolved_study_id <- study_id %>%
+      purrr::when(!is.null(.) ~ .,
+                  !is.null(molecular_profile_id) ~ .lookup_study_name(molecular_profile_id = molecular_profile_id,
+                                                                      study_id = .,
+                                                                      base_url = base_url),
+                  # if both NULL
+                  ~ suppressMessages(.guess_study_id(study_id, resolved_url)))
 
-      # make sure length = 1
-      switch(
-        length(study_id) > 1,
-        rlang::abort("More than 1 `study_id` passed. Please
-                   use `sample_study_pairs` argument instead")) %||%
-
-      # if molecular profile provided, guess based on that
-      switch((is.null(study_id) & !is.null(molecular_profile_id)),
-             .lookup_study_name(molecular_profile_id = molecular_profile_id,
-                                study_id = study_id,
-                                base_url = base_url)) %||%
-
-      # else, guess based on URL
-      suppressMessages(.guess_study_id(study_id, resolved_url))
 
     # Get molecular profile ID ---------
-    resolved_molecular_profile_id <-
+    resolved_molecular_profile_id <- molecular_profile_id %>%
+      purrr::when(
+        !is.null(.) ~ .,
+        ~ .lookup_profile_name(data_type, study_id = resolved_study_id, base_url))
 
-      # make sure length = 1
-      switch(
-        length(molecular_profile_id) > 1,
-        rlang::abort("More than 1 `molecular_profile_id` passed. Please
-                   use `sample_study_pairs` argument instead")) %||%
-
-      # if not passed, lookup based on study_id
-      molecular_profile_id %||%
-      .lookup_profile_name(data_type, study_id = resolved_study_id, base_url)
 
 
     # create lookup dataframe ------
@@ -138,9 +136,16 @@
 
   # Prep data frame for Query -------------------------------------------------------
 
-  if(!("data.frame" %in% class(sample_study_pairs))) {
-    rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id`, `study_id`")
+  if(
+     !("data.frame" %in% class(sample_study_pairs)) |
+     !("sample_id" %in% colnames(sample_study_pairs)) |
+     !("study_id" %in% colnames(sample_study_pairs))
+       #| "molecular_profile_id" %in% colnames(sample_study_pairs))
+     ) {
+
+    rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id` and `study_id`, or `sample_study_pairs`")
   }
+
 
   # If user passes study_id and data_type we can pull the correct molecular ID
   if(!("molecular_profile_id" %in% colnames(sample_study_pairs))) {
@@ -156,6 +161,21 @@
       left_join(unique_study_id)
 
   }
+
+  # ** I don't think we should allow molecular profile ID quiery without study IDs in sample_study_pairs because this could conflict with data_type- think about later
+  # if(!("study_id" %in% colnames(sample_study_pairs))) {
+  #
+  #   unique_molec <- distinct(select(sample_study_pairs, .data$molecular_profile_id)) %>%
+  #     mutate(study_id =
+  #              purrr::map(.data$molecular_profile_id,
+  #                         ~.lookup_study_name(.x, study_id = NULL,
+  #                                             base_url = base_url)))
+  #
+  #   sample_study_pairs <- sample_study_pairs %>%
+  #     left_join(unique_molec)
+  #
+  # }
+
 
 
   # MUTATION/CNA query ----------------------------------------------------------------------
@@ -273,6 +293,7 @@ get_mutation_by_sample <- function(sample_id = NULL,
                                    molecular_profile_id = NULL,
                                    sample_study_pairs = NULL,
                                    base_url = NULL) {
+
 
   .get_data_by_sample(sample_id = sample_id,
                     study_id = study_id,

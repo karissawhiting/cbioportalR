@@ -24,7 +24,8 @@ Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,
-    covr
+    covr,
+    spelling
 Depends: 
     R (>= 2.10)
 Imports: 
@@ -46,3 +47,4 @@ VignetteBuilder: knitr
 Config/testthat/edition: 3
 URL: https://github.com/karissawhiting/cbioportalR
 BugReports: https://github.com/karissawhiting/cbioportalR/issues
+Language: en-US

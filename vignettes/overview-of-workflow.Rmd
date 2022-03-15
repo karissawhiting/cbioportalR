@@ -30,7 +30,7 @@ We will outline the main data retrieval workflow and functions using a case stud
 
 ## Setup
 
-Before accessing data you will need to connect to a cBioPortal database and set your base URL for the R session. In this example we will use data from the public cBioPortal database instance (<https://www.cbioportal.org>). You do not need a token to access this public website. If you are using a private instance of cbioportal (like MSK's institutional database), you will need to acquire a token and save it to your .Renviron file.
+Before accessing data you will need to connect to a cBioPortal database and set your base URL for the R session. In this example we will use data from the public cBioPortal database instance (<https://www.cbioportal.org>). You do not need a token to access this public website. If you are using a private instance of cBioPortal (like MSK's institutional database), you will need to acquire a token and save it to your .Renviron file.
 
 *Note: If you are a MSK researcher working on IMPACT, you should connect to MSK's cBioPortal instance to get the most up to date IMPACT data, and you must follow MSK-IMPACT publication guidelines when using the data.*
 

@@ -1,6 +1,6 @@
 #' Get Metadata on All Available Studies in Database or a Specified Study
 #'
-#' @param study_id one or more study IDs (seee `available_studies()` to lookup IDs)
+#' @param study_id one or more study IDs (see `available_studies()` to lookup IDs)
 #' @param base_url The database URL to query.
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #' @return A dataframe of study metadata

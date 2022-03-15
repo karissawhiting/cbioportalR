@@ -11,7 +11,8 @@ test_that("test endpoints - with sample ID", {
   endpoint_funs <- c(
     get_mutation_by_sample = get_mutation_by_sample,
     get_cna_by_sample = get_cna_by_sample,
-    get_clinical_by_sample = get_clinical_by_sample)
+    get_clinical_by_sample = get_clinical_by_sample,
+    get_panel_by_sample = get_panel_by_sample)
 
   res <- purrr::map(endpoint_funs,
                     function(fn) rlang::exec(fn, study_id = study_id,
@@ -62,6 +63,19 @@ test_that("test clinical functions", {
 })
 
 #  Test Getting Panels -------------------------------------------------
+test_that("test get panel by sample", {
+
+  db_test <- "public"
+
+  # no panel attribute in this study
+  expect_error(get_panel_by_sample(study_id = "acc_tcga",
+                                sample_id = c("TCGA-OR-A5J2-01", "TCGA-OR-A5J4-01"),
+                                base_url = 'www.cbioportal.org/api'), "No*")
+
+  expect_error(get_panel_by_sample(sample_id = c("TCGA-OR-A5J2-01", "TCGA-OR-A5J4-01")),"You*")
+
+})
+
 
 test_that("test get panels", {
 

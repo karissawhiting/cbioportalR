@@ -7,7 +7,7 @@
 get_study_info(study_id = NULL, base_url = NULL)
 }
 \arguments{
-\item{study_id}{one or more study IDs (seee \code{available_studies()} to lookup IDs)}
+\item{study_id}{one or more study IDs (see \code{available_studies()} to lookup IDs)}
 
 \item{base_url}{The database URL to query.
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
