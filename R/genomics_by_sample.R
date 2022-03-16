@@ -143,7 +143,7 @@
        #| "molecular_profile_id" %in% colnames(sample_study_pairs))
      ) {
 
-    rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id` and `study_id`, or `sample_study_pairs`")
+    rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id` and `study_id`")
   }
 
 
@@ -284,14 +284,15 @@
 #'
 #'
 #' @examples
-#' get_mutation_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
+#' get_mutations_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
 #' study_id = "acc_tcga",
 #' base_url = "public")
 #'
-get_mutation_by_sample <- function(sample_id = NULL,
+get_mutations_by_sample <- function(sample_id = NULL,
                                    study_id = NULL,
                                    molecular_profile_id = NULL,
                                    sample_study_pairs = NULL,
+                                   genes = NULL,
                                    base_url = NULL) {
 
 
@@ -300,6 +301,7 @@ get_mutation_by_sample <- function(sample_id = NULL,
                     molecular_profile_id = molecular_profile_id,
                     sample_study_pairs = sample_study_pairs,
                     data_type = c("mutation"),
+                    genes = genes,
                     base_url = base_url)
 
 
@@ -324,6 +326,7 @@ get_cna_by_sample <- function(sample_id = NULL,
                                    study_id = NULL,
                                    molecular_profile_id = NULL,
                                    sample_study_pairs = NULL,
+                                    genes = NULL,
                                    base_url = NULL) {
 
   .get_data_by_sample(sample_id = sample_id,
@@ -331,6 +334,7 @@ get_cna_by_sample <- function(sample_id = NULL,
                      molecular_profile_id = molecular_profile_id,
                      sample_study_pairs = sample_study_pairs,
                      data_type = c("cna"),
+                     genes = genes,
                      base_url = base_url)
 
 
@@ -346,13 +350,14 @@ get_cna_by_sample <- function(sample_id = NULL,
 #'
 #' @examples
 #' set_cbioportal_db("public")
-#' get_fusion_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
+#' get_fusions_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
 #'                  study_id = "prad_msk_2019")
 #'
-get_fusion_by_sample <- function(sample_id = NULL,
+get_fusions_by_sample <- function(sample_id = NULL,
                               study_id = NULL,
                               molecular_profile_id = NULL,
                               sample_study_pairs = NULL,
+                              genes = NULL,
                               base_url = NULL) {
 
   .get_data_by_sample(sample_id = sample_id,
@@ -360,6 +365,7 @@ get_fusion_by_sample <- function(sample_id = NULL,
                      molecular_profile_id = molecular_profile_id,
                      sample_study_pairs = sample_study_pairs,
                      data_type = c("fusion"),
+                     genes = genes,
                      base_url = base_url)
 
 
@@ -381,6 +387,7 @@ get_fusion_by_sample <- function(sample_id = NULL,
 get_genetics_by_sample <- function(sample_id = NULL,
                                    study_id = NULL,
                                    sample_study_pairs = NULL,
+                                   genes = NULL,
                                    base_url = NULL) {
 
   safe_get_data <- purrr::safely(.get_data_by_sample, quiet = TRUE)
@@ -393,6 +400,7 @@ get_genetics_by_sample <- function(sample_id = NULL,
 
                     molecular_profile_id = NULL,
                     sample_study_pairs = sample_study_pairs,
+                    genes = genes,
                     base_url = base_url,
                     data_type = x)
     })

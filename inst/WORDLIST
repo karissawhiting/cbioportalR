@@ -8,6 +8,7 @@ Codecov
 Discov
 Entrez
 Gao
+Granlund
 KMT
 MLL
 MSI
@@ -23,6 +24,7 @@ Renviron
 TMB
 VPN
 al
+api
 cBioPortal
 cBioPortal's
 cBioPortal’s
@@ -37,5 +39,6 @@ idk
 maf
 magrittr
 nonmuscle
+tibbles
 usethis
 www

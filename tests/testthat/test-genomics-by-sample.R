@@ -183,8 +183,8 @@ test_that("data is same regardless of function", {
   # Mutation
   molecular_profile_id = "prad_msk_2019_mutations"
 
-  by_study <- get_mutation_by_sample(sample_id = sample_id, study_id = study_id)
-  by_prof <- get_mutation_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
+  by_study <- get_mutations_by_sample(sample_id = sample_id, study_id = study_id)
+  by_prof <- get_mutations_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_prof, get_gen$mut)
 
   # CNA ----
@@ -195,8 +195,8 @@ test_that("data is same regardless of function", {
 
   # Fusions ----
   molecular_profile_id = "prad_msk_2019_fusion"
-  by_study <- get_fusion_by_sample(sample_id = sample_id, study_id = study_id)
-  by_prof <- get_fusion_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
+  by_study <- get_fusions_by_sample(sample_id = sample_id, study_id = study_id)
+  by_prof <- get_fusions_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_prof, get_gen$fusion)
 
 })

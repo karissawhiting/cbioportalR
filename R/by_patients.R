@@ -16,7 +16,7 @@
 #' get_sample_id_by_patient(patient_id = c("P-0000034", "P-0000036"))
 #' }
 #'
-get_sample_by_patient <- function(patient_id = NULL,
+get_samples_by_patient <- function(patient_id = NULL,
                                   study_id = NULL,
                                   base_url = NULL) {
 

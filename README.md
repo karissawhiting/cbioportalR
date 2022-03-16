@@ -8,7 +8,7 @@ coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/b
 
 <!-- badges: end -->
 
-# cbioportalR
+# cbioportalR <a href='https://karissawhiting.github.io/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 {cbioportalR} allows you to access
 [cBioPortal’s](https://www.cbioportal.org/) genomic and clinical data
@@ -141,11 +141,11 @@ and which functions access which levels of the schema:
     <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(138,43,226,0.6); color: #FFFFFF; font-weight: bold;">Database</td>
 <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`available_studies()`, `available_profiles()`, `available_gene_panels()`, `get_genes()`</td></tr>
     <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(93,109,221,0.6); color: #FFFFFF; font-weight: bold;">Studies</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`available_profiles()`, `get_study_info()`, `available_clinical_attributes()`, `get_genetics_by_study()`, `get_mutation_by_study()`, `get_cna_by_study()`, `get_fusion_by_study()`, `get_clinical_by_study()`, `available_samples()`</td></tr>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`available_profiles()`, `get_study_info()`, `available_clinical_attributes()`, `get_genetics_by_study()`, `get_mutations_by_study()`, `get_cna_by_study()`, `get_fusions_by_study()`, `get_clinical_by_study()`, `available_samples()`</td></tr>
     <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(48,167,198,0.6); color: #000000; font-weight: bold;">Molecular Profiles</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`get_genetics_by_study()`, `get_mutation_by_study()`, `get_cna_by_study()`, `get_fusion_by_study()`</td></tr>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`get_genetics_by_study()`, `get_mutations_by_study()`, `get_cna_by_study()`, `get_fusions_by_study()`</td></tr>
     <tr><td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(244,164,96,0.6); color: #000000; font-weight: bold;">Samples</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`get_genetics_by_sample()`, `get_mutation_by_study()`, `get_cna_by_sample()`, `get_fusion_by_sample()`, `get_clinical_by_sample()`, `get_panel_by_sample()`, `get_sample_by_patient()`</td></tr>
+<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">`get_genetics_by_sample()`, `get_mutations_by_study()`, `get_cna_by_sample()`, `get_fusions_by_sample()`, `get_clinical_by_sample()`, `get_panel_by_sample()`, `get_samples_by_patient()`</td></tr>
   </tbody>
   
   
@@ -226,7 +226,7 @@ df <- get_genetics_by_study(study_id = "acc_tcga")
 
 As you can see, there is no fusion data available for this study, only
 mutations and cna. Alternatively, you can use
-`get_mutation_by_study(study_id = "acc_tcga")` and
+`get_mutations_by_study(study_id = "acc_tcga")` and
 `get_cna_by_study(study_id = "acc_tcga")`
 
 ``` r
@@ -268,7 +268,7 @@ samples <- available_samples(study_id = "acc_tcga") %>%
   pull(sampleId) %>%
   head(n = 10)
 
-mutations <- get_mutation_by_sample(sample_id =  samples)
+mutations <- get_mutations_by_sample(sample_id =  samples)
 #> The following parameters were used in query:
 #> Study ID: "msk_impact_2017"
 #> Molecular Profile ID: "msk_impact_2017_mutations"
@@ -285,7 +285,7 @@ get accurate results. You can check which samples are stored in a study
 using `available_samples(study_id = "acc_tcga")`.
 
 ``` r
-mutations <- get_mutation_by_sample(sample_id =  samples,
+mutations <- get_mutations_by_sample(sample_id =  samples,
                                     study_id = "acc_tcga")
 #> The following parameters were used in query:
 #> Study ID: "acc_tcga"

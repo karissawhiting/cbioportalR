@@ -24,8 +24,8 @@ library(dplyr)
 
 We will outline the main data retrieval workflow and functions using a case study based on two public sets of data:
 
-1) on 105 samples in high risk nonmuscle invasive bladder cancer patients [(Pietzak et al. 2017)](https://pubmed.ncbi.nlm.nih.gov/28583311/).
-2) 
+1) 105 samples in high risk nonmuscle invasive bladder cancer patients [(Pietzak et al. 2017)](https://pubmed.ncbi.nlm.nih.gov/28583311/).
+2) 18 samples of 18 prostate cancer patients  [(Granlund et al. 2020)](https://pubmed.ncbi.nlm.nih.gov/31564440/)
 
 
 ## Setup
@@ -64,14 +64,20 @@ By inspecting this dataframe, we see the unique `study_id` we want is  `"blca_nm
 
 ```{r}
 all_studies %>% 
-  filter(studyId == "blca_nmibc_2017") %>%
-  t()
+  filter(studyId %in% c("blca_nmibc_2017", "prad_msk_2019"))
 ```
 More in-depth information about the study can be found with `get_study_info()`
 
 ```{r  }
 get_study_info("blca_nmibc_2017")%>% 
   t() 
+```
+
+```{r }
+get_study_info("prad_msk_2019")%>% 
+  t() 
+
+#	prad_msk_2019
 ```
 
 Lastly, it is important to know what genomic data is available for our study. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions. 
@@ -82,7 +88,11 @@ We can check available genomic data with `available_profiles()`.
 available_profiles(study_id = "blca_nmibc_2017")
 ```
 
-Luckily, our study has mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`. 
+```{r }
+available_profiles(study_id = "prad_msk_2019")
+```
+
+Luckily, our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`. 
 
 ```{r}
 available_profiles(study_id = "blca_nmibc_2017") %>%
@@ -92,28 +102,44 @@ available_profiles(study_id = "blca_nmibc_2017") %>%
 
 ## Pulling Genomic Data
 
-Now that we have inspected our study and confirmed the genomic data that is available, we will pull the data into our R environment. 
+Now that we have inspected our studies and confirmed the genomic data that is available, we will pull the data into our R environment. We will show two ways to do this: 
 
-Since we are working with only one study, the easiest way to do this is by study_id. We can pull each data type individually:
+1) Using study IDs (`get_genetics_by_study()`)
+2) Using sample ID-study ID pairs (`get_genetics_by_sample()`)
+
+Pulling by study will give us genomic data for all genes/panels included in the study. You must pull by one study at a time. A benefit of pulling data this way is that you don't have to specify which specific genes to query. It returns all genomic data available by default, however pulling all study data can be slow and inconvenient if you are working across multiple large studies, especially if you only need a subset of each study.
+
+When we pull by sample IDs, the API requires us to specify which genes we want to query. If you do not specify, the function will default to querying all IMPACT genes (on any version of IMPACT panel). This allows you to pull specific samples across multiple studies.
+
+### By Study IDs
+
+To pull by study ID, we can pull each data type individually:
 
 ```{r}
 
-mut <- get_mutation_by_study(study_id = "blca_nmibc_2017")
-cna <- get_cna_by_study(study_id = "blca_nmibc_2017")
-fus <- get_fusion_by_study(study_id = "blca_nmibc_2017")
+mut_blca <- get_mutations_by_study(study_id = "blca_nmibc_2017")
+cna_blca<- get_cna_by_study(study_id = "blca_nmibc_2017")
+fus_blca <- get_fusions_by_study(study_id = "blca_nmibc_2017")
+
+
+mut_prad <- get_mutations_by_study(study_id = "prad_msk_2019")
+cna_prad <- get_cna_by_study(study_id = "prad_msk_2019")
+fus_prad <- get_fusions_by_study(study_id = "prad_msk_2019")
 
 ```
 
 Or we can pull all genomic data at the same time with `get_genetics_by_study()`
 
 ```{r}
-all_genomic <- get_genetics_by_study("blca_nmibc_2017")
+all_genomic_blca <- get_genetics_by_study("blca_nmibc_2017")
+all_genomic_prad<- get_genetics_by_study("prad_msk_2019")
+
 ```
 
 ```{r}
-all_equal(mut, all_genomic$mutation)
-all_equal(cna, all_genomic$cna)
-all_equal(fus, all_genomic$fusion)
+all_equal(mut_blca, all_genomic_blca$mutation)
+all_equal(cna_blca, all_genomic_blca$cna)
+all_equal(fus_blca, all_genomic_blca$fusion)
 ```
 
 ```{r}
@@ -121,5 +147,133 @@ all_equal(fus, all_genomic$fusion)
 
 ```
 
+Finally, we can join the two studies together
+
+```{r}
+mut_study <- bind_rows(mut_blca, mut_prad)
+cna_study <- bind_rows(cna_blca, cna_prad)
+fus_study <- bind_rows(fus_blca, fus_prad)
+```
+
+### By Sample IDs
+
+We can pull from both studies at the same time for a select set of samples using the `sample_study_pairs` argument in `get_genetics_by_sample()`.
+
+Let's pull data for the first 10 samples in each study. We first need to construct our dataframe to pass to the function:
+
+```{r}
+s1 <- available_samples("blca_nmibc_2017") %>%
+  select(sampleId, studyId) %>%
+  head(10)
+
+s2 <- available_samples("prad_msk_2019") %>%
+  select(sampleId, studyId) %>%
+  head(10)
+
+df_pairs <- bind_rows(s1, s2)
+```
+
+We need to rename the columns as per the functions documentation. 
+
+```{r }
+df_pairs <- df_pairs %>%
+  rename("sample_id" = sampleId, 
+         "study_id" = studyId)
+```
+
+Now we pass this to `get_genetics_by_sample()`
+
+```{r}
+all_genomic <- get_genetics_by_sample(sample_study_pairs = df_pairs)
+
+mut_sample <- all_genomic$mutation
+```
+
+Like with querying by study ID, you can also pull data individually by genomic data type:
+
+```{r}
+mut_only <- get_mutations_by_sample(sample_study_pairs = df_pairs)
+
+identical(mut_only, mut_sample)
+```
+
+### Compare Pulling by Study vs. Sample
+
+Let's compare these results with the ones we got from pulling by study:
+
+```{r}
+
+# filter to our subset used in sample query
+mut_study_subset <- mut_study %>%
+  filter(sampleId %in%  df_pairs$sample_id)
+
+# arrange to compare
+mut_study_subset <- mut_study_subset %>%
+  arrange(desc(sampleId))%>%
+  arrange(desc(entrezGeneId))
+
+mut_sample <- mut_sample %>%
+  arrange(desc(sampleId)) %>%
+  arrange(desc(entrezGeneId))
+
+all.equal(mut_study_subset, mut_sample)
+
+```
+
+In this case, both results are equal which means both studies were IMPACT panel only studies. 
+
+Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample::
+
+```{r}
+ex_by_sample <-  get_mutations_by_sample(sample_id = "PD3181a",
+                                        study_id = "acyc_sanger_2013")
+
+ex_by_study <- get_mutations_by_study(study_id = "acyc_sanger_2013") %>%
+  filter(sampleId == "PD3181a")
+
+genes_diff <- setdiff(ex_by_study$entrezGeneId, ex_by_sample$entrezGeneId)
+
+```
+
+We could solve this by specifying which genes we want to query in `get_mutations_by_sample()`:
+
+```{r}
+ex_by_sample_update <-  get_mutations_by_sample(sample_id = "PD3181a",
+                                               study_id = "acyc_sanger_2013", 
+                                               genes = ex_by_study$entrezGeneId)
+
+setdiff(ex_by_study$entrezGeneId, ex_by_sample_update$entrezGeneId)
+```
+
+
 ## Pulling Clinical Data
+
+You can also pull clinical data by study or sample ID. You can explore what clinical data is available a study using:
+
+```{r}
+attr_blca <- available_clinical_attributes("blca_nmibc_2017")
+attr_prad <- available_clinical_attributes("prad_msk_2019")
+
+attr_prad
+```
+
+There are a select set available for both studies:
+
+```{r }
+in_both <- intersect(attr_blca$clinicalAttributeId, attr_prad$clinicalAttributeId)
+```
+
+```{r}
+clinical_blca <-get_clinical_by_sample(sample_id = s1$sampleId,
+                       study_id = "blca_nmibc_2017", 
+                       clinical_attribute = in_both)
+
+clinical_prad <-get_clinical_by_sample(sample_id = s2$sampleId,
+                       study_id = "prad_msk_2019", 
+                       clinical_attribute = in_both)
+
+all_clinical <- bind_rows(clinical_blca, clinical_prad)
+
+all_clinical
+```
 

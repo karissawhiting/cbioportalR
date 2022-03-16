@@ -9,6 +9,7 @@ get_cna_by_sample(
   study_id = NULL,
   molecular_profile_id = NULL,
   sample_study_pairs = NULL,
+  genes = NULL,
   base_url = NULL
 )
 }
@@ -26,6 +27,9 @@ more than 1 study needed, see \code{sample_study_pairs}}
 \item{sample_study_pairs}{A dataframe with columns: \code{sample_id}, \code{study_id} and \code{molecular_profile_id} (optional).
 This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
+
+\item{genes}{A vector of entrez ids. If NULL, will return results for all
+IMPACT genes (see \code{cbioportalR::impact_gene_info})}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

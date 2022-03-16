@@ -7,14 +7,14 @@ test_that("test endpoints - with patient ID", {
   set_cbioportal_db("public")
 
   expect_error(
-    get_sample_by_patient(patient_id = c("P-0000034", "P-0000036")),
+    get_samples_by_patient(patient_id = c("P-0000034", "P-0000036")),
     NA)
 
   expect_message(
-    get_sample_by_patient(patient_id = c("P-0000034", "P-0000036")),
+    get_samples_by_patient(patient_id = c("P-0000034", "P-0000036")),
     "No*")
 
-  res <- get_sample_by_patient(patient_id = c("P-0000034", "P-0000036"))
+  res <- get_samples_by_patient(patient_id = c("P-0000034", "P-0000036"))
   unique(res$studyId) == "msk_impact_2017"
 })
 
@@ -25,7 +25,7 @@ test_that("test endpoints - error with n patient ID", {
   set_cbioportal_db("public")
 
   expect_error(
-    get_sample_by_patient(),
+    get_samples_by_patient(),
     "You*"
     )
 
