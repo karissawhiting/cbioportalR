@@ -27,17 +27,17 @@ reference:
   - contents:
     - available_clinical_attributes
     - get_clinical_by_study
-    - get_mutation_by_study
+    - get_mutations_by_study
     - get_cna_by_study
-    - get_fusion_by_study
+    - get_fusions_by_study
     - available_samples
     - get_genetics_by_study
   - subtitle: Sample Level
   - contents:
     - get_clinical_by_sample
-    - get_mutation_by_sample
+    - get_mutations_by_sample
     - get_cna_by_sample
-    - get_fusion_by_sample
+    - get_fusions_by_sample
     - get_genetics_by_sample
     - get_panel_by_sample
   - subtitle: Gene & Gene Panel Level
@@ -48,7 +48,7 @@ reference:
     - get_hugo_symbol
   - subtitle: Patient Level
   - contents:
-    - get_sample_by_patient
+    - get_samples_by_patient
   - subtitle: Data
   - contents:
     - all_genes_lookup
