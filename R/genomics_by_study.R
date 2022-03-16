@@ -150,11 +150,11 @@
 #' @return A dataframe of mutations (maf file format)
 #' @export
 #' @examples
-#' get_mutation_by_study(study_id = "prad_msk_2019")
-#' get_mutation_by_study(molecular_profile_id = "prad_msk_2019_mutations")
+#' get_mutations_by_study(study_id = "prad_msk_2019")
+#' get_mutations_by_study(molecular_profile_id = "prad_msk_2019_mutations")
 #'
 #'
-get_mutation_by_study <- function(study_id = NULL,
+get_mutations_by_study <- function(study_id = NULL,
                                   molecular_profile_id = NULL,
                                   base_url = NULL) {
 
@@ -195,11 +195,11 @@ get_cna_by_study <- function(study_id = NULL,
 #'
 #'
 #' @examples
-#' get_fusion_by_study(study_id = "prad_msk_2019")
-#' get_fusion_by_study(molecular_profile_id = "prad_msk_2019_fusion")
+#' get_fusions_by_study(study_id = "prad_msk_2019")
+#' get_fusions_by_study(molecular_profile_id = "prad_msk_2019_fusion")
 #'
 
-get_fusion_by_study <- function(study_id = NULL,
+get_fusions_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
                              base_url = NULL) {
 

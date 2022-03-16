@@ -9,7 +9,7 @@ test_that("test endpoints - with sample ID", {
   sample_id = c("s_C_36924L_P001_d")
 
   endpoint_funs <- c(
-    get_mutation_by_sample = get_mutation_by_sample,
+    get_mutations_by_sample = get_mutations_by_sample,
     get_cna_by_sample = get_cna_by_sample,
     get_clinical_by_sample = get_clinical_by_sample,
     get_panel_by_sample = get_panel_by_sample)
@@ -23,7 +23,7 @@ test_that("test endpoints - with sample ID", {
   expect_equal(names(res), names(endpoint_funs))
 
   # These should be the same (mutation is default data_type)
-  # expect_equal(res$.get_data_by_sample, res$get_mutation_by_sample)
+  # expect_equal(res$.get_data_by_sample, res$get_mutations_by_sample)
   #
   #   cna_res <- .get_data_by_sample(study_id = study_id,
   #                                sample_id = sample_id,

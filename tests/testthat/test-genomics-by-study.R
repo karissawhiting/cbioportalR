@@ -7,8 +7,8 @@ test_that("get mutations by study id - no error", {
   set_cbioportal_db(db = db_test)
   study_id = "mpnst_mskcc"
 
-  expect_error(get_mutation_by_study(study_id = study_id), NA)
-  expect_message(get_mutation_by_study(study_id = study_id), "Returning*")
+  expect_error(get_mutations_by_study(study_id = study_id), NA)
+  expect_message(get_mutations_by_study(study_id = study_id), "Returning*")
 
 })
 
@@ -18,8 +18,8 @@ test_that("get mutations by molecular profile - no error", {
   set_cbioportal_db(db = db_test)
   molecular_profile_id = "mpnst_mskcc_mutations"
 
-  expect_error(get_mutation_by_study(molecular_profile_id = molecular_profile_id), NA)
-  expect_message(get_mutation_by_study(molecular_profile_id = molecular_profile_id), "Returning*")
+  expect_error(get_mutations_by_study(molecular_profile_id = molecular_profile_id), NA)
+  expect_message(get_mutations_by_study(molecular_profile_id = molecular_profile_id), "Returning*")
 
 })
 
@@ -30,8 +30,8 @@ test_that("get mutations by molecular profile/ study id/ get_genetics all the sa
   molecular_profile_id = "mpnst_mskcc_mutations"
   study_id = "mpnst_mskcc"
 
-  by_study <- get_mutation_by_study(study = study_id)
-  by_prof <- get_mutation_by_study(molecular_profile_id = molecular_profile_id)
+  by_study <- get_mutations_by_study(study = study_id)
+  by_prof <- get_mutations_by_study(molecular_profile_id = molecular_profile_id)
   get_gen <- get_genetics_by_study(study = study_id)$mut
   expect_identical(by_study, by_prof, get_gen)
 
@@ -147,8 +147,8 @@ test_that("data is same regardless of function", {
   # Mutatioon
   molecular_profile_id = "mpnst_mskcc_mutations"
 
-  by_study <- get_mutation_by_study(study = study_id)
-  by_prof <- get_mutation_by_study(molecular_profile_id = molecular_profile_id)
+  by_study <- get_mutations_by_study(study = study_id)
+  by_prof <- get_mutations_by_study(molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_prof, get_gen$mut)
 
   # CNA ----
@@ -159,8 +159,8 @@ test_that("data is same regardless of function", {
 
   # Fusions ----
   molecular_profile_id = "mpnst_mskcc_fusion"
-  by_study <- get_fusion_by_study(study = study_id)
-  by_prof <- get_fusion_by_study(molecular_profile_id = molecular_profile_id)
+  by_study <- get_fusions_by_study(study = study_id)
+  by_prof <- get_fusions_by_study(molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_prof, get_gen$fusion)
 
 })

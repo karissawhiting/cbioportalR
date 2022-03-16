@@ -24,7 +24,7 @@ library(tidyverse)
 
 <!-- badges: end -->
 
-# cbioportalR
+# cbioportalR <a href='https://karissawhiting.github.io/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 {cbioportalR} allows you to access [cBioPortal's](https://www.cbioportal.org/) genomic and clinical data sets directly through R. The package wraps cBioPortal's API endpoints so R users can easily leverage the [existing API](https://www.cbioportal.org/api/swagger-ui.html) to access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study). 
 
@@ -107,24 +107,24 @@ x <- tibble::tibble(
       "`get_study_info()`",
       "`available_clinical_attributes()`",
       "`get_genetics_by_study()`",
-      "`get_mutation_by_study()`",
+      "`get_mutations_by_study()`",
       "`get_cna_by_study()`", 
-      "`get_fusion_by_study()`", 
+      "`get_fusions_by_study()`", 
       "`get_clinical_by_study()`", 
       "`available_samples()`"),
     
     c("`get_genetics_by_study()`",
-      "`get_mutation_by_study()`",
+      "`get_mutations_by_study()`",
       "`get_cna_by_study()`",
-      "`get_fusion_by_study()`"), 
+      "`get_fusions_by_study()`"), 
     
     c("`get_genetics_by_sample()`",
-      "`get_mutation_by_study()`",
+      "`get_mutations_by_study()`",
       "`get_cna_by_sample()`",
-      "`get_fusion_by_sample()`", 
+      "`get_fusions_by_sample()`", 
       "`get_clinical_by_sample()`", 
       "`get_panel_by_sample()`", 
-      "`get_sample_by_patient()`"))) %>%
+      "`get_samples_by_patient()`"))) %>%
   mutate(level = 
            forcats::fct_relevel(level, "Database", "Studies", 
                                 "Molecular Profiles", "Samples"))
@@ -194,7 +194,7 @@ To pull all genomic data for a particular study you can use:
 df <- get_genetics_by_study(study_id = "acc_tcga")
 ```
 
-As you can see, there is no fusion data available for this study, only mutations and cna. Alternatively, you can use  `get_mutation_by_study(study_id = "acc_tcga")` and `get_cna_by_study(study_id = "acc_tcga")`
+As you can see, there is no fusion data available for this study, only mutations and cna. Alternatively, you can use  `get_mutations_by_study(study_id = "acc_tcga")` and `get_cna_by_study(study_id = "acc_tcga")`
 
 ```{r }
 df$mut %>% 
@@ -208,7 +208,7 @@ samples <- available_samples(study_id = "acc_tcga") %>%
   pull(sampleId) %>%
   head(n = 10)
 
-mutations <- get_mutation_by_sample(sample_id =  samples)
+mutations <- get_mutations_by_sample(sample_id =  samples)
 
 # no results returned because these samples are not in this study
 length(mutations) == 0
@@ -217,7 +217,7 @@ length(mutations) == 0
 No results were returned because the samples are not stored in this study. When we specify the correct study (`study_id = "acc_tcga"`), we get accurate results. You can check which samples are stored in a study using `available_samples(study_id = "acc_tcga")`. 
 
 ```{r}
-mutations <- get_mutation_by_sample(sample_id =  samples,
+mutations <- get_mutations_by_sample(sample_id =  samples,
                                     study_id = "acc_tcga")
 
 mutations %>%

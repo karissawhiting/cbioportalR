@@ -15,9 +15,9 @@ test_that("With study_id-  works fine", {
                      get_study_info = get_study_info,
                      available_samples = available_samples,
 
-                     get_mutation_by_study = get_mutation_by_study,
+                     get_mutations_by_study = get_mutations_by_study,
                      get_cna_by_study = get_cna_by_study,
-                     get_fusion_by_study = get_fusion_by_study,
+                     get_fusions_by_study = get_fusions_by_study,
                      get_genetics_by_study = get_genetics_by_study
                      )
 
@@ -40,9 +40,9 @@ test_that("Missing study_id - arg throws an error", {
                      get_study_info = get_study_info,
                      available_samples = available_samples,
 
-                     get_mutation_by_study = get_mutation_by_study,
+                     get_mutations_by_study = get_mutations_by_study,
                      get_cna_by_study = get_cna_by_study,
-                     get_fusion_by_study = get_fusion_by_study
+                     get_fusions_by_study = get_fusions_by_study
                      # throws a message instead
 #                     get_genetics_by_study = get_genetics_by_study
                      )
@@ -68,9 +68,9 @@ test_that("Incorrect study_id - API error", {
                      get_study_info = get_study_info,
                      available_samples = available_samples,
 
-                     get_mutation_by_study = get_mutation_by_study,
+                     get_mutations_by_study = get_mutations_by_study,
                      get_cna_by_study = get_cna_by_study,
-                     get_fusion_by_study = get_fusion_by_study
+                     get_fusions_by_study = get_fusions_by_study
  #                    get_genetics_by_study = get_genetics_by_study - handled differently
                      )
 
@@ -112,9 +112,9 @@ test_that("More than 1 study_id - throws an error", {
                      get_study_info = get_study_info,
                      available_samples = available_samples,
 
-                     get_mutation_by_study = get_mutation_by_study,
+                     get_mutations_by_study = get_mutations_by_study,
                      get_cna_by_study = get_cna_by_study,
-                     get_fusion_by_study = get_fusion_by_study,
+                     get_fusions_by_study = get_fusions_by_study,
                      get_genetics_by_study = get_genetics_by_study
                      )
 
