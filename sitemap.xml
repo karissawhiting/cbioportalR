@@ -82,10 +82,10 @@
     <loc>https://karissawhiting.github.io/cbioportalR/reference/get_entrez_id.html</loc>
   </url>
   <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_fusion_by_sample.html</loc>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_fusions_by_sample.html</loc>
   </url>
   <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_fusion_by_study.html</loc>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_fusions_by_study.html</loc>
   </url>
   <url>
     <loc>https://karissawhiting.github.io/cbioportalR/reference/get_gene_panel.html</loc>
@@ -103,16 +103,16 @@
     <loc>https://karissawhiting.github.io/cbioportalR/reference/get_hugo_symbol.html</loc>
   </url>
   <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_mutation_by_sample.html</loc>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_mutations_by_sample.html</loc>
   </url>
   <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_mutation_by_study.html</loc>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_mutations_by_study.html</loc>
   </url>
   <url>
     <loc>https://karissawhiting.github.io/cbioportalR/reference/get_panel_by_sample.html</loc>
   </url>
   <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_sample_by_patient.html</loc>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_samples_by_patient.html</loc>
   </url>
   <url>
     <loc>https://karissawhiting.github.io/cbioportalR/reference/get_study_info.html</loc>
