@@ -1,5 +1,3 @@
-# cbioportalR 0.2.0
-
 
 # cbioportalR 0.2.0
 
