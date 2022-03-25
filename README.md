@@ -4,7 +4,7 @@
 
 [![R-CMD-check](https://github.com/karissawhiting/cbioportalR/workflows/R-CMD-check/badge.svg)](https://github.com/karissawhiting/cbioportalR/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master)
+coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=main)
 
 <!-- badges: end -->
 
