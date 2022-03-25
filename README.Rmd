@@ -242,3 +242,11 @@ get_clinical_by_sample(sample_id = samples, study_id = "acc_tcga") %>%
 
 All functions that pull by study IDs are limited to pulling data from one study at a time. If you need to pull specific samples from multiple studies, you likely want to pull by sample ID (instead of study ID) and supply the function with a dataframe of `sample_study_pairs` that specify  where the function should look for each study. For more information see the [Overview of Workflow Vignette](https://karissawhiting.github.io/cbioportalR/articles/overview-of-workflow.html). 
 
+
+## Contributing
+
+Please note that {cbioportalR} is released with a [Contributor
+Code of
+Conduct](https://karissawhiting.github.io/cbioportalR/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms. 
+
+Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!

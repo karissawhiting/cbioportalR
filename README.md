@@ -8,7 +8,7 @@ coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/b
 
 <!-- badges: end -->
 
-# cbioportalR <a href='https://karissawhiting.github.io/cbioportalR/'><img src='man/figures/logo.png' align="right" height="150" /></a>
+# cbioportalR <a href='https://karissawhiting.github.io/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 {cbioportalR} allows you to access
 [cBioPortal’s](https://www.cbioportal.org/) genomic and clinical data
@@ -167,7 +167,7 @@ available_studies() %>%
 #>    <chr>   <chr> <chr>       <lgl>       <chr> <chr>    <chr>   <int> <chr>     
 #>  1 prad_m… Pros… "Genome-wi… TRUE        2502… Hierony… "PUBL…      0 2021-04-2…
 #>  2 pan_or… Chin… "Landscape… TRUE        <NA>  <NA>     ""          0 2021-09-2…
-#>  3 crc_ni… Disp… "Targeted … TRUE        <NA>  <NA>     ""          0 2021-10-2…
+#>  3 crc_ni… Disp… "Targeted … TRUE        3481… <NA>     ""          0 2021-10-2…
 #>  4 acc_tc… Adre… "TCGA Adre… TRUE        <NA>  <NA>     "PUBL…      0 2021-10-2…
 #>  5 acyc_s… Aden… "Whole exo… TRUE        2377… Stephen… "ACYC…      0 2021-10-2…
 #>  6 all_st… Acut… "Whole-gen… TRUE        2777… Zhang e… "PUBL…      0 2021-10-2…
@@ -377,3 +377,11 @@ supply the function with a dataframe of `sample_study_pairs` that
 specify where the function should look for each study. For more
 information see the [Overview of Workflow
 Vignette](https://karissawhiting.github.io/cbioportalR/articles/overview-of-workflow.html).
+
+## Contributing
+
+Please note that {cbioportalR} is released with a [Contributor Code of
+Conduct](https://karissawhiting.github.io/cbioportalR/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!
