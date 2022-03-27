@@ -64,6 +64,7 @@
                                 data_type = c("mutation", "cna", "fusion"),
 
                                 genes = NULL,
+                                add_hugo = TRUE,
                                 base_url = NULL) {
 
   # Check Arguments ---------------------------------------------------------
@@ -134,7 +135,7 @@
     cbioportalR::impact_gene_info$entrez_id %>% unlist()
 
 
-  # Prep data frame for Query -------------------------------------------------------
+  # * Prep data frame for Query -------------------------------------------------------
 
   if(
      !("data.frame" %in% class(sample_study_pairs)) |
@@ -178,7 +179,7 @@
 
 
 
-  # MUTATION/CNA query ----------------------------------------------------------------------
+  # * MUTATION/CNA query ----------------------------------------------------------------------
 
   if(data_type %in% c("mutation", "cna")) {
 
@@ -215,7 +216,7 @@
 
   }
 
-  # FUSIONS query ----------------------------------------------------------------------
+  # * FUSIONS query ----------------------------------------------------------------------
 
   # Fusions endpoint works a little differently than Mut and CNA
   # Instead of passing a sample list, you pass individual sample IDs (retrieved using list)
@@ -260,19 +261,31 @@
 
   }
 
-  genes_msg <- genes %||%
-    "all IMPACT genes (see `gnomeR::impact_gene_info`)"
+  # * Add Hugo Symbol & Return -----
 
-  cli::cli_text("The following parameters were used in query:")
-  cli::cli_dl(c("{.field Study ID}" = "{.val {unique(sample_study_pairs$study_id)}}",
-                "{.field Molecular Profile ID}" = "{.val {unique(sample_study_pairs$molecular_profile_id)}}",
-                "{.field Genes}" = "{.val {genes_msg}}"
-  ))
+  if(add_hugo) {
+
+    # Fusions already has hugo by default from API
+    df <- switch(data_type,
+                 "fusion" = df,
+                 "mutation" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url),
+                 "cna" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url))
+
+  }
+      genes_msg <- genes %||%
+        "all IMPACT genes (see `gnomeR::impact_gene_info`)"
+
+      cli::cli_text("The following parameters were used in query:")
+      cli::cli_dl(c("{.field Study ID}" = "{.val {unique(sample_study_pairs$study_id)}}",
+                    "{.field Molecular Profile ID}" = "{.val {unique(sample_study_pairs$molecular_profile_id)}}",
+                    "{.field Genes}" = "{.val {genes_msg}}"
+      ))
+
+      return(df)
+  }
 
 
-  return(df)
 
-}
 
 # Wrapper Functions ------------------------------------------------------------
 

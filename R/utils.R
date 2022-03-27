@@ -165,3 +165,42 @@
 }
 
 
+#' Get Hugo Symbols From Genomics Data Pulls
+#'
+
+#' @param df data frame resulting from genomic data pulls
+#' @param base_url The database URL to query
+#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
+#'
+#' @return a dataframe that matches input data frame but with hugoGeneSymbol column
+#' @keywords internal
+#' @noRd
+#' @export
+#'
+.lookup_hugo <- function(df, base_url) {
+
+  hugo <- get_hugo_symbol(unique(df$entrezGeneId)) %>%
+    select(-.data$type)
+
+  df_with_hugo <- left_join(df, hugo, by ="entrezGeneId" ) %>%
+    select(.data$hugoGeneSymbol, .data$entrezGeneId, everything())
+
+  # If there happens to be more than 1 hugo per entrez
+  if(!(nrow(df_with_hugo) == nrow(df))) {
+    cli::cli_abort("Could not automatically add Hugo Symbol.
+                 To proceed, please set {.code add_hugo = FALSE}.
+                 You can investigate issue by calling {.code get_hugo(<your df>$entrezGeneId)} on results")
+  }
+
+  # When hugo symbol unknown, return entrez_gene with signifier
+  df_with_hugo <-df_with_hugo %>%
+    mutate(hugoGeneSymbol = case_when(is.na(hugoGeneSymbol) ~ paste0("unk_gene_", entrezGeneId),
+                                      TRUE ~ hugoGeneSymbol))
+
+  return(df_with_hugo)
+
+
+}
+
+
+
