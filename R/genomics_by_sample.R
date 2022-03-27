@@ -268,8 +268,8 @@
     # Fusions already has hugo by default from API
     df <- switch(data_type,
                  "fusion" = df,
-                 "mutation" = if(nrow(df) > 0) .lookup_hugo(df),
-                 "cna" = if(nrow(df) > 0) .lookup_hugo(df))
+                 "mutation" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url),
+                 "cna" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url))
 
   }
       genes_msg <- genes %||%
