@@ -88,16 +88,16 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,608 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    molecularAlteration… datatype name  description showProfileInAn… patientLevel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> COPY_NUMBER_ALTERAT… DISCRETE Puta… Discrete c… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> COPY_NUMBER_ALTERAT… DISCRETE Copy… Discrete c… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MUTATION_EXTENDED    MAF      Muta… Targeted s… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> STRUCTURAL_VARIANT   FUSION   Fusi… Fusions fr… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> COPY_NUMBER_ALTERAT… DISCRETE Puta… Putative c… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> MUTATION_EXTENDED    MAF      Muta… IMPACT341 … TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> COPY_NUMBER_ALTERAT… DISCRETE Puta… Putative c… TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> MUTATION_EXTENDED    MAF      Muta… Whole exom… TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> STRUCTURAL_VARIANT   FUSION   Fusi… Fusions.    TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> COPY_NUMBER_ALTERAT… DISCRETE Puta… Putative c… TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MUTATION_EXTENDED    MAF      Muta… Mutation d… TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> STRUCTURAL_VARIANT   FUSION   Fusi… Fusions.    TRUE             FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> PROTEIN_LEVEL        LOG2-VA… Prot… Protein ex… FALSE            FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> PROTEIN_LEVEL        Z-SCORE  Prot… Protein ex… TRUE             FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> COPY_NUMBER_ALTERAT… DISCRETE Puta… Putative c… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MRNA_EXPRESSION      CONTINU… mRNA… mRNA gene … FALSE            FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> COPY_NUMBER_ALTERAT… CONTINU… Capp… Capped rel… FALSE            FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,598 more rows, and 5 more variables: molecularProfileId &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, genericAssayType &lt;chr&gt;, pivotThreshold &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sortOrder &lt;chr&gt;</span></span>
@@ -109,12 +109,12 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> PROTEIN_LEVEL         LOG2-VA… Prot… Protein ex… FALSE            FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> PROTEIN_LEVEL         Z-SCORE  Prot… Protein ex… TRUE             FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> COPY_NUMBER_ALTERATI… DISCRETE Puta… Putative c… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MRNA_EXPRESSION       CONTINU… mRNA… mRNA gene … FALSE            FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> MRNA_EXPRESSION       Z-SCORE  mRNA… mRNA expre… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> COPY_NUMBER_ALTERATI… CONTINU… Capp… Capped rel… FALSE            FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> METHYLATION           CONTINU… Meth… Methylatio… FALSE            FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> MRNA_EXPRESSION       Z-SCORE  mRNA… Log-transf… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> MUTATION_EXTENDED     MAF      Muta… Mutation d… TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> COPY_NUMBER_ALTERATI… CONTINU… Capp… Capped rel… FALSE            FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> MUTATION_EXTENDED     MAF      Muta… Mutation d… TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> METHYLATION           CONTINU… Meth… Methylatio… FALSE            FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> MRNA_EXPRESSION       CONTINU… mRNA… mRNA gene … FALSE            FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> MRNA_EXPRESSION       Z-SCORE  mRNA… mRNA expre… TRUE             FALSE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> MRNA_EXPRESSION       Z-SCORE  mRNA… Log-transf… TRUE             FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2 more variables: molecularProfileId &lt;chr&gt;, studyId &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
