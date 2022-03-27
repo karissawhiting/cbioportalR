@@ -149,7 +149,7 @@ test_that("Test sample-study pairs df", {
                                    data_type = "fusion"), "*")
 
 
-  # need colnames ------
+  # need colnames ---
   df_pairs <- data.frame(
     "wrong" = c("P-0002146-T01-IM3", "s_C_CAUWT7_P001_d"),
     "study_id" = c("blca_plasmacytoid_mskcc_2016", "prad_msk_2019"))
@@ -158,7 +158,7 @@ test_that("Test sample-study pairs df", {
   expect_error(.get_data_by_sample(sample_study_pairs = df_pairs,
                                    data_type = data_type), "*")
 
-  # need colnames ------
+  # need colnames ---
   df_pairs <- data.frame(
     "sample_id" = c("P-0002146-T01-IM3", "s_C_CAUWT7_P001_d"),
     "wrong" = c("blca_plasmacytoid_mskcc_2016", "prad_msk_2019"))
@@ -187,16 +187,45 @@ test_that("data is same regardless of function", {
   by_prof <- get_mutations_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_prof, get_gen$mut)
 
-  # CNA ----
+  # CNA ---
   molecular_profile_id = "prad_msk_2019_cna"
   by_study <- get_cna_by_sample(sample_id = sample_id, study_id = study_id)
   by_prof <- get_cna_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_prof, get_gen$cna)
 
-  # Fusions ----
+  # Fusions ---
   molecular_profile_id = "prad_msk_2019_fusion"
   by_study <- get_fusions_by_sample(sample_id = sample_id, study_id = study_id)
   by_prof <- get_fusions_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_prof, get_gen$fusion)
+
+})
+
+
+test_that("Unknown Hugo Symbol returns Unk ", {
+
+  set_cbioportal_db("public")
+  df <- get_cna_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
+                          study_id = "acc_tcga")
+  df[16, ] <- df[15,]
+  df[16, 'entrezGeneId'] <- 1000000
+
+  df <- df %>% select(-.data$hugoGeneSymbol)
+  df2 <- .lookup_hugo(df)
+
+  expect_true(any(stringr::str_detect(df2$hugoGeneSymbol, "unk")))
+
+
+})
+
+test_that("Hugo Symbol is added by default ", {
+
+  set_cbioportal_db("public")
+  df <- get_genetics_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
+                          study_id = "acc_tcga")
+
+  expect_true(length(df$mutation$hugoGeneSymbol) > 1)
+  expect_true(length(df$cna$hugoGeneSymbol) > 1)
+
 
 })

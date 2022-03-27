@@ -11,6 +11,7 @@
   sample_study_pairs = NULL,
   data_type = c("mutation", "cna", "fusion"),
   genes = NULL,
+  add_hugo = TRUE,
   base_url = NULL
 )
 }
