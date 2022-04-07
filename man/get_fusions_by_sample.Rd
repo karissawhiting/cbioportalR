@@ -10,6 +10,7 @@ get_fusions_by_sample(
   molecular_profile_id = NULL,
   sample_study_pairs = NULL,
   genes = NULL,
+  add_hugo = NULL,
   base_url = NULL
 )
 }
@@ -30,6 +31,8 @@ need to pull samples from several different studies at once. If passed this will
 
 \item{genes}{A vector of entrez ids. If NULL, will return results for all
 IMPACT genes (see \code{cbioportalR::impact_gene_info})}
+
+\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

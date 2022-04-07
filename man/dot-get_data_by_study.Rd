@@ -8,7 +8,8 @@
   study_id = NULL,
   molecular_profile_id = NULL,
   data_type = c("mutation", "cna", "fusion"),
-  base_url = NULL
+  base_url = NULL,
+  add_hugo = TRUE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ If NULL, guesses molecular_profile_id based on study ID.}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
+
+\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
 }
 \value{
 a dataframe of mutations or CNAs
