@@ -12,6 +12,7 @@
 #' @param molecular_profile_id a molecular profile to query mutations.
 #' If NULL, guesses molecular_profile_id based on study ID.
 #' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`.
+#' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
@@ -32,7 +33,8 @@
 .get_data_by_study <- function(study_id = NULL,
                               molecular_profile_id = NULL,
                               data_type = c("mutation", "cna", "fusion"),
-                              base_url = NULL) {
+                              base_url = NULL,
+                              add_hugo = TRUE) {
 
 
 
@@ -134,6 +136,19 @@
 
   }
 
+
+  # * Add Hugo Symbol & Return -----
+
+  if(add_hugo) {
+
+    # Fusions already has hugo by default from API
+    df <- switch(data_type,
+                 "fusion" = df,
+                 "mutation" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url),
+                 "cna" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url))
+
+  }
+
   cli::cli_alert_info("Returning all data for the {.val {molecular_profile_id}} molecular profile in the {.val {study_id}} study")
   return(df)
 
@@ -156,6 +171,7 @@
 #'
 get_mutations_by_study <- function(study_id = NULL,
                                   molecular_profile_id = NULL,
+                                  add_hugo = TRUE,
                                   base_url = NULL) {
 
   .get_data_by_study(study_id = study_id,
@@ -178,6 +194,7 @@ get_mutations_by_study <- function(study_id = NULL,
 
 get_cna_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
+                             add_hugo = TRUE,
                              base_url = NULL) {
 
   .get_data_by_study(study_id = study_id,
@@ -201,6 +218,7 @@ get_cna_by_study <- function(study_id = NULL,
 
 get_fusions_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
+                             add_hugo = TRUE,
                              base_url = NULL) {
 
   .get_data_by_study(study_id = study_id,
@@ -220,7 +238,9 @@ get_fusions_by_study <- function(study_id = NULL,
 #' get_genetics_by_study(study_id = "prad_msk_2019")
 #'
 #
-get_genetics_by_study <- function(study_id = NULL, base_url = NULL) {
+get_genetics_by_study <- function(study_id = NULL,
+                                  add_hugo = TRUE,
+                                  base_url = NULL) {
 
   # ** Not using `.check_for_study_id()` here because we allow no study ID to be passed,
   # but still don't allow study_id > 1. Maybe generalized that check function to

@@ -182,7 +182,7 @@
   hugo <- get_hugo_symbol(unique(df$entrezGeneId)) %>%
     select(-.data$type)
 
-  df_with_hugo <- left_join(df, hugo, by ="entrezGeneId" ) %>%
+  df_with_hugo <- left_join(df, hugo, by = "entrezGeneId" ) %>%
     select(.data$hugoGeneSymbol, .data$entrezGeneId, everything())
 
   # If there happens to be more than 1 hugo per entrez
@@ -193,7 +193,7 @@
   }
 
   # When hugo symbol unknown, return entrez_gene with signifier
-  df_with_hugo <-df_with_hugo %>%
+  df_with_hugo <- df_with_hugo %>%
     mutate(hugoGeneSymbol = case_when(is.na(hugoGeneSymbol) ~ paste0("unk_gene_", entrezGeneId),
                                       TRUE ~ hugoGeneSymbol))
 

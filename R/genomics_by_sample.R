@@ -16,6 +16,7 @@
 #' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion`
 #' @param genes A vector of entrez ids. If NULL, will return results for all
 #' IMPACT genes (see `cbioportalR::impact_gene_info`)
+#' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
@@ -307,6 +308,7 @@ get_mutations_by_sample <- function(sample_id = NULL,
                                    molecular_profile_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
+                                   add_hugo = NULL,
                                    base_url = NULL) {
 
 
@@ -340,7 +342,8 @@ get_cna_by_sample <- function(sample_id = NULL,
                                    study_id = NULL,
                                    molecular_profile_id = NULL,
                                    sample_study_pairs = NULL,
-                                    genes = NULL,
+                                   genes = NULL,
+                                   add_hugo = NULL,
                                    base_url = NULL) {
 
   .get_data_by_sample(sample_id = sample_id,
@@ -372,6 +375,7 @@ get_fusions_by_sample <- function(sample_id = NULL,
                               molecular_profile_id = NULL,
                               sample_study_pairs = NULL,
                               genes = NULL,
+                              add_hugo = NULL,
                               base_url = NULL) {
 
   .get_data_by_sample(sample_id = sample_id,
@@ -402,6 +406,7 @@ get_genetics_by_sample <- function(sample_id = NULL,
                                    study_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
+                                   add_hugo = NULL,
                                    base_url = NULL) {
 
   safe_get_data <- purrr::safely(.get_data_by_sample, quiet = TRUE)

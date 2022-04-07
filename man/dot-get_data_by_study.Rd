@@ -8,7 +8,8 @@
   study_id = NULL,
   molecular_profile_id = NULL,
   data_type = c("mutation", "cna", "fusion"),
-  base_url = NULL
+  base_url = NULL,
+  add_hugo = TRUE
 )
 }
 \arguments{
