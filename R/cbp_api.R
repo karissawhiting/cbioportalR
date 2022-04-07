@@ -33,6 +33,11 @@ cbp_api <- function(url_path,
     abort(message = "must supply a url. Try `set_cbioportal_db()`")
 
 
+  # if public url, no token needed
+  token <-  switch(resolved_url,
+                 "www.cbioportal.org/api" = "",
+                 token)
+
   url <- httr::modify_url(url = "",
                     scheme = "https",
                     hostname = resolved_url,
