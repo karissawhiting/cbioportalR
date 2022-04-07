@@ -370,48 +370,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">entrezGeneId</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">mut_study_subset</span>, <span class="va">mut_sample</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "Names: 32 string mismatches"                          </span>
-<span class="co">#&gt;  [2] "Length mismatch: comparison on first 32 components"   </span>
-<span class="co">#&gt;  [3] "Component 1: 176 string mismatches"                   </span>
-<span class="co">#&gt;  [4] "Component 2: Modes: character, numeric"               </span>
-<span class="co">#&gt;  [5] "Component 2: target is character, current is numeric" </span>
-<span class="co">#&gt;  [6] "Component 3: 176 string mismatches"                   </span>
-<span class="co">#&gt;  [7] "Component 4: 176 string mismatches"                   </span>
-<span class="co">#&gt;  [8] "Component 5: 176 string mismatches"                   </span>
-<span class="co">#&gt;  [9] "Component 6: Modes: numeric, character"               </span>
-<span class="co">#&gt; [10] "Component 6: target is numeric, current is character" </span>
-<span class="co">#&gt; [11] "Component 7: 176 string mismatches"                   </span>
-<span class="co">#&gt; [12] "Component 8: 176 string mismatches"                   </span>
-<span class="co">#&gt; [13] "Component 9: 176 string mismatches"                   </span>
-<span class="co">#&gt; [14] "Component 10: 176 string mismatches"                  </span>
-<span class="co">#&gt; [15] "Component 11: Modes: numeric, character"              </span>
-<span class="co">#&gt; [16] "Component 11: target is numeric, current is character"</span>
-<span class="co">#&gt; [17] "Component 12: Mean relative difference: 0.6971266"    </span>
-<span class="co">#&gt; [18] "Component 13: Mean relative difference: 5121.933"     </span>
-<span class="co">#&gt; [19] "Component 14: Mean relative difference: 0.9997533"    </span>
-<span class="co">#&gt; [20] "Component 15: Mean relative difference: 0.9999951"    </span>
-<span class="co">#&gt; [21] "Component 16: Mean relative difference: 1.095192e-07" </span>
-<span class="co">#&gt; [22] "Component 17: Modes: character, numeric"              </span>
-<span class="co">#&gt; [23] "Component 17: target is character, current is numeric"</span>
-<span class="co">#&gt; [24] "Component 18: 176 string mismatches"                  </span>
-<span class="co">#&gt; [25] "Component 19: 176 string mismatches"                  </span>
-<span class="co">#&gt; [26] "Component 20: 176 string mismatches"                  </span>
-<span class="co">#&gt; [27] "Component 21: Modes: numeric, character"              </span>
-<span class="co">#&gt; [28] "Component 21: target is numeric, current is character"</span>
-<span class="co">#&gt; [29] "Component 22: Modes: character, numeric"              </span>
-<span class="co">#&gt; [30] "Component 22: target is character, current is numeric"</span>
-<span class="co">#&gt; [31] "Component 23: 8 string mismatches"                    </span>
-<span class="co">#&gt; [32] "Component 24: 8 string mismatches"                    </span>
-<span class="co">#&gt; [33] "Component 25: 176 string mismatches"                  </span>
-<span class="co">#&gt; [34] "Component 26: 176 string mismatches"                  </span>
-<span class="co">#&gt; [35] "Component 27: 176 string mismatches"                  </span>
-<span class="co">#&gt; [36] "Component 28: 176 string mismatches"                  </span>
-<span class="co">#&gt; [37] "Component 29: 176 string mismatches"                  </span>
-<span class="co">#&gt; [38] "Component 30: Modes: numeric, character"              </span>
-<span class="co">#&gt; [39] "Component 30: target is numeric, current is character"</span>
-<span class="co">#&gt; [40] "Component 31: Mean relative difference: 0.003702942"  </span>
-<span class="co">#&gt; [41] "Component 32: Modes: character, numeric"              </span>
-<span class="co">#&gt; [42] "Component 32: target is character, current is numeric"</span></code></pre></div>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>In this case, both results are equal which means both studies were IMPACT panel only studies.</p>
 <p>Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample::</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">

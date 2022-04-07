@@ -63,6 +63,7 @@
   study_id <span class="op">=</span> <span class="cn">NULL</span>,
   sample_study_pairs <span class="op">=</span> <span class="cn">NULL</span>,
   genes <span class="op">=</span> <span class="cn">NULL</span>,
+  add_hugo <span class="op">=</span> <span class="cn">NULL</span>,
   base_url <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -82,6 +83,8 @@ need to pull samples from several different studies at once. If passed this will
 <dt>genes</dt>
 <dd><p>A vector of entrez ids. If NULL, will return results for all
 IMPACT genes (see <code><a href="impact_gene_info.html">cbioportalR::impact_gene_info</a></code>)</p></dd>
+<dt>add_hugo</dt>
+<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
 <dt>base_url</dt>
 <dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>

@@ -61,6 +61,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_mutations_by_study</span><span class="op">(</span>
   study_id <span class="op">=</span> <span class="cn">NULL</span>,
   molecular_profile_id <span class="op">=</span> <span class="cn">NULL</span>,
+  add_hugo <span class="op">=</span> <span class="cn">TRUE</span>,
   base_url <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -75,6 +76,8 @@ more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
 <dd><p>A string indicating the molecular profile ID from which to pull data. If ID supplied, will
 guess the molecular profile ID based on the study ID. Only 1 molecular profile ID can be passed. If mutations from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+<dt>add_hugo</dt>
+<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
 <dt>base_url</dt>
 <dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
@@ -88,20 +91,20 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">get_mutations_by_study</span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"prad_msk_2019"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning all data for the <span style="color: #0000BB;">"prad_msk_2019_mutations"</span> molecular profile in the <span style="color: #0000BB;">"prad_msk_2019"</span> study</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26 × 32</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    uniqueSampleKey          uniquePatientKey molecularProfil… sampleId patientId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> c19DX1A4SzNUUl9QMDAxX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> c19DX1A4SzNUUl9QMDAzX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> c19DX1A4SzNUUl9QMDAyX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> c19DX1A4SzNUUl9QMDAzX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> c19DX0UwS0pGSl9QMDAyX2Q… cF9DX0UwS0pGSjp… prad_msk_2019_m… s_C_E0K… p_C_E0KJ…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 16 more rows, and 27 more variables: entrezGeneId &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26 × 33</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hugoGeneSymbol entrezGeneId uniqueSampleKey uniquePatientKey molecularProfil…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ZFHX3                   463 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ZFHX3                   463 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ATR                     545 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BCL2                    596 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ETV1                   <span style="text-decoration: underline;">2</span>115 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ETV1                   <span style="text-decoration: underline;">2</span>115 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FAT1                   <span style="text-decoration: underline;">2</span>195 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MSH6                   <span style="text-decoration: underline;">2</span>956 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MSH6                   <span style="text-decoration: underline;">2</span>956 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> FOXA1                  <span style="text-decoration: underline;">3</span>169 c19DX0UwS0pGSl… cF9DX0UwS0pGSjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 16 more rows, and 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalRefCount &lt;int&gt;, startPosition &lt;int&gt;, endPosition &lt;int&gt;,</span></span>
@@ -110,20 +113,20 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></span>
 <span class="r-in"><span class="fu">get_mutations_by_study</span><span class="op">(</span>molecular_profile_id <span class="op">=</span> <span class="st">"prad_msk_2019_mutations"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning all data for the <span style="color: #0000BB;">"prad_msk_2019_mutations"</span> molecular profile in the <span style="color: #0000BB;">"prad_msk_2019"</span> study</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26 × 32</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    uniqueSampleKey          uniquePatientKey molecularProfil… sampleId patientId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> c19DX1A4SzNUUl9QMDAxX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> c19DX1A4SzNUUl9QMDAzX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> c19DX004WDQyVF9QMDAyX2Q… cF9DX004WDQyVDp… prad_msk_2019_m… s_C_M8X… p_C_M8X4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> c19DX1A4SzNUUl9QMDAyX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> c19DX1A4SzNUUl9QMDAzX2Q… cF9DX1A4SzNUUjp… prad_msk_2019_m… s_C_P8K… p_C_P8K3…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> c19DX0UwS0pGSl9QMDAyX2Q… cF9DX0UwS0pGSjp… prad_msk_2019_m… s_C_E0K… p_C_E0KJ…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 16 more rows, and 27 more variables: entrezGeneId &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 26 × 33</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    hugoGeneSymbol entrezGeneId uniqueSampleKey uniquePatientKey molecularProfil…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ZFHX3                   463 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ZFHX3                   463 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ATR                     545 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BCL2                    596 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ETV1                   <span style="text-decoration: underline;">2</span>115 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ETV1                   <span style="text-decoration: underline;">2</span>115 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FAT1                   <span style="text-decoration: underline;">2</span>195 c19DX004WDQyVF… cF9DX004WDQyVDp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MSH6                   <span style="text-decoration: underline;">2</span>956 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MSH6                   <span style="text-decoration: underline;">2</span>956 c19DX1A4SzNUUl… cF9DX1A4SzNUUjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> FOXA1                  <span style="text-decoration: underline;">3</span>169 c19DX0UwS0pGSl… cF9DX0UwS0pGSjp… prad_msk_2019_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 16 more rows, and 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalRefCount &lt;int&gt;, startPosition &lt;int&gt;, endPosition &lt;int&gt;,</span></span>
