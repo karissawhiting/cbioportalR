@@ -4,7 +4,12 @@
 \alias{get_cna_by_study}
 \title{Get CNA By Study}
 \usage{
-get_cna_by_study(study_id = NULL, molecular_profile_id = NULL, base_url = NULL)
+get_cna_by_study(
+  study_id = NULL,
+  molecular_profile_id = NULL,
+  add_hugo = TRUE,
+  base_url = NULL
+)
 }
 \arguments{
 \item{study_id}{A study ID to query mutations. If NULL, guesses study ID based
@@ -12,6 +17,8 @@ on molecular_profile_id.}
 
 \item{molecular_profile_id}{a molecular profile to query mutations.
 If NULL, guesses molecular_profile_id based on study ID.}
+
+\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

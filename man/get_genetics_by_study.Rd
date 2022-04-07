@@ -4,11 +4,13 @@
 \alias{get_genetics_by_study}
 \title{Get All Genomic Information By Study}
 \usage{
-get_genetics_by_study(study_id = NULL, base_url = NULL)
+get_genetics_by_study(study_id = NULL, add_hugo = TRUE, base_url = NULL)
 }
 \arguments{
 \item{study_id}{A study ID to query mutations. If NULL, guesses study ID based
 on molecular_profile_id.}
+
+\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
