@@ -50,6 +50,7 @@ reference:
   - subtitle: Patient Level
   - contents:
     - get_samples_by_patient
+    - get_clinical_by_patient
   - subtitle: Data
   - contents:
     - all_genes_lookup

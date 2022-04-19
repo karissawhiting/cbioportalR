@@ -152,6 +152,7 @@ get_clinical_by_patient <- function(study_id = NULL,
 #' @inheritParams .get_clinical_by_list_item
 #' @param patient_id a cBioPortal patient_id
 #' @return a dataframe of a specific clinical attribute
+#' @keywords internal
 #' @export
 #'
 #' @examples

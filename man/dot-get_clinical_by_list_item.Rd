@@ -35,3 +35,4 @@ Get clinical data by attribute, study ID and sample ID
  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 
 }
+\keyword{internal}
