@@ -1,0 +1,44 @@
+Package: cbioportalR
+Title: An R package to access data on cBioPortal
+Version: 0.2.0
+Authors@R: 
+    c(person(given = "Karissa",
+           family = "Whiting",
+           role = c("aut", "cre"),
+           email = "karissa.whiting@gmail.com",
+           comment = c(ORCID = "0000-0002-4683-1868")))
+Description: allows you to access cBioPortal's genomic and clinical data directly through R.
+    The package wraps cBioPortal's existing API endpoints so R users can easily leverage cBioPortal's API.
+    Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB),
+    microsatellite instability status (MSI), FACETS and select clinical data points (depending on the study). 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    covr,
+    spelling
+Depends: 
+    R (>= 2.10)
+Imports: 
+    httr,
+    tibble,
+    purrr,
+    magrittr,
+    rlang,
+    glue,
+    jsonlite,
+    tidyr,
+    dplyr,
+    stringr,
+    usethis,
+    cli
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+URL: https://github.com/karissawhiting/cbioportalR
+BugReports: https://github.com/karissawhiting/cbioportalR/issues
+Language: en-US
