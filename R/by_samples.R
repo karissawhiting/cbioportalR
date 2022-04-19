@@ -2,13 +2,9 @@
 
 #' Get clinical data by attribute, study ID and sample ID
 #'
-#' @param study_id study ID
-#' @param sample_id a vector of sample IDs
+#' @inheritParams .get_data_by_sample
 #' @param clinical_attribute one or more clinical attributes for your study.
-#' If none provided, will return all attributes available for
-#' that study (`available_clinical_attributes(<study_id>)`)
-#' @param base_url The database URL to query.
-#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
+#' If none provided, will return all attributes available for studies
 #' @return a dataframe of a specific clinical attribute
 #' @export
 #'
@@ -16,7 +12,92 @@
 #' get_clinical_by_sample(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
 #'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 #'
+#' ex <- tibble::tribble(
+#' ~sample_id, ~study_id,
+#' "P-0001453-T01-IM3", "blca_nmibc_2017",
+#' "P-0002166-T01-IM3", "blca_nmibc_2017",
+#' "P-0003238-T01-IM5", "blca_nmibc_2017",
+#' "P-0000004-T01-IM3", "msk_impact_2017",
+#' "P-0000023-T01-IM3", "msk_impact_2017")
+#'
+#' x <- get_clinical_by_sample(sample_study_pairs = ex,
+#'  clinical_attribute = NULL, base_url = 'www.cbioportal.org/api')
+#'
+
 get_clinical_by_sample <- function(study_id = NULL,
+                                   sample_id = NULL,
+                                   sample_study_pairs = NULL,
+                                   clinical_attribute = NULL,
+                                   base_url = NULL) {
+
+
+  # Check Arguments ---------------------------------------------------------
+
+  if(is.null(sample_id) & is.null(sample_study_pairs))  {
+    cli::cli_abort("You must pass either {.code sample_id} or {.code sample_study_pairs}")
+  }
+
+  # * if no sample_study_pairs ----
+
+  # `sample_study_pairs` gets priority. If that is NULL then consider other args
+  if(is.null(sample_study_pairs)) {
+
+    # Need final URL to guess default study
+    resolved_url <- base_url %>%
+      .resolve_url() %||%
+      .get_cbioportal_url()  %||%
+      abort(message = "must supply a url. Try `set_cbioportal_db()`")
+
+
+    # get study ID
+    resolved_study_id <- study_id %>%
+      purrr::when(!is.null(.) ~ .,
+                  ~ suppressMessages(.guess_study_id(study_id, resolved_url)))
+
+
+
+    # create lookup dataframe -
+    sample_study_pairs <- data.frame("sample_id" = sample_id,
+                                     "study_id" = resolved_study_id)
+
+  }
+
+  # * check sample_study_pairs-------
+  if(
+    !("data.frame" %in% class(sample_study_pairs)) |
+    !("sample_id" %in% colnames(sample_study_pairs)) |
+    !("study_id" %in% colnames(sample_study_pairs))
+    #| "molecular_profile_id" %in% colnames(sample_study_pairs))
+  ) {
+
+    rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id` and `study_id`")
+  }
+
+  # Prep data frame for Query ------------------------------------------------
+  sample_study_pairs_nest <- sample_study_pairs %>%
+    group_by(.data$study_id) %>%
+    tidyr::nest(sample_id_nest = .data$sample_id)
+
+  # Query --------------------------------------------------------------------
+  df <- purrr::map2_dfr(sample_study_pairs_nest$study_id, sample_study_pairs_nest$sample_id_nest,
+                       ~.get_clinical_by_list_item (study_id = .x,
+                                               sample_id = .y$sample_id,
+                                               clinical_attribute = clinical_attribute,
+                                               base_url = base_url))
+  return(df)
+}
+
+#' Get clinical data by attribute, study ID and sample ID
+#'
+#' @inheritParams get_clinical_by_sample
+#' @return a dataframe of a specific clinical attribute
+#' @export
+#'
+#' @examples
+#' .get_clinical_by_list_item(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
+#'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
+#'
+.get_clinical_by_list_item <- function(study_id = NULL,
                               sample_id = NULL,
                               clinical_attribute = NULL,
                               base_url = NULL) {
@@ -53,7 +134,7 @@ get_clinical_by_sample <- function(study_id = NULL,
 
 
   df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
-  df
+
   return(df)
 }
 
@@ -72,16 +153,19 @@ get_clinical_by_sample <- function(study_id = NULL,
 #'
 get_panel_by_sample <- function(study_id = NULL,
                                    sample_id = NULL,
+                                    sample_study_pairs = NULL,
                                    base_url = NULL) {
 
   res <- get_clinical_by_sample(study_id = study_id,
                          sample_id = sample_id,
+                         sample_study_pairs = sample_study_pairs,
                          clinical_attribute = "GENE_PANEL",
                          base_url = base_url)
 
+
   res %>%
     purrr::when(nrow(.) < 1 ~ cli::cli_abort("No gene panel data found. Did you specify the correct {.code study_id} for your {.code sample_id}?
-                                        Is {.val GENE_PANEL} an available clinical attribute in {.var {study_id}} "),
+                                        Is {.val GENE_PANEL} an available clinical attribute in your queried studies?"),
 
               TRUE ~ transmute(.,  .data$sampleId, .data$studyId, genePanel = .data$value))
 

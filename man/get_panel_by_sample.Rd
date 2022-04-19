@@ -4,14 +4,25 @@
 \alias{get_panel_by_sample}
 \title{Get Gene Panel by study ID and sample ID}
 \usage{
-get_panel_by_sample(study_id = NULL, sample_id = NULL, base_url = NULL)
+get_panel_by_sample(
+  study_id = NULL,
+  sample_id = NULL,
+  sample_study_pairs = NULL,
+  base_url = NULL
+)
 }
 \arguments{
-\item{study_id}{study ID}
+\item{study_id}{A string indicating the study ID from which to pull data. If no study ID, will
+guess the study ID based on your URL and inform. Only 1 study ID can be passed. If mutations/cna from
+more than 1 study needed, see \code{sample_study_pairs}}
 
-\item{sample_id}{a vector of sample IDs}
+\item{sample_id}{a vector of sample IDs (character)}
 
-\item{base_url}{The database URL to query.
+\item{sample_study_pairs}{A dataframe with columns: \code{sample_id}, \code{study_id} and \code{molecular_profile_id} (optional).
+This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
+need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
+
+\item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{

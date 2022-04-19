@@ -123,7 +123,7 @@
 
 
 
-    # create lookup dataframe ------
+    # create lookup dataframe
     sample_study_pairs <- data.frame("sample_id" = sample_id,
                                      "study_id" = resolved_study_id,
                                      "molecular_profile_id" = resolved_molecular_profile_id)
@@ -136,7 +136,7 @@
     cbioportalR::impact_gene_info$entrez_id %>% unlist()
 
 
-  # * Prep data frame for Query -------------------------------------------------------
+  # * Prep data frame for Query -------------------------------------------------
 
   if(
      !("data.frame" %in% class(sample_study_pairs)) |
