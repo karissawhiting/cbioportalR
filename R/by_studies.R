@@ -112,7 +112,7 @@ get_clinical_by_study <- function(study_id = NULL,
 #' available_samples(study_id = "acc_tcga")
 #' }
 #'
-available_samples<- function(study_id = NULL,
+available_samples <- function(study_id = NULL,
                                 base_url = NULL) {
 
   .check_for_study_id(study_id)
@@ -140,4 +140,43 @@ available_samples<- function(study_id = NULL,
 
 }
 
+#' Get All Patient IDs in a Study
+#'
+#' @inheritParams available_samples
+#' @return A dataframe of patient_ids in a given study
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' set_cbioportal_db("public")
+#' available_samples(study_id = "acc_tcga")
+#' }
+#'
+available_patients <- function(study_id = NULL,
+                              base_url = NULL) {
+
+  .check_for_study_id(study_id)
+
+  # query --------------------------------------------------------------------
+  list_of_urls <- purrr::map(study_id,
+                             ~paste0("studies/", .x,
+                                     "/patients?"))
+
+
+  api_results <- purrr::map_dfr(list_of_urls, function(x) {
+    res <- cbp_api(url_path = x, base_url = base_url)
+    res$content
+    df <- bind_rows(res$content) %>%
+      select(.data$patientId, .data$studyId)
+    df
+  })
+
+
+  df <- api_results %>%
+    dplyr::distinct()
+
+  return(df)
+
+}
 
