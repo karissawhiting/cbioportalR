@@ -46,6 +46,9 @@
     <loc>https://karissawhiting.github.io/cbioportalR/reference/available_gene_panels.html</loc>
   </url>
   <url>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/available_patients.html</loc>
+  </url>
+  <url>
     <loc>https://karissawhiting.github.io/cbioportalR/reference/available_profiles.html</loc>
   </url>
   <url>
@@ -55,10 +58,13 @@
     <loc>https://karissawhiting.github.io/cbioportalR/reference/available_studies.html</loc>
   </url>
   <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/reference/cbioportalr-package.html</loc>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/cbp_api.html</loc>
   </url>
   <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/reference/cbp_api.html</loc>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/dot-get_clinical_by_list_item.html</loc>
+  </url>
+  <url>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/dot-get_clinical_pat_by_list_item.html</loc>
   </url>
   <url>
     <loc>https://karissawhiting.github.io/cbioportalR/reference/dot-get_data_by_sample.html</loc>
@@ -74,6 +80,9 @@
   </url>
   <url>
     <loc>https://karissawhiting.github.io/cbioportalR/reference/get_cbioportal_token.html</loc>
+  </url>
+  <url>
+    <loc>https://karissawhiting.github.io/cbioportalR/reference/get_clinical_by_patient.html</loc>
   </url>
   <url>
     <loc>https://karissawhiting.github.io/cbioportalR/reference/get_clinical_by_sample.html</loc>

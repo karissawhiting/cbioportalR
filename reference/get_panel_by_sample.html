@@ -58,17 +58,28 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_panel_by_sample</span><span class="op">(</span>study_id <span class="op">=</span> <span class="cn">NULL</span>, sample_id <span class="op">=</span> <span class="cn">NULL</span>, base_url <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_panel_by_sample</span><span class="op">(</span>
+  study_id <span class="op">=</span> <span class="cn">NULL</span>,
+  sample_id <span class="op">=</span> <span class="cn">NULL</span>,
+  sample_study_pairs <span class="op">=</span> <span class="cn">NULL</span>,
+  base_url <span class="op">=</span> <span class="cn">NULL</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>study_id</dt>
-<dd><p>study ID</p></dd>
+<dd><p>A string indicating the study ID from which to pull data. If no study ID, will
+guess the study ID based on your URL and inform. Only 1 study ID can be passed. If mutations/cna from
+more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
 <dt>sample_id</dt>
-<dd><p>a vector of sample IDs</p></dd>
+<dd><p>a vector of sample IDs (character)</p></dd>
+<dt>sample_study_pairs</dt>
+<dd><p>A dataframe with columns: <code>sample_id</code>, <code>study_id</code> and <code>molecular_profile_id</code> (optional).
+This can be used in place of <code>sample_id</code>, <code>study_id</code>, <code>molecular_profile_id</code> arguments above if you
+need to pull samples from several different studies at once. If passed this will take overwrite <code>sample_id</code>, <code>study_id</code>, <code>molecular_profile_id</code> if also passed.</p></dd>
 <dt>base_url</dt>
-<dd><p>The database URL to query.
+<dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
 </dl></div>
     <div class="section level2">
@@ -93,7 +104,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Karissa Whiting, Axel Martin, Arshi Arora.</p>
+  <p></p><p>Developed by Karissa Whiting.</p>
 </div>
 
 <div class="pkgdown-footer-right">
