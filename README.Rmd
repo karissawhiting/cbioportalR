@@ -249,4 +249,13 @@ Please note that {cbioportalR} is released with a [Contributor
 Code of
 Conduct](https://karissawhiting.github.io/cbioportalR/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms. 
 
+Thank you to contributors!
+
+[&#x0040;arorarshi](https://github.com/arorarshi),
+[&#x0040;AxelitoMartin](https://github.com/AxelitoMartin),
+[&#x0040;edrill](https://github.com/edrill),
+[&#x0040;jalavery](https://github.com/jalavery), 
+[&#x0040;ddsjoberg](https://github.com/ddsjoberg)
+
+
 Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!
