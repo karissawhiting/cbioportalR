@@ -2,7 +2,7 @@
 % Please edit documentation in R/by_patients.R
 \name{get_clinical_by_patient}
 \alias{get_clinical_by_patient}
-\title{Get clinical data by attribute, study ID and sample ID}
+\title{Get clinical data by attribute, study ID and patient ID}
 \usage{
 get_clinical_by_patient(
   study_id = NULL,
@@ -33,7 +33,7 @@ If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 a dataframe of a specific clinical attribute
 }
 \description{
-Get clinical data by attribute, study ID and sample ID
+Get clinical data by attribute, study ID and patient ID
 }
 \examples{
 get_clinical_by_sample(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",

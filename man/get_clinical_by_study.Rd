@@ -24,7 +24,7 @@ If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 a dataframe of all available clinical attributes and their values
 }
 \description{
-Get all available clinical data for a specified study
+Returns all sample-level and patient-level clinical data for a given study
 }
 \examples{
 get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')

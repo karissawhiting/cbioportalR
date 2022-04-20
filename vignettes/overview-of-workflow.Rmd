@@ -77,7 +77,6 @@ get_study_info("blca_nmibc_2017")%>%
 get_study_info("prad_msk_2019")%>% 
   t() 
 
-#	prad_msk_2019
 ```
 
 Lastly, it is important to know what genomic data is available for our study. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions. 
@@ -161,16 +160,19 @@ We can pull from both studies at the same time for a select set of samples using
 
 Let's pull data for the first 10 samples in each study. We first need to construct our dataframe to pass to the function:
 
+*Note: you can also run `available_patients()` to only pull patient IDs*
+
 ```{r}
 s1 <- available_samples("blca_nmibc_2017") %>%
-  select(sampleId, studyId) %>%
+  select(sampleId, patientId, studyId) %>%
   head(10)
 
 s2 <- available_samples("prad_msk_2019") %>%
-  select(sampleId, studyId) %>%
+  select(sampleId,  patientId, studyId) %>%
   head(10)
 
-df_pairs <- bind_rows(s1, s2)
+df_pairs <- bind_rows(s1, s2) %>% 
+  select(-patientId)
 ```
 
 We need to rename the columns as per the functions documentation. 
@@ -248,7 +250,9 @@ setdiff(ex_by_study$entrezGeneId, ex_by_sample_update$entrezGeneId)
 
 ## Pulling Clinical Data
 
-You can also pull clinical data by study or sample ID. You can explore what clinical data is available a study using:
+You can also pull clinical data by study ID, sample ID, or patient ID. Pulling by sample ID will pull all sample-level characteristics (e.g. sample site, tumor stage at sampling time and other variables collected at time of sampling that may be available). Pulling by patient ID will pull all patient-level characteristics (e.g. age, sex, etc.). Pulling by study ID will pull all sample _and_ patient-level characteristics at once. 
+
+You can explore what clinical data is available a study using:
 
 ```{r}
 attr_blca <- available_clinical_attributes("blca_nmibc_2017")
@@ -263,17 +267,65 @@ There are a select set available for both studies:
 in_both <- intersect(attr_blca$clinicalAttributeId, attr_prad$clinicalAttributeId)
 ```
 
+The below pulls data at the sample level:
+
 ```{r}
-clinical_blca <-get_clinical_by_sample(sample_id = s1$sampleId,
+clinical_blca <- get_clinical_by_sample(sample_id = s1$sampleId,
                        study_id = "blca_nmibc_2017", 
                        clinical_attribute = in_both)
 
-clinical_prad <-get_clinical_by_sample(sample_id = s2$sampleId,
+clinical_prad <- get_clinical_by_sample(sample_id = s2$sampleId,
                        study_id = "prad_msk_2019", 
                        clinical_attribute = in_both)
 
 all_clinical <- bind_rows(clinical_blca, clinical_prad)
 
-all_clinical
+all_clinical %>%
+  select(-contains("unique")) %>%
+  head()
+```
+
+The below pulls data at the patient level:
+
+```{r}
+p1 <- available_patients("blca_nmibc_2017")
+
+clinical_blca <- get_clinical_by_patient(patient_id = s1$patientId,
+                       study_id = "blca_nmibc_2017", 
+                       clinical_attribute = in_both)
+
+clinical_prad <- get_clinical_by_sample(sample_id = s2$patientId,
+                       study_id = "prad_msk_2019", 
+                       clinical_attribute = in_both)
+
+all_clinical <- bind_rows(clinical_blca, clinical_prad)
+
+all_clinical %>%
+  select(-contains("unique")) %>%
+  head()
+```
+
+Like with the genomic data pull functions, you can also pull clinical data by study ID - sampleID, or ID study ID - patient ID pairs:
+
+
+```{r }
+df_pairs <- bind_rows(s1, s2) %>% 
+  select(-sampleId)
+
+df_pairs <- df_pairs %>%
+  rename("patient_id" = patientId, 
+         "study_id" = studyId)
+```
+
+Now we pass this to `get_genetics_by_sample()`
+
+```{r}
+all_patient_clinical <- get_clinical_by_patient(patient_study_pairs = df_pairs, 
+                                                clinical_attribute = in_both)
+
+all_patient_clinical %>% 
+  select(-contains("unique"))
+```
+
 ```
 

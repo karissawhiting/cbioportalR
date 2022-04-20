@@ -58,7 +58,7 @@ get_samples_by_patient <- function(patient_id = NULL,
 
 
 
-#' Get clinical data by attribute, study ID and sample ID
+#' Get clinical data by attribute, study ID and patient ID
 #'
 #' @inheritParams get_clinical_by_sample
 #' @param patient_id a cBioPortal patient_id
@@ -147,7 +147,7 @@ get_clinical_by_patient <- function(study_id = NULL,
   return(df)
 }
 
-#' Get clinical data by attribute, study ID and sample ID
+#' Get clinical data by attribute, study ID and patient ID
 #'
 #' @inheritParams .get_clinical_by_list_item
 #' @param patient_id a cBioPortal patient_id

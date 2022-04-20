@@ -26,9 +26,9 @@ This vignette is meant for those who wish to contribute to {cbioportalR}, or use
 
 # General Structure
 
-- The `cbp_api()` internal function makes all api calls (`GET` and `POST`). All other user-facing or internal functions paste together necessary URLs and query parameters based on the function and its arguments and pass to this.
+- The `cbp_api()` internal function makes all api calls (`GET` and `POST` using {httr} package). All other user-facing or internal functions paste together necessary URLs and query parameters based on the function and its arguments and pass to this.
 - `.get_data_by_study()` and `.get_data_by_sample()` are internal utility functions that work for mutation/cna/fusion data pulls.
-- Functions ending in `*_by_study()` query by study_id, and functions ending in `*_by_sample()` query by sample ID. For genomic queries by sample, you need to specify the specific genes you want to query (this is not necessary when querying by `study_id`). If no specified genes passed by the user, we default to IMPACT genes only. 
+- Functions ending in `*_by_study()` query by study_id, functions ending in `*_by_sample()` query by sample ID, and functions ending in `*_by_patient()` query by patient ID. For genomic queries by sample, you need to specify the specific genes you want to query (this is not necessary when querying by `study_id`). If no specified genes passed by the user, we default to IMPACT genes only. 
 - There are no specific differences between functions starting with `available_*()` and those starting with `get_*()`. These are named according to how you may use them in your workflow. For example, you would check the `available_profiles()` for your `study_id`  in order to `get_fusions_by_study()`
     
     
