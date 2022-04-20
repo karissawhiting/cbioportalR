@@ -137,57 +137,7 @@
 <h2 id="cbioportal-data-model">cBioPortal Data Model<a class="anchor" aria-label="anchor" href="#cbioportal-data-model"></a>
 </h2>
 <p>There are many ways to identify and pull data (e.g. by study ID, by sample ID, by molecular profile ID). Having an understanding of how data is organized in cBioPortal will help you determine which functions you need. The figure below outlines the general data schema for cBioPortal and which functions access which levels of the schema:</p>
-<table class="table"><tbody><tr>
-<td>
-<img src="reference/figures/svg-cbp-diagram.svg" width="90%">
-</td>
-<td>
-<table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: small; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 500px; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" class="table">
-<thead style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;"><tr>
-<th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" rowspan="1" colspan="1">
-<strong>Level</strong>
-</th>
-<th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" rowspan="1" colspan="1">
-<strong>Functions</strong>
-</th>
-</tr></thead>
-<tbody style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
-<tr>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(138,43,226,0.6); color: #FFFFFF; font-weight: bold;">
-Database
-</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
-<code><a href="reference/available_studies.html">available_studies()</a></code>, <code><a href="reference/available_profiles.html">available_profiles()</a></code>, <code><a href="reference/available_gene_panels.html">available_gene_panels()</a></code>, <code><a href="reference/get_genes.html">get_genes()</a></code>
-</td>
-</tr>
-<tr>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(93,109,221,0.6); color: #FFFFFF; font-weight: bold;">
-Studies
-</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
-<code><a href="reference/available_profiles.html">available_profiles()</a></code>, <code><a href="reference/get_study_info.html">get_study_info()</a></code>, <code><a href="reference/available_clinical_attributes.html">available_clinical_attributes()</a></code>, <code><a href="reference/get_genetics_by_study.html">get_genetics_by_study()</a></code>, <code><a href="reference/get_mutations_by_study.html">get_mutations_by_study()</a></code>, <code><a href="reference/get_cna_by_study.html">get_cna_by_study()</a></code>, <code><a href="reference/get_fusions_by_study.html">get_fusions_by_study()</a></code>, <code><a href="reference/get_clinical_by_study.html">get_clinical_by_study()</a></code>, <code><a href="reference/available_samples.html">available_samples()</a></code>
-</td>
-</tr>
-<tr>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(48,167,198,0.6); color: #000000; font-weight: bold;">
-Molecular Profiles
-</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
-<code><a href="reference/get_genetics_by_study.html">get_genetics_by_study()</a></code>, <code><a href="reference/get_mutations_by_study.html">get_mutations_by_study()</a></code>, <code><a href="reference/get_cna_by_study.html">get_cna_by_study()</a></code>, <code><a href="reference/get_fusions_by_study.html">get_fusions_by_study()</a></code>
-</td>
-</tr>
-<tr>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center; background-color: rgba(244,164,96,0.6); color: #000000; font-weight: bold;">
-Samples
-</td>
-<td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;">
-<code><a href="reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code>, <code><a href="reference/get_mutations_by_study.html">get_mutations_by_study()</a></code>, <code><a href="reference/get_cna_by_sample.html">get_cna_by_sample()</a></code>, <code><a href="reference/get_fusions_by_sample.html">get_fusions_by_sample()</a></code>, <code><a href="reference/get_clinical_by_sample.html">get_clinical_by_sample()</a></code>, <code><a href="reference/get_panel_by_sample.html">get_panel_by_sample()</a></code>, <code><a href="reference/get_samples_by_patient.html">get_samples_by_patient()</a></code>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr></tbody></table>
+<p><img src="reference/figures/readme-cbp-diagram.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -311,7 +261,7 @@ Samples
 <span class="co">#&gt; #   referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;,</span>
 <span class="co">#&gt; #   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span>
 <span class="co">#&gt; #   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></code></pre></div>
-<p>Lastly, you can also pull clinical data by study_id or sample ID. To see what data is available, you can use:</p>
+<p>Lastly, you can also pull clinical data by study ID, sample ID or patient ID. To see what data is available, you can use:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
@@ -361,6 +311,14 @@ Samples
 <span class="co">#&gt;  9 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OTHER_SAMPLE_ID </span>
 <span class="co">#&gt; 10 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… PATHOLOGY_REPOR…</span>
 <span class="co">#&gt; # … with 1 more variable: value &lt;chr&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">patients</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/available_patients.html">available_patients</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">pull</span><span class="op">(</span><span class="va">patientId</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/get_clinical_by_patient.html">get_clinical_by_patient</a></span><span class="op">(</span>patient_id <span class="op">=</span> <span class="va">patients</span>, study_id <span class="op">=</span> <span class="st">"acc_tcga"</span>, 
+                        clinical_attribute <span class="op">=</span> <span class="st">"AGE"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
 <p>All functions that pull by study IDs are limited to pulling data from one study at a time. If you need to pull specific samples from multiple studies, you likely want to pull by sample ID (instead of study ID) and supply the function with a dataframe of <code>sample_study_pairs</code> that specify where the function should look for each study. For more information see the <a href="https://karissawhiting.github.io/cbioportalR/articles/overview-of-workflow.html">Overview of Workflow Vignette</a>.</p>
 </div>
 <div class="section level2">

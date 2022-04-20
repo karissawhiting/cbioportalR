@@ -213,9 +213,7 @@
 <span class="co">#&gt; cancerType.shortName        "PROSTATE"                                                       </span>
 <span class="co">#&gt; cancerType.parent           "tissue"                                                         </span>
 <span class="co">#&gt; cancerType.cancerTypeId     "prostate"                                                       </span>
-<span class="co">#&gt; referenceGenome             "hg19"</span>
-
-<span class="co">#   prad_msk_2019</span></code></pre></div>
+<span class="co">#&gt; referenceGenome             "hg19"</span></code></pre></div>
 <p>Lastly, it is important to know what genomic data is available for our study. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions.</p>
 <p>We can check available genomic data with <code><a href="../reference/available_profiles.html">available_profiles()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -303,16 +301,18 @@
 </h3>
 <p>We can pull from both studies at the same time for a select set of samples using the <code>sample_study_pairs</code> argument in <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code>.</p>
 <p>Let’s pull data for the first 10 samples in each study. We first need to construct our dataframe to pass to the function:</p>
+<p><em>Note: you can also run <code><a href="../reference/available_patients.html">available_patients()</a></code> to only pull patient IDs</em></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_samples.html">available_samples</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sampleId</span>, <span class="va">studyId</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sampleId</span>, <span class="va">patientId</span>, <span class="va">studyId</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
 <span class="va">s2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_samples.html">available_samples</a></span><span class="op">(</span><span class="st">"prad_msk_2019"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sampleId</span>, <span class="va">studyId</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sampleId</span>,  <span class="va">patientId</span>, <span class="va">studyId</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 
-<span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">s1</span>, <span class="va">s2</span><span class="op">)</span></code></pre></div>
+<span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">s1</span>, <span class="va">s2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">patientId</span><span class="op">)</span></code></pre></div>
 <p>We need to rename the columns as per the functions documentation.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="va">df_pairs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -405,7 +405,8 @@
 <div class="section level2">
 <h2 id="pulling-clinical-data">Pulling Clinical Data<a class="anchor" aria-label="anchor" href="#pulling-clinical-data"></a>
 </h2>
-<p>You can also pull clinical data by study or sample ID. You can explore what clinical data is available a study using:</p>
+<p>You can also pull clinical data by study ID, sample ID, or patient ID. Pulling by sample ID will pull all sample-level characteristics (e.g. sample site, tumor stage at sampling time and other variables collected at time of sampling that may be available). Pulling by patient ID will pull all patient-level characteristics (e.g. age, sex, etc.). Pulling by study ID will pull all sample <em>and</em> patient-level characteristics at once.</p>
+<p>You can explore what clinical data is available a study using:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">attr_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span>
 <span class="va">attr_prad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span><span class="st">"prad_msk_2019"</span><span class="op">)</span>
@@ -431,32 +432,86 @@
 <p>There are a select set available for both studies:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">in_both</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">attr_blca</span><span class="op">$</span><span class="va">clinicalAttributeId</span>, <span class="va">attr_prad</span><span class="op">$</span><span class="va">clinicalAttributeId</span><span class="op">)</span></code></pre></div>
+<p>The below pulls data at the sample level:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">clinical_blca</span> <span class="op">&lt;-</span><span class="fu"><a href="../reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">s1</span><span class="op">$</span><span class="va">sampleId</span>,
+<code class="sourceCode R"><span class="va">clinical_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">s1</span><span class="op">$</span><span class="va">sampleId</span>,
                        study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span>, 
                        clinical_attribute <span class="op">=</span> <span class="va">in_both</span><span class="op">)</span>
 
-<span class="va">clinical_prad</span> <span class="op">&lt;-</span><span class="fu"><a href="../reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">s2</span><span class="op">$</span><span class="va">sampleId</span>,
+<span class="va">clinical_prad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">s2</span><span class="op">$</span><span class="va">sampleId</span>,
                        study_id <span class="op">=</span> <span class="st">"prad_msk_2019"</span>, 
                        clinical_attribute <span class="op">=</span> <span class="va">in_both</span><span class="op">)</span>
 
 <span class="va">all_clinical</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">clinical_blca</span>, <span class="va">clinical_prad</span><span class="op">)</span>
 
-<span class="va">all_clinical</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 136 × 7</span></span>
-<span class="co">#&gt;    uniqueSampleKey  uniquePatientKey sampleId patientId studyId clinicalAttribu…</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> UC0wMDAxNDUzLVQ… UC0wMDAxNDUzOmJ… P-00014… P-0001453 blca_n… CANCER_TYPE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> UC0wMDAxNDUzLVQ… UC0wMDAxNDUzOmJ… P-00014… P-0001453 blca_n… CANCER_TYPE_DET…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> UC0wMDAxNDUzLVQ… UC0wMDAxNDUzOmJ… P-00014… P-0001453 blca_n… FRACTION_GENOME…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> UC0wMDAxNDUzLVQ… UC0wMDAxNDUzOmJ… P-00014… P-0001453 blca_n… MUTATION_COUNT  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> UC0wMDAxNDUzLVQ… UC0wMDAxNDUzOmJ… P-00014… P-0001453 blca_n… ONCOTREE_CODE   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> UC0wMDAxNDUzLVQ… UC0wMDAxNDUzOmJ… P-00014… P-0001453 blca_n… SOMATIC_STATUS  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> UC0wMDAxNDUzLVQ… UC0wMDAxNDUzOmJ… P-00014… P-0001453 blca_n… TMB_NONSYNONYMO…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> UC0wMDAyMTY2LVQ… UC0wMDAyMTY2OmJ… P-00021… P-0002166 blca_n… CANCER_TYPE     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> UC0wMDAyMTY2LVQ… UC0wMDAyMTY2OmJ… P-00021… P-0002166 blca_n… CANCER_TYPE_DET…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> UC0wMDAyMTY2LVQ… UC0wMDAyMTY2OmJ… P-00021… P-0002166 blca_n… FRACTION_GENOME…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 126 more rows, and 1 more variable: value &lt;chr&gt;</span></span></code></pre></div>
+<span class="va">all_clinical</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"unique"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span>
+<span class="co">#&gt;   sampleId          patientId studyId         clinicalAttributeId     value     </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 CANCER_TYPE             Bladder C…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 CANCER_TYPE_DETAILED    Bladder U…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 FRACTION_GENOME_ALTERED 0.4448    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 MUTATION_COUNT          11        </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 ONCOTREE_CODE           BLCA      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 SOMATIC_STATUS          Matched</span></code></pre></div>
+<p>The below pulls data at the patient level:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_patients.html">available_patients</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span>
+
+<span class="va">clinical_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_patient.html">get_clinical_by_patient</a></span><span class="op">(</span>patient_id <span class="op">=</span> <span class="va">s1</span><span class="op">$</span><span class="va">patientId</span>,
+                       study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span>, 
+                       clinical_attribute <span class="op">=</span> <span class="va">in_both</span><span class="op">)</span>
+
+<span class="va">clinical_prad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">s2</span><span class="op">$</span><span class="va">patientId</span>,
+                       study_id <span class="op">=</span> <span class="st">"prad_msk_2019"</span>, 
+                       clinical_attribute <span class="op">=</span> <span class="va">in_both</span><span class="op">)</span>
+
+<span class="va">all_clinical</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">clinical_blca</span>, <span class="va">clinical_prad</span><span class="op">)</span>
+
+<span class="va">all_clinical</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"unique"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span>
+<span class="co">#&gt;   patientId studyId         clinicalAttributeId value</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> P-0001453 blca_nmibc_2017 SAMPLE_COUNT        1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> P-0001453 blca_nmibc_2017 SEX                 Male </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> P-0002166 blca_nmibc_2017 SAMPLE_COUNT        1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> P-0002166 blca_nmibc_2017 SEX                 Male </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> P-0003238 blca_nmibc_2017 SAMPLE_COUNT        1    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> P-0003238 blca_nmibc_2017 SEX                 Male</span></code></pre></div>
+<p>Like with the genomic data pull functions, you can also pull clinical data by study ID - sampleID, or ID study ID - patient ID pairs:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">s1</span>, <span class="va">s2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sampleId</span><span class="op">)</span>
+
+<span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="va">df_pairs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">"patient_id"</span> <span class="op">=</span> <span class="va">patientId</span>, 
+         <span class="st">"study_id"</span> <span class="op">=</span> <span class="va">studyId</span><span class="op">)</span></code></pre></div>
+<p>Now we pass this to <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code></p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">all_patient_clinical</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_patient.html">get_clinical_by_patient</a></span><span class="op">(</span>patient_study_pairs <span class="op">=</span> <span class="va">df_pairs</span>, 
+                                                clinical_attribute <span class="op">=</span> <span class="va">in_both</span><span class="op">)</span>
+
+<span class="va">all_patient_clinical</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"unique"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 34 × 4</span></span>
+<span class="co">#&gt;    patientId studyId         clinicalAttributeId value </span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> P-0001453 blca_nmibc_2017 SAMPLE_COUNT        1     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> P-0001453 blca_nmibc_2017 SEX                 Male  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> P-0002166 blca_nmibc_2017 SAMPLE_COUNT        1     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> P-0002166 blca_nmibc_2017 SEX                 Male  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> P-0003238 blca_nmibc_2017 SAMPLE_COUNT        1     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> P-0003238 blca_nmibc_2017 SEX                 Male  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> P-0003257 blca_nmibc_2017 SAMPLE_COUNT        1     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> P-0003257 blca_nmibc_2017 SEX                 Female</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> P-0003261 blca_nmibc_2017 SAMPLE_COUNT        1     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> P-0003261 blca_nmibc_2017 SEX                 Male  </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 24 more rows</span></span></code></pre></div>
+<p>```</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
