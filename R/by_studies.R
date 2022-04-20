@@ -58,6 +58,8 @@ available_clinical_attributes <- function(study_id = NULL, base_url = NULL) {
 
 #' Get all available clinical data for a specified study
 #'
+#' Returns all sample-level and patient-level clinical data for a given study
+#'
 #' @param study_id study ID
 #' @param base_url The database URL to query.
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
@@ -78,22 +80,60 @@ get_clinical_by_study <- function(study_id = NULL,
   # checks ---------------------------------------------------------------------
   .check_for_study_id(study_id)
 
+  # get sample level --------------------------------------------------------
   url_path <- paste0(
     "studies/",
     study_id,
     "/clinical-data?")
 
   res <- cbp_api(url_path, base_url = base_url)
-  df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
+  df_samp <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
 
-  # Filter selected clinical attributes if not NULL
-  df_return <- df %>%
+  # filter selected clinical attributes if not NULL
+  df_samp <- df_samp %>%
     purrr::when(
-      !is.null(clinical_attribute) ~ filter(., clinicalAttributeId %in% clinical_attribute),
-      ~{cli_alert_warning("No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
-      .})
+      nrow(df_samp) > 0 & !is.null(clinical_attribute) ~ filter(., clinicalAttributeId %in% clinical_attribute),
+      ~{cli_alert_warning("Sample Level Clinical Data: No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
+      .}) %>%
+    mutate(dataLevel = "SAMPLE")
 
-  return(df_return)
+
+  # get patient level ---------------------------------------------------------
+
+  url_path <- paste0(
+    "studies/",
+    study_id,
+    "/clinical-data?clinicalDataType=PATIENT")
+
+  res <- cbp_api(url_path, base_url = base_url)
+  df_pat <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
+
+  # filter selected clinical attributes if not NULL
+  df_pat <- df_pat %>%
+    purrr::when(
+      nrow(df_pat) > 0 & !is.null(clinical_attribute) ~ filter(., clinicalAttributeId %in% clinical_attribute),
+      ~{cli_alert_warning("Patient Level Clinical Data: No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
+        .})%>%
+    mutate(dataLevel = "PATIENT")
+
+  # put together  ---------------------------------------------------------
+
+  if(nrow(df_pat) > 0 & nrow(df_samp > 0)) {
+    common_names <- intersect(names(df_pat), names(df_samp))
+
+    df_all <- df_pat %>% select(all_of(common_names)) %>%
+      bind_rows(select(df_samp, all_of(common_names)))
+
+    return(df_all)
+  }
+
+  # return whichever is not 0 rows
+  ind_results <- list(df_pat, df_samp)
+  index <- which(purrr::map(ind_results, ~nrow(.x)) > 0)
+
+  return(ind_results[[index]])
+
+
 }
 
 #' Get All Sample IDs in a Study

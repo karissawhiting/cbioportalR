@@ -93,10 +93,10 @@ test_cbioportal_db()
 
 There are many ways to identify and pull data (e.g. by study ID, by sample ID, by molecular profile ID). Having an understanding of how data is organized in cBioPortal will help you determine which functions you need. The figure below outlines the general data schema for cBioPortal and which functions access which levels of the schema:
 
-```{r, results = FALSE, echo=FALSE}
+```{r, results = FALSE, echo=FALSE, eval = FALSE }
 
 x <- tibble::tibble(
-  level = c("Database", "Studies", "Molecular Profiles", "Samples"),
+  level = c("Database", "Studies", "Molecular Profiles", "Patients & Samples"),
   functions = list(
     c("`available_studies()`",
       "`available_profiles()`",
@@ -111,7 +111,8 @@ x <- tibble::tibble(
       "`get_cna_by_study()`", 
       "`get_fusions_by_study()`", 
       "`get_clinical_by_study()`", 
-      "`available_samples()`"),
+      "`available_samples()`", 
+      "available_patients()"),
     
     c("`get_genetics_by_study()`",
       "`get_mutations_by_study()`",
@@ -123,11 +124,12 @@ x <- tibble::tibble(
       "`get_cna_by_sample()`",
       "`get_fusions_by_sample()`", 
       "`get_clinical_by_sample()`", 
+      "`get_clinical_by_patient()`", 
       "`get_panel_by_sample()`", 
       "`get_samples_by_patient()`"))) %>%
   mutate(level = 
            forcats::fct_relevel(level, "Database", "Studies", 
-                                "Molecular Profiles", "Samples"))
+                                "Molecular Profiles", "Patients & Samples"))
 
 table_funs <- x %>%
   gt::gt() %>%
@@ -161,16 +163,25 @@ table_funs <- x %>%
 raw_html_table <- table_funs %>% 
   gt::as_raw_html()
 
+# <table>
+# <tbody>
+# 	<tr>
+# 		<td><img src='man/figures/svg-cbp-diagram.svg' width='90%'></td>
+# 		<td>`r raw_html_table`</td>
+# 	</tr>
+# </tbody>
+# </table>
+  
 ```
 
-<table>
-<tbody>
-	<tr>
-		<td><img src="man/figures/svg-cbp-diagram.svg" width="90%"></td> 
-		<td>`r raw_html_table`</td>
-	</tr>
-</tbody>
-</table>
+
+
+```{r, echo=FALSE}
+
+knitr::include_graphics("man/figures/readme-cbp-diagram.png")
+
+```
+
 
 ## Examples
 
@@ -224,7 +235,7 @@ mutations %>%
   head()
 ```
 
-Lastly, you can also pull clinical data by study_id or sample ID. To see what data is available, you can use:
+Lastly, you can also pull clinical data by study ID, sample ID or patient ID. To see what data is available, you can use:
 
 ```{r}
 available_clinical_attributes(study_id = "acc_tcga") %>%
@@ -237,6 +248,16 @@ get_clinical_by_study("acc_tcga")
 
 ```{r}
 get_clinical_by_sample(sample_id = samples, study_id = "acc_tcga") %>%
+  head(10)
+```
+
+```{r, eval = FALSE}
+patients <- available_patients(study_id = "acc_tcga") %>%
+  pull(patientId) %>%
+  head(n = 10)
+
+get_clinical_by_patient(patient_id = patients, study_id = "acc_tcga", 
+                        clinical_attribute = "AGE") %>%
   head(10)
 ```
 
