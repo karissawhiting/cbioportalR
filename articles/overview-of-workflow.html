@@ -122,7 +122,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_studies</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_studies.html">available_studies</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">all_studies</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 340 × 13</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 342 × 13</span></span>
 <span class="co">#&gt;    studyId name  description publicStudy pmid  citation groups status importDate</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> acbc_m… Aden… <span style="color: #949494;">"</span>Whole exo… TRUE        2609… Martelo… <span style="color: #949494;">"</span>ACYC…      0 2022-03-0…</span>
@@ -135,7 +135,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> blca_d… Blad… <span style="color: #949494;">"</span>Whole exo… TRUE        2509… Van All… <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> blca_m… Blad… <span style="color: #949494;">"</span>Comprehen… TRUE        2389… Iyer et… <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> blca_b… Blad… <span style="color: #949494;">"</span>Whole-exo… TRUE        2412… Guo et … <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 330 more rows, and 4 more variables: allSampleCount &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 332 more rows, and 4 more variables: allSampleCount &lt;int&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   readPermission &lt;lgl&gt;, cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></span></code></pre></div>
 <p>By inspecting this dataframe, we see the unique <code>study_id</code> we want is <code>"blca_nmibc_2017"</code> To get more information on our study we can do the following:</p>
 <p><em>Note: the transpose function <code><a href="https://rdrr.io/r/base/t.html" class="external-link">t()</a></code> just used here to better view results</em></p>
@@ -394,9 +394,9 @@
 <span class="co">#&gt; The following parameters were used in query:</span>
 <span class="co">#&gt; <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013"</span></span>
 <span class="co">#&gt; <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013_mutations"</span></span>
-<span class="co">#&gt; <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">747</span>, <span style="color: #0000BB;">2318</span>, <span style="color: #0000BB;">2639</span>, <span style="color: #0000BB;">4360</span>, <span style="color: #0000BB;">4654</span>, <span style="color: #0000BB;">4969</span>, <span style="color: #0000BB;">5188</span>, <span style="color: #0000BB;">6710</span>, <span style="color: #0000BB;">6814</span>, <span style="color: #0000BB;">8289</span>, <span style="color: #0000BB;">10556</span>, <span style="color: #0000BB;">26266</span>,</span>
-<span class="co">#&gt; <span style="color: #0000BB;">27130</span>, <span style="color: #0000BB;">79613</span>, <span style="color: #0000BB;">81794</span>, <span style="color: #0000BB;">93643</span>, <span style="color: #0000BB;">113655</span>, <span style="color: #0000BB;">114112</span>, <span style="color: #0000BB;">114821</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">127435</span>,</span>
-<span class="co">#&gt; <span style="color: #0000BB;">127731</span>, <span style="color: #0000BB;">152485</span>, <span style="color: #0000BB;">284525</span>, and <span style="color: #0000BB;">401024</span></span>
+<span class="co">#&gt; <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">81794</span>, <span style="color: #0000BB;">8289</span>, <span style="color: #0000BB;">747</span>, <span style="color: #0000BB;">2318</span>, <span style="color: #0000BB;">401024</span>, <span style="color: #0000BB;">2639</span>, <span style="color: #0000BB;">27130</span>, <span style="color: #0000BB;">113655</span>, <span style="color: #0000BB;">4360</span>, <span style="color: #0000BB;">4654</span>, <span style="color: #0000BB;">4969</span>,</span>
+<span class="co">#&gt; <span style="color: #0000BB;">5188</span>, <span style="color: #0000BB;">127435</span>, <span style="color: #0000BB;">10556</span>, <span style="color: #0000BB;">26266</span>, <span style="color: #0000BB;">284525</span>, <span style="color: #0000BB;">6814</span>, <span style="color: #0000BB;">93643</span>, <span style="color: #0000BB;">79613</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">114112</span>,</span>
+<span class="co">#&gt; <span style="color: #0000BB;">127731</span>, <span style="color: #0000BB;">114821</span>, <span style="color: #0000BB;">6710</span>, and <span style="color: #0000BB;">152485</span></span>
 
 <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">ex_by_study</span><span class="op">$</span><span class="va">entrezGeneId</span>, <span class="va">ex_by_sample_update</span><span class="op">$</span><span class="va">entrezGeneId</span><span class="op">)</span>
 <span class="co">#&gt; integer(0)</span></code></pre></div>
@@ -526,7 +526,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>
