@@ -39,6 +39,8 @@ links:
 -   [Full reference documentation for
     API](https://www.cbioportal.org/api/swagger-ui.html#/)
 
+This package is compatible with the latest version of cBioPortal (v4.1.4) but may change as the cBioPortal API evolves. Please see the [cBioPortal releases page](https://github.com/cBioPortal/cbioportal/releases) for information on any API updates.
+
 *Note: If you are a MSK researcher working on IMPACT data, you should
 connect to MSK’s cBioPortal instance to get the most up to date IMPACT
 data, and you must follow [MSK-IMPACT publication
