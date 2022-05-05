@@ -32,10 +32,10 @@ need to pull samples from several different studies at once. If passed this will
 
 \item{data_type}{specify what type of data to return. Options are\code{mutations}, \code{cna}, \code{fusion}}
 
-\item{genes}{A vector of entrez ids. If NULL, will return results for all
+\item{genes}{A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function. If NULL, will return results for all.
 IMPACT genes (see \code{cbioportalR::impact_gene_info})}
 
-\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
+\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is \code{TRUE} and adds this by default.}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

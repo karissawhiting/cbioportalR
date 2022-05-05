@@ -14,9 +14,9 @@
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
 #' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion`
-#' @param genes A vector of entrez ids. If NULL, will return results for all
+#' @param genes A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the `get_entrez_id()` function. If NULL, will return results for all.
 #' IMPACT genes (see `cbioportalR::impact_gene_info`)
-#' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is `TRUE` and adds this by default.
+#' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
@@ -92,6 +92,15 @@
     "mutation" = "mutations",
     "fusion" = "fusion",
     "cna" = "discrete-copy-number")
+
+  # check if hugo symbol or entrez id was supplied
+  genes_class <- class(genes)
+
+  # if character, convert to entrez ID
+  if (genes_class == "character"){
+    genes <- get_entrez_id(genes, base_url = 'www.cbioportal.org/api')$entrezGeneId
+    print("Hugo symbols were supplied and converted to entrez IDs in order to query the cBioPortal API.")
+  }
 
   # Make Informed guesses on parameters -------------------------------------
 

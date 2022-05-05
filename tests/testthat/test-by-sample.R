@@ -112,6 +112,34 @@ test_that("test endpoints - sample_study_pair wrong format", {
 
 })
 
+test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
+  db_test <- "public"
+  set_cbioportal_db(db = db_test)
+
+  # get all genes returned for this study
+  all_genes <- get_genetics_by_study(study_id = "acc_2019")
+
+  # try to pull genetics by sample using entrez IDs
+  # get study ID-sample ID pairs
+  s1 <- available_samples("acc_2019") %>%
+    select(sampleId, studyId) %>%
+    janitor::clean_names()
+
+  all_genomic_entrez <- get_genetics_by_sample(sample_study_pairs = s1,
+                                               genes = all_genes$mutation$entrezGeneId)
+
+  # convert relevant entrez IDs to hugo symbols
+  entrez_to_hugo <- get_hugo_symbol(all_genes$mutation$entrezGeneId)
+
+  # try to pull genetics by sample using the converted Hugo symbols
+  all_genomic_hugo <- get_genetics_by_sample(sample_study_pairs = s1,
+                                             genes = entrez_to_hugo$hugoGeneSymbol)
+
+  expect_equal(all_genomic_entrez$mutation, all_genomic_hugo$mutation)
+  expect_equal(all_genomic_entrez$cna, all_genomic_hugo$cna)
+  expect_equal(all_genomic_entrez$fusion, all_genomic_hugo$fusion)
+})
+
 # Test Clinical Functions --------------------------------------------------
 test_that("test clinical functions", {
 
