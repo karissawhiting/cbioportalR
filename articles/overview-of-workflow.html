@@ -123,32 +123,32 @@
 <code class="sourceCode R"><span class="va">all_studies</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_studies.html">available_studies</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">all_studies</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 342 × 13</span></span>
-<span class="co">#&gt;    studyId name  description publicStudy pmid  citation groups status importDate</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> acbc_m… Aden… <span style="color: #949494;">"</span>Whole exo… TRUE        2609… Martelo… <span style="color: #949494;">"</span>ACYC…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> acc_20… Aden… <span style="color: #949494;">"</span>Multi-Ins… TRUE        3148… Allen e… <span style="color: #949494;">"</span>ACYC…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> acc_tc… Adre… <span style="color: #949494;">"</span>TCGA Adre… TRUE        <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>       <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> blca_p… Blad… <span style="color: #949494;">"</span>Whole exo… TRUE        2690… Al-Ahma… <span style="color: #949494;">""</span>          0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> bcc_un… Basa… <span style="color: #949494;">"</span>Whole-exo… TRUE        2695… Bonilla… <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> all_st… Acut… <span style="color: #949494;">"</span>Comprehen… TRUE        2573… Anderss… <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> ampca_… Ampu… <span style="color: #949494;">"</span>Exome seq… TRUE        2680… Gingras… <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> blca_d… Blad… <span style="color: #949494;">"</span>Whole exo… TRUE        2509… Van All… <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> blca_m… Blad… <span style="color: #949494;">"</span>Comprehen… TRUE        2389… Iyer et… <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> blca_b… Blad… <span style="color: #949494;">"</span>Whole-exo… TRUE        2412… Guo et … <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 332 more rows, and 4 more variables: allSampleCount &lt;int&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   readPermission &lt;lgl&gt;, cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></span></code></pre></div>
+<span class="co">#&gt;    studyId name  description publicStudy groups status importDate allSampleCount</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> acc_tc… Adre… <span style="color: #949494;">"</span>TCGA Adre… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…             92</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> blca_p… Blad… <span style="color: #949494;">"</span>Whole exo… TRUE        <span style="color: #949494;">""</span>          0 2022-03-0…             34</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> bcc_un… Basa… <span style="color: #949494;">"</span>Whole-exo… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…            293</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> all_st… Acut… <span style="color: #949494;">"</span>Comprehen… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…             93</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> ampca_… Ampu… <span style="color: #949494;">"</span>Exome seq… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…            160</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> blca_d… Blad… <span style="color: #949494;">"</span>Whole exo… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…             50</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> blca_m… Blad… <span style="color: #949494;">"</span>Comprehen… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…             97</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> blca_b… Blad… <span style="color: #949494;">"</span>Whole-exo… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…             99</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> blca_m… Blad… <span style="color: #949494;">"</span>Genomic P… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…            109</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> all_st… Hypo… <span style="color: #949494;">"</span>Whole gen… TRUE        <span style="color: #949494;">""</span>          0 2022-03-0…             44</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 332 more rows, and 5 more variables: readPermission &lt;lgl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;</span></span></code></pre></div>
 <p>By inspecting this dataframe, we see the unique <code>study_id</code> we want is <code>"blca_nmibc_2017"</code> To get more information on our study we can do the following:</p>
 <p><em>Note: the transpose function <code><a href="https://rdrr.io/r/base/t.html" class="external-link">t()</a></code> just used here to better view results</em></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_studies</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">studyId</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span>, <span class="st">"prad_msk_2019"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 13</span></span>
-<span class="co">#&gt;   studyId  name  description publicStudy pmid  citation groups status importDate</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> blca_nm… Nonm… IMPACT seq… TRUE        2858… Pietzak… PUBLIC      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> prad_ms… Pros… MSK-IMPACT… TRUE        3156… Granlun… PUBLIC      0 2022-03-0…</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: allSampleCount &lt;int&gt;, readPermission &lt;lgl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></span></code></pre></div>
+<span class="co">#&gt;   studyId  name  description publicStudy groups status importDate allSampleCount</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> blca_nm… Nonm… IMPACT seq… TRUE        PUBLIC      0 2022-03-0…            105</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> prad_ms… Pros… MSK-IMPACT… TRUE        PUBLIC      0 2022-03-0…             18</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: readPermission &lt;lgl&gt;, cancerTypeId &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;</span></span></code></pre></div>
 <p>More in-depth information about the study can be found with <code><a href="../reference/get_study_info.html">get_study_info()</a></code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
@@ -254,7 +254,7 @@
 <div class="section level3">
 <h3 id="by-study-ids">By Study IDs<a class="anchor" aria-label="anchor" href="#by-study-ids"></a>
 </h3>
-<p>To pull by study ID, we can pull each data type individually:</p>
+<p>To pull by study ID, we can pull each data type individually. Specifying which genes to query is not required when pulling data by study ID.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">mut_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations_by_study.html">get_mutations_by_study</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span><span class="op">)</span>
@@ -299,6 +299,7 @@
 <div class="section level3">
 <h3 id="by-sample-ids">By Sample IDs<a class="anchor" aria-label="anchor" href="#by-sample-ids"></a>
 </h3>
+<p>When we pull by sample IDs, the API requires us to specify which genes we want to query. If you do not specify, the function will default to querying all IMPACT genes (on any version of IMPACT panel). This allows you to pull specific samples across multiple studies.</p>
 <p>We can pull from both studies at the same time for a select set of samples using the <code>sample_study_pairs</code> argument in <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code>.</p>
 <p>Let’s pull data for the first 10 samples in each study. We first need to construct our dataframe to pass to the function:</p>
 <p><em>Note: you can also run <code><a href="../reference/available_patients.html">available_patients()</a></code> to only pull patient IDs</em></p>
@@ -370,9 +371,17 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">entrezGeneId</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">mut_study_subset</span>, <span class="va">mut_sample</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<span class="co">#&gt; [1] "Names: 6 string mismatches"                                     </span>
+<span class="co">#&gt; [2] "Component 28: 'is.NA' value mismatch: 0 in current 10 in target"</span>
+<span class="co">#&gt; [3] "Component 29: 176 string mismatches"                            </span>
+<span class="co">#&gt; [4] "Component 30: 176 string mismatches"                            </span>
+<span class="co">#&gt; [5] "Component 31: Modes: character, numeric"                        </span>
+<span class="co">#&gt; [6] "Component 31: target is character, current is numeric"          </span>
+<span class="co">#&gt; [7] "Component 32: Mean relative difference: 0.003716705"            </span>
+<span class="co">#&gt; [8] "Component 33: Modes: numeric, character"                        </span>
+<span class="co">#&gt; [9] "Component 33: target is numeric, current is character"</span></code></pre></div>
 <p>In this case, both results are equal which means both studies were IMPACT panel only studies.</p>
-<p>Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample::</p>
+<p>Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ex_by_sample</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="st">"PD3181a"</span>,
                                         study_id <span class="op">=</span> <span class="st">"acyc_sanger_2013"</span><span class="op">)</span>
@@ -386,7 +395,7 @@
 <span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Returning all data for the <span style="color: #0000BB;">"acyc_sanger_2013_mutations"</span> molecular profile in the <span style="color: #0000BB;">"acyc_sanger_2013"</span> study</span>
 
 <span class="va">genes_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">ex_by_study</span><span class="op">$</span><span class="va">entrezGeneId</span>, <span class="va">ex_by_sample</span><span class="op">$</span><span class="va">entrezGeneId</span><span class="op">)</span></code></pre></div>
-<p>We could solve this by specifying which genes we want to query in <code><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample()</a></code>:</p>
+<p>We could resolve this discrepancy by specifying which genes we want to query in <code><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample()</a></code> to ensure that the same genes are queried across both studies:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ex_by_sample_update</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="st">"PD3181a"</span>,
                                                study_id <span class="op">=</span> <span class="st">"acyc_sanger_2013"</span>, 
@@ -394,9 +403,9 @@
 <span class="co">#&gt; The following parameters were used in query:</span>
 <span class="co">#&gt; <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013"</span></span>
 <span class="co">#&gt; <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013_mutations"</span></span>
-<span class="co">#&gt; <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">81794</span>, <span style="color: #0000BB;">8289</span>, <span style="color: #0000BB;">747</span>, <span style="color: #0000BB;">2318</span>, <span style="color: #0000BB;">401024</span>, <span style="color: #0000BB;">2639</span>, <span style="color: #0000BB;">27130</span>, <span style="color: #0000BB;">113655</span>, <span style="color: #0000BB;">4360</span>, <span style="color: #0000BB;">4654</span>, <span style="color: #0000BB;">4969</span>,</span>
-<span class="co">#&gt; <span style="color: #0000BB;">5188</span>, <span style="color: #0000BB;">127435</span>, <span style="color: #0000BB;">10556</span>, <span style="color: #0000BB;">26266</span>, <span style="color: #0000BB;">284525</span>, <span style="color: #0000BB;">6814</span>, <span style="color: #0000BB;">93643</span>, <span style="color: #0000BB;">79613</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">114112</span>,</span>
-<span class="co">#&gt; <span style="color: #0000BB;">127731</span>, <span style="color: #0000BB;">114821</span>, <span style="color: #0000BB;">6710</span>, and <span style="color: #0000BB;">152485</span></span>
+<span class="co">#&gt; <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">747</span>, <span style="color: #0000BB;">2318</span>, <span style="color: #0000BB;">2639</span>, <span style="color: #0000BB;">4360</span>, <span style="color: #0000BB;">4654</span>, <span style="color: #0000BB;">4969</span>, <span style="color: #0000BB;">5188</span>, <span style="color: #0000BB;">6710</span>, <span style="color: #0000BB;">6814</span>, <span style="color: #0000BB;">8289</span>, <span style="color: #0000BB;">10556</span>, <span style="color: #0000BB;">26266</span>,</span>
+<span class="co">#&gt; <span style="color: #0000BB;">27130</span>, <span style="color: #0000BB;">79613</span>, <span style="color: #0000BB;">81794</span>, <span style="color: #0000BB;">93643</span>, <span style="color: #0000BB;">113655</span>, <span style="color: #0000BB;">114112</span>, <span style="color: #0000BB;">114821</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">127435</span>,</span>
+<span class="co">#&gt; <span style="color: #0000BB;">127731</span>, <span style="color: #0000BB;">152485</span>, <span style="color: #0000BB;">284525</span>, and <span style="color: #0000BB;">401024</span></span>
 
 <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">ex_by_study</span><span class="op">$</span><span class="va">entrezGeneId</span>, <span class="va">ex_by_sample_update</span><span class="op">$</span><span class="va">entrezGeneId</span><span class="op">)</span>
 <span class="co">#&gt; integer(0)</span></code></pre></div>
