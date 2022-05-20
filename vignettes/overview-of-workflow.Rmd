@@ -112,7 +112,7 @@ When we pull by sample IDs, the API requires us to specify which genes we want t
 
 ### By Study IDs
 
-To pull by study ID, we can pull each data type individually:
+To pull by study ID, we can pull each data type individually. Specifying which genes to query is not required when pulling data by study ID.
 
 ```{r}
 
@@ -155,6 +155,8 @@ fus_study <- bind_rows(fus_blca, fus_prad)
 ```
 
 ### By Sample IDs
+
+When we pull by sample IDs, the API requires us to specify which genes we want to query. If you do not specify, the function will default to querying all IMPACT genes (on any version of IMPACT panel). This allows you to pull specific samples across multiple studies.
 
 We can pull from both studies at the same time for a select set of samples using the `sample_study_pairs` argument in `get_genetics_by_sample()`.
 
@@ -224,7 +226,7 @@ all.equal(mut_study_subset, mut_sample)
 
 In this case, both results are equal which means both studies were IMPACT panel only studies. 
 
-Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample::
+Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample:
 
 ```{r}
 ex_by_sample <-  get_mutations_by_sample(sample_id = "PD3181a",
@@ -237,7 +239,7 @@ genes_diff <- setdiff(ex_by_study$entrezGeneId, ex_by_sample$entrezGeneId)
 
 ```
 
-We could solve this by specifying which genes we want to query in `get_mutations_by_sample()`:
+We could resolve this discrepancy by specifying which genes we want to query in `get_mutations_by_sample()` to ensure that the same genes are queried across both studies:
 
 ```{r}
 ex_by_sample_update <-  get_mutations_by_sample(sample_id = "PD3181a",
