@@ -8,10 +8,8 @@ cbioportal_env <- rlang::new_environment()
 #' This function sets a base cBioPortal url
 #' @param db The database URL to use as base URL for calls, or "public" for https://www.cbioportal.org/
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db(db = "public")
-#' }
 #'
 set_cbioportal_db <- function(db = NULL) {
 
@@ -40,11 +38,8 @@ set_cbioportal_db <- function(db = NULL) {
 #'
 #' Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_cbioportal_token()
-#' }
-#'
 #'
 get_cbioportal_token <- function() {
   x <- Sys.getenv("CBIOPORTAL_TOKEN")
@@ -60,7 +55,7 @@ get_cbioportal_token <- function() {
 #'
 #' Helps troubleshoot API issues during an R session
 #' @export
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db("public")
 #' test_cbioportal_db()
 #'
@@ -92,7 +87,7 @@ test_cbioportal_db <- function() {
 #' @export
 #' @keywords internal
 #' @noRd
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' .get_cbioportal_url()
 #'
 .get_cbioportal_url <- function() {

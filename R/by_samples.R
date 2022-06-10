@@ -8,7 +8,7 @@
 #' @return a dataframe of a specific clinical attribute
 #' @export
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_clinical_by_sample(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
 #'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 #'
@@ -93,7 +93,7 @@ get_clinical_by_sample <- function(study_id = NULL,
 #' @return a dataframe of a specific clinical attribute
 #' @export
 #' @keywords internal
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' .get_clinical_by_list_item(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
 #'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 #'
@@ -146,7 +146,7 @@ get_clinical_by_sample <- function(study_id = NULL,
 #' @return a dataframe of a specific clinical attribute
 #' @export
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_panel_by_sample(study_id = "blca_plasmacytoid_mskcc_2016",
 #'  sample_id = "DS-sig-010-P2",
 #'  base_url = 'www.cbioportal.org/api')

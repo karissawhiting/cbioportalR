@@ -3,6 +3,8 @@
 
 test_that("test endpoints - with sample ID", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   study_id = "prad_msk_2019"
@@ -26,6 +28,8 @@ test_that("test endpoints - with sample ID", {
 })
 
 test_that("test endpoints - with sample  ID, no study ID", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -54,6 +58,8 @@ test_that("test endpoints - with sample  ID, no study ID", {
 
 test_that("test endpoints - no sample ID or sample_study_pair", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   study_id = NULL
@@ -71,6 +77,8 @@ test_that("test endpoints - no sample ID or sample_study_pair", {
 })
 
 test_that("test endpoints - sample_study_pair", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -99,6 +107,8 @@ test_that("test endpoints - sample_study_pair", {
 
 test_that("test endpoints - sample_study_pair wrong format", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
 
@@ -114,6 +124,8 @@ test_that("test endpoints - sample_study_pair wrong format", {
 
 # Test Clinical Functions --------------------------------------------------
 test_that("test clinical functions", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   study_id = "acc_tcga"
@@ -135,6 +147,8 @@ test_that("test clinical functions", {
 #  Test Getting Panels -------------------------------------------------
 test_that("test get panel by sample", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
 
   # no panel attribute in this study
@@ -149,6 +163,8 @@ test_that("test get panel by sample", {
 
 
 test_that("test get panels", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
 

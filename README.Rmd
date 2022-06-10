@@ -37,10 +37,10 @@ For more information on cBioPortal, see the following publications:
 
 For full documentation on the cBioPortal API, please see the following links:
 
-- [cBioPortal API and API Clients documentation](https://docs.cbioportal.org/6.-web-api-and-clients/api-and-api-clients)
+- [cBioPortal API and API Clients documentation](http://docs.cbioportal.org/6.-web-api-and-clients/api-and-api-clients)
 - [Full reference documentation for API](https://www.cbioportal.org/api/swagger-ui.html#/)
 
-*Note: If you are a MSK researcher working on IMPACT data, you should connect to MSK's cBioPortal instance to get the most up to date IMPACT data, and you must follow [MSK-IMPACT publication guidelines](https://cmo.mskcc.org/cmo/initiatives/msk-impact/) when using this data*
+*Note: If you are a MSK researcher working on IMPACT data, you should connect to MSK's cBioPortal instance to get the most up to date IMPACT data, and you must follow [MSK-IMPACT publication guidelines](http://cmo.mskcc.org/cmo/initiatives/msk-impact/) when using this data*
 
 ## Installation
 

@@ -17,7 +17,7 @@ A dataframe of gene ids, hugo symbols, and gene types
 Get A List of Genes for a Specified Database
 }
 \examples{
-\dontrun{
+\donttest{
 get_genes(base_url = 'www.cbioportal.org/api')
 }
 }

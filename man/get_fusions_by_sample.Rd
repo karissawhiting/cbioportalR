@@ -44,8 +44,9 @@ A data frame of Fusions
 Get Fusions By Sample ID
 }
 \examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set_cbioportal_db("public")
 get_fusions_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
                  study_id = "prad_msk_2019")
-
+\dontshow{\}) # examplesIf}
 }

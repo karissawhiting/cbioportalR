@@ -3,6 +3,8 @@
 # No Parameter Endpoints -------------------------------------------------------
 test_that("test main API function", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   res <- cbp_api(url_path = "genes/TP53", base_url = "public")
@@ -16,6 +18,8 @@ test_that("test main API function", {
 
 test_that("test quiet arg", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   expect_output(
@@ -27,6 +31,8 @@ test_that("test quiet arg", {
 })
 
 test_that("test extra_box arg", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)

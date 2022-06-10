@@ -21,7 +21,9 @@ A dataframe of available genetic profiles and their profile ids
 Get Available Genomic Profiles For a Study or Database
 }
 \examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set_cbioportal_db("public")
 available_profiles()
 available_profiles(study_id = "acc_tcga")
+\dontshow{\}) # examplesIf}
 }

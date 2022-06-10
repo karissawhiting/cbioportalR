@@ -7,6 +7,7 @@ Cerami
 Codecov
 Discov
 Entrez
+EntrezId
 Gao
 Granlund
 Isaak
@@ -36,11 +37,13 @@ cna
 entrez
 et
 https
+httr
 hugo
 idk
 maf
 magrittr
 nonmuscle
+sampleID
 tibbles
 usethis
 www

@@ -13,8 +13,7 @@ set_cbioportal_db(db = NULL)
 This function sets a base cBioPortal url
 }
 \examples{
-\dontrun{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set_cbioportal_db(db = "public")
-}
-
+\dontshow{\}) # examplesIf}
 }

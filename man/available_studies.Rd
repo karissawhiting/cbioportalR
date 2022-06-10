@@ -17,6 +17,8 @@ A dataframe of available studies and their metadata
 Get Metadata on All Available Studies in a Database
 }
 \examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set_cbioportal_db("public")
 available_studies()
+\dontshow{\}) # examplesIf}
 }

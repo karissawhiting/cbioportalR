@@ -5,6 +5,8 @@
 # * General Tests -----------------
 test_that("With study_id-  works fine", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   study_id = "mpnst_mskcc"
@@ -31,6 +33,8 @@ test_that("With study_id-  works fine", {
 })
 
 test_that("Missing study_id - arg throws an error", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -61,6 +65,8 @@ test_that("Missing study_id - arg throws an error", {
 
 test_that("Incorrect study_id - API error", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   study_id = "blerg"
@@ -88,6 +94,8 @@ test_that("Incorrect study_id - API error", {
 
 test_that("Missing study_id - arg defaults to sensible database value, no error", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
 
@@ -104,6 +112,8 @@ test_that("Missing study_id - arg defaults to sensible database value, no error"
 
 
 test_that("More than 1 study_id - throws an error", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -134,6 +144,8 @@ test_that("More than 1 study_id - throws an error", {
 
 test_that("Clinical data by study- no attribute, defaults to all", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   study_id = "acc_tcga"
@@ -143,6 +155,8 @@ test_that("Clinical data by study- no attribute, defaults to all", {
 })
 
 test_that("Clinical data by study- 1 attribute ", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -160,6 +174,8 @@ test_that("Clinical data by study- 1 attribute ", {
 })
 
 test_that("Clinical data by study- 2 attributes ", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)

@@ -4,11 +4,11 @@
 \name{cbioportalR-package}
 \alias{cbioportalR}
 \alias{cbioportalR-package}
-\title{cbioportalR: An R package to access data on cBioPortal}
+\title{cbioportalR: An R Package to Access Data on cBioPortal}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-allows you to access cBioPortal's genomic and clinical data directly through R. The package wraps cBioPortal's existing API endpoints so R users can easily leverage cBioPortal's API. Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI), FACETS and select clinical data points (depending on the study).
+allows you to access 'cBioPortal's' genomic and clinical data directly through R. The package wraps 'cBioPortal's' existing API endpoints so R users can easily leverage cBioPortal's API. Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden ('TMB'), microsatellite instability status ('MSI'), 'FACETS' and select clinical data points (depending on the study).
 }
 \seealso{
 Useful links:

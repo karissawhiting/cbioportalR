@@ -47,20 +47,19 @@ A dataframe of mutations or CNAs
 Internal Function to Get Mutations/CNA/Fusion By Sample ID
 }
 \examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set_cbioportal_db("public")
 .get_data_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
  study_id = "acc_tcga", data_type = "mutation")
 
-
 .get_data_by_sample(sample_id = c("DS-sig-010-P2"),
  molecular_profile_id = "blca_plasmacytoid_mskcc_2016_cna", data_type = "cna")
 
-.get_data_by_sample(sample_id = c("P-0002146-T01-IM3"),
- molecular_profile_id = "blca_plasmacytoid_mskcc_2016_mutations", data_type = "mutation")
 
 .get_data_by_sample(sample_id = c("P-0002146-T01-IM3"),
  study_id = "blca_plasmacytoid_mskcc_2016", data_type = "fusion")
 
+\donttest{
 df_pairs <- data.frame(
 "sample_id" = c("s_C_36924L_P001_d",
 "s_C_03LNU8_P001_d"),
@@ -79,6 +78,7 @@ df_pairs2 <- data.frame(
 .get_data_by_sample(sample_study_pairs = df_pairs2, genes = 7157)
 .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "cna")
 .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "fusion")
-
+}
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

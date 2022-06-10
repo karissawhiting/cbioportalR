@@ -3,6 +3,8 @@
 
 test_that("test get genes", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   set_cbioportal_db("public")
 
   expect_error(

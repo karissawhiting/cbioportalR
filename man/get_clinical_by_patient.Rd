@@ -36,8 +36,7 @@ a dataframe of a specific clinical attribute
 Get clinical data by attribute, study ID and patient ID
 }
 \examples{
-get_clinical_by_sample(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
- base_url = 'www.cbioportal.org/api')
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 ex <- tibble::tribble(
 ~patient_id, ~study_id,
@@ -49,5 +48,5 @@ ex <- tibble::tribble(
 
 x <- get_clinical_by_patient(patient_study_pairs = ex,
  clinical_attribute = NULL, base_url = 'www.cbioportal.org/api')
-
+\dontshow{\}) # examplesIf}
 }

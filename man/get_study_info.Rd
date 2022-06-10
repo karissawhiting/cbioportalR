@@ -19,6 +19,8 @@ A dataframe of study metadata
 Get Metadata on All Available Studies in Database or a Specified Study
 }
 \examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set_cbioportal_db("public")
 get_study_info("acc_tcga")
+\dontshow{\}) # examplesIf}
 }
