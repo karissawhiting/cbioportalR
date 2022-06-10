@@ -72,19 +72,28 @@
 <dd><p>A string indicating the study ID from which to pull data. If no study ID, will
 guess the study ID based on your URL and inform. Only 1 study ID can be passed. If mutations/cna from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+
+
 <dt>molecular_profile_id</dt>
 <dd><p>A string indicating the molecular profile ID from which to pull data. If ID supplied, will
 guess the molecular profile ID based on the study ID. Only 1 molecular profile ID can be passed. If mutations from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+
+
 <dt>add_hugo</dt>
 <dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
+
+
 <dt>base_url</dt>
 <dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A dataframe of mutations (maf file format)</p>
+    
+
+<p>A dataframe of mutations (maf file format)</p>
     </div>
 
     <div class="section level2">
@@ -134,7 +143,6 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></span>
 <span class="r-in"></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -146,7 +154,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

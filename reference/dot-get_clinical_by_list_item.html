@@ -72,18 +72,27 @@
 <dd><p>A string indicating the study ID from which to pull data. If no study ID, will
 guess the study ID based on your URL and inform. Only 1 study ID can be passed. If mutations/cna from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+
+
 <dt>sample_id</dt>
 <dd><p>a vector of sample IDs (character)</p></dd>
+
+
 <dt>clinical_attribute</dt>
 <dd><p>one or more clinical attributes for your study.
 If none provided, will return all attributes available for studies</p></dd>
+
+
 <dt>base_url</dt>
 <dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a dataframe of a specific clinical attribute</p>
+    
+
+<p>a dataframe of a specific clinical attribute</p>
     </div>
 
     <div class="section level2">
@@ -95,7 +104,6 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> VENHQS1PUi1BNUoy… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: value &lt;chr&gt;</span></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -107,7 +115,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

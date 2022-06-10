@@ -71,18 +71,27 @@
     <dl><dt>study_id</dt>
 <dd><p>A study ID to query mutations. If NULL, guesses study ID based
 on molecular_profile_id.</p></dd>
+
+
 <dt>molecular_profile_id</dt>
 <dd><p>a molecular profile to query mutations.
 If NULL, guesses molecular_profile_id based on study ID.</p></dd>
+
+
 <dt>add_hugo</dt>
 <dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
+
+
 <dt>base_url</dt>
 <dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A dataframe of fusions</p>
+    
+
+<p>A dataframe of fusions</p>
     </div>
 
     <div class="section level2">
@@ -113,7 +122,6 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;, site2EntrezGeneId &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2HugoSymbol &lt;chr&gt;, ncbiBuild &lt;chr&gt;, center &lt;chr&gt;, eventInfo &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variantClass &lt;chr&gt;, comments &lt;chr&gt;</span></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -125,7 +133,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

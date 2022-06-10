@@ -67,13 +67,18 @@
 <dd><p>A character vector of length 1 indicating study_id.
 See <code>get_studies()</code> to see all available studies for your URL. If <code>NULL</code>, it will
 return all profiles for your current database url</p></dd>
+
+
 <dt>base_url</dt>
 <dd><p>The database URL to query.
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A dataframe of available genetic profiles and their profile ids</p>
+    
+
+<p>A dataframe of available genetic profiles and their profile ids</p>
     </div>
 
     <div class="section level2">
@@ -83,7 +88,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #00BB00;">base_url</span> for this R session is now set to <span style="color: #0000BB;">"www.cbioportal.org/api"</span> </span>
 <span class="r-in"><span class="fu">available_profiles</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No `study_id` provided. Returning all available genomic profiles for <span style="color: #0000BB; font-style: italic;">&lt;www.cbioportal.org/api&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,644 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,650 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    molecularAlteration… datatype name  description showProfileInAn… patientLevel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> PROTEIN_LEVEL        LOG2-VA… Prot… Protein ex… FALSE            FALSE       </span>
@@ -96,7 +101,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MRNA_EXPRESSION      Z-SCORE  mRNA… mRNA expre… TRUE             FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MRNA_EXPRESSION      Z-SCORE  mRNA… Log-transf… TRUE             FALSE       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> COPY_NUMBER_ALTERAT… DISCRETE Copy… Putative c… TRUE             FALSE       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,634 more rows, and 5 more variables: molecularProfileId &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,640 more rows, and 5 more variables: molecularProfileId &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, genericAssayType &lt;chr&gt;, pivotThreshold &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sortOrder &lt;chr&gt;</span></span>
 <span class="r-in"><span class="fu">available_profiles</span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span></span>
@@ -124,7 +129,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

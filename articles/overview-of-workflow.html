@@ -77,7 +77,7 @@
 
 
 <script src="overview-of-workflow_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Overview of Data Retrieval Workflow</h1>
             
       
@@ -122,7 +122,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_studies</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_studies.html">available_studies</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">all_studies</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 342 × 13</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 344 × 13</span></span>
 <span class="co">#&gt;    studyId name  description publicStudy groups status importDate allSampleCount</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> acc_tc… Adre… <span style="color: #949494;">"</span>TCGA Adre… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…             92</span>
@@ -135,7 +135,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> blca_b… Blad… <span style="color: #949494;">"</span>Whole-exo… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…             99</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> blca_m… Blad… <span style="color: #949494;">"</span>Genomic P… TRUE        <span style="color: #949494;">"</span>PUBL…      0 2022-03-0…            109</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> all_st… Hypo… <span style="color: #949494;">"</span>Whole gen… TRUE        <span style="color: #949494;">""</span>          0 2022-03-0…             44</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 332 more rows, and 5 more variables: readPermission &lt;lgl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 334 more rows, and 5 more variables: readPermission &lt;lgl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;</span></span></code></pre></div>
 <p>By inspecting this dataframe, we see the unique <code>study_id</code> we want is <code>"blca_nmibc_2017"</code> To get more information on our study we can do the following:</p>
 <p><em>Note: the transpose function <code><a href="https://rdrr.io/r/base/t.html" class="external-link">t()</a></code> just used here to better view results</em></p>
@@ -535,7 +535,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer>

@@ -65,15 +65,39 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>panel_id</dt>
 <dd><p>name of panel. See <code><a href="available_gene_panels.html">available_gene_panels()</a></code> to get panel ID</p></dd>
+
+
 <dt>base_url</dt>
 <dd><p>The database URL to query.
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A dataframe of genes in a specified panel</p>
+    
+
+<p>A dataframe of genes in a specified panel</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">get_gene_panel</span><span class="op">(</span>panel_id <span class="op">=</span> <span class="st">"IMPACT468"</span>, base_url <span class="op">=</span> <span class="st">'www.cbioportal.org/api'</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 469 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    genePanelId entrezGeneId hugoGeneSymbol description                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> IMPACT468             25 ABL1           Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> IMPACT468          <span style="text-decoration: underline;">84</span>142 ABRAXAS1       Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> IMPACT468             90 ACVR1          Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> IMPACT468          <span style="text-decoration: underline;">27</span>161 AGO2           Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> IMPACT468            207 AKT1           Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> IMPACT468            208 AKT2           Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> IMPACT468          <span style="text-decoration: underline;">10</span>000 AKT3           Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> IMPACT468            238 ALK            Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> IMPACT468            242 ALOX12B        Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> IMPACT468         <span style="text-decoration: underline;">139</span>285 AMER1          Targeted (468 cancer genes) sequenci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 459 more rows</span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -83,7 +107,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

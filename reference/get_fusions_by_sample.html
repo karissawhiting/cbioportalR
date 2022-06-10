@@ -73,30 +73,45 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>sample_id</dt>
 <dd><p>a vector of sample IDs (character)</p></dd>
+
+
 <dt>study_id</dt>
 <dd><p>A string indicating the study ID from which to pull data. If no study ID, will
 guess the study ID based on your URL and inform. Only 1 study ID can be passed. If mutations/cna from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+
+
 <dt>molecular_profile_id</dt>
 <dd><p>A string indicating the molecular profile ID from which to pull data. If ID supplied, will
 guess the molecular profile ID based on the study ID. Only 1 molecular profile ID can be passed. If mutations from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+
+
 <dt>sample_study_pairs</dt>
 <dd><p>A dataframe with columns: <code>sample_id</code>, <code>study_id</code> and <code>molecular_profile_id</code> (optional).
 This can be used in place of <code>sample_id</code>, <code>study_id</code>, <code>molecular_profile_id</code> arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite <code>sample_id</code>, <code>study_id</code>, <code>molecular_profile_id</code> if also passed.</p></dd>
+
+
 <dt>genes</dt>
 <dd><p>A vector of entrez ids. If NULL, will return results for all
 IMPACT genes (see <code><a href="impact_gene_info.html">cbioportalR::impact_gene_info</a></code>)</p></dd>
+
+
 <dt>add_hugo</dt>
 <dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
+
+
 <dt>base_url</dt>
 <dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame of Fusions</p>
+    
+
+<p>A data frame of Fusions</p>
     </div>
 
     <div class="section level2">
@@ -118,7 +133,6 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;, site2EntrezGeneId &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2HugoSymbol &lt;chr&gt;, ncbiBuild &lt;chr&gt;, center &lt;chr&gt;, eventInfo &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variantClass &lt;chr&gt;, comments &lt;chr&gt;</span></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -130,7 +144,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -74,32 +74,49 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>sample_id</dt>
 <dd><p>a vector of sample IDs (character)</p></dd>
+
+
 <dt>study_id</dt>
 <dd><p>A string indicating the study ID from which to pull data. If no study ID, will
 guess the study ID based on your URL and inform. Only 1 study ID can be passed. If mutations/cna from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+
+
 <dt>molecular_profile_id</dt>
 <dd><p>A string indicating the molecular profile ID from which to pull data. If ID supplied, will
 guess the molecular profile ID based on the study ID. Only 1 molecular profile ID can be passed. If mutations from
 more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
+
+
 <dt>sample_study_pairs</dt>
 <dd><p>A dataframe with columns: <code>sample_id</code>, <code>study_id</code> and <code>molecular_profile_id</code> (optional).
 This can be used in place of <code>sample_id</code>, <code>study_id</code>, <code>molecular_profile_id</code> arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite <code>sample_id</code>, <code>study_id</code>, <code>molecular_profile_id</code> if also passed.</p></dd>
+
+
 <dt>data_type</dt>
 <dd><p>specify what type of data to return. Options are<code>mutations</code>, <code>cna</code>, <code>fusion</code></p></dd>
+
+
 <dt>genes</dt>
 <dd><p>A vector of entrez ids. If NULL, will return results for all
 IMPACT genes (see <code><a href="impact_gene_info.html">cbioportalR::impact_gene_info</a></code>)</p></dd>
+
+
 <dt>add_hugo</dt>
 <dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
+
+
 <dt>base_url</dt>
 <dd><p>The database URL to query
 If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;your_db&gt;)</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A dataframe of mutations or CNAs</p>
+    
+
+<p>A dataframe of mutations or CNAs</p>
     </div>
 
     <div class="section level2">
@@ -134,7 +151,6 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></span>
 <span class="r-in"></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="fu">.get_data_by_sample</span><span class="op">(</span>sample_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DS-sig-010-P2"</span><span class="op">)</span>,</span>
 <span class="r-in"> molecular_profile_id <span class="op">=</span> <span class="st">"blca_plasmacytoid_mskcc_2016_cna"</span>, data_type <span class="op">=</span> <span class="st">"cna"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
@@ -149,29 +165,6 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   alteration &lt;int&gt;</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">.get_data_by_sample</span><span class="op">(</span>sample_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P-0002146-T01-IM3"</span><span class="op">)</span>,</span>
-<span class="r-in"> molecular_profile_id <span class="op">=</span> <span class="st">"blca_plasmacytoid_mskcc_2016_mutations"</span>, data_type <span class="op">=</span> <span class="st">"mutation"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016_mutations"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 33</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> TERT                   <span style="text-decoration: underline;">7</span>015 UC0wMDAyMTQ2LVQ… UC0wMDAyMTQ2OmJ… blca_plasmacyto…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> TP53                   <span style="text-decoration: underline;">7</span>157 UC0wMDAyMTQ2LVQ… UC0wMDAyMTQ2OmJ… blca_plasmacyto…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> NOTCH4                 <span style="text-decoration: underline;">4</span>855 UC0wMDAyMTQ2LVQ… UC0wMDAyMTQ2OmJ… blca_plasmacyto…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> BLM                     641 UC0wMDAyMTQ2LVQ… UC0wMDAyMTQ2OmJ… blca_plasmacyto…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> TP53                   <span style="text-decoration: underline;">7</span>157 UC0wMDAyMTQ2LVQ… UC0wMDAyMTQ2OmJ… blca_plasmacyto…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> CDKN1A                 <span style="text-decoration: underline;">1</span>026 UC0wMDAyMTQ2LVQ… UC0wMDAyMTQ2OmJ… blca_plasmacyto…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> RB1                    <span style="text-decoration: underline;">5</span>925 UC0wMDAyMTQ2LVQ… UC0wMDAyMTQ2OmJ… blca_plasmacyto…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalRefCount &lt;int&gt;, startPosition &lt;int&gt;, endPosition &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, chr &lt;chr&gt;, …</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">.get_data_by_sample</span><span class="op">(</span>sample_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P-0002146-T01-IM3"</span><span class="op">)</span>,</span>
 <span class="r-in"> study_id <span class="op">=</span> <span class="st">"blca_plasmacytoid_mskcc_2016"</span>, data_type <span class="op">=</span> <span class="st">"fusion"</span><span class="op">)</span></span>
@@ -187,6 +180,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;, ncbiBuild &lt;chr&gt;, center &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eventInfo &lt;chr&gt;, variantClass &lt;chr&gt;, comments &lt;chr&gt;</span></span>
 <span class="r-in"></span>
+<span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span class="r-in"><span class="st">"sample_id"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"s_C_36924L_P001_d"</span>,</span>
 <span class="r-in"><span class="st">"s_C_03LNU8_P001_d"</span><span class="op">)</span>,</span>
@@ -316,7 +310,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;, ncbiBuild &lt;chr&gt;, center &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eventInfo &lt;chr&gt;, variantClass &lt;chr&gt;, comments &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2EntrezGeneId &lt;int&gt;, site2HugoSymbol &lt;chr&gt;</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -328,7 +322,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>
