@@ -20,13 +20,17 @@
 #' @export
 #' @keywords internal
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \donttest{
 #' set_cbioportal_db("public")
+#' .get_data_by_study(study_id = "prad_msk_2019", data_type = "cna")
 #' .get_data_by_study(study_id = "prad_msk_2019", data_type = "mutation")
 #' .get_data_by_study(study_id = "prad_msk_2019", data_type = "fusion")
 #'
 #' .get_data_by_study(molecular_profile_id = "prad_msk_2019_cna", data_type = "cna")
+#' .get_data_by_study(molecular_profile_id = "prad_msk_2019_mutations", data_type = "mutation")
 #' .get_data_by_study(molecular_profile_id = "prad_msk_2019_fusion", data_type = "fusion")
+#' }
 #'
 .get_data_by_study <- function(study_id = NULL,
                               molecular_profile_id = NULL,

@@ -35,13 +35,16 @@ This internal function allows you to pull data from either endpoint. It has
 logic for sensible default guesses at \code{study_id} and \code{molecular_profile_id} when those are \code{NULL}
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 set_cbioportal_db("public")
+.get_data_by_study(study_id = "prad_msk_2019", data_type = "cna")
 .get_data_by_study(study_id = "prad_msk_2019", data_type = "mutation")
 .get_data_by_study(study_id = "prad_msk_2019", data_type = "fusion")
 
 .get_data_by_study(molecular_profile_id = "prad_msk_2019_cna", data_type = "cna")
+.get_data_by_study(molecular_profile_id = "prad_msk_2019_mutations", data_type = "mutation")
 .get_data_by_study(molecular_profile_id = "prad_msk_2019_fusion", data_type = "fusion")
-\dontshow{\}) # examplesIf}
+}
+
 }
 \keyword{internal}

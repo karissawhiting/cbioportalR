@@ -29,21 +29,20 @@ For more information on cBioPortal, see the following publications:
 -   [Gao et al. Sci. Signal.
     2013](https://pubmed.ncbi.nlm.nih.gov/23550210/)
 -   [Cerami et al. Cancer Discov.
-    2012](https://cancerdiscovery.aacrjournals.org/content/2/5/401.abstract)
+    2012](https://aacrjournals.org/cancerdiscovery/article/2/5/401/3246/The-cBio-Cancer-Genomics-Portal-An-Open-Platform)
 
 For full documentation on the cBioPortal API, please see the following
 links:
 
 -   [cBioPortal API and API Clients
-    documentation](http://docs.cbioportal.org/6.-web-api-and-clients/api-and-api-clients)
+    documentation](https://docs.cbioportal.org/web-api-and-clients/)
 -   [Full reference documentation for
     API](https://www.cbioportal.org/api/swagger-ui.html#/)
 
 *Note: If you are a MSK researcher working on IMPACT data, you should
 connect to MSK’s cBioPortal instance to get the most up to date IMPACT
-data, and you must follow [MSK-IMPACT publication
-guidelines](http://cmo.mskcc.org/cmo/initiatives/msk-impact/) when using
-this data*
+data, and you must follow the MSK-IMPACT publication guidelines when
+using this data*
 
 ## Installation
 
