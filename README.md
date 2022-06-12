@@ -222,12 +222,11 @@ more information from you (unlike pulling by study ID which returns
 everything available for that study). This can be useful when working
 within a very large database or working across samples housed in
 multiple different studies. When querying by `sample_id` you must also
-specify the corresponding `study_id` in which the samples are housed and
-the specific genes for which you wish to return results. When these
-pieces of information are not provided, {cbioportalR} makes an informed
-guess based on your connection and will throw an informative message to
-clarify exactly what is being queried. In the example below, the
-function defaults to the public version of the IMPACT database
+specify the corresponding `study_id` in which the samples are housed.
+When these pieces of information are not provided, {cbioportalR} makes
+an informed guess based on your connection and will throw an informative
+message to clarify exactly what is being queried. In the example below,
+the function defaults to the public version of the IMPACT database
 (`study_id = "msk_impact_2017"`).
 
 ``` r

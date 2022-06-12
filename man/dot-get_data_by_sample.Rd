@@ -32,8 +32,7 @@ need to pull samples from several different studies at once. If passed this will
 
 \item{data_type}{specify what type of data to return. Options are\code{mutations}, \code{cna}, \code{fusion}}
 
-\item{genes}{A vector of entrez ids. If NULL, will return results for all
-IMPACT genes (see \code{cbioportalR::impact_gene_info})}
+\item{genes}{A vector of entrez ids. If NULL, it will return gene results for all available data for that sample.}
 
 \item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
 

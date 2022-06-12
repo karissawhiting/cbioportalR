@@ -14,8 +14,7 @@
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
 #' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion`
-#' @param genes A vector of entrez ids. If NULL, will return results for all
-#' IMPACT genes (see `cbioportalR::impact_gene_info`)
+#' @param genes A vector of entrez ids. If NULL, it will return gene results for all available data for that sample.
 #' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
@@ -92,6 +91,8 @@
     "fusion" = "fusion",
     "cna" = "discrete-copy-number")
 
+  resolved_genes <- genes
+
   # Make Informed guesses on parameters -------------------------------------
 
   # `sample_study_pairs` gets priority. If that is NULL then consider other args
@@ -130,9 +131,6 @@
   }
 
 
-  # default to IMPACT genes if `genes` are NULL
-  resolved_genes <- genes %||%
-    cbioportalR::impact_gene_info$entrez_id %>% unlist()
 
 
   # * Prep data frame for Query -------------------------------------------------
@@ -201,7 +199,8 @@
 
         body_n = list(
           entrezGeneIds = resolved_genes,
-          sampleIds = y$sample_id)
+          sampleIds = y$sample_id) %>%
+          purrr::discard(is.null)
 
         res <- cbp_api(url_path = x,
                        method = "post",
@@ -252,7 +251,7 @@
 
     df <- df_fus %>%
       purrr::when(
-        nrow(.) > 0 ~ filter(., .data$site1EntrezGeneId %in% resolved_genes),
+        (nrow(.) > 0 & !is.null(resolved_genes)) ~ filter(., .data$site1EntrezGeneId %in% resolved_genes),
         TRUE ~ .)
 
     # Since you don't query by genes, filter genes at end so behaviour is consistent
