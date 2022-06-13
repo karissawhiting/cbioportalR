@@ -99,11 +99,11 @@ need to pull samples from several different studies at once. If passed this will
 
 
 <dt>genes</dt>
-<dd><p>A vector of entrez ids. If NULL, it will return gene results for all available data for that sample.</p></dd>
+<dd><p>A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function. If NULL, it will return gene results for all available data for that sample.</p></dd>
 
 
 <dt>add_hugo</dt>
-<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
+<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is <code>TRUE</code> and adds this by default.</p></dd>
 
 
 <dt>base_url</dt>

@@ -53,7 +53,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.1" id="cbioportalr-021">cbioportalR 0.2.1<a class="anchor" aria-label="anchor" href="#cbioportalr-021"></a></h2>
-<ul><li>Update get_*_by_sample() functions to pull all gene data available for selected sample by default instead of pulling data for IMPACT genes only by default. This will change default results when user does not specify genes, and could return more results than previously as they will include results for non IMPACT gene mutations, CNA or fusions, if available.</li></ul></div>
+<ul><li>Update <code>get_genomics_by_sample()</code> and related functions to pull all gene data available for selected sample by default instead of pulling data for IMPACT genes only by default. This will change default results when user does not specify genes, and could return more results than previously as they will include results for non IMPACT gene mutations, CNA or fusions, if available.</li>
+<li>Allow users to pass Hugo Symbols to all <code>get_genomics_by_sample()</code> and related functions (previously had to specify by Entrez Gene ID or <code>NULL</code>) (<a href="https://github.com/karissawhiting/cbioportalR/issues/33" class="external-link">#33</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="cbioportalr-020">cbioportalR 0.2.0<a class="anchor" aria-label="anchor" href="#cbioportalr-020"></a></h2>
 <ul><li>Update internals of most functions with the exception of <code><a href="../reference/cbp_api.html">cbp_api()</a></code>
