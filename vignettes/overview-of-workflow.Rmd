@@ -63,7 +63,7 @@ all_studies
 
 By inspecting this dataframe, we see the unique `study_id` we want is  `"blca_nmibc_2017"` To get more information on our study we can do the following:
 
-*Note: the transpose function `t()` just used here to better view results*
+*Note: the transpose function `t()` is just used here to better view results*
 
 ```{r}
 all_studies %>% 
@@ -72,12 +72,12 @@ all_studies %>%
 More in-depth information about the study can be found with `get_study_info()`
 
 ```{r  }
-get_study_info("blca_nmibc_2017")%>% 
+get_study_info("blca_nmibc_2017") %>% 
   t() 
 ```
 
 ```{r }
-get_study_info("prad_msk_2019")%>% 
+get_study_info("prad_msk_2019") %>% 
   t() 
 
 ```
@@ -94,7 +94,7 @@ available_profiles(study_id = "blca_nmibc_2017")
 available_profiles(study_id = "prad_msk_2019")
 ```
 
-Luckily, our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`. 
+Luckily, in this example our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`. 
 
 ```{r}
 available_profiles(study_id = "blca_nmibc_2017") %>%
@@ -109,13 +109,13 @@ Now that we have inspected our studies and confirmed the genomic data that is av
 1) Using study IDs (`get_genetics_by_study()`)
 2) Using sample ID-study ID pairs (`get_genetics_by_sample()`)
 
-Pulling by study will give us genomic data for all genes/panels included in the study. You must pull by one study at a time. A benefit of pulling data this way is that you don't have to specify which specific genes to query. It returns all genomic data available by default, however pulling all study data can be slow and inconvenient if you are working across multiple large studies, especially if you only need a subset of each study.
+Pulling by study will give us genomic data for all genes/panels included in the study. These functions can only pull data one study ID at a time and will return all genomic data available for that study. Pulling by study ID can be efficient, and a good way to ensure you have all genomic information available in cBioPortal for a particular study. 
 
-When we pull by sample IDs, the API requires us to specify which genes we want to query. If you do not specify, the function will default to querying all IMPACT genes (on any version of IMPACT panel). This allows you to pull specific samples across multiple studies.
+If you are working across multiple studies, or only need a subset of samples from one or multiple studies, you may chose to pull by sample IDs instead of study ID. When you pull by sample IDs you can pull specific samples across multiple studies, but must also specify the studies they belong to. You may also pass a specific list of genes for which to return information. If you don't specify a list of genes the function will default to returning all available gene data for each sample. 
 
 ### By Study IDs
 
-To pull by study ID, we can pull each data type individually. Specifying which genes to query is not required when pulling data by study ID.
+To pull by study ID, we can pull each data type individually.
 
 ```{r}
 
@@ -144,11 +144,6 @@ all_equal(cna_blca, all_genomic_blca$cna)
 all_equal(fus_blca, all_genomic_blca$fusion)
 ```
 
-```{r}
-#get_panel_by_sample
-
-```
-
 Finally, we can join the two studies together
 
 ```{r}
@@ -159,9 +154,7 @@ fus_study <- bind_rows(fus_blca, fus_prad)
 
 ### By Sample IDs
 
-When we pull by sample IDs, the API requires us to specify which genes we want to query. If you do not specify, the function will default to querying all IMPACT genes (on any version of IMPACT panel). This allows you to pull specific samples across multiple studies.
-
-We can pull from both studies at the same time for a select set of samples using the `sample_study_pairs` argument in `get_genetics_by_sample()`.
+When we pull by sample IDs, we can pull specific samples across multiple studies. In the above example, we can pull from both studies at the same time for a select set of samples using the `sample_study_pairs` argument in `get_genetics_by_sample()`.
 
 Let's pull data for the first 10 samples in each study. We first need to construct our dataframe to pass to the function:
 
@@ -227,30 +220,7 @@ all.equal(mut_study_subset, mut_sample)
 
 ```
 
-In this case, both results are equal which means both studies were IMPACT panel only studies. 
-
-Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample:
-
-```{r}
-ex_by_sample <-  get_mutations_by_sample(sample_id = "PD3181a",
-                                        study_id = "acyc_sanger_2013")
-
-ex_by_study <- get_mutations_by_study(study_id = "acyc_sanger_2013") %>%
-  filter(sampleId == "PD3181a")
-
-genes_diff <- setdiff(ex_by_study$entrezGeneId, ex_by_sample$entrezGeneId)
-
-```
-
-We could resolve this discrepancy by specifying which genes we want to query in `get_mutations_by_sample()` to ensure that the same genes are queried across both studies:
-
-```{r}
-ex_by_sample_update <-  get_mutations_by_sample(sample_id = "PD3181a",
-                                               study_id = "acyc_sanger_2013", 
-                                               genes = ex_by_study$entrezGeneId)
-
-setdiff(ex_by_study$entrezGeneId, ex_by_sample_update$entrezGeneId)
-```
+Both results are equal.
 
 
 ## Pulling Clinical Data
@@ -332,5 +302,4 @@ all_patient_clinical %>%
   select(-contains("unique"))
 ```
 
-```
 

@@ -1,3 +1,7 @@
+# cbioportalR 0.2.1
+
+* Update get_*_by_sample() functions to pull all gene data available for selected sample by default instead of 
+pulling data for IMPACT genes only by default. This will change default results when user does not specify genes, and could return more results than previously as they will include results for non IMPACT gene mutations, CNA or fusions, if available.
 
 # cbioportalR 0.2.0
 

@@ -1,6 +1,6 @@
 Package: cbioportalR
 Title: An R Package to Access Data on cBioPortal
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     c(person(given = "Karissa",
            family = "Whiting",

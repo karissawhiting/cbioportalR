@@ -239,3 +239,26 @@ test_that("Hugo Symbol is added by default ", {
 
 
 })
+
+test_that("Returns same results as pulling by study ID ", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+  all <- available_samples("blca_plasmacytoid_mskcc_2016")
+  resolved_genes <- cbioportalR::impact_gene_info$entrez_id %>% unlist()
+  x <- .get_data_by_sample(sample_id = all$sampleId,
+                           study_id = "blca_plasmacytoid_mskcc_2016", data_type = "cna")
+
+  y <-.get_data_by_sample(sample_id = all$sampleId,
+                          study_id = "blca_plasmacytoid_mskcc_2016", data_type = "cna")
+
+  resolved_genes <- cbioportalR::impact_gene_info$entrez_id %>% unlist()
+
+  z <-.get_data_by_sample(sample_id = all$sampleId,
+                          study_id = "blca_plasmacytoid_mskcc_2016", data_type = "cna",
+                          genes = resolved_genes)
+  expect_true(length(setdiff(x$hugoGeneSymbol, z$hugoGeneSymbol)) != 0)
+
+
+})
