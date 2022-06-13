@@ -84,6 +84,7 @@ get_entrez_id <- function(hugo_symbol = NULL,
 #'
 #' get_alias(hugo_symbol = "FGFR3", base_url = 'www.cbioportal.org/api')
 #' get_alias(hugo_symbol = c("FGFR3", "TP53"), base_url = 'www.cbioportal.org/api')
+#'
 get_alias <- function(hugo_symbol = NULL,
                       base_url = NULL) {
 

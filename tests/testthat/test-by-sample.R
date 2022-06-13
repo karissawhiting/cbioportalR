@@ -1,8 +1,9 @@
 
-# Sample ID AND Study ID Endpoints -----------------------------------------------------------
+# Tests all sample ID pull functions (and some non genomic sample tests, e.g. clinical pulls)------
+
+# Sample ID AND Study ID Endpoints ----------------------------------------------
 
 test_that("test endpoints - with sample ID", {
-
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"

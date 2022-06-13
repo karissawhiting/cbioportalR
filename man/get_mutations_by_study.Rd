@@ -20,7 +20,7 @@ more than 1 study needed, see \code{sample_study_pairs}}
 guess the molecular profile ID based on the study ID. Only 1 molecular profile ID can be passed. If mutations from
 more than 1 study needed, see \code{sample_study_pairs}}
 
-\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
+\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is \code{TRUE} and adds this by default.}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
