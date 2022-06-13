@@ -29,8 +29,8 @@ more than 1 study needed, see \code{sample_study_pairs}}
 This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
 
-\item{genes}{A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function. If NULL, will return results for all.
-IMPACT genes (see \code{cbioportalR::impact_gene_info})}
+\item{genes}{A vector of entrez ids. If NULL, it will return gene results for all available data for that sample.}
+
 
 \item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is \code{TRUE} and adds this by default.}
 
@@ -44,8 +44,9 @@ A data frame of Fusions
 Get Fusions By Sample ID
 }
 \examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 set_cbioportal_db("public")
 get_fusions_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
                  study_id = "prad_msk_2019")
-
+\dontshow{\}) # examplesIf}
 }

@@ -10,9 +10,7 @@ get_cbioportal_token()
 Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 }
 \examples{
-\dontrun{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_cbioportal_token()
-}
-
-
+\dontshow{\}) # examplesIf}
 }

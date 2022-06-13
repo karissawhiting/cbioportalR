@@ -19,7 +19,7 @@
 #'   \item{alias}{A nested dataframe of aliases for each gene and corresponding entrez gene ids for aliases if they exist}
 #' }
 #'
-#' @source \url{https://cbioportal.org/}
+#' @source \url{http://www.cbioportal.org/}
 #'
 "impact_gene_info"
 

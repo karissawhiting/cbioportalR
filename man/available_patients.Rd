@@ -20,9 +20,10 @@ A dataframe of patient_ids in a given study
 Get All Patient IDs in a Study
 }
 \examples{
-\dontrun{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 set_cbioportal_db("public")
 available_samples(study_id = "acc_tcga")
 }
-
+\dontshow{\}) # examplesIf}
 }

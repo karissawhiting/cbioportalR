@@ -21,6 +21,7 @@
 #' @keywords internal
 #'
 #' @examples
+#' \donttest{
 #' set_cbioportal_db("public")
 #' .get_data_by_study(study_id = "prad_msk_2019", data_type = "cna")
 #' .get_data_by_study(study_id = "prad_msk_2019", data_type = "mutation")
@@ -29,6 +30,7 @@
 #' .get_data_by_study(molecular_profile_id = "prad_msk_2019_cna", data_type = "cna")
 #' .get_data_by_study(molecular_profile_id = "prad_msk_2019_mutations", data_type = "mutation")
 #' .get_data_by_study(molecular_profile_id = "prad_msk_2019_fusion", data_type = "fusion")
+#' }
 #'
 .get_data_by_study <- function(study_id = NULL,
                               molecular_profile_id = NULL,
@@ -164,7 +166,7 @@
 #'
 #' @return A dataframe of mutations (maf file format)
 #' @export
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_mutations_by_study(study_id = "prad_msk_2019")
 #' get_mutations_by_study(molecular_profile_id = "prad_msk_2019_mutations")
 #'
@@ -187,10 +189,9 @@ get_mutations_by_study <- function(study_id = NULL,
 #' @export
 #'
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_cna_by_study(study_id = "prad_msk_2019")
 #' get_cna_by_study(molecular_profile_id = "prad_msk_2019_cna")
-#' get_cna_by_study(molecular_profile_id = "acc_tcga_gistic")
 
 get_cna_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
@@ -211,7 +212,7 @@ get_cna_by_study <- function(study_id = NULL,
 #' @export
 #'
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_fusions_by_study(study_id = "prad_msk_2019")
 #' get_fusions_by_study(molecular_profile_id = "prad_msk_2019_fusion")
 #'
@@ -234,7 +235,7 @@ get_fusions_by_study <- function(study_id = NULL,
 #' @export
 #'
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_genetics_by_study(study_id = "prad_msk_2019")
 #'
 #

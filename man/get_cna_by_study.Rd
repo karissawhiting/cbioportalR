@@ -30,7 +30,8 @@ A dataframe of CNAs
 Get CNA By Study
 }
 \examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_cna_by_study(study_id = "prad_msk_2019")
 get_cna_by_study(molecular_profile_id = "prad_msk_2019_cna")
-get_cna_by_study(molecular_profile_id = "acc_tcga_gistic")
+\dontshow{\}) # examplesIf}
 }

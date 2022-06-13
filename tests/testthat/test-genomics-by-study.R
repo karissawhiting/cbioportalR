@@ -3,6 +3,8 @@
 # Mutations By Study ID/Molecular Profile --------------------------------------
 test_that("get mutations by study id - no error", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   study_id = "mpnst_mskcc"
@@ -14,6 +16,8 @@ test_that("get mutations by study id - no error", {
 
 test_that("get mutations by molecular profile - no error", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   molecular_profile_id = "mpnst_mskcc_mutations"
@@ -24,6 +28,8 @@ test_that("get mutations by molecular profile - no error", {
 })
 
 test_that("get mutations by molecular profile/ study id/ get_genetics all the same", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -38,6 +44,8 @@ test_that("get mutations by molecular profile/ study id/ get_genetics all the sa
 })
 
 test_that("Test study_id and Profile Param", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   # > expand.grid(study_id = c("correct", "incorrect", "NULL"),
   # profile = c("correct", "incorrect", "NULL"))
@@ -137,6 +145,8 @@ test_that("Test study_id and Profile Param", {
 
 test_that("data is same regardless of function", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
 
@@ -166,6 +176,8 @@ test_that("data is same regardless of function", {
 })
 
 test_that("get_genetics- one data type non existant", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)

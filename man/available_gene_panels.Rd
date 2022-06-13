@@ -16,3 +16,9 @@ a dataframe of metadata regarding each available panel
 \description{
 Get Available Gene Panels For a Database
 }
+\examples{
+\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+set_cbioportal_db("public")
+available_gene_panels()
+\dontshow{\}) # examplesIf}
+}

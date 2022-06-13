@@ -1,6 +1,7 @@
 
 # No Parameter Endpoints -------------------------------------------------------
 test_that("test endpoints- no parameters works without error", {
+  skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)

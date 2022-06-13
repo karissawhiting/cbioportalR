@@ -2,12 +2,12 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "cbioportalR",
-  "description": "allows you to access cBioPortal's genomic and clinical data directly through R. The package wraps cBioPortal's existing API endpoints in R so R users can easily leverage cBioPortal's API. Using these functions, you can access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study). ",
-  "name": "cbioportalR: An R package to access data on cBioPortal",
+  "description": "An R client for access to genomic and clinical data from `cBioPortal`. The package wraps 'cBioPortal's' existing API endpoints so R users can easily leverage the existing API. Using these functions, users can access genomic data on mutations, copy number alterations and fusions, as well as data on tumor mutational burden ('TMB'), microsatellite instability status ('MSI'), 'FACETS' data and select clinical data points (depending on the study). ",
+  "name": "cbioportalR: An R Package to Access Data on cBioPortal",
   "codeRepository": "https://github.com/karissawhiting/cbioportalR",
   "issueTracker": "https://github.com/karissawhiting/cbioportalR/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -21,16 +21,6 @@
       "familyName": "Whiting",
       "email": "karissa.whiting@gmail.com",
       "@id": "https://orcid.org/0000-0002-4683-1868"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Axel",
-      "familyName": "Martin"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Arshi",
-      "familyName": "Arora"
     }
   ],
   "maintainer": [
@@ -234,18 +224,6 @@
     },
     "12": {
       "@type": "SoftwareApplication",
-      "identifier": "usethis",
-      "name": "usethis",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=usethis"
-    },
-    "13": {
-      "@type": "SoftwareApplication",
       "identifier": "cli",
       "name": "cli",
       "provider": {
@@ -258,7 +236,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "843.178KB",
+  "fileSize": "2036.28KB",
   "releaseNotes": "https://github.com/karissawhiting/cbioportalR/blob/master/NEWS.md",
   "readme": "https://github.com/karissawhiting/cbioportalR/blob/main/README.md",
   "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"]

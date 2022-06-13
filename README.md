@@ -8,7 +8,7 @@ coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/b
 
 <!-- badges: end -->
 
-# cbioportalR <a href='https://karissawhiting.github.io/cbioportalR/'><img src='man/figures/logo.png' align="right" height="150" /></a>
+# cbioportalR <a href='https://karissawhiting.github.io/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 {cbioportalR} allows you to access
 [cBioPortal’s](https://www.cbioportal.org/) genomic and clinical data
@@ -29,22 +29,19 @@ For more information on cBioPortal, see the following publications:
 -   [Gao et al. Sci. Signal.
     2013](https://pubmed.ncbi.nlm.nih.gov/23550210/)
 -   [Cerami et al. Cancer Discov.
-    2012](https://cancerdiscovery.aacrjournals.org/content/2/5/401.abstract)
+    2012](https://aacrjournals.org/cancerdiscovery/article/2/5/401/3246/The-cBio-Cancer-Genomics-Portal-An-Open-Platform)
 
 For full documentation on the cBioPortal API, please see the following
 links:
 
 -   [cBioPortal API and API Clients
-    documentation](https://docs.cbioportal.org/6.-web-api-and-clients/api-and-api-clients)
+    documentation](https://docs.cbioportal.org/web-api-and-clients/)
 -   [Full reference documentation for
     API](https://www.cbioportal.org/api/swagger-ui.html#/)
 
-This package is compatible with the latest version of cBioPortal (v4.1.4) but may change as the cBioPortal API evolves. Please see the [cBioPortal releases page](https://github.com/cBioPortal/cbioportal/releases) for information on any specific API updates.
-
 *Note: If you are a MSK researcher working on IMPACT data, you should
 connect to MSK’s cBioPortal instance to get the most up to date IMPACT
-data, and you must follow [MSK-IMPACT publication
-guidelines](https://cmo.mskcc.org/cmo/initiatives/msk-impact/) when
+data, and you must follow the MSK-IMPACT publication guidelines when
 using this data*
 
 ## Installation
@@ -102,8 +99,8 @@ function will both set your URL and check the connection.
 
 ``` r
 set_cbioportal_db(db = "public")
-#> ✓ You are successfully connected!
-#> ✓ base_url for this R session is now set to "www.cbioportal.org/api"
+#> ✔ You are successfully connected!
+#> ✔ base_url for this R session is now set to "www.cbioportal.org/api"
 ```
 
 You are now set up for the remainder of your session! API calls depend
@@ -113,7 +110,7 @@ session:
 
 ``` r
 test_cbioportal_db()
-#> ✓ You are successfully connected!
+#> ✔ You are successfully connected!
 ```
 
 ## cBioPortal Data Model
@@ -134,20 +131,20 @@ To see available studies in your database you can use:
 available_studies() %>% 
   head(n = 10)
 #> # A tibble: 10 × 13
-#>    studyId name  description publicStudy pmid  citation groups status importDate
-#>    <chr>   <chr> <chr>       <lgl>       <chr> <chr>    <chr>   <int> <chr>     
-#>  1 acbc_m… Aden… "Whole exo… TRUE        2609… Martelo… "ACYC…      0 2022-03-0…
-#>  2 acc_20… Aden… "Multi-Ins… TRUE        3148… Allen e… "ACYC…      0 2022-03-0…
-#>  3 acc_tc… Adre… "TCGA Adre… TRUE        <NA>  <NA>     "PUBL…      0 2022-03-0…
-#>  4 blca_p… Blad… "Whole exo… TRUE        2690… Al-Ahma… ""          0 2022-03-0…
-#>  5 bcc_un… Basa… "Whole-exo… TRUE        2695… Bonilla… "PUBL…      0 2022-03-0…
-#>  6 all_st… Acut… "Comprehen… TRUE        2573… Anderss… "PUBL…      0 2022-03-0…
-#>  7 ampca_… Ampu… "Exome seq… TRUE        2680… Gingras… "PUBL…      0 2022-03-0…
-#>  8 blca_d… Blad… "Whole exo… TRUE        2509… Van All… "PUBL…      0 2022-03-0…
-#>  9 blca_m… Blad… "Comprehen… TRUE        2389… Iyer et… "PUBL…      0 2022-03-0…
-#> 10 blca_b… Blad… "Whole-exo… TRUE        2412… Guo et … "PUBL…      0 2022-03-0…
-#> # … with 4 more variables: allSampleCount <int>, readPermission <lgl>,
-#> #   cancerTypeId <chr>, referenceGenome <chr>
+#>    studyId name  description publicStudy groups status importDate allSampleCount
+#>    <chr>   <chr> <chr>       <lgl>       <chr>   <int> <chr>               <int>
+#>  1 acc_tc… Adre… "TCGA Adre… TRUE        "PUBL…      0 2022-03-0…             92
+#>  2 blca_p… Blad… "Whole exo… TRUE        ""          0 2022-03-0…             34
+#>  3 bcc_un… Basa… "Whole-exo… TRUE        "PUBL…      0 2022-03-0…            293
+#>  4 all_st… Acut… "Comprehen… TRUE        "PUBL…      0 2022-03-0…             93
+#>  5 ampca_… Ampu… "Exome seq… TRUE        "PUBL…      0 2022-03-0…            160
+#>  6 blca_d… Blad… "Whole exo… TRUE        "PUBL…      0 2022-03-0…             50
+#>  7 blca_m… Blad… "Comprehen… TRUE        "PUBL…      0 2022-03-0…             97
+#>  8 blca_b… Blad… "Whole-exo… TRUE        "PUBL…      0 2022-03-0…             99
+#>  9 blca_m… Blad… "Genomic P… TRUE        "PUBL…      0 2022-03-0…            109
+#> 10 all_st… Hypo… "Whole gen… TRUE        ""          0 2022-03-0…             44
+#> # … with 5 more variables: readPermission <lgl>, cancerTypeId <chr>,
+#> #   referenceGenome <chr>, pmid <chr>, citation <chr>
 ```
 
 To view study metadata on a particular study you can use:
@@ -202,22 +199,22 @@ mutations and cna. Alternatively, you can use
 ``` r
 df$mut %>% 
   head()
-#> # A tibble: 6 × 32
-#>   uniqueSampleKey           uniquePatientKey molecularProfil… sampleId patientId
-#>   <chr>                     <chr>            <chr>            <chr>    <chr>    
-#> 1 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…
-#> 2 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…
-#> 3 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…
-#> 4 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…
-#> 5 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…
-#> 6 VENHQS1PUi1BNUoxLTAxOmFj… VENHQS1PUi1BNUo… acc_tcga_mutati… TCGA-OR… TCGA-OR-…
-#> # … with 27 more variables: entrezGeneId <int>, studyId <chr>, center <chr>,
-#> #   mutationStatus <chr>, validationStatus <chr>, tumorAltCount <int>,
-#> #   tumorRefCount <int>, normalAltCount <int>, normalRefCount <int>,
-#> #   startPosition <int>, endPosition <int>, referenceAllele <chr>,
-#> #   proteinChange <chr>, mutationType <chr>, functionalImpactScore <chr>,
-#> #   fisValue <dbl>, linkXvar <chr>, linkPdb <chr>, linkMsa <chr>,
-#> #   ncbiBuild <chr>, variantType <chr>, keyword <chr>, chr <chr>, …
+#> # A tibble: 6 × 33
+#>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…
+#>   <chr>                 <int> <chr>            <chr>            <chr>           
+#> 1 KRT8                   3856 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 2 LCE1B                353132 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 3 SLC9C2               284525 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 4 DNAH14               127602 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 5 OPN4                  94233 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 6 DNAJC4                 3338 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> # … with 28 more variables: sampleId <chr>, patientId <chr>, studyId <chr>,
+#> #   center <chr>, mutationStatus <chr>, validationStatus <chr>,
+#> #   tumorAltCount <int>, tumorRefCount <int>, normalAltCount <int>,
+#> #   normalRefCount <int>, startPosition <int>, endPosition <int>,
+#> #   referenceAllele <chr>, proteinChange <chr>, mutationType <chr>,
+#> #   functionalImpactScore <chr>, fisValue <dbl>, linkXvar <chr>, linkPdb <chr>,
+#> #   linkMsa <chr>, ncbiBuild <chr>, variantType <chr>, keyword <chr>, …
 ```
 
 You can also pull data by specific sample IDs but the API requires a bit
@@ -225,12 +222,11 @@ more information from you (unlike pulling by study ID which returns
 everything available for that study). This can be useful when working
 within a very large database or working across samples housed in
 multiple different studies. When querying by `sample_id` you must also
-specify the corresponding `study_id` in which the samples are housed and
-the specific genes for which you wish to return results. When these
-pieces of information are not provided, {cbioportalR} makes an informed
-guess based on your connection and will throw an informative message to
-clarify exactly what is being queried. In the example below, the
-function defaults to the public version of the IMPACT database
+specify the corresponding `study_id` in which the samples are housed.
+When these pieces of information are not provided, {cbioportalR} makes
+an informed guess based on your connection and will throw an informative
+message to clarify exactly what is being queried. In the example below,
+the function defaults to the public version of the IMPACT database
 (`study_id = "msk_impact_2017"`).
 
 ``` r
@@ -302,21 +298,22 @@ available_clinical_attributes(study_id = "acc_tcga") %>%
 
 ``` r
 get_clinical_by_study("acc_tcga")
-#> ! No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study
-#> # A tibble: 1,558 × 7
-#>    uniqueSampleKey  uniquePatientKey sampleId patientId studyId clinicalAttribu…
-#>    <chr>            <chr>            <chr>    <chr>     <chr>   <chr>           
-#>  1 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE     
-#>  2 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE_DET…
-#>  3 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… DAYS_TO_COLLECT…
-#>  4 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… FRACTION_GENOME…
-#>  5 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… IS_FFPE         
-#>  6 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… MUTATION_COUNT  
-#>  7 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OCT_EMBEDDED    
-#>  8 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… ONCOTREE_CODE   
-#>  9 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OTHER_SAMPLE_ID 
-#> 10 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… PATHOLOGY_REPOR…
-#> # … with 1,548 more rows, and 1 more variable: value <chr>
+#> ! Sample Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study
+#> ! Patient Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study
+#> # A tibble: 6,292 × 6
+#>    uniquePatientKey           patientId studyId clinicalAttribu… value dataLevel
+#>    <chr>                      <chr>     <chr>   <chr>            <chr> <chr>    
+#>  1 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… AGE              58    PATIENT  
+#>  2 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… AJCC_PATHOLOGIC… Stag… PATIENT  
+#>  3 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… ATYPICAL_MITOTI… Atyp… PATIENT  
+#>  4 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CAPSULAR_INVASI… Inva… PATIENT  
+#>  5 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CLIN_M_STAGE     M0    PATIENT  
+#>  6 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CT_SCAN_PREOP_R… [Unk… PATIENT  
+#>  7 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CYTOPLASM_PRESE… Cyto… PATIENT  
+#>  8 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DAYS_TO_INITIAL… 0     PATIENT  
+#>  9 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DFS_MONTHS       24.77 PATIENT  
+#> 10 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DFS_STATUS       1:Re… PATIENT  
+#> # … with 6,282 more rows
 ```
 
 ``` r

@@ -14,8 +14,7 @@
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
 #' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion`
-#' @param genes A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the `get_entrez_id()` function. If NULL, will return results for all.
-#' IMPACT genes (see `cbioportalR::impact_gene_info`)
+#' @param genes A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the `get_entrez_id()` function. If NULL, it will return gene results for all available data for that sample.
 #' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
@@ -24,21 +23,19 @@
 #' @export
 #'
 #' @keywords internal
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db("public")
 #' .get_data_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
 #'  study_id = "acc_tcga", data_type = "mutation")
 #'
-#'
 #' .get_data_by_sample(sample_id = c("DS-sig-010-P2"),
 #'  molecular_profile_id = "blca_plasmacytoid_mskcc_2016_cna", data_type = "cna")
 #'
-#' .get_data_by_sample(sample_id = c("P-0002146-T01-IM3"),
-#'  molecular_profile_id = "blca_plasmacytoid_mskcc_2016_mutations", data_type = "mutation")
 #'
 #' .get_data_by_sample(sample_id = c("P-0002146-T01-IM3"),
 #'  study_id = "blca_plasmacytoid_mskcc_2016", data_type = "fusion")
 #'
+#' \donttest{
 #' df_pairs <- data.frame(
 #' "sample_id" = c("s_C_36924L_P001_d",
 #' "s_C_03LNU8_P001_d"),
@@ -57,6 +54,7 @@
 #' .get_data_by_sample(sample_study_pairs = df_pairs2, genes = 7157)
 #' .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "cna")
 #' .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "fusion")
+#' }
 #'
 .get_data_by_sample <- function(sample_id = NULL,
                                 study_id = NULL,
@@ -93,6 +91,7 @@
     "fusion" = "fusion",
     "cna" = "discrete-copy-number")
 
+# CHECK HERE-------
   # check if hugo symbol or entrez id was supplied
   genes_class <- class(genes)
 
@@ -101,6 +100,8 @@
     genes <- get_entrez_id(genes, base_url = 'www.cbioportal.org/api')$entrezGeneId
     print("Hugo symbols were supplied and converted to entrez IDs in order to query the cBioPortal API.")
   }
+  
+  resolved_genes <- genes
 
   # Make Informed guesses on parameters -------------------------------------
 
@@ -140,9 +141,6 @@
   }
 
 
-  # default to IMPACT genes if `genes` are NULL
-  resolved_genes <- genes %||%
-    cbioportalR::impact_gene_info$entrez_id %>% unlist()
 
 
   # * Prep data frame for Query -------------------------------------------------
@@ -211,7 +209,8 @@
 
         body_n = list(
           entrezGeneIds = resolved_genes,
-          sampleIds = y$sample_id)
+          sampleIds = y$sample_id) %>%
+          purrr::discard(is.null)
 
         res <- cbp_api(url_path = x,
                        method = "post",
@@ -262,7 +261,7 @@
 
     df <- df_fus %>%
       purrr::when(
-        nrow(.) > 0 ~ filter(., .data$site1EntrezGeneId %in% resolved_genes),
+        (nrow(.) > 0 & !is.null(resolved_genes)) ~ filter(., .data$site1EntrezGeneId %in% resolved_genes),
         TRUE ~ .)
 
     # Since you don't query by genes, filter genes at end so behaviour is consistent
@@ -307,7 +306,7 @@
 #' @export
 #'
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_mutations_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
 #' study_id = "acc_tcga",
 #' base_url = "public")
@@ -342,7 +341,7 @@ get_mutations_by_sample <- function(sample_id = NULL,
 #' @export
 #'
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db("public")
 #' get_cna_by_sample(sample_id = c("s_C_36924L_P001_d"),
 #'                  study_id = "prad_msk_2019")
@@ -374,7 +373,7 @@ get_cna_by_sample <- function(sample_id = NULL,
 #' @export
 #'
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db("public")
 #' get_fusions_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
 #'                  study_id = "prad_msk_2019")
@@ -406,7 +405,7 @@ get_fusions_by_sample <- function(sample_id = NULL,
 #' @export
 #'
 #'
-#' @examples
+#' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_genetics_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
 #'  study_id = "acc_tcga")
 #'

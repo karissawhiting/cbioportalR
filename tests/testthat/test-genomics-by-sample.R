@@ -1,6 +1,8 @@
 
 test_that("Test study_id and Profile Param", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   # > expand.grid(study_id = c("correct", "incorrect", "NULL"),
   # profile = c("correct", "incorrect", "NULL"))
   #
@@ -128,6 +130,8 @@ test_that("Test study_id and Profile Param", {
 
 test_that("Test sample-study pairs df", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   data_type = "mutation"
@@ -171,6 +175,8 @@ test_that("Test sample-study pairs df", {
 
 test_that("data is same regardless of function", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   db_test <- "public"
   set_cbioportal_db(db = db_test)
   sample_id = c("s_C_03LNU8_P001_d", "s_C_36924L_P001_d", "s_C_CAUWT7_P001_d")
@@ -204,6 +210,8 @@ test_that("data is same regardless of function", {
 
 test_that("Unknown Hugo Symbol returns Unk ", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   set_cbioportal_db("public")
   df <- get_cna_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
                           study_id = "acc_tcga")
@@ -220,12 +228,37 @@ test_that("Unknown Hugo Symbol returns Unk ", {
 
 test_that("Hugo Symbol is added by default ", {
 
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
   set_cbioportal_db("public")
   df <- get_genetics_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
                           study_id = "acc_tcga")
 
   expect_true(length(df$mutation$hugoGeneSymbol) > 1)
   expect_true(length(df$cna$hugoGeneSymbol) > 1)
+
+
+})
+
+test_that("Returns same results as pulling by study ID ", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+  all <- available_samples("blca_plasmacytoid_mskcc_2016")
+  resolved_genes <- cbioportalR::impact_gene_info$entrez_id %>% unlist()
+  x <- .get_data_by_sample(sample_id = all$sampleId,
+                           study_id = "blca_plasmacytoid_mskcc_2016", data_type = "cna")
+
+  y <-.get_data_by_sample(sample_id = all$sampleId,
+                          study_id = "blca_plasmacytoid_mskcc_2016", data_type = "cna")
+
+  resolved_genes <- cbioportalR::impact_gene_info$entrez_id %>% unlist()
+
+  z <-.get_data_by_sample(sample_id = all$sampleId,
+                          study_id = "blca_plasmacytoid_mskcc_2016", data_type = "cna",
+                          genes = resolved_genes)
+  expect_true(length(setdiff(x$hugoGeneSymbol, z$hugoGeneSymbol)) != 0)
 
 
 })

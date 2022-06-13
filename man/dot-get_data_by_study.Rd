@@ -35,6 +35,7 @@ This internal function allows you to pull data from either endpoint. It has
 logic for sensible default guesses at \code{study_id} and \code{molecular_profile_id} when those are \code{NULL}
 }
 \examples{
+\donttest{
 set_cbioportal_db("public")
 .get_data_by_study(study_id = "prad_msk_2019", data_type = "cna")
 .get_data_by_study(study_id = "prad_msk_2019", data_type = "mutation")
@@ -43,6 +44,7 @@ set_cbioportal_db("public")
 .get_data_by_study(molecular_profile_id = "prad_msk_2019_cna", data_type = "cna")
 .get_data_by_study(molecular_profile_id = "prad_msk_2019_mutations", data_type = "mutation")
 .get_data_by_study(molecular_profile_id = "prad_msk_2019_fusion", data_type = "fusion")
+}
 
 }
 \keyword{internal}
