@@ -17,38 +17,6 @@
 
 }
 
-#' Check for Molecular Profile ID
-#'
-#' @param molecular_profile_id
-#'
-#' @return stop if no arg
-#' @keywords internal
-#' @noRd
-#' @export
-#'
-.check_for_molecular_profile_id <- function(molecular_profile_id) {
-
-  if (is.null(molecular_profile_id)) {
-    stop("You must provide a molecular_profile_id. See `available_profiles(<study_id>)` to view available profiles for a study")
-  }
-}
-
-
-#' Check for Sample ID
-#'
-#' @param sample_id
-#'
-#' @return stop if no sample_id arg
-#' @keywords internal
-#' @noRd
-#' @export
-#'
-.check_for_sample_id <- function(sample_id) {
-  if (is.null(sample_id)) {
-    stop("You must provide at least one sample id")
-  }
-}
-
 #' Check for Patient ID
 #'
 #' @param patient_id

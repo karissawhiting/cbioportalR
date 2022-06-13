@@ -103,7 +103,6 @@ get_clinical_by_sample <- function(study_id = NULL,
                               base_url = NULL) {
 
   # check arguments  -----------------------------------------------------------
-  .check_for_sample_id(sample_id)
   .check_for_study_id(study_id)
 
   resolved_clinical_attributes <- clinical_attribute %||%
