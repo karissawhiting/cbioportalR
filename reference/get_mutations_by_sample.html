@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,8 +94,7 @@ need to pull samples from several different studies at once. If passed this will
 
 
 <dt>genes</dt>
-<dd><p>A vector of entrez ids. If NULL, will return results for all
-IMPACT genes (see <code><a href="impact_gene_info.html">cbioportalR::impact_gene_info</a></code>)</p></dd>
+<dd><p>A vector of entrez ids. If NULL, it will return gene results for all available data for that sample.</p></dd>
 
 
 <dt>add_hugo</dt>
@@ -123,21 +122,21 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"acc_tcga"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"acc_tcga_mutations"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 33</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 173 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    hugoGeneSymbol entrezGeneId uniqueSampleKey uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> TP53                   <span style="text-decoration: underline;">7</span>157 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> RTEL1                 <span style="text-decoration: underline;">51</span>750 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FAT1                   <span style="text-decoration: underline;">2</span>195 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BCOR                  <span style="text-decoration: underline;">54</span>880 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> CTNNB1                 <span style="text-decoration: underline;">1</span>499 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> HLA-A                  <span style="text-decoration: underline;">3</span>105 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> HLA-A                  <span style="text-decoration: underline;">3</span>105 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SLX4                  <span style="text-decoration: underline;">84</span>464 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> PPP4R2               <span style="text-decoration: underline;">151</span>987 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> GATA3                  <span style="text-decoration: underline;">2</span>625 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ZNF787               <span style="text-decoration: underline;">126</span>208 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> PODXL                  <span style="text-decoration: underline;">5</span>420 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> CCDC102A              <span style="text-decoration: underline;">92</span>922 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> TVP23C               <span style="text-decoration: underline;">201</span>158 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> RINL                 <span style="text-decoration: underline;">126</span>432 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ZNF628                <span style="text-decoration: underline;">89</span>887 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 163 more rows, and 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalRefCount &lt;int&gt;, startPosition &lt;int&gt;, endPosition &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;,</span></span>

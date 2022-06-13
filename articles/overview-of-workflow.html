@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,7 +138,7 @@
 <span class="co">#&gt; <span style="color: #949494;"># … with 334 more rows, and 5 more variables: readPermission &lt;lgl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;</span></span></code></pre></div>
 <p>By inspecting this dataframe, we see the unique <code>study_id</code> we want is <code>"blca_nmibc_2017"</code> To get more information on our study we can do the following:</p>
-<p><em>Note: the transpose function <code><a href="https://rdrr.io/r/base/t.html" class="external-link">t()</a></code> just used here to better view results</em></p>
+<p><em>Note: the transpose function <code><a href="https://rdrr.io/r/base/t.html" class="external-link">t()</a></code> is just used here to better view results</em></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_studies</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">studyId</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span>, <span class="st">"prad_msk_2019"</span><span class="op">)</span><span class="op">)</span>
@@ -151,7 +151,7 @@
 <span class="co">#&gt; <span style="color: #949494;">#   referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;</span></span></code></pre></div>
 <p>More in-depth information about the study can be found with <code><a href="../reference/get_study_info.html">get_study_info()</a></code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="op">)</span> 
 <span class="co">#&gt;                             [,1]                                                                           </span>
 <span class="co">#&gt; name                        "Nonmuscle Invasive Bladder Cancer (MSK Eur Urol 2017)"                        </span>
@@ -183,7 +183,7 @@
 <span class="co">#&gt; cancerType.cancerTypeId     "blca"                                                                         </span>
 <span class="co">#&gt; referenceGenome             "hg19"</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"prad_msk_2019"</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"prad_msk_2019"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="op">)</span> 
 <span class="co">#&gt;                             [,1]                                                             </span>
 <span class="co">#&gt; name                        "Prostate Cancer (MSK, Cell Metab 2020)"                         </span>
@@ -234,7 +234,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MUTATION_EXTENDED     MAF      Muta… IMPACT468 … TRUE             FALSE       </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">3</span> STRUCTURAL_VARIANT    FUSION   Fusi… Fusion dat… TRUE             FALSE       </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: molecularProfileId &lt;chr&gt;, studyId &lt;chr&gt;</span></span></code></pre></div>
-<p>Luckily, our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of <code>&lt;study_id&gt;_mutations</code>, <code>&lt;study_id&gt;_fusion</code>, <code>&lt;study_id&gt;_cna</code>.</p>
+<p>Luckily, in this example our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of <code>&lt;study_id&gt;_mutations</code>, <code>&lt;study_id&gt;_fusion</code>, <code>&lt;study_id&gt;_cna</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/available_profiles.html">available_profiles</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">molecularProfileId</span><span class="op">)</span>
@@ -249,12 +249,12 @@
 <li>Using study IDs (<code><a href="../reference/get_genetics_by_study.html">get_genetics_by_study()</a></code>)</li>
 <li>Using sample ID-study ID pairs (<code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code>)</li>
 </ol>
-<p>Pulling by study will give us genomic data for all genes/panels included in the study. You must pull by one study at a time. A benefit of pulling data this way is that you don’t have to specify which specific genes to query. It returns all genomic data available by default, however pulling all study data can be slow and inconvenient if you are working across multiple large studies, especially if you only need a subset of each study.</p>
-<p>When we pull by sample IDs, the API requires us to specify which genes we want to query. If you do not specify, the function will default to querying all IMPACT genes (on any version of IMPACT panel). This allows you to pull specific samples across multiple studies.</p>
+<p>Pulling by study will give us genomic data for all genes/panels included in the study. These functions can only pull data one study ID at a time and will return all genomic data available for that study. Pulling by study ID can be efficient, and a good way to ensure you have all genomic information available in cBioPortal for a particular study.</p>
+<p>If you are working across multiple studies, or only need a subset of samples from one or multiple studies, you may chose to pull by sample IDs instead of study ID. When you pull by sample IDs you can pull specific samples across multiple studies, but must also specify the studies they belong to. You may also pass a specific list of genes for which to return information. If you don’t specify a list of genes the function will default to returning all available gene data for each sample.</p>
 <div class="section level3">
 <h3 id="by-study-ids">By Study IDs<a class="anchor" aria-label="anchor" href="#by-study-ids"></a>
 </h3>
-<p>To pull by study ID, we can pull each data type individually. Specifying which genes to query is not required when pulling data by study ID.</p>
+<p>To pull by study ID, we can pull each data type individually.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">mut_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations_by_study.html">get_mutations_by_study</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span><span class="op">)</span>
@@ -288,10 +288,8 @@
 <span class="co">#&gt; [1] TRUE</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/all_equal.html" class="external-link">all_equal</a></span><span class="op">(</span><span class="va">fus_blca</span>, <span class="va">all_genomic_blca</span><span class="op">$</span><span class="va">fusion</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#get_panel_by_sample</span></code></pre></div>
 <p>Finally, we can join the two studies together</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mut_study</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">mut_blca</span>, <span class="va">mut_prad</span><span class="op">)</span>
 <span class="va">cna_study</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">cna_blca</span>, <span class="va">cna_prad</span><span class="op">)</span>
 <span class="va">fus_study</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">fus_blca</span>, <span class="va">fus_prad</span><span class="op">)</span></code></pre></div>
@@ -299,11 +297,10 @@
 <div class="section level3">
 <h3 id="by-sample-ids">By Sample IDs<a class="anchor" aria-label="anchor" href="#by-sample-ids"></a>
 </h3>
-<p>When we pull by sample IDs, the API requires us to specify which genes we want to query. If you do not specify, the function will default to querying all IMPACT genes (on any version of IMPACT panel). This allows you to pull specific samples across multiple studies.</p>
-<p>We can pull from both studies at the same time for a select set of samples using the <code>sample_study_pairs</code> argument in <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code>.</p>
+<p>When we pull by sample IDs, we can pull specific samples across multiple studies. In the above example, we can pull from both studies at the same time for a select set of samples using the <code>sample_study_pairs</code> argument in <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code>.</p>
 <p>Let’s pull data for the first 10 samples in each study. We first need to construct our dataframe to pass to the function:</p>
 <p><em>Note: you can also run <code><a href="../reference/available_patients.html">available_patients()</a></code> to only pull patient IDs</em></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_samples.html">available_samples</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sampleId</span>, <span class="va">patientId</span>, <span class="va">studyId</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
@@ -315,12 +312,12 @@
 <span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">s1</span>, <span class="va">s2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">patientId</span><span class="op">)</span></code></pre></div>
 <p>We need to rename the columns as per the functions documentation.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="va">df_pairs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">"sample_id"</span> <span class="op">=</span> <span class="va">sampleId</span>, 
          <span class="st">"study_id"</span> <span class="op">=</span> <span class="va">studyId</span><span class="op">)</span></code></pre></div>
 <p>Now we pass this to <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_genomic</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample</a></span><span class="op">(</span>sample_study_pairs <span class="op">=</span> <span class="va">df_pairs</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "study_id"</span>
 <span class="co">#&gt; The following parameters were used in query:</span>
@@ -340,7 +337,7 @@
 
 <span class="va">mut_sample</span> <span class="op">&lt;-</span> <span class="va">all_genomic</span><span class="op">$</span><span class="va">mutation</span></code></pre></div>
 <p>Like with querying by study ID, you can also pull data individually by genomic data type:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mut_only</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_study_pairs <span class="op">=</span> <span class="va">df_pairs</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "study_id"</span>
 <span class="co">#&gt; The following parameters were used in query:</span>
@@ -355,7 +352,7 @@
 <h3 id="compare-pulling-by-study-vs--sample">Compare Pulling by Study vs. Sample<a class="anchor" aria-label="anchor" href="#compare-pulling-by-study-vs--sample"></a>
 </h3>
 <p>Let’s compare these results with the ones we got from pulling by study:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># filter to our subset used in sample query</span>
 <span class="va">mut_study_subset</span> <span class="op">&lt;-</span> <span class="va">mut_study</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -380,35 +377,7 @@
 <span class="co">#&gt; [7] "Component 32: Mean relative difference: 0.003716705"            </span>
 <span class="co">#&gt; [8] "Component 33: Modes: numeric, character"                        </span>
 <span class="co">#&gt; [9] "Component 33: target is numeric, current is character"</span></code></pre></div>
-<p>In this case, both results are equal which means both studies were IMPACT panel only studies.</p>
-<p>Below is an example of when the results may not be equal. This occurs if one of the studies used a wider panel, because we used the default gene set of IMPACT only genes when we searched by sample:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ex_by_sample</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="st">"PD3181a"</span>,
-                                        study_id <span class="op">=</span> <span class="st">"acyc_sanger_2013"</span><span class="op">)</span>
-<span class="co">#&gt; The following parameters were used in query:</span>
-<span class="co">#&gt; <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013"</span></span>
-<span class="co">#&gt; <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013_mutations"</span></span>
-<span class="co">#&gt; <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
-
-<span class="va">ex_by_study</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations_by_study.html">get_mutations_by_study</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acyc_sanger_2013"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sampleId</span> <span class="op">==</span> <span class="st">"PD3181a"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Returning all data for the <span style="color: #0000BB;">"acyc_sanger_2013_mutations"</span> molecular profile in the <span style="color: #0000BB;">"acyc_sanger_2013"</span> study</span>
-
-<span class="va">genes_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">ex_by_study</span><span class="op">$</span><span class="va">entrezGeneId</span>, <span class="va">ex_by_sample</span><span class="op">$</span><span class="va">entrezGeneId</span><span class="op">)</span></code></pre></div>
-<p>We could resolve this discrepancy by specifying which genes we want to query in <code><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample()</a></code> to ensure that the same genes are queried across both studies:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ex_by_sample_update</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="st">"PD3181a"</span>,
-                                               study_id <span class="op">=</span> <span class="st">"acyc_sanger_2013"</span>, 
-                                               genes <span class="op">=</span> <span class="va">ex_by_study</span><span class="op">$</span><span class="va">entrezGeneId</span><span class="op">)</span>
-<span class="co">#&gt; The following parameters were used in query:</span>
-<span class="co">#&gt; <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013"</span></span>
-<span class="co">#&gt; <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"acyc_sanger_2013_mutations"</span></span>
-<span class="co">#&gt; <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">747</span>, <span style="color: #0000BB;">2318</span>, <span style="color: #0000BB;">2639</span>, <span style="color: #0000BB;">4360</span>, <span style="color: #0000BB;">4654</span>, <span style="color: #0000BB;">4969</span>, <span style="color: #0000BB;">5188</span>, <span style="color: #0000BB;">6710</span>, <span style="color: #0000BB;">6814</span>, <span style="color: #0000BB;">8289</span>, <span style="color: #0000BB;">10556</span>, <span style="color: #0000BB;">26266</span>,</span>
-<span class="co">#&gt; <span style="color: #0000BB;">27130</span>, <span style="color: #0000BB;">79613</span>, <span style="color: #0000BB;">81794</span>, <span style="color: #0000BB;">93643</span>, <span style="color: #0000BB;">113655</span>, <span style="color: #0000BB;">114112</span>, <span style="color: #0000BB;">114821</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">118491</span>, <span style="color: #0000BB;">127435</span>,</span>
-<span class="co">#&gt; <span style="color: #0000BB;">127731</span>, <span style="color: #0000BB;">152485</span>, <span style="color: #0000BB;">284525</span>, and <span style="color: #0000BB;">401024</span></span>
-
-<span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">ex_by_study</span><span class="op">$</span><span class="va">entrezGeneId</span>, <span class="va">ex_by_sample_update</span><span class="op">$</span><span class="va">entrezGeneId</span><span class="op">)</span>
-<span class="co">#&gt; integer(0)</span></code></pre></div>
+<p>Both results are equal.</p>
 </div>
 </div>
 <div class="section level2">
@@ -416,7 +385,7 @@
 </h2>
 <p>You can also pull clinical data by study ID, sample ID, or patient ID. Pulling by sample ID will pull all sample-level characteristics (e.g. sample site, tumor stage at sampling time and other variables collected at time of sampling that may be available). Pulling by patient ID will pull all patient-level characteristics (e.g. age, sex, etc.). Pulling by study ID will pull all sample <em>and</em> patient-level characteristics at once.</p>
 <p>You can explore what clinical data is available a study using:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">attr_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span>
 <span class="va">attr_prad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span><span class="st">"prad_msk_2019"</span><span class="op">)</span>
 
@@ -439,10 +408,10 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">13</span> TMB (nonsyno… TMB (nonsy… NUMBER   FALSE            1        TMB_NONSYNONYMO…</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: studyId &lt;chr&gt;</span></span></code></pre></div>
 <p>There are a select set available for both studies:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">in_both</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">attr_blca</span><span class="op">$</span><span class="va">clinicalAttributeId</span>, <span class="va">attr_prad</span><span class="op">$</span><span class="va">clinicalAttributeId</span><span class="op">)</span></code></pre></div>
 <p>The below pulls data at the sample level:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">clinical_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">s1</span><span class="op">$</span><span class="va">sampleId</span>,
                        study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span>, 
                        clinical_attribute <span class="op">=</span> <span class="va">in_both</span><span class="op">)</span>
@@ -466,7 +435,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">5</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 ONCOTREE_CODE           BLCA      </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">6</span> P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 SOMATIC_STATUS          Matched</span></code></pre></div>
 <p>The below pulls data at the patient level:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_patients.html">available_patients</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span>
 
 <span class="va">clinical_blca</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_patient.html">get_clinical_by_patient</a></span><span class="op">(</span>patient_id <span class="op">=</span> <span class="va">s1</span><span class="op">$</span><span class="va">patientId</span>,
@@ -492,7 +461,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">5</span> P-0003238 blca_nmibc_2017 SAMPLE_COUNT        1    </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">6</span> P-0003238 blca_nmibc_2017 SEX                 Male</span></code></pre></div>
 <p>Like with the genomic data pull functions, you can also pull clinical data by study ID - sampleID, or ID study ID - patient ID pairs:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">s1</span>, <span class="va">s2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sampleId</span><span class="op">)</span>
 
@@ -500,7 +469,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">"patient_id"</span> <span class="op">=</span> <span class="va">patientId</span>, 
          <span class="st">"study_id"</span> <span class="op">=</span> <span class="va">studyId</span><span class="op">)</span></code></pre></div>
 <p>Now we pass this to <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_patient_clinical</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_clinical_by_patient.html">get_clinical_by_patient</a></span><span class="op">(</span>patient_study_pairs <span class="op">=</span> <span class="va">df_pairs</span>, 
                                                 clinical_attribute <span class="op">=</span> <span class="va">in_both</span><span class="op">)</span>
 
@@ -520,7 +489,6 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> P-0003261 blca_nmibc_2017 SAMPLE_COUNT        1     </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> P-0003261 blca_nmibc_2017 SEX                 Male  </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 24 more rows</span></span></code></pre></div>
-<p>```</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

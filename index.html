@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -218,7 +218,7 @@
 <span class="co">#&gt; #   referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;,</span>
 <span class="co">#&gt; #   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span>
 <span class="co">#&gt; #   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></code></pre></div>
-<p>You can also pull data by specific sample IDs but the API requires a bit more information from you (unlike pulling by study ID which returns everything available for that study). This can be useful when working within a very large database or working across samples housed in multiple different studies. When querying by <code>sample_id</code> you must also specify the corresponding <code>study_id</code> in which the samples are housed and the specific genes for which you wish to return results. When these pieces of information are not provided, {cbioportalR} makes an informed guess based on your connection and will throw an informative message to clarify exactly what is being queried. In the example below, the function defaults to the public version of the IMPACT database (<code>study_id = "msk_impact_2017"</code>).</p>
+<p>You can also pull data by specific sample IDs but the API requires a bit more information from you (unlike pulling by study ID which returns everything available for that study). This can be useful when working within a very large database or working across samples housed in multiple different studies. When querying by <code>sample_id</code> you must also specify the corresponding <code>study_id</code> in which the samples are housed. When these pieces of information are not provided, {cbioportalR} makes an informed guess based on your connection and will throw an informative message to clarify exactly what is being queried. In the example below, the function defaults to the public version of the IMPACT database (<code>study_id = "msk_impact_2017"</code>).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/available_samples.html">available_samples</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
   <span class="fu">pull</span><span class="op">(</span><span class="va">sampleId</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>

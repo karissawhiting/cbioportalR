@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,8 +87,7 @@ need to pull samples from several different studies at once. If passed this will
 
 
 <dt>genes</dt>
-<dd><p>A vector of entrez ids. If NULL, will return results for all
-IMPACT genes (see <code><a href="impact_gene_info.html">cbioportalR::impact_gene_info</a></code>)</p></dd>
+<dd><p>A vector of entrez ids. If NULL, it will return gene results for all available data for that sample.</p></dd>
 
 
 <dt>add_hugo</dt>
@@ -121,21 +120,21 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> No <span style="color: #0000BB;">"fusion"</span> data returned. Error:  <span style="color: #BB0000;">No molecular profile for `` data_type = `fusion` `` found in </span><span style="color: #0000BB;">"acc_tcga"</span>.  See `` available_profiles('`acc_tcga`') ``</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mutation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 33</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 173 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    hugoGeneSymbol entrezGeneId uniqueSampleKey uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> TP53                   <span style="text-decoration: underline;">7</span>157 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> RTEL1                 <span style="text-decoration: underline;">51</span>750 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FAT1                   <span style="text-decoration: underline;">2</span>195 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BCOR                  <span style="text-decoration: underline;">54</span>880 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> CTNNB1                 <span style="text-decoration: underline;">1</span>499 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> HLA-A                  <span style="text-decoration: underline;">3</span>105 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> HLA-A                  <span style="text-decoration: underline;">3</span>105 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SLX4                  <span style="text-decoration: underline;">84</span>464 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> PPP4R2               <span style="text-decoration: underline;">151</span>987 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> GATA3                  <span style="text-decoration: underline;">2</span>625 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ZFPM1                <span style="text-decoration: underline;">161</span>882 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ZNF787               <span style="text-decoration: underline;">126</span>208 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> PODXL                  <span style="text-decoration: underline;">5</span>420 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> CCDC102A              <span style="text-decoration: underline;">92</span>922 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> TVP23C               <span style="text-decoration: underline;">201</span>158 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> RINL                 <span style="text-decoration: underline;">126</span>432 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ZNF628                <span style="text-decoration: underline;">89</span>887 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_mutati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 163 more rows, and 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalRefCount &lt;int&gt;, startPosition &lt;int&gt;, endPosition &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;,</span></span>
@@ -143,26 +142,21 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cna</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 417 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    hugoGeneSymbol entrezGeneId uniqueSampleKey uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> DNMT3A                 <span style="text-decoration: underline;">1</span>788 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ESR1                   <span style="text-decoration: underline;">2</span>099 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MTOR                   <span style="text-decoration: underline;">2</span>475 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> IFNGR1                 <span style="text-decoration: underline;">3</span>459 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> INSR                   <span style="text-decoration: underline;">3</span>643 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> JAK1                   <span style="text-decoration: underline;">3</span>716 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> PRKN                   <span style="text-decoration: underline;">5</span>071 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> PIK3CD                 <span style="text-decoration: underline;">5</span>293 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> TNFAIP3                <span style="text-decoration: underline;">7</span>128 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> BCL10                  <span style="text-decoration: underline;">8</span>915 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> LATS1                  <span style="text-decoration: underline;">9</span>113 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ERRFI1                <span style="text-decoration: underline;">54</span>206 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> ASXL2                 <span style="text-decoration: underline;">55</span>252 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> ARID1B                <span style="text-decoration: underline;">57</span>492 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> NEGR1                <span style="text-decoration: underline;">257</span>194 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   alteration &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> RNF180               <span style="text-decoration: underline;">285</span>671 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SRM                    <span style="text-decoration: underline;">6</span>723 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> CHD5                  <span style="text-decoration: underline;">26</span>038 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> PRKACB                 <span style="text-decoration: underline;">5</span>567 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ADGRL4                <span style="text-decoration: underline;">64</span>123 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> DNAJC6                 <span style="text-decoration: underline;">9</span>829 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> KCNAB2                 <span style="text-decoration: underline;">8</span>514 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> PER3                   <span style="text-decoration: underline;">8</span>863 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> C1ORF52              <span style="text-decoration: underline;">148</span>423 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ICMT                  <span style="text-decoration: underline;">23</span>463 VENHQS1PUi1BNU… VENHQS1PUi1BNUo… acc_tcga_gistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 407 more rows, and 4 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, alteration &lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
