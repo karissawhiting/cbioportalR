@@ -91,17 +91,18 @@
     "fusion" = "fusion",
     "cna" = "discrete-copy-number")
 
-# CHECK HERE-------
   # check if hugo symbol or entrez id was supplied
   genes_class <- class(genes)
 
   # if character, convert to entrez ID
-  if (genes_class == "character"){
-    genes <- get_entrez_id(genes, base_url = 'www.cbioportal.org/api')$entrezGeneId
-    print("Hugo symbols were supplied and converted to entrez IDs in order to query the cBioPortal API.")
-  }
-  
-  resolved_genes <- genes
+
+  resolved_genes <- genes %>%
+    purrr::when(
+      is.character(.) ~ {
+        cli::cli_inform("Hugo symbols were converted to entrez IDs in order to query the cBioPortal API (see {.code ?get_entrez_id} for more info)")
+        get_entrez_id(., base_url = base_url)$entrezGeneId
+    },
+    TRUE ~ .)
 
   # Make Informed guesses on parameters -------------------------------------
 

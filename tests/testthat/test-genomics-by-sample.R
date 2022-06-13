@@ -1,3 +1,4 @@
+# Tests core `.get_data_by_sample` (and genomics-specific tests) -----------------
 
 test_that("Test study_id and Profile Param", {
 
@@ -261,4 +262,34 @@ test_that("Returns same results as pulling by study ID ", {
   expect_true(length(setdiff(x$hugoGeneSymbol, z$hugoGeneSymbol)) != 0)
 
 
+})
+
+
+test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+
+  # get all genes returned for this study
+  all_genes <- get_genetics_by_study(study_id = "blca_plasmacytoid_mskcc_2016")
+
+  # try to pull genetics by sample using entrez IDs
+  # get study ID-sample ID pairs
+  s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
+    transmute(sample_id = sampleId, study_id = studyId)
+
+  all_genomic_entrez <- get_genetics_by_sample(sample_study_pairs = s1,
+                                               genes = all_genes$mutation$entrezGeneId)
+
+  # convert relevant entrez IDs to hugo symbols
+  entrez_to_hugo <- get_hugo_symbol(all_genes$mutation$entrezGeneId)
+
+  # try to pull genetics by sample using the converted Hugo symbols
+  all_genomic_hugo <- get_genetics_by_sample(sample_study_pairs = s1,
+                                             genes = entrez_to_hugo$hugoGeneSymbol)
+
+  expect_equal(all_genomic_entrez$mutation, all_genomic_hugo$mutation)
+  expect_equal(all_genomic_entrez$cna, all_genomic_hugo$cna)
+  expect_equal(all_genomic_entrez$fusion, all_genomic_hugo$fusion)
 })

@@ -197,7 +197,6 @@ mut_only <- get_mutations_by_sample(sample_study_pairs = df_pairs)
 identical(mut_only, mut_sample)
 ```
 
-### Compare Pulling by Study vs. Sample
 
 Let's compare these results with the ones we got from pulling by study:
 
@@ -214,7 +213,10 @@ mut_study_subset <- mut_study_subset %>%
 
 mut_sample <- mut_sample %>%
   arrange(desc(sampleId)) %>%
-  arrange(desc(entrezGeneId))
+  arrange(desc(entrezGeneId)) %>%
+  
+  # reorder so columns in same order
+  select(names(mut_study_subset))
 
 all.equal(mut_study_subset, mut_sample)
 
@@ -222,6 +224,14 @@ all.equal(mut_study_subset, mut_sample)
 
 Both results are equal.
 
+We can also limit our results to a specific set of genes by passing a vector of Entrez Gene IDs or Hugo Symbols to the function. This can be useful if, for example, we want to pull all IMPACT gene results for two studies but one of the two uses a much larger panel. we can limit our query to just the genes we want results for:
+
+```{r}
+by_hugo <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = "TP53")
+by_gene_id <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = 7157)
+
+identical(by_hugo, by_gene_id)
+```
 
 ## Pulling Clinical Data
 
