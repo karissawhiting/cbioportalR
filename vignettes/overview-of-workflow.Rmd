@@ -224,13 +224,22 @@ all.equal(mut_study_subset, mut_sample)
 
 Both results are equal.
 
-We can also limit our results to a specific set of genes by passing a vector of Entrez Gene IDs or Hugo Symbols to the function. This can be useful if, for example, we want to pull all IMPACT gene results for two studies but one of the two uses a much larger panel. we can limit our query to just the genes we want results for:
+#### Limit Results to Specified Genes or Panels
+
+We can also limit our results to a specific set of genes by passing a vector of Entrez Gene IDs or Hugo Symbols to the `gene` argument, or a specified panel by passing a panel ID to the `panel` argument (see `available_gene_panels()` for supported panels). This can be useful if, for example, we want to pull all IMPACT gene results for two studies but one of the two uses a much larger panel. In that case, we can limit our query to just the genes for which we want results:
 
 ```{r}
 by_hugo <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = "TP53")
 by_gene_id <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = 7157)
 
 identical(by_hugo, by_gene_id)
+```
+
+```{r}
+get_mutations_by_sample(
+  sample_study_pairs = df_pairs,
+  panel = "IMPACT468") %>%
+  head()
 ```
 
 ## Pulling Clinical Data
@@ -290,7 +299,7 @@ all_clinical %>%
   head()
 ```
 
-Like with the genomic data pull functions, you can also pull clinical data by study ID - sampleID, or ID study ID - patient ID pairs:
+Like with the genomic data pull functions, you can also pull clinical data by study ID - sample ID, or ID study ID - patient ID pairs:
 
 
 ```{r }
