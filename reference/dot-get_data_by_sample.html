@@ -65,6 +65,7 @@
   sample_study_pairs <span class="op">=</span> <span class="cn">NULL</span>,
   data_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mutation"</span>, <span class="st">"cna"</span>, <span class="st">"fusion"</span><span class="op">)</span>,
   genes <span class="op">=</span> <span class="cn">NULL</span>,
+  panel <span class="op">=</span> <span class="cn">NULL</span>,
   add_hugo <span class="op">=</span> <span class="cn">TRUE</span>,
   base_url <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
@@ -99,7 +100,11 @@ need to pull samples from several different studies at once. If passed this will
 
 
 <dt>genes</dt>
-<dd><p>A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function. If NULL, it will return gene results for all available data for that sample.</p></dd>
+<dd><p>A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function.  If <code>panel</code> and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
+
+
+<dt>panel</dt>
+<dd><p>One or more panel IDs to query (e.g. 'IMPACT468'). If <code>panel</code>  and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
 
 
 <dt>add_hugo</dt>
@@ -128,7 +133,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"acc_tcga"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"acc_tcga_mutations"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 173 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    hugoGeneSymbol entrezGeneId uniqueSampleKey uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
@@ -155,7 +160,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016_cna"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
@@ -170,7 +175,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016_fusion"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSampleKey   uniquePatientKey molecularProfil… sampleId patientId studyId</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
@@ -190,7 +195,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"prad_msk_2019"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">prad_msk_2019_mutations</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
@@ -224,7 +229,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"prad_msk_2019"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">prad_msk_2019_cna</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
@@ -236,7 +241,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"prad_msk_2019"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">prad_msk_2019_fusion</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 0</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">df_pairs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -249,7 +254,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016"</span> and <span style="color: #0000BB;">"prad_msk_2019"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">blca_plasmacytoid_mskcc_2016_mutations</span> and</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">prad_msk_2019_mutations</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
@@ -291,7 +296,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016"</span> and <span style="color: #0000BB;">"prad_msk_2019"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">blca_plasmacytoid_mskcc_2016_cna</span> and <span style="color: #0000BB;">prad_msk_2019_cna</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span class="fu">.get_data_by_sample</span><span class="op">(</span>sample_study_pairs <span class="op">=</span> <span class="va">df_pairs2</span>, data_type <span class="op">=</span> <span class="st">"fusion"</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Joining, by = "study_id"</span>
@@ -299,7 +304,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"blca_plasmacytoid_mskcc_2016"</span> and <span style="color: #0000BB;">"prad_msk_2019"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">blca_plasmacytoid_mskcc_2016_fusion</span> and</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">prad_msk_2019_fusion</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 17</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSampleKey   uniquePatientKey molecularProfil… sampleId patientId studyId</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>

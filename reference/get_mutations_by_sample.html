@@ -64,6 +64,7 @@
   molecular_profile_id <span class="op">=</span> <span class="cn">NULL</span>,
   sample_study_pairs <span class="op">=</span> <span class="cn">NULL</span>,
   genes <span class="op">=</span> <span class="cn">NULL</span>,
+  panel <span class="op">=</span> <span class="cn">NULL</span>,
   add_hugo <span class="op">=</span> <span class="cn">NULL</span>,
   base_url <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
@@ -94,7 +95,11 @@ need to pull samples from several different studies at once. If passed this will
 
 
 <dt>genes</dt>
-<dd><p>A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function. If NULL, it will return gene results for all available data for that sample.</p></dd>
+<dd><p>A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function.  If <code>panel</code> and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
+
+
+<dt>panel</dt>
+<dd><p>One or more panel IDs to query (e.g. 'IMPACT468'). If <code>panel</code>  and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
 
 
 <dt>add_hugo</dt>
@@ -121,7 +126,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"acc_tcga"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"acc_tcga_mutations"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"all IMPACT genes (see `gnomeR::impact_gene_info`)"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 173 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    hugoGeneSymbol entrezGeneId uniqueSampleKey uniquePatientKey molecularProfil…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
