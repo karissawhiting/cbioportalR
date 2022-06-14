@@ -32,68 +32,74 @@
   }
 }
 
-ex <- tibble::tribble(~sample_id, ~study_id,
-"P-0001453-T01-IM3", "blca_nmibc_2017",
-"P-0002166-T01-IM3", "blca_nmibc_2017",
-"P-0003238-T01-IM5", "blca_nmibc_2017",
-"P-0000004-T01-IM3", "msk_impact_2017",
-"P-0000023-T01-IM3", "msk_impact_2017")
-
-input_df <- tibble::tribble(~bop, ~studyID,
-                            "P-0001453-T01-IM3", "blca_nmibc_2017",
-                            "P-0002166-T01-IM3", "blca_nmibc_2017",
-                            "P-0003238-T01-IM5", "blca_nmibc_2017",
-                            "P-0000004-T01-IM3", "msk_impact_2017",
-                            "P-0000023-T01-IM3", "msk_impact_2017")
-
-
 
 #' Check Sample ID-Study ID and Patient ID-Study ID pairs input data frames
 #'
 #' @param input_df input data frame to check
 #'
-#' @return stop if no sample_id arg
+#' @return A valid `sample_study_pairs` or `patient_study_pairs` data frame. If `input_df` is NULL, it will return NULL.
 #' @keywords internal
 #' @noRd
 #' @export
 #'
-.check_input_pair_df <- function(input_df, type = c("patient", "sample")) {
+.check_input_pair_df <- function(input_df) {
 
-  return(deparse(substitute(input_df)))
+  input_df %||% return(NULL)
+
+  # may change this to: exists(arg, envir = rlang::caller_env())
+  arg_name <- deparse(substitute(input_df))
 
   # must be a data.frame
   switch(!inherits(input_df, "data.frame"),
-         rlang::abort("`sample_study_pairs` must be a `data.frame`"))
+    rlang::abort("{arg_name} must be a `data.frame`")
+  )
 
   # must have sample_id and study_id columns
   names(input_df) <- names(input_df) %>%
+    stringr::str_remove_all(., stringr::fixed(" ")) %>%
+    stringr::str_remove_all(., stringr::fixed("_")) %>%
+    stringr::str_remove_all(., stringr::fixed(".")) %>%
     stringr::str_to_lower()
 
+  switch(arg_name,
+    "sample_study_pairs" = {
+      final_names <- c("sample_id", "study_id")
+    },
+    "patient_study_pairs" = {
+      final_names <- c("patient_id", "study_id")
+      accepted_names <- c(final_names, stringr::str_remove_all(final_names, "_"))
+    }
+  )
 
+  accepted_names <- c(final_names, stringr::str_remove_all(final_names, "_"))
 
   output_df <- input_df %>%
     purrr::when(
-      type == "sample" ~ {switch(
-        !(any(str_detect(names(input_df), "sampleid|sample_id")) &
-            any(str_detect(names(input_df), "studyid|study_id"))),
-        rlang::abort("`sample_study_pairs` must have the following columns: `sample_id` and `study_id`"))
-
-        select(., contains("sample"), contains("study")) %>%
-          purrr::set_names("sample_id", "study_id")
-      },
-      type == "patient" ~ {switch(
-        !(any(str_detect(names(input_df), "patientid|patient_id")) &
-            any(str_detect(names(input_df), "studyid|study_id"))),
-        rlang::abort("`patient_study_pairs` must have the following columns: `patient_id` and `study_id`"))
-
-        select(., contains("patient"), contains("study")) %>%
-          purrr::set_names("patient_id", "study_id")
-      }
+      !(any(stringr::str_detect(names(.), paste0(accepted_names[c(1, 3)], collapse = "|"))) &
+        any(stringr::str_detect(names(.), paste0(accepted_names[c(2, 4)], collapse = "|")))) ~
+        cli::cli_abort("{arg_name} must have the following columns: {final_names}"),
+      TRUE ~ select(
+        ., (contains("sample") | contains("patient")),
+        contains("study")
+      ) %>%
+        purrr::set_names(final_names)
     )
+
+  # if molecular_profile_id passed, keep it
+  optional_molec <- c("molecular_profile_id",
+                      stringr::str_remove_all("molecular_profile_id", "_"))
+
+  molec_col <- names(input_df)[stringr::str_detect(names(input_df),
+                                          paste0(optional_molec, collapse = "|"))]
+
+  if(length(molec_col > 0)) {
+    output_df <- input_df %>%
+      transmute("molecular_profile_id" = .data[[molec_col]]) %>%
+      bind_cols(output_df, .)
+  }
 
   output_df
 }
-
 
 #' Guess Study ID based on URL
 #'

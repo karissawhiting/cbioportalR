@@ -63,7 +63,7 @@ get_clinical_by_sample <- function(study_id = NULL,
   }
 
   # * check sample_study_pairs-------
-# HEREEEEE
+  sample_study_pairs <- .check_input_pair_df(input_df = sample_study_pairs)
 
   # Prep data frame for Query ------------------------------------------------
   sample_study_pairs_nest <- sample_study_pairs %>%

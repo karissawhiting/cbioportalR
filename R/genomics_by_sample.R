@@ -131,6 +131,9 @@
   }
 
 
+  # Check sample_study_pairs-------
+  sample_study_pairs <- .check_input_pair_df(input_df = sample_study_pairs)
+
   # Get genes to query --------
 
   # get entrez ids for a panel
@@ -151,15 +154,7 @@
 
   # * Prep data frame for Query -------------------------------------------------
 
-  if(
-     !("data.frame" %in% class(sample_study_pairs)) |
-     !("sample_id" %in% colnames(sample_study_pairs)) |
-     !("study_id" %in% colnames(sample_study_pairs))
-       #| "molecular_profile_id" %in% colnames(sample_study_pairs))
-     ) {
 
-    rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id` and `study_id`")
-  }
 
 
   # If user passes study_id and data_type we can pull the correct molecular ID

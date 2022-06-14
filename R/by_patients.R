@@ -118,15 +118,8 @@ get_clinical_by_patient <- function(study_id = NULL,
 
   }
 
-  # * check sample_study_pairs-------
-  if(
-    !("data.frame" %in% class(patient_study_pairs)) |
-    !("patient_id" %in% colnames(patient_study_pairs)) |
-    !("study_id" %in% colnames(patient_study_pairs))
-  ) {
-
-    rlang::abort("`patient_study_pairs` must be a `data.frame` with the following columns: `patient_id` and `study_id`")
-  }
+  # Check patient_study_pairs-------
+  patient_study_pairs <- .check_input_pair_df(patient_study_pairs)
 
   # Prep data frame for Query ------------------------------------------------
   patient_study_pairs_nest <- patient_study_pairs %>%
