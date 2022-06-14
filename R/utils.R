@@ -171,4 +171,34 @@
 }
 
 
+#' Get Entrez Gene IDs for a given panel ID
+#'
+
+#' @param panel_id Panel ID for which to retrieve gene IDs (see `available_gene_panels()` for options).
+#' If NULL, it will return NULL
+#' @param base_url The database URL to query
+#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
+#'
+#' @return a vector of Entrez Gene IDs
+#' @keywords internal
+#' @noRd
+#' @export
+#'
+.get_panel_entrez <- function(panel_id, base_url) {
+
+  # if NULL, return NULL
+  panel_id %||% return(panel_id)
+
+  res <- tryCatch(get_gene_panel(panel_id = panel_id, base_url = base_url),
+    error = function(e) {
+      cli::cli_abort("There was an error pullling genes for panel ID: {.code {panel_id}}. See {.code available_gene_panels()} for supported panels.")
+    })
+
+  entrez_ids <- res %>%
+    dplyr::pull(.data$entrezGeneId) %>%
+    unique()
+
+  return(entrez_ids)
+
+    }
 

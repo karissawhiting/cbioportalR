@@ -268,7 +268,6 @@ test_that("Returns same results as pulling by study ID ", {
 test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
 
   skip_if(httr::http_error("www.cbioportal.org/api"))
-
   set_cbioportal_db("public")
 
   # get all genes returned for this study
@@ -293,3 +292,139 @@ test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
   expect_equal(all_genomic_entrez$cna, all_genomic_hugo$cna)
   expect_equal(all_genomic_entrez$fusion, all_genomic_hugo$fusion)
 })
+
+
+test_that("pulling with gene ID (entrez or hugo) works with no error", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+  set_cbioportal_db("public")
+
+  genes = get_entrez_id(c("ERBB2", "PIK3C2G",
+                           "CDKN1A", "EPHA2", "NOTCH2"))
+
+  s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
+    transmute(sample_id = sampleId, study_id = studyId)
+
+  gen_by_entrez <- get_genetics_by_sample(sample_study_pairs = s1,
+                                               genes = genes$entrezGeneId)
+
+  gen_by_hugo <- get_genetics_by_sample(sample_study_pairs = s1,
+                                               genes =  genes$hugoGeneSymbol)
+
+
+  expect_true(identical(gen_by_entrez$mutation, gen_by_hugo$mutation))
+  expect_true(identical(gen_by_entrez$cna, gen_by_hugo$cna))
+  expect_true(identical(gen_by_entrez$fusion, gen_by_hugo$fusion))
+
+})
+
+test_that("pulling with panel ID works with no error and matches pull by gene", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+  set_cbioportal_db("public")
+
+  s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
+    transmute(sample_id = sampleId, study_id = studyId)
+
+  expect_error(gen_by_panel <- get_genetics_by_sample(sample_study_pairs = s1,
+                                          panel = "IMPACT468"), NA)
+
+  genes <- get_gene_panel("IMPACT468")
+
+  gen_by_entrez <- get_genetics_by_sample(sample_study_pairs = s1,
+                                          genes = genes$entrezGeneId)
+
+
+  expect_true(identical(gen_by_panel$mutation, gen_by_entrez$mutation))
+  expect_true(identical(gen_by_panel$cna, gen_by_entrez$cna))
+  expect_true(identical(gen_by_panel$fusion, gen_by_entrez$fusion))
+
+})
+
+test_that("pulling with panel ID works with no error and matches pull by gene", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+  set_cbioportal_db("public")
+
+  s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
+    dplyr::transmute(sample_id = sampleId, study_id = studyId)
+
+  # error if misspecified panel
+  expect_error(get_mutations_by_sample(sample_study_pairs = s1,
+                                      panel = "ttt"), "*")
+
+  # no error if correct panel
+  expect_error(gen_by_panel <- get_genetics_by_sample(sample_study_pairs = s1,
+                                                      panel = "IMPACT468"), NA)
+
+  genes <- get_gene_panel("IMPACT468")
+
+  gen_by_entrez <- get_genetics_by_sample(sample_study_pairs = s1,
+                                          genes = genes$entrezGeneId)
+
+
+  expect_true(identical(gen_by_panel$mutation, gen_by_entrez$mutation))
+  expect_true(identical(gen_by_panel$cna, gen_by_entrez$cna))
+  expect_true(identical(gen_by_panel$fusion, gen_by_entrez$fusion))
+
+})
+
+test_that("pull by panel ID + gene IDs", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+  set_cbioportal_db("public")
+
+  s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
+    dplyr::transmute(sample_id = sampleId, study_id = studyId)
+
+  plus_gene <- "NOTCH4"
+  plus_entrez = get_entrez_id(plus_gene)$entrezGeneId
+
+  expect_error(gen_by_panel <- get_genetics_by_sample(sample_study_pairs = s1,
+                                                      panel = "sarc_mskcc_panel", genes = plus_gene), NA)
+
+  expect_error(gen_by_panel2 <- get_genetics_by_sample(sample_study_pairs = s1,
+                                                      panel = "sarc_mskcc_panel", genes = plus_entrez), NA)
+
+  expect_error(gen_by_panel3 <- get_genetics_by_sample(sample_study_pairs = s1,
+                                                       panel = "sarc_mskcc_panel"), NA)
+
+  expect_true(identical(gen_by_panel$mutation, gen_by_panel2$mutation))
+  expect_true(identical(gen_by_panel$cna, gen_by_panel2$cna))
+  expect_true(identical(gen_by_panel$fusion, gen_by_panel2$fusion))
+
+  expect_equal(setdiff(gen_by_panel$mutation$hugoGeneSymbol,
+          gen_by_panel3$mutation$hugoGeneSymbol), plus_gene)
+
+
+})
+
+test_that("pull by two panel IDs", {
+
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+  set_cbioportal_db("public")
+
+  s1 <- c("DS-sig-010-P2", "DS-sig-010-P1", "DS-sig-018-P")
+  panels <- c("IMPACT468", "sarc_mskcc_panel")
+
+  ids <- get_gene_panel(panels) %>%
+    dplyr::pull(entrezGeneId) %>%
+    unique()
+
+  expect_error(gen_by_panel <- get_mutations_by_sample(sample_id = s1,
+                                                      study_id = "blca_plasmacytoid_mskcc_2016",
+                                                      panel =  c("IMPACT468", "sarc_mskcc_panel"),
+                                                      genes = "NOTCH2"), NA)
+
+  expect_error(gen_by_panel2 <- get_mutations_by_sample(sample_id = s1,
+                                                      study_id = "blca_plasmacytoid_mskcc_2016",
+                                                      panel =  c("sarc_mskcc_panel"),
+                                                      genes = "NOTCH2"), NA)
+
+
+  expect_true(length(gen_by_panel$hugoGeneSymbol) > length(gen_by_panel2$hugoGeneSymbol))
+
+
+})
+
+

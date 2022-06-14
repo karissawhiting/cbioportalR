@@ -3,7 +3,7 @@
 * Update `get_genomics_by_sample()` and related functions to pull all gene data available for selected sample by default instead of 
 pulling data for IMPACT genes only by default. This will change default results when user does not specify genes, and could return more results than previously as they will include results for non IMPACT gene mutations, CNA or fusions, if available.
 * Allow users to pass Hugo Symbols to all `get_genomics_by_sample()` and related functions (previously had to specify by Entrez Gene ID or `NULL`) (#33)
-
+* Allow users to pass gene panels to all `get_genomics_by_sample()` and related functions with new `panel` argument. Previously could only specify `genes` by specified sets of gene IDs. (#15)
 
 # cbioportalR 0.2.0
 

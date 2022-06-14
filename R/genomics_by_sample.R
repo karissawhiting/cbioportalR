@@ -14,7 +14,8 @@
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
 #' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion`
-#' @param genes A vector of entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the `get_entrez_id()` function. If NULL, it will return gene results for all available data for that sample.
+#' @param genes A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the `get_entrez_id()` function.  If `panel` and `genes` are both NULL (default), it will return gene results for all available genomic data for that sample.
+#' @param panel One or more panel IDs to query (e.g. 'IMPACT468'). If `panel`  and `genes` are both NULL (default), it will return gene results for all available genomic data for that sample.
 #' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
@@ -63,10 +64,11 @@
                                 data_type = c("mutation", "cna", "fusion"),
 
                                 genes = NULL,
+                                panel = NULL,
                                 add_hugo = TRUE,
                                 base_url = NULL) {
 
-  # Check Arguments ---------------------------------------------------------
+  # Check Arguments -----------------------------------------------------------
 
   if(is.null(sample_id) & is.null(sample_study_pairs))  {
     cli::cli_abort("You must pass either {.code sample_id} or {.code sample_study_pairs}")
@@ -91,20 +93,7 @@
     "fusion" = "fusion",
     "cna" = "discrete-copy-number")
 
-  # check if hugo symbol or entrez id was supplied
-  genes_class <- class(genes)
-
-  # if character, convert to entrez ID
-
-  resolved_genes <- genes %>%
-    purrr::when(
-      is.character(.) ~ {
-        cli::cli_inform("Hugo symbols were converted to entrez IDs in order to query the cBioPortal API (see {.code ?get_entrez_id} for more info)")
-        get_entrez_id(., base_url = base_url)$entrezGeneId
-    },
-    TRUE ~ .)
-
-  # Make Informed guesses on parameters -------------------------------------
+  # Make Informed guesses on parameters ---------------------------------------
 
   # `sample_study_pairs` gets priority. If that is NULL then consider other args
   if(is.null(sample_study_pairs)) {
@@ -142,6 +131,22 @@
   }
 
 
+  # Get genes to query --------
+
+  # get entrez ids for a panel
+  panel_genes <- .get_panel_entrez(panel_id = panel, base_url = base_url)
+
+  # if genes arg passed, get gene IDs if panel, or entrez IDs if hugo
+  resolved_genes <- genes %>%
+    purrr::when(
+      is.character(.) ~ {
+#        cli::cli_inform("Hugo symbols were converted to entrez IDs in order to query the cBioPortal API (see {.code ?get_entrez_id} for more info)")
+        get_entrez_id(., base_url = base_url)$entrezGeneId
+      },
+      TRUE ~ .)
+
+  resolved_genes <- c(panel_genes, resolved_genes) %>%
+    unique()
 
 
   # * Prep data frame for Query -------------------------------------------------
@@ -283,8 +288,8 @@
                  "cna" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url))
 
   }
-      genes_msg <- genes %||%
-        "all IMPACT genes (see `gnomeR::impact_gene_info`)"
+      genes_msg <- c(panel, genes) %||%
+        "All available genes"
 
       cli::cli_text("The following parameters were used in query:")
       cli::cli_dl(c("{.field Study ID}" = "{.val {unique(sample_study_pairs$study_id)}}",
@@ -317,6 +322,7 @@ get_mutations_by_sample <- function(sample_id = NULL,
                                    molecular_profile_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
+                                   panel = NULL,
                                    add_hugo = NULL,
                                    base_url = NULL) {
 
@@ -327,6 +333,7 @@ get_mutations_by_sample <- function(sample_id = NULL,
                     sample_study_pairs = sample_study_pairs,
                     data_type = c("mutation"),
                     genes = genes,
+                    panel = panel,
                     base_url = base_url)
 
 
@@ -352,6 +359,7 @@ get_cna_by_sample <- function(sample_id = NULL,
                                    molecular_profile_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
+                                   panel = NULL,
                                    add_hugo = NULL,
                                    base_url = NULL) {
 
@@ -361,6 +369,7 @@ get_cna_by_sample <- function(sample_id = NULL,
                      sample_study_pairs = sample_study_pairs,
                      data_type = c("cna"),
                      genes = genes,
+                     panel = panel,
                      base_url = base_url)
 
 
@@ -384,6 +393,7 @@ get_fusions_by_sample <- function(sample_id = NULL,
                               molecular_profile_id = NULL,
                               sample_study_pairs = NULL,
                               genes = NULL,
+                              panel = NULL,
                               add_hugo = NULL,
                               base_url = NULL) {
 
@@ -393,6 +403,7 @@ get_fusions_by_sample <- function(sample_id = NULL,
                      sample_study_pairs = sample_study_pairs,
                      data_type = c("fusion"),
                      genes = genes,
+                     panel = panel,
                      base_url = base_url)
 
 
@@ -415,6 +426,7 @@ get_genetics_by_sample <- function(sample_id = NULL,
                                    study_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
+                                   panel = NULL,
                                    add_hugo = NULL,
                                    base_url = NULL) {
 
@@ -429,6 +441,7 @@ get_genetics_by_sample <- function(sample_id = NULL,
                     molecular_profile_id = NULL,
                     sample_study_pairs = sample_study_pairs,
                     genes = genes,
+                    panel = panel,
                     base_url = base_url,
                     data_type = x)
     })
