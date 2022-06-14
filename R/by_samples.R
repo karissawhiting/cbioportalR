@@ -63,15 +63,7 @@ get_clinical_by_sample <- function(study_id = NULL,
   }
 
   # * check sample_study_pairs-------
-  if(
-    !("data.frame" %in% class(sample_study_pairs)) |
-    !("sample_id" %in% colnames(sample_study_pairs)) |
-    !("study_id" %in% colnames(sample_study_pairs))
-    #| "molecular_profile_id" %in% colnames(sample_study_pairs))
-  ) {
-
-    rlang::abort("`sample_study_pairs` must be a `data.frame` with the following columns: `sample_id` and `study_id`")
-  }
+# HEREEEEE
 
   # Prep data frame for Query ------------------------------------------------
   sample_study_pairs_nest <- sample_study_pairs %>%

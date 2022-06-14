@@ -93,7 +93,7 @@ get_clinical_by_patient <- function(study_id = NULL,
     cli::cli_abort("You must pass either {.code patient_id} or {.code patient_study_pairs}")
   }
 
-  # * if no sample_study_pairs ----
+  # * if no patient_study_pairs ----
 
   # `patient_study_pairs` gets priority. If that is NULL then consider other args
   if(is.null(patient_study_pairs)) {
@@ -123,7 +123,6 @@ get_clinical_by_patient <- function(study_id = NULL,
     !("data.frame" %in% class(patient_study_pairs)) |
     !("patient_id" %in% colnames(patient_study_pairs)) |
     !("study_id" %in% colnames(patient_study_pairs))
-    #| "molecular_profile_id" %in% colnames(sample_study_pairs))
   ) {
 
     rlang::abort("`patient_study_pairs` must be a `data.frame` with the following columns: `patient_id` and `study_id`")

@@ -32,6 +32,68 @@
   }
 }
 
+ex <- tibble::tribble(~sample_id, ~study_id,
+"P-0001453-T01-IM3", "blca_nmibc_2017",
+"P-0002166-T01-IM3", "blca_nmibc_2017",
+"P-0003238-T01-IM5", "blca_nmibc_2017",
+"P-0000004-T01-IM3", "msk_impact_2017",
+"P-0000023-T01-IM3", "msk_impact_2017")
+
+input_df <- tibble::tribble(~bop, ~studyID,
+                            "P-0001453-T01-IM3", "blca_nmibc_2017",
+                            "P-0002166-T01-IM3", "blca_nmibc_2017",
+                            "P-0003238-T01-IM5", "blca_nmibc_2017",
+                            "P-0000004-T01-IM3", "msk_impact_2017",
+                            "P-0000023-T01-IM3", "msk_impact_2017")
+
+
+
+#' Check Sample ID-Study ID and Patient ID-Study ID pairs input data frames
+#'
+#' @param input_df input data frame to check
+#'
+#' @return stop if no sample_id arg
+#' @keywords internal
+#' @noRd
+#' @export
+#'
+.check_input_pair_df <- function(input_df, type = c("patient", "sample")) {
+
+  return(deparse(substitute(input_df)))
+
+  # must be a data.frame
+  switch(!inherits(input_df, "data.frame"),
+         rlang::abort("`sample_study_pairs` must be a `data.frame`"))
+
+  # must have sample_id and study_id columns
+  names(input_df) <- names(input_df) %>%
+    stringr::str_to_lower()
+
+
+
+  output_df <- input_df %>%
+    purrr::when(
+      type == "sample" ~ {switch(
+        !(any(str_detect(names(input_df), "sampleid|sample_id")) &
+            any(str_detect(names(input_df), "studyid|study_id"))),
+        rlang::abort("`sample_study_pairs` must have the following columns: `sample_id` and `study_id`"))
+
+        select(., contains("sample"), contains("study")) %>%
+          purrr::set_names("sample_id", "study_id")
+      },
+      type == "patient" ~ {switch(
+        !(any(str_detect(names(input_df), "patientid|patient_id")) &
+            any(str_detect(names(input_df), "studyid|study_id"))),
+        rlang::abort("`patient_study_pairs` must have the following columns: `patient_id` and `study_id`"))
+
+        select(., contains("patient"), contains("study")) %>%
+          purrr::set_names("patient_id", "study_id")
+      }
+    )
+
+  output_df
+}
+
 
 #' Guess Study ID based on URL
 #'
