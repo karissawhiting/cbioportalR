@@ -10,7 +10,7 @@
 #' @param molecular_profile_id  A string indicating the molecular profile ID from which to pull data. If ID supplied, will
 #' guess the molecular profile ID based on the study ID. Only 1 molecular profile ID can be passed. If mutations from
 #' more than 1 study needed, see `sample_study_pairs`
-#' @param sample_study_pairs A dataframe with columns: `sample_id`, `study_id` and `molecular_profile_id` (optional).
+#' @param sample_study_pairs A dataframe with columns: `sample_id`, `study_id` and `molecular_profile_id` (optional). Variations in capitalization of column names are accepted.
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
 #' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion`

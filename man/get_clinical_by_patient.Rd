@@ -20,6 +20,7 @@ more than 1 study needed, see \code{sample_study_pairs}}
 \item{patient_id}{a cBioPortal patient_id}
 
 \item{patient_study_pairs}{A dataframe with columns: \code{patient_id}, \code{study_id}.
+Variations in capitalization of column names are accepted.
 This can be used in place of \code{patient_id}, \code{study_id}, arguments above if you
 need to pull samples from several different studies at once. If passed, this will take overwrite \code{patient_id} and \code{study_id} if they are also passed.}
 
@@ -39,7 +40,7 @@ Get clinical data by attribute, study ID and patient ID
 \dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 ex <- tibble::tribble(
-~patient_id, ~study_id,
+~patientID, ~study_id,
 "P-0001453", "blca_nmibc_2017",
 "P-0002166", "blca_nmibc_2017",
 "P-0003238", "blca_nmibc_2017",

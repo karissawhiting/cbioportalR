@@ -26,7 +26,7 @@ more than 1 study needed, see \code{sample_study_pairs}}
 guess the molecular profile ID based on the study ID. Only 1 molecular profile ID can be passed. If mutations from
 more than 1 study needed, see \code{sample_study_pairs}}
 
-\item{sample_study_pairs}{A dataframe with columns: \code{sample_id}, \code{study_id} and \code{molecular_profile_id} (optional).
+\item{sample_study_pairs}{A dataframe with columns: \code{sample_id}, \code{study_id} and \code{molecular_profile_id} (optional). Variations in capitalization of column names are accepted.
 This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
 

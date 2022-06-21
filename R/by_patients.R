@@ -61,6 +61,7 @@ get_samples_by_patient <- function(patient_id = NULL,
 #' @inheritParams get_clinical_by_sample
 #' @param patient_id a cBioPortal patient_id
 #' @param patient_study_pairs A dataframe with columns: `patient_id`, `study_id`.
+#' Variations in capitalization of column names are accepted.
 #' This can be used in place of `patient_id`, `study_id`, arguments above if you
 #' need to pull samples from several different studies at once. If passed, this will take overwrite `patient_id` and `study_id` if they are also passed.
 #' @return a dataframe of a specific clinical attribute
@@ -69,7 +70,7 @@ get_samples_by_patient <- function(patient_id = NULL,
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #'
 #' ex <- tibble::tribble(
-#' ~patient_id, ~study_id,
+#' ~patientID, ~study_id,
 #' "P-0001453", "blca_nmibc_2017",
 #' "P-0002166", "blca_nmibc_2017",
 #' "P-0003238", "blca_nmibc_2017",
