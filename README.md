@@ -8,7 +8,7 @@ coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/b
 
 <!-- badges: end -->
 
-# cbioportalR <a href='https://karissawhiting.github.io/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
+# cbioportalR <a href='https://www.karissawhiting.com/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 {cbioportalR} allows you to access
 [cBioPortal’s](https://www.cbioportal.org/) genomic and clinical data
@@ -238,7 +238,7 @@ mutations <- get_mutations_by_sample(sample_id =  samples)
 #> The following parameters were used in query:
 #> Study ID: "msk_impact_2017"
 #> Molecular Profile ID: "msk_impact_2017_mutations"
-#> Genes: "all IMPACT genes (see `gnomeR::impact_gene_info`)"
+#> Genes: "All available genes"
 
 # no results returned because these samples are not in this study
 length(mutations) == 0
@@ -256,19 +256,19 @@ mutations <- get_mutations_by_sample(sample_id =  samples,
 #> The following parameters were used in query:
 #> Study ID: "acc_tcga"
 #> Molecular Profile ID: "acc_tcga_mutations"
-#> Genes: "all IMPACT genes (see `gnomeR::impact_gene_info`)"
+#> Genes: "All available genes"
 
 mutations %>%
   head()
 #> # A tibble: 6 × 33
 #>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…
 #>   <chr>                 <int> <chr>            <chr>            <chr>           
-#> 1 H3C2                   8358 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
-#> 2 TP53                   7157 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
-#> 3 RTEL1                 51750 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
-#> 4 FAT1                   2195 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
-#> 5 BCOR                  54880 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
-#> 6 CTNNB1                 1499 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 1 KRT8                   3856 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 2 LCE1B                353132 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 3 SLC9C2               284525 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 4 DNAH14               127602 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 5 OPN4                  94233 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
+#> 6 DNAJC4                 3338 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…
 #> # … with 28 more variables: sampleId <chr>, patientId <chr>, studyId <chr>,
 #> #   center <chr>, mutationStatus <chr>, validationStatus <chr>,
 #> #   tumorAltCount <int>, tumorRefCount <int>, normalAltCount <int>,
@@ -353,12 +353,12 @@ studies, you likely want to pull by sample ID (instead of study ID) and
 supply the function with a dataframe of `sample_study_pairs` that
 specify where the function should look for each study. For more
 information see the [Overview of Workflow
-Vignette](https://karissawhiting.github.io/cbioportalR/articles/overview-of-workflow.html).
+Vignette](https://www.karissawhiting.com/cbioportalR/articles/overview-of-workflow.html).
 
 ## Contributing
 
 Please note that {cbioportalR} is released with a [Contributor Code of
-Conduct](https://karissawhiting.github.io/cbioportalR/CODE_OF_CONDUCT.html).
+Conduct](https://www.karissawhiting.com/cbioportalR/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
 
 Thank you to contributors!

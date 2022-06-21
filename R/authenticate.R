@@ -8,6 +8,7 @@ cbioportal_env <- rlang::new_environment()
 #' This function sets a base cBioPortal url
 #' @param db The database URL to use as base URL for calls, or "public" for https://www.cbioportal.org/
 #' @export
+#' @author Karissa Whiting, Daniel D. Sjoberg
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db(db = "public")
 #'
@@ -38,6 +39,7 @@ set_cbioportal_db <- function(db = NULL) {
 #'
 #' Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 #' @export
+#' @author Karissa Whiting, Daniel D. Sjoberg
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_cbioportal_token()
 #'
@@ -55,6 +57,7 @@ get_cbioportal_token <- function() {
 #'
 #' Helps troubleshoot API issues during an R session
 #' @export
+#' @author Karissa Whiting, Daniel D. Sjoberg
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db("public")
 #' test_cbioportal_db()
@@ -85,6 +88,7 @@ test_cbioportal_db <- function() {
 #'
 #' @return saved url in the `cbioportal_env` environment
 #' @export
+#' @author Karissa Whiting, Daniel D. Sjoberg
 #' @keywords internal
 #' @noRd
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
@@ -109,6 +113,7 @@ test_cbioportal_db <- function() {
 #'
 #' @return A string with a final URL to be used
 #' @export
+#' @author Karissa Whiting, Daniel D. Sjoberg
 #' @keywords internal
 #' @noRd
 #'

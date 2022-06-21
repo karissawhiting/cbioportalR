@@ -16,3 +16,6 @@ test_cbioportal_db()
 
 \dontshow{\}) # examplesIf}
 }
+\author{
+Karissa Whiting, Daniel D. Sjoberg
+}
