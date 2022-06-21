@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/karissawhiting/cbioportalR",
   "issueTracker": "https://github.com/karissawhiting/cbioportalR/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -236,8 +236,5 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2048.102KB",
-  "releaseNotes": "https://github.com/karissawhiting/cbioportalR/blob/master/NEWS.md",
-  "readme": "https://github.com/karissawhiting/cbioportalR/blob/main/README.md",
-  "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"]
+  "fileSize": "2053.055KB"
 }
