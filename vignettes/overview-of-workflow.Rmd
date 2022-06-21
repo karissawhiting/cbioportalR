@@ -307,8 +307,7 @@ df_pairs <- bind_rows(s1, s2) %>%
   select(-sampleId)
 
 df_pairs <- df_pairs %>%
-  rename("patient_id" = patientId, 
-         "study_id" = studyId)
+  select(patientId, studyId)
 ```
 
 Now we pass this to `get_genetics_by_sample()`

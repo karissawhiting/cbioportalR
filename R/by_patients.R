@@ -61,6 +61,7 @@ get_samples_by_patient <- function(patient_id = NULL,
 #' @inheritParams get_clinical_by_sample
 #' @param patient_id a cBioPortal patient_id
 #' @param patient_study_pairs A dataframe with columns: `patient_id`, `study_id`.
+#' Variations in capitalization of column names are accepted.
 #' This can be used in place of `patient_id`, `study_id`, arguments above if you
 #' need to pull samples from several different studies at once. If passed, this will take overwrite `patient_id` and `study_id` if they are also passed.
 #' @return a dataframe of a specific clinical attribute
@@ -69,7 +70,7 @@ get_samples_by_patient <- function(patient_id = NULL,
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #'
 #' ex <- tibble::tribble(
-#' ~patient_id, ~study_id,
+#' ~patientID, ~study_id,
 #' "P-0001453", "blca_nmibc_2017",
 #' "P-0002166", "blca_nmibc_2017",
 #' "P-0003238", "blca_nmibc_2017",
@@ -93,7 +94,7 @@ get_clinical_by_patient <- function(study_id = NULL,
     cli::cli_abort("You must pass either {.code patient_id} or {.code patient_study_pairs}")
   }
 
-  # * if no sample_study_pairs ----
+  # * if no patient_study_pairs ----
 
   # `patient_study_pairs` gets priority. If that is NULL then consider other args
   if(is.null(patient_study_pairs)) {
@@ -118,16 +119,8 @@ get_clinical_by_patient <- function(study_id = NULL,
 
   }
 
-  # * check sample_study_pairs-------
-  if(
-    !("data.frame" %in% class(patient_study_pairs)) |
-    !("patient_id" %in% colnames(patient_study_pairs)) |
-    !("study_id" %in% colnames(patient_study_pairs))
-    #| "molecular_profile_id" %in% colnames(sample_study_pairs))
-  ) {
-
-    rlang::abort("`patient_study_pairs` must be a `data.frame` with the following columns: `patient_id` and `study_id`")
-  }
+  # Check patient_study_pairs-------
+  patient_study_pairs <- .check_input_pair_df(patient_study_pairs)
 
   # Prep data frame for Query ------------------------------------------------
   patient_study_pairs_nest <- patient_study_pairs %>%

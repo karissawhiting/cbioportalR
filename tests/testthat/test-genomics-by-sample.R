@@ -172,6 +172,25 @@ test_that("Test sample-study pairs df", {
                                    data_type = data_type), "*")
 
 
+  # approximate colnames work ---
+  sample_study_pairs <- data.frame(
+    "SAMPLE ID" = c("P-0002146-T01-IM3", "s_C_CAUWT7_P001_d"),
+    "studyID" = c("blca_plasmacytoid_mskcc_2016", "prad_msk_2019"),
+    "moLEcularProfile ID" = c("blca_plasmacytoid_mskcc_2016_mutations", "prad_msk_2019_mutations"))
+
+  expect_error(.get_data_by_sample(sample_study_pairs = sample_study_pairs,
+                                   data_type = data_type), NA)
+
+  #additional columns ignored  ---
+  sample_study_pairs <- data.frame(
+    "SAMPLE ID" = c("P-0002146-T01-IM3", "s_C_CAUWT7_P001_d"),
+    "studyID" = c("blca_plasmacytoid_mskcc_2016", "prad_msk_2019"),
+    "moLEcularProfile ID" = c("blca_plasmacytoid_mskcc_2016_mutations", "prad_msk_2019_mutations"),
+    "rando" = c("h", "i"))
+
+  expect_error(.get_data_by_sample(sample_study_pairs = sample_study_pairs,
+                                   data_type = data_type), NA)
+
 })
 
 test_that("data is same regardless of function", {

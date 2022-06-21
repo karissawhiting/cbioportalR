@@ -33,6 +33,74 @@
 }
 
 
+#' Check Sample ID-Study ID and Patient ID-Study ID pairs input data frames
+#'
+#' @param input_df input data frame to check
+#'
+#' @return A valid `sample_study_pairs` or `patient_study_pairs` data frame. If `input_df` is NULL, it will return NULL.
+#' @keywords internal
+#' @noRd
+#' @export
+#'
+.check_input_pair_df <- function(input_df) {
+
+  input_df %||% return(NULL)
+
+  # may change this to: exists(arg, envir = rlang::caller_env())
+  arg_name <- deparse(substitute(input_df))
+
+  # must be a data.frame
+  switch(!inherits(input_df, "data.frame"),
+    rlang::abort("{arg_name} must be a `data.frame`")
+  )
+
+  # must have sample_id and study_id columns
+  names(input_df) <- names(input_df) %>%
+    stringr::str_remove_all(., stringr::fixed(" ")) %>%
+    stringr::str_remove_all(., stringr::fixed("_")) %>%
+    stringr::str_remove_all(., stringr::fixed(".")) %>%
+    stringr::str_to_lower()
+
+  switch(arg_name,
+    "sample_study_pairs" = {
+      final_names <- c("sample_id", "study_id")
+    },
+    "patient_study_pairs" = {
+      final_names <- c("patient_id", "study_id")
+      accepted_names <- c(final_names, stringr::str_remove_all(final_names, "_"))
+    }
+  )
+
+  accepted_names <- c(final_names, stringr::str_remove_all(final_names, "_"))
+
+  output_df <- input_df %>%
+    purrr::when(
+      !(any(stringr::str_detect(names(.), paste0(accepted_names[c(1, 3)], collapse = "|"))) &
+        any(stringr::str_detect(names(.), paste0(accepted_names[c(2, 4)], collapse = "|")))) ~
+        cli::cli_abort("{arg_name} must have the following columns: {final_names}"),
+      TRUE ~ select(
+        ., (contains("sample") | contains("patient")),
+        contains("study")
+      ) %>%
+        purrr::set_names(final_names)
+    )
+
+  # if molecular_profile_id passed, keep it
+  optional_molec <- c("molecular_profile_id",
+                      stringr::str_remove_all("molecular_profile_id", "_"))
+
+  molec_col <- names(input_df)[stringr::str_detect(names(input_df),
+                                          paste0(optional_molec, collapse = "|"))]
+
+  if(length(molec_col > 0)) {
+    output_df <- input_df %>%
+      transmute("molecular_profile_id" = .data[[molec_col]]) %>%
+      bind_cols(output_df, .)
+  }
+
+  output_df
+}
+
 #' Guess Study ID based on URL
 #'
 #' @param study_id a study id passed by a user

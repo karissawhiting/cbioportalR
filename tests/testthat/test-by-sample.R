@@ -85,12 +85,34 @@ test_that("test endpoints - sample_study_pair", {
   set_cbioportal_db(db = db_test)
 
   ex <- tibble::tribble(
-    ~sample_id, ~study_id,
+    ~sampleId, ~studyId,
     "P-0001453-T01-IM3", "blca_nmibc_2017",
     "P-0002166-T01-IM3", "blca_nmibc_2017",
     "P-0003238-T01-IM5", "blca_nmibc_2017",
     "P-0000004-T01-IM3", "msk_impact_2017",
     "P-0000023-T01-IM3", "msk_impact_2017"
+  )
+
+  endpoint_funs <- c(
+    get_mutations_by_sample = get_mutations_by_sample,
+    get_cna_by_sample = get_cna_by_sample,
+    get_clinical_by_sample = get_clinical_by_sample)
+
+  res <- purrr::map(endpoint_funs,
+                    function(fn) rlang::exec(fn, sample_study_pairs = ex))
+
+
+  expect_equal(names(res), names(endpoint_funs))
+
+
+  # test out of order
+  ex <- tibble::tribble(
+    ~`StUdY ID`, ~sampleID, ~free, ~other,
+    "blca_nmibc_2017", "P-0001453-T01-IM3", "p", "r",
+    "blca_nmibc_2017", "P-0002166-T01-IM3", "p", "r",
+    "blca_nmibc_2017", "P-0003238-T01-IM5", "p", "r",
+    "msk_impact_2017", "P-0000004-T01-IM3", "p", "r",
+    "msk_impact_2017", "P-0000023-T01-IM3", "p",  "r"
   )
 
   endpoint_funs <- c(

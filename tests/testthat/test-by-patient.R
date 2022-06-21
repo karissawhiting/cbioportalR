@@ -74,12 +74,12 @@ test_that("test endpoints - sample_study_pair", {
   set_cbioportal_db(db = db_test)
 
   ex <- tibble::tribble(
-    ~patient_id, ~study_id,
-    "P-0001453", "blca_nmibc_2017",
-    "P-0002166", "blca_nmibc_2017",
-    "P-0003238", "blca_nmibc_2017",
-    "P-0000004", "msk_impact_2017",
-    "P-0000023", "msk_impact_2017"
+    ~`Patient ID`, ~STUDYID, ~other,
+    "P-0001453", "blca_nmibc_2017", "r",
+    "P-0002166", "blca_nmibc_2017", "r",
+    "P-0003238", "blca_nmibc_2017", "r",
+    "P-0000004", "msk_impact_2017", "r",
+    "P-0000023", "msk_impact_2017", "r"
   )
 
   endpoint_funs <- c(
