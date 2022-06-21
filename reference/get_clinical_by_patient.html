@@ -81,6 +81,7 @@ more than 1 study needed, see <code>sample_study_pairs</code></p></dd>
 
 <dt>patient_study_pairs</dt>
 <dd><p>A dataframe with columns: <code>patient_id</code>, <code>study_id</code>.
+Variations in capitalization of column names are accepted.
 This can be used in place of <code>patient_id</code>, <code>study_id</code>, arguments above if you
 need to pull samples from several different studies at once. If passed, this will take overwrite <code>patient_id</code> and <code>study_id</code> if they are also passed.</p></dd>
 
@@ -106,7 +107,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
 <span class="r-in"><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span class="r-in"><span class="op">~</span><span class="va">patient_id</span>, <span class="op">~</span><span class="va">study_id</span>,</span>
+<span class="r-in"><span class="op">~</span><span class="va">patientID</span>, <span class="op">~</span><span class="va">study_id</span>,</span>
 <span class="r-in"><span class="st">"P-0001453"</span>, <span class="st">"blca_nmibc_2017"</span>,</span>
 <span class="r-in"><span class="st">"P-0002166"</span>, <span class="st">"blca_nmibc_2017"</span>,</span>
 <span class="r-in"><span class="st">"P-0003238"</span>, <span class="st">"blca_nmibc_2017"</span>,</span>

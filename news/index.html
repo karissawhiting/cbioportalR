@@ -56,6 +56,7 @@
 <ul><li>Update <code>get_genomics_by_sample()</code> and related functions to pull all gene data available for selected sample by default instead of pulling data for IMPACT genes only by default. This will change default results when user does not specify genes, and could return more results than previously as they will include results for non IMPACT gene mutations, CNA or fusions, if available.</li>
 <li>Allow users to pass Hugo Symbols to all <code>get_genomics_by_sample()</code> and related functions (previously had to specify by Entrez Gene ID or <code>NULL</code>) (<a href="https://github.com/karissawhiting/cbioportalR/issues/33" class="external-link">#33</a>)</li>
 <li>Allow users to pass gene panels to all <code>get_genomics_by_sample()</code> and related functions with new <code>panel</code> argument. Previously could only specify <code>genes</code> by specified sets of gene IDs. (<a href="https://github.com/karissawhiting/cbioportalR/issues/15" class="external-link">#15</a>)</li>
+<li>Update functions that take sample ID-study ID or patient ID-study ID pairs to be less stringent in what data frame columns names they accept. Previously these functions only accepted snake case (e.g. <code>sample_id</code>, <code>study_id</code>), but now accept any capitalization/delimiters (e.g. <code>sampleID</code>, <code>sample id</code>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="cbioportalr-020">cbioportalR 0.2.0<a class="anchor" aria-label="anchor" href="#cbioportalr-020"></a></h2>
