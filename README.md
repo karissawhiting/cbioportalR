@@ -80,7 +80,7 @@ file and save the file changes. *After saving you should restart your R
 session to ensure the token is saved and recognized.*
 
 ``` r
-CBIOPORTAL_TOKEN = 'YOUR_TOKEN'
+CBIOPORTAL_TOKEN= 'YOUR_TOKEN'
 ```
 
 You can test that your token was saved using:
