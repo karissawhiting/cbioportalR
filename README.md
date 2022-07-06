@@ -184,20 +184,19 @@ get_study_info("acc_tcga") %>%
 To pull all genomic data for a particular study you can use:
 
 ``` r
-# As a result you will get a list of dataframes of 1) mutation + fusion and 2) cna.
 df <- get_genetics_by_study(study_id = "acc_tcga")
 #> ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study
 #> ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study
 #> ! No "fusion" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``
 ```
 
-As you can see, there is no fusion data available for this study, only
-mutations and cna. Alternatively, you can use
-`get_mutations_by_study(study_id = "acc_tcga")` and
-`get_cna_by_study(study_id = "acc_tcga")`
+As a result, you will get a list of data frames with mutation and CNA
+data respectively. The function will also try to pull fusion data, but
+there is no fusion data available for this study, as indicated by the
+function message.
 
 ``` r
-df$mut %>% 
+df$mutation %>% 
   head()
 #> # A tibble: 6 × 33
 #>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…
@@ -215,6 +214,20 @@ df$mut %>%
 #> #   referenceAllele <chr>, proteinChange <chr>, mutationType <chr>,
 #> #   functionalImpactScore <chr>, fisValue <dbl>, linkXvar <chr>, linkPdb <chr>,
 #> #   linkMsa <chr>, ncbiBuild <chr>, variantType <chr>, keyword <chr>, …
+
+df$cna %>% 
+  head()
+#> # A tibble: 6 × 9
+#>   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…
+#>   <chr>                 <int> <chr>            <chr>            <chr>           
+#> 1 MEOX1                  4222 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic 
+#> 2 NUFIP2                57532 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic 
+#> 3 OSBPL7               114881 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic 
+#> 4 TP53I13               90313 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic 
+#> 5 TAOK1                 57551 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic 
+#> 6 SPOP                   8405 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic 
+#> # … with 4 more variables: sampleId <chr>, patientId <chr>, studyId <chr>,
+#> #   alteration <int>
 ```
 
 You can also pull data by specific sample IDs but the API requires a bit
@@ -368,5 +381,6 @@ Thank you to contributors!
 [@edrill](https://github.com/edrill),
 [@jalavery](https://github.com/jalavery),
 [@ddsjoberg](https://github.com/ddsjoberg)
+[@karomanchuk](https://github.com/karomanchuk)
 
 Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!

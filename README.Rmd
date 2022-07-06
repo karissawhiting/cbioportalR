@@ -201,14 +201,17 @@ get_study_info("acc_tcga") %>%
 To pull all genomic data for a particular study you can use:
 
 ```{r }
-# As a result you will get a list of dataframes of 1) mutation + fusion and 2) cna.
 df <- get_genetics_by_study(study_id = "acc_tcga")
 ```
 
-As you can see, there is no fusion data available for this study, only mutations and cna. Alternatively, you can use  `get_mutations_by_study(study_id = "acc_tcga")` and `get_cna_by_study(study_id = "acc_tcga")`
+As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion data, but there is no fusion data available for this study, as indicated by the function message. 
 
-```{r }
-df$mut %>% 
+
+```{r}
+df$mutation %>% 
+  head()
+
+df$cna %>% 
   head()
 ```
 
@@ -277,6 +280,6 @@ Thank you to contributors!
 [&#x0040;edrill](https://github.com/edrill),
 [&#x0040;jalavery](https://github.com/jalavery), 
 [&#x0040;ddsjoberg](https://github.com/ddsjoberg)
-
+[&#x0040;karomanchuk](https://github.com/karomanchuk)
 
 Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!
