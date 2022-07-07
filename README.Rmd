@@ -11,7 +11,7 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/readme-",
+ # fig.path = "man/figures/readme-",
   out.width = "100%"
 )
 
@@ -23,7 +23,9 @@ library(tidyverse)
 [![Codecov test coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master)
 <!-- badges: end -->
 
-# cbioportalR <a href='https://www.karissawhiting.com/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
+<br>
+
+# cbioportalR <a href='https://www.karissawhiting.com/cbioportalR/'><img src='man/figures/logo.png' align="right" height="160" style="float:right; height:160px;"></a> 
 
 {cbioportalR} allows you to access [cBioPortal's](https://www.cbioportal.org/) genomic and clinical data sets directly through R. The package wraps cBioPortal's API endpoints so R users can easily leverage the [existing API](https://www.cbioportal.org/api/swagger-ui.html) to access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study). 
 
