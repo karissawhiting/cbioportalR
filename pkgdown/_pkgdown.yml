@@ -1,9 +1,9 @@
 url: https://karissawhiting.github.io/cbioportalR/
 
 template:
+  bootstrap: 5
+  bootswatch: cosmo
   params:
-    bootstrap: 5
-    bootswatch: cosmo
     ganalytics: G-ZFP6P2RCRE
 
 development:
