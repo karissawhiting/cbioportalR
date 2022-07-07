@@ -10,7 +10,7 @@
 
 0 errors ✔ | 0 warnings ✔ | 2 notes ✖
 
-**Note 1**: These are names not mispelling
+**Note 1**: These are names, not mispelling
 ```
 ❯ On windows-x86_64-devel (r-devel), ubuntu-gcc-release (r-release), fedora-clang-devel (r-devel)
   checking CRAN incoming feasibility ... NOTE

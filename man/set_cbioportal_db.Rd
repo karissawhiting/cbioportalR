@@ -17,3 +17,6 @@ This function sets a base cBioPortal url
 set_cbioportal_db(db = "public")
 \dontshow{\}) # examplesIf}
 }
+\author{
+Karissa Whiting, Daniel D. Sjoberg
+}

@@ -27,9 +27,8 @@ library(dplyr)
 
 We will outline the main data retrieval workflow and functions using a case study based on two public sets of data:
 
-1) 105 samples in high risk nonmuscle invasive bladder cancer patients [(Pietzak et al. 2017)](https://pubmed.ncbi.nlm.nih.gov/28583311/).
-2) 18 samples of 18 prostate cancer patients  [(Granlund et al. 2020)](https://pubmed.ncbi.nlm.nih.gov/31564440/)
-
+1)  105 samples in high risk nonmuscle invasive bladder cancer patients [(Pietzak et al. 2017)](https://pubmed.ncbi.nlm.nih.gov/28583311/).
+2)  18 samples of 18 prostate cancer patients [(Granlund et al. 2020)](https://pubmed.ncbi.nlm.nih.gov/31564440/)
 
 ## Setup
 
@@ -37,9 +36,7 @@ Before accessing data you will need to connect to a cBioPortal database and set 
 
 *Note: If you are a MSK researcher working on IMPACT, you should connect to MSK's cBioPortal instance to get the most up to date IMPACT data, and you must follow MSK-IMPACT publication guidelines when using the data.*
 
-
 To set the database url for your current R session use the `set_cbioportal_db()` function. To set it to the public instance you can either provide the full URL to the function, or just `public` as a shortcut. This function will both check your connection to the database and set the url (`www.cbioportal.org/api`) as your base url to connect to for all future API calls during your session.
-
 
 ```{r}
 set_cbioportal_db("public")
@@ -51,7 +48,6 @@ You can use `test_cbioportal_db` at any time throughout your session to check yo
 test_cbioportal_db()
 ```
 
-
 ## Get Study Metadata
 
 Now that we are successfully connected, we may want to view all studies available for our chosen database to find the correct `study_id` corresponding to the data we want to pull. All studies have a unique identifier in the database. You can view all studies available in your database with the following:
@@ -61,7 +57,7 @@ all_studies <- available_studies()
 all_studies
 ```
 
-By inspecting this dataframe, we see the unique `study_id` we want is  `"blca_nmibc_2017"` To get more information on our study we can do the following:
+By inspecting this data frame, we see the unique `study_id` for the NMIBC data set is `"blca_nmibc_2017"` and the unique `study_id` for the prostate cancer data set is `"prad_msk_2019"`. To get more information on our studies we can do the following:
 
 *Note: the transpose function `t()` is just used here to better view results*
 
@@ -69,6 +65,7 @@ By inspecting this dataframe, we see the unique `study_id` we want is  `"blca_nm
 all_studies %>% 
   filter(studyId %in% c("blca_nmibc_2017", "prad_msk_2019"))
 ```
+
 More in-depth information about the study can be found with `get_study_info()`
 
 ```{r  }
@@ -82,9 +79,9 @@ get_study_info("prad_msk_2019") %>%
 
 ```
 
-Lastly, it is important to know what genomic data is available for our study. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions. 
+Lastly, it is important to know what genomic data is available for our studies. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions.
 
-We can check available genomic data with `available_profiles()`. 
+We can check available genomic data with `available_profiles()`.
 
 ```{r}
 available_profiles(study_id = "blca_nmibc_2017")
@@ -94,7 +91,7 @@ available_profiles(study_id = "blca_nmibc_2017")
 available_profiles(study_id = "prad_msk_2019")
 ```
 
-Luckily, in this example our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`. 
+Luckily, in this example our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`.
 
 ```{r}
 available_profiles(study_id = "blca_nmibc_2017") %>%
@@ -104,14 +101,14 @@ available_profiles(study_id = "blca_nmibc_2017") %>%
 
 ## Pulling Genomic Data
 
-Now that we have inspected our studies and confirmed the genomic data that is available, we will pull the data into our R environment. We will show two ways to do this: 
+Now that we have inspected our studies and confirmed the genomic data that is available, we will pull the data into our R environment. We will show two ways to do this:
 
-1) Using study IDs (`get_genetics_by_study()`)
-2) Using sample ID-study ID pairs (`get_genetics_by_sample()`)
+1)  Using study IDs (`get_genetics_by_study()`)
+2)  Using sample ID-study ID pairs (`get_genetics_by_sample()`)
 
-Pulling by study will give us genomic data for all genes/panels included in the study. These functions can only pull data one study ID at a time and will return all genomic data available for that study. Pulling by study ID can be efficient, and a good way to ensure you have all genomic information available in cBioPortal for a particular study. 
+Pulling by study will give us genomic data for all genes/panels included in the study. These functions can only pull data one study ID at a time and will return all genomic data available for that study. Pulling by study ID can be efficient, and a good way to ensure you have all genomic information available in cBioPortal for a particular study.
 
-If you are working across multiple studies, or only need a subset of samples from one or multiple studies, you may chose to pull by sample IDs instead of study ID. When you pull by sample IDs you can pull specific samples across multiple studies, but must also specify the studies they belong to. You may also pass a specific list of genes for which to return information. If you don't specify a list of genes the function will default to returning all available gene data for each sample. 
+If you are working across multiple studies, or only need a subset of samples from one or multiple studies, you may chose to pull by sample IDs instead of study ID. When you pull by sample IDs you can pull specific samples across multiple studies, but must also specify the studies they belong to. You may also pass a specific list of genes for which to return information. If you don't specify a list of genes the function will default to returning all available gene data for each sample.
 
 ### By Study IDs
 
@@ -173,7 +170,7 @@ df_pairs <- bind_rows(s1, s2) %>%
   select(-patientId)
 ```
 
-We need to rename the columns as per the functions documentation. 
+We need to rename the columns as per the functions documentation.
 
 ```{r }
 df_pairs <- df_pairs %>%
@@ -196,7 +193,6 @@ mut_only <- get_mutations_by_sample(sample_study_pairs = df_pairs)
 
 identical(mut_only, mut_sample)
 ```
-
 
 Let's compare these results with the ones we got from pulling by study:
 
@@ -244,7 +240,7 @@ get_mutations_by_sample(
 
 ## Pulling Clinical Data
 
-You can also pull clinical data by study ID, sample ID, or patient ID. Pulling by sample ID will pull all sample-level characteristics (e.g. sample site, tumor stage at sampling time and other variables collected at time of sampling that may be available). Pulling by patient ID will pull all patient-level characteristics (e.g. age, sex, etc.). Pulling by study ID will pull all sample _and_ patient-level characteristics at once. 
+You can also pull clinical data by study ID, sample ID, or patient ID. Pulling by sample ID will pull all sample-level characteristics (e.g. sample site, tumor stage at sampling time and other variables collected at time of sampling that may be available). Pulling by patient ID will pull all patient-level characteristics (e.g. age, sex, etc.). Pulling by study ID will pull all sample *and* patient-level characteristics at once.
 
 You can explore what clinical data is available a study using:
 
@@ -301,7 +297,6 @@ all_clinical %>%
 
 Like with the genomic data pull functions, you can also pull clinical data by study ID - sample ID, or ID study ID - patient ID pairs:
 
-
 ```{r }
 df_pairs <- bind_rows(s1, s2) %>% 
   select(-sampleId)
@@ -319,5 +314,3 @@ all_patient_clinical <- get_clinical_by_patient(patient_study_pairs = df_pairs,
 all_patient_clinical %>% 
   select(-contains("unique"))
 ```
-
-

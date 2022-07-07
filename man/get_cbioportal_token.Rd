@@ -14,3 +14,6 @@ Convenience function that retrieves cBioPortal token System Environment variable
 get_cbioportal_token()
 \dontshow{\}) # examplesIf}
 }
+\author{
+Karissa Whiting, Daniel D. Sjoberg
+}

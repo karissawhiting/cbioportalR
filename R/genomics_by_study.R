@@ -213,7 +213,6 @@ get_cna_by_study <- function(study_id = NULL,
 #'
 #'
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
-#' get_fusions_by_study(study_id = "prad_msk_2019")
 #' get_fusions_by_study(molecular_profile_id = "prad_msk_2019_fusion")
 #'
 

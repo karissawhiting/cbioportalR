@@ -31,7 +31,6 @@ Get Fusions By Study
 }
 \examples{
 \dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-get_fusions_by_study(study_id = "prad_msk_2019")
 get_fusions_by_study(molecular_profile_id = "prad_msk_2019_fusion")
 \dontshow{\}) # examplesIf}
 }
