@@ -54,23 +54,18 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item">
-  <a class="nav-link" href="index.html">
-    <span class="fa fa-home"></span>
-     
-  </a>
-</li>
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
     <a class="dropdown-item" href="articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
   </div>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="news/index.html">News</a>
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -79,8 +74,8 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/karissawhiting/cbioportalR">
-    <span class="fa fa-github fa-lg"></span>
+  <a class="external-link nav-link" href="https://github.com/karissawhiting/cbioportalR/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,12 +87,10 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9">
-<!-- badges: end --><div class="section level1">
-<div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="cbioportalr-">cbioportalR 
+<div class="section level2">
+<h2 id="cbioportalr-">cbioportalR <a href="https://www.karissawhiting.com/cbioportalR/" class="external-link"><img src="reference/figures/logo.png" align="right" height="120"></a>
 <a class="anchor" aria-label="anchor" href="#cbioportalr-"></a>
-</h1>
-</div>
+</h2>
 <p>{cbioportalR} allows you to access <a href="https://www.cbioportal.org/" class="external-link">cBioPortal’s</a> genomic and clinical data sets directly through R. The package wraps cBioPortal’s API endpoints so R users can easily leverage the <a href="https://www.cbioportal.org/api/swagger-ui.html" class="external-link">existing API</a> to access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study).</p>
 <p>This package was created to work with both the public <a href="https://www.cbioportal.org/" class="external-link">cBioPortal website</a>, as well as private institutional cBioPortal instances (e.g. MSKCC, GENIE) with appropriate credentials and <a href="#authentication">authentication</a>.</p>
 <p>For more information on cBioPortal, see the following publications:</p>
@@ -111,6 +104,7 @@
 <li><a href="https://www.cbioportal.org/api/swagger-ui.html#/" class="external-link">Full reference documentation for API</a></li>
 </ul>
 <p><em>Note: If you are a MSK researcher working on IMPACT data, you should connect to MSK’s cBioPortal instance to get the most up to date IMPACT data, and you must follow the MSK-IMPACT publication guidelines when using this data</em></p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -352,7 +346,6 @@
 <p>Thank you to contributors!</p>
 <p><a href="https://github.com/arorarshi" class="external-link">@arorarshi</a>, <a href="https://github.com/AxelitoMartin" class="external-link">@AxelitoMartin</a>, <a href="https://github.com/edrill" class="external-link">@edrill</a>, <a href="https://github.com/jalavery" class="external-link">@jalavery</a>, <a href="https://github.com/ddsjoberg" class="external-link">@ddsjoberg</a> <a href="https://github.com/karomanchuk" class="external-link">@karomanchuk</a></p>
 <p>Thank you <a href="https://awenfilms.net/" class="external-link">Isaak Liptzin</a> for the hex sticker!</p>
-</div>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
