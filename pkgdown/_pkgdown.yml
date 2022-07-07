@@ -15,10 +15,7 @@ authors:
     href: "https://www.karissawhiting.com/"
 
 navbar:
-  type: default
   left:
-  - icon: fa-home
-    href: index.html
   - text: Reference
     href: reference/index.html
   - text: Articles
