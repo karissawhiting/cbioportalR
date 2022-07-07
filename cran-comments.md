@@ -21,6 +21,8 @@
   Possibly misspelled words in DESCRIPTION:
     cBioPortal (2:39, 10:72)
     cBioPortal's (11:24)
+    genomic (10:40, 12:45)
+    microsatellite (13:5)
 ```
 
 **Note 2**: This note only occurs on windows and I think can be ignored
