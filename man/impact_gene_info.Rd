@@ -26,7 +26,7 @@ IMPACT platform 468. Options are \code{included} and \verb{not included}}
 impact_gene_info
 }
 \description{
-Dataframe labeling all genes found in IMPACT along with their corresponding
-platform and Entrez ID.
+Dataframe labeling all genes included in IMPACT panels along with their corresponding
+platform ID and Entrez ID.
 }
 \keyword{datasets}

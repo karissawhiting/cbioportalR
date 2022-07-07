@@ -2,8 +2,8 @@
 
 #' IMPACT Gene Meta Data
 #'
-#' Dataframe labeling all genes found in IMPACT along with their corresponding
-#' platform and Entrez ID.
+#' Dataframe labeling all genes included in IMPACT panels along with their corresponding
+#' platform ID and Entrez ID.
 #'
 #' @format A data frame with 470 genes
 #' \describe{
@@ -22,15 +22,4 @@
 #' @source \url{http://www.cbioportal.org/}
 #'
 "impact_gene_info"
-
-
-#' A table to lookup Hugo Symbol by Entrez ID
-#'
-#' @format A data frame
-#' \describe{
-#'     \item{entrezGeneId}{entrez Gene Id}
-#'     \item{hugoGeneSymbol}{Gene Hugo Symbol}
-#'     \item{type}{Gene type}
-#'     }
-"all_genes_lookup"
 

@@ -59,5 +59,4 @@ reference:
     - get_clinical_by_patient
   - subtitle: Data
   - contents:
-    - all_genes_lookup
     - impact_gene_info

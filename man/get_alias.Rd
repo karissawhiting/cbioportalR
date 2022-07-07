@@ -20,7 +20,7 @@ You may notice that genes -alias pairs are not always consistent. For example
 get_alias("KMT2D") will return "MLL2" but get_alias("MLL2") will not return "KMT2D"
 This function relies on the existing cBioPortal API which controls this database
 of aliases. Therefore, this is a convenience function but
-you may want to consider a more carefully curated alias list like \code{gnomeR::impact_gene_info}
+you may want to consider a more carefully curated alias list like \code{cbioportalR::impact_gene_info}
 }
 \examples{
 \dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

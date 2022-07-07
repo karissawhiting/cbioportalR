@@ -74,7 +74,7 @@ get_entrez_id <- function(hugo_symbol = NULL,
 #' get_alias("KMT2D") will return "MLL2" but get_alias("MLL2") will not return "KMT2D"
 #' This function relies on the existing cBioPortal API which controls this database
 #' of aliases. Therefore, this is a convenience function but
-#' you may want to consider a more carefully curated alias list like `gnomeR::impact_gene_info`
+#' you may want to consider a more carefully curated alias list like `cbioportalR::impact_gene_info`
 #'
 #' @param hugo_symbol a hugo symbol for which to return aliases
 #' @param base_url The database URL to query
