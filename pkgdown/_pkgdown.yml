@@ -14,22 +14,6 @@ authors:
   Karissa Whiting:
     href: "https://www.karissawhiting.com/"
 
-navbar:
-  left:
-  - icon: fa-home
-    href: index.html
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
-    menu:
-    - text: "Overview of Data Retrieval Workflow"
-      href: articles/overview-of-workflow.html
-  - text: News
-    href: news/index.html
-  right:
-  - icon: fa-github fa-lg
-    href: https://github.com/karissawhiting/cbioportalR
-
 reference:
   - subtitle: Authentication
   - contents:

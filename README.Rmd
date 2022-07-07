@@ -7,11 +7,11 @@ editor_options:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
   
-```{r, include = FALSE}
+```{r, setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "man/figures/readme-",
   out.width = "100%"
 )
 
@@ -21,7 +21,6 @@ library(tidyverse)
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/karissawhiting/cbioportalR/workflows/R-CMD-check/badge.svg)](https://github.com/karissawhiting/cbioportalR/actions)
 [![Codecov test coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master)
-
 <!-- badges: end -->
 
 # cbioportalR <a href='https://www.karissawhiting.com/cbioportalR/'><img src='man/figures/logo.png' align="right" height="120" /></a>
