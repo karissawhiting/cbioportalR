@@ -238,7 +238,7 @@ get_mutations_by_sample(
   head()
 ```
 
-## Pulling Clinical Data
+## Pulling Clinical Data & Sample Metadata
 
 You can also pull clinical data by study ID, sample ID, or patient ID. Pulling by sample ID will pull all sample-level characteristics (e.g. sample site, tumor stage at sampling time and other variables collected at time of sampling that may be available). Pulling by patient ID will pull all patient-level characteristics (e.g. age, sex, etc.). Pulling by study ID will pull all sample *and* patient-level characteristics at once.
 

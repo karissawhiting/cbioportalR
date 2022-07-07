@@ -292,8 +292,9 @@ mutations %>%
 #> #   linkMsa <chr>, ncbiBuild <chr>, variantType <chr>, keyword <chr>, …
 ```
 
-Lastly, you can also pull clinical data by study ID, sample ID or
-patient ID. To see what data is available, you can use:
+Lastly, you can also pull clinical data or sample metadata (e.g. tumor
+sample site) by study ID, sample ID or patient ID. To see what data is
+available, you can use:
 
 ``` r
 available_clinical_attributes(study_id = "acc_tcga") %>%
