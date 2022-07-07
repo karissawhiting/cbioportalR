@@ -9,7 +9,7 @@ coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/b
 
 <br>
 
-# cbioportalR <a href='https://www.karissawhiting.com/cbioportalR/'><img src='man/figures/logo.png' align="right" height="160" style="float:right; height:160px;"></a>
+## cbioportalR <a href='https://www.karissawhiting.com/cbioportalR/'><img src='man/figures/logo.png' align="right" height="180" style="align:right; height:180px;"></a>
 
 {cbioportalR} allows you to access
 [cBioPortal’s](https://www.cbioportal.org/) genomic and clinical data
