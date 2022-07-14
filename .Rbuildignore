@@ -26,3 +26,4 @@
 ^doc$
 ^Meta$
 ^vignettes/overview-of-workflow\.Rmd\.orig$
+^CRAN-SUBMISSION$
