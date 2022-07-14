@@ -25,15 +25,6 @@
     microsatellite (13:5)
 ```
 
-**Note 2**: This note only occurs on windows and I think can be ignored
-
-```
-❯ On windows-x86_64-devel (r-devel)
-  checking for detritus in the temp directory ... NOTE
-  Found the following files/directories:
-    'lastMiKTeXException'
-```
-  
   
 ## Downstream dependencies
 There are currently no downstream dependencies for this package
