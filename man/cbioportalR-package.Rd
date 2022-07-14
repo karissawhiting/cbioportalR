@@ -14,6 +14,7 @@ An R client for access to genomic and clinical data from `cBioPortal`. The packa
 Useful links:
 \itemize{
   \item \url{https://github.com/karissawhiting/cbioportalR}
+  \item \url{https://www.karissawhiting.com/cbioportalR/}
   \item Report bugs at \url{https://github.com/karissawhiting/cbioportalR/issues}
 }
 
