@@ -37,7 +37,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 3.0.0",
+      "version": ">= 3.1.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -50,6 +50,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
+      "version": ">= 1.39",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -62,6 +63,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
+      "version": ">= 2.14",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -74,6 +76,7 @@
       "@type": "SoftwareApplication",
       "identifier": "covr",
       "name": "covr",
+      "version": ">= 3.5.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -86,6 +89,7 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
+      "version": ">= 2.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -106,6 +110,7 @@
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
+      "version": ">= 1.4.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -118,6 +123,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
+      "version": ">= 3.1.7",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -130,6 +136,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
+      "version": ">= 0.3.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -142,6 +149,7 @@
       "@type": "SoftwareApplication",
       "identifier": "magrittr",
       "name": "magrittr",
+      "version": ">= 2.0.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -154,6 +162,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
+      "version": ">= 1.0.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -166,6 +175,7 @@
       "@type": "SoftwareApplication",
       "identifier": "glue",
       "name": "glue",
+      "version": ">= 1.6.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -178,6 +188,7 @@
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
+      "version": ">= 1.8.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -190,6 +201,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
+      "version": ">= 1.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -202,6 +214,7 @@
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
+      "version": ">= 1.0.9",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -214,6 +227,7 @@
       "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
+      "version": ">= 1.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -226,6 +240,7 @@
       "@type": "SoftwareApplication",
       "identifier": "cli",
       "name": "cli",
+      "version": ">= 3.3.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -236,5 +251,8 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2053.055KB"
+  "fileSize": "1952.954KB",
+  "releaseNotes": "https://github.com/karissawhiting/cbioportalR/blob/master/NEWS.md",
+  "readme": "https://github.com/karissawhiting/cbioportalR/blob/main/README.md",
+  "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"]
 }

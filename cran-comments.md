@@ -39,4 +39,7 @@
 There are currently no downstream dependencies for this package
 
 ## Additional Comments
+This package is an API wrapper. It can be used with or without an API key. Examples and tests connect to a public database instance (does not require a key), and are skipped or fail gracefully when internet connection is not available. All examples and unit tests run successfully in multiple other environments (checked via Github Actions), and on local and remote systems. Network-dependent vignettes are precompiled for CRAN.
+
 Thank you!
+

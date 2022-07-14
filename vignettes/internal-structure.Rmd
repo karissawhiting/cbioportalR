@@ -5,18 +5,14 @@ vignette: >
   %\VignetteIndexEntry{Internal Structure & Guiding Principles}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-params:
-  EVAL: !r identical(Sys.getenv("NOT_CRAN"), "true")
 ---
 
 ```{r, include = FALSE}
-NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  warning = FALSE, 
-  purl = NOT_CRAN,
-  eval = NOT_CRAN
+  warning = FALSE
 )
 ```
 
