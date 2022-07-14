@@ -110,7 +110,7 @@
 <li>The <code><a href="../reference/cbp_api.html">cbp_api()</a></code> internal function makes all api calls (<code>GET</code> and <code>POST</code> using {httr} package). All other user-facing or internal functions paste together necessary URLs and query parameters based on the function and its arguments and pass to this.</li>
 <li>
 <code><a href="../reference/dot-get_data_by_study.html">.get_data_by_study()</a></code> and <code><a href="../reference/dot-get_data_by_sample.html">.get_data_by_sample()</a></code> are internal utility functions that work for mutation/cna/fusion data pulls.</li>
-<li>Functions ending in <code>*_by_study()</code> query by study_id, functions ending in <code>*_by_sample()</code> query by sample ID, and functions ending in <code>*_by_patient()</code> query by patient ID. For genomic queries by sample, you need to specify the specific genes you want to query (this is not necessary when querying by <code>study_id</code>). If no specified genes passed by the user, we default to IMPACT genes only.</li>
+<li>Functions ending in <code>*_by_study()</code> query by study_id, functions ending in <code>*_by_sample()</code> query by sample ID, and functions ending in <code>*_by_patient()</code> query by patient ID.</li>
 <li>There are no specific differences between functions starting with <code>available_*()</code> and those starting with <code>get_*()</code>. These are named according to how you may use them in your workflow. For example, you would check the <code><a href="../reference/available_profiles.html">available_profiles()</a></code> for your <code>study_id</code> in order to <code><a href="../reference/get_fusions_by_study.html">get_fusions_by_study()</a></code>
 </li>
 </ul>
