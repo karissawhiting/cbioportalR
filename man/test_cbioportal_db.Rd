@@ -6,6 +6,11 @@
 \usage{
 test_cbioportal_db()
 }
+\value{
+No return value, called for side effects.
+Will display an alert notifying if the user has successfully authenticated
+to cBioPortal
+}
 \description{
 Helps troubleshoot API issues during an R session
 }

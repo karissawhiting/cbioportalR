@@ -15,10 +15,10 @@ coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/b
 [cBioPortal’s](https://www.cbioportal.org/) genomic and clinical data
 sets directly through R. The package wraps cBioPortal’s API endpoints so
 R users can easily leverage the [existing
-API](https://www.cbioportal.org/api/swagger-ui.html) to access genomic
-data on mutations, copy number alterations and fusions as well as data
-on tumor mutational burden (TMB), microsatellite instability status
-(MSI) and select clinical data points (depending on the study).
+API](https://www.cbioportal.org/api/swagger-ui/index.html) to access
+genomic data on mutations, copy number alterations and fusions as well
+as data on tumor mutational burden (TMB), microsatellite instability
+status (MSI) and select clinical data points (depending on the study).
 
 This package was created to work with both the public [cBioPortal
 website](https://www.cbioportal.org/), as well as private institutional
@@ -38,7 +38,7 @@ links:
 -   [cBioPortal API and API Clients
     documentation](https://docs.cbioportal.org/web-api-and-clients/)
 -   [Full reference documentation for
-    API](https://www.cbioportal.org/api/swagger-ui.html#/)
+    API](https://www.cbioportal.org/api/swagger-ui/index.html)
 
 *Note: If you are a MSK researcher working on IMPACT data, you should
 connect to MSK’s cBioPortal instance to get the most up to date IMPACT

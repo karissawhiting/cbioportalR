@@ -37,6 +37,7 @@ cBioPortal’s
 cbioportal
 cli
 cna
+doi
 entrez
 et
 https
@@ -46,6 +47,7 @@ idk
 maf
 magrittr
 nonmuscle
+scisignal
 tibbles
 usethis
 www

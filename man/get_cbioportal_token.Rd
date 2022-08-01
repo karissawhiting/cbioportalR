@@ -6,6 +6,10 @@
 \usage{
 get_cbioportal_token()
 }
+\value{
+Returns a string with cBioPortal token if successfully authenticated, or
+a warning that token could not be found.
+}
 \description{
 Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 }

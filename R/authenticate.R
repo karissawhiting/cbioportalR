@@ -5,8 +5,11 @@ cbioportal_env <- rlang::new_environment()
 # ------------------------------------------------------------------------------
 #' Connect to cBioPortal DB
 #'
-#' This function sets a base cBioPortal url
+#' This function sets a base cBioPortal URL
 #' @param db The database URL to use as base URL for calls, or "public" for https://www.cbioportal.org/
+#' @return No return value, called for side effects.
+#' Will display an alert notifying if the user has successfully authenticated
+#' to cBioPortal.
 #' @export
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
@@ -39,6 +42,8 @@ set_cbioportal_db <- function(db = NULL) {
 #'
 #' Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 #' @export
+#' @return Returns a string with cBioPortal token if successfully authenticated, or
+#' a warning that token could not be found.
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' get_cbioportal_token()
@@ -57,6 +62,9 @@ get_cbioportal_token <- function() {
 #'
 #' Helps troubleshoot API issues during an R session
 #' @export
+#' @return No return value, called for side effects.
+#' Will display an alert notifying if the user has successfully authenticated
+#' to cBioPortal
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @examplesIf !httr::http_error("www.cbioportal.org/api")
 #' set_cbioportal_db("public")
@@ -86,7 +94,7 @@ test_cbioportal_db <- function() {
 #'
 #' Pulls the set URL from the internal package environment
 #'
-#' @return saved url in the `cbioportal_env` environment
+#' @return a string indicating the saved URL in the `cbioportal_env` environment or an error if no URL found.
 #' @export
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @keywords internal
@@ -111,7 +119,7 @@ test_cbioportal_db <- function() {
 #'
 #' @param raw_url The URL passed to a function by a user
 #'
-#' @return A string with a final URL to be used
+#' @return A string with a final URL to be used in the given query.
 #' @export
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @keywords internal
