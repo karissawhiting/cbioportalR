@@ -5,6 +5,8 @@
 [![R-CMD-check](https://github.com/karissawhiting/cbioportalR/workflows/R-CMD-check/badge.svg)](https://github.com/karissawhiting/cbioportalR/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/cbioportalR)](https://CRAN.R-project.org/package=cbioportalR)
 <!-- badges: end -->
 
 <br>
@@ -47,11 +49,19 @@ using this data*
 
 ## Installation
 
-You can install {cbioportalR} with:
+You can install {cbioportalR} with the following code:
+
+``` r
+install.packages("cbioportalR")
+```
+
+Install the development version of {cbioportalR} with:
 
 ``` r
 remotes::install_github("karissawhiting/cbioportalR")
 ```
+
+Load the package:
 
 ``` r
 library(cbioportalR)
