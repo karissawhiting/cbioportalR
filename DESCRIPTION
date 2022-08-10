@@ -1,6 +1,6 @@
 Package: cbioportalR
 Title: Browse and Query Clinical and Genomic Data from cBioPortal
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: 
     c(person(given = "Karissa",
            family = "Whiting",
