@@ -1,0 +1,13 @@
+img.logo {
+    float: right;
+    width: 0px;
+    margin-left: 40px;
+}
+
+.page-header{
+    border-bottom: 0px solid #dee2e6;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+}
+
