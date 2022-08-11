@@ -48,7 +48,7 @@
     
     <a class="navbar-brand me-2" href="index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,10 +112,14 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install {cbioportalR} with:</p>
+<p>You can install {cbioportalR} with the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"karissawhiting/cbioportalR"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"cbioportalR"</span><span class="op">)</span></span></code></pre></div>
+<p>Install the development version of {cbioportalR} with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"karissawhiting/cbioportalR"</span><span class="op">)</span></span></code></pre></div>
+<p>Load the package:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/karissawhiting/cbioportalR" class="external-link">cbioportalR</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -123,21 +127,21 @@
 </h2>
 <p>If you are using the public domain <a href="https://www.cbioportal.org/" class="external-link uri">https://www.cbioportal.org/</a>, you don’t need a token to start pulling data. If you are using a private instance of cBioPortal (like MSKCC’s institutional database), you will need to acquire a token and save it to your <code>.Renviron</code> file (or wherever you store credentials). Simply log in to your institution’s cBioPortal site, acquire a token (Usually through the ‘Web API’ tab) and save it in your <code>.Renviron</code> file. This will save the token as an environmental variable so you don’t have to hard code the secret key in your scripts.</p>
 <p><em>Tip: The following {usethis} function can easily find and open the <code>.Renviron</code> for you:</em></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">edit_r_environ</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Paste the token you were given (using the format below) in the .Renviron file and save the file changes. <em>After saving you should restart your R session to ensure the token is saved and recognized.</em></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CBIOPORTAL_TOKEN</span> <span class="op">=</span> <span class="st">'YOUR_TOKEN'</span></span></code></pre></div>
 <p>You can test that your token was saved using:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_cbioportal_token.html">get_cbioportal_token</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>For every new R session, you need to set your database URL. The <code><a href="reference/set_cbioportal_db.html">set_cbioportal_db()</a></code> function will set an environmental variable for your session that tells the package which database to point to for all API calls. You can set it to point to the public database with <code>db = 'www.cbioportal.org'</code> or <code>db = 'public'</code>. If using a private database you will pass your institutions cBioPortal URL as <code>db</code>. This function will both set your URL and check the connection.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span>db <span class="op">=</span> <span class="st">"public"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ You are successfully connected!</span></span>
 <span><span class="co">#&gt; ✔ base_url for this R session is now set to "www.cbioportal.org/api"</span></span></code></pre></div>
 <p>You are now set up for the remainder of your session! API calls depend on your internet connection and possibly a VPN connection so you can use the following to check your connection at any time throughout your session:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/test_cbioportal_db.html">test_cbioportal_db</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ You are successfully connected!</span></span></code></pre></div>
 </div>
@@ -151,7 +155,7 @@
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <p>To see available studies in your database you can use:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/available_studies.html">available_studies</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 10 × 13</span></span>
@@ -170,7 +174,7 @@
 <span><span class="co">#&gt; # … with 5 more variables: readPermission &lt;lgl&gt;, cancerTypeId &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;</span></span></code></pre></div>
 <p>To view study metadata on a particular study you can use:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                             [,1]                                                                                                                                                                                             </span></span>
@@ -201,13 +205,13 @@
 <span><span class="co">#&gt; cancerType.cancerTypeId     "acc"                                                                                                                                                                                            </span></span>
 <span><span class="co">#&gt; referenceGenome             "hg19"</span></span></code></pre></div>
 <p>To pull all genomic data for a particular study you can use:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_genetics_by_study.html">get_genetics_by_study</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ! No "fusion" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``</span></span></code></pre></div>
 <p>As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion data, but there is no fusion data available for this study, as indicated by the function message.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">mutation</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 33</span></span>
@@ -241,7 +245,7 @@
 <span><span class="co">#&gt; # … with 4 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   alteration &lt;int&gt;</span></span></code></pre></div>
 <p>You can also pull data by specific sample IDs but the API requires a bit more information from you (unlike pulling by study ID which returns everything available for that study). This can be useful when working within a very large database or working across samples housed in multiple different studies. When querying by <code>sample_id</code> you must also specify the corresponding <code>study_id</code> in which the samples are housed. When these pieces of information are not provided, {cbioportalR} makes an informed guess based on your connection and will throw an informative message to clarify exactly what is being queried. In the example below, the function defaults to the public version of the IMPACT database (<code>study_id = "msk_impact_2017"</code>).</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/available_samples.html">available_samples</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">pull</span><span class="op">(</span><span class="va">sampleId</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -256,7 +260,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mutations</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>No results were returned because the samples are not stored in this study. When we specify the correct study (<code>study_id = "acc_tcga"</code>), we get accurate results. You can check which samples are stored in a study using <code>available_samples(study_id = "acc_tcga")</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mutations</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span>  <span class="va">samples</span>,</span>
 <span>                                    study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; The following parameters were used in query:</span></span>
@@ -283,7 +287,7 @@
 <span><span class="co">#&gt; #   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></span></code></pre></div>
 <p>Lastly, you can also pull clinical data or sample metadata (e.g. tumor sample site) by study ID, sample ID or patient ID. To see what data is available, you can use:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 7</span></span>
@@ -296,7 +300,7 @@
 <span><span class="co">#&gt; 5 Cancer Type    Cancer type STRING   FALSE            1        CANCER_TYPE     </span></span>
 <span><span class="co">#&gt; 6 Cancer Type D… Cancer typ… STRING   FALSE            1        CANCER_TYPE_DET…</span></span>
 <span><span class="co">#&gt; # … with 1 more variable: studyId &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_clinical_by_study.html">get_clinical_by_study</a></span><span class="op">(</span><span class="st">"acc_tcga"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ! Sample Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ! Patient Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study</span></span>
@@ -314,7 +318,7 @@
 <span><span class="co">#&gt;  9 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DFS_MONTHS       24.77 PATIENT  </span></span>
 <span><span class="co">#&gt; 10 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DFS_STATUS       1:Re… PATIENT  </span></span>
 <span><span class="co">#&gt; # … with 6,282 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">samples</span>, study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ! No `clinical_attribute` passed. Defaulting to returning</span></span>
@@ -333,7 +337,7 @@
 <span><span class="co">#&gt;  9 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OTHER_SAMPLE_ID </span></span>
 <span><span class="co">#&gt; 10 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… PATHOLOGY_REPOR…</span></span>
 <span><span class="co">#&gt; # … with 1 more variable: value &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">patients</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/available_patients.html">available_patients</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">pull</span><span class="op">(</span><span class="va">patientId</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -392,7 +396,14 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/karissawhiting/cbioportalR/actions" class="external-link"><img src="https://github.com/karissawhiting/cbioportalR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master" class="external-link"><img src="https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=cbioportalR" class="external-link"><img src="https://www.r-pkg.org/badges/version/cbioportalR" alt="CRAN status"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
