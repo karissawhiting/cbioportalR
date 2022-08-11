@@ -6,6 +6,10 @@ template:
   params:
     ganalytics: G-ZFP6P2RCRE
 
+development:
+  mode: auto
+  version_label: default
+
 authors:
   Karissa Whiting:
     href: "https://www.karissawhiting.com/"
