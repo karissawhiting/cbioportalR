@@ -31,7 +31,7 @@ more than 1 study needed, see \code{sample_study_pairs}}
 This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
 
-\item{data_type}{specify what type of data to return. Options are\code{mutations}, \code{cna}, \code{fusion} or \code{structural-variant} (same as \code{fusion}).}
+\item{data_type}{specify what type of data to return. Options are\code{mutations}, \code{cna}, \code{fusion} or \code{structural_variant} (same as \code{fusion}).}
 
 \item{genes}{A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function.  If \code{panel} and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
 

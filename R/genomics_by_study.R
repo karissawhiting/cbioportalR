@@ -11,7 +11,7 @@
 #' on molecular_profile_id.
 #' @param molecular_profile_id a molecular profile to query mutations.
 #' If NULL, guesses molecular_profile_id based on study ID.
-#' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`, or `structural-variant` (same as `fusion`).
+#' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`, or `structural_variant` (same as `fusion`).
 #' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
@@ -49,7 +49,7 @@
     cli::cli_abort("You must provide a {.code study_id} or a {.code molecular_profile_id}. See {.code available_profiles(<study_id>)} to view available profiles for a study")
   }
 
-  # fusions and structural-variants are the same. fusion is older nomenclature.
+  # fusions and structural_variants are the same. fusion is older nomenclature.
   data_type <- match.arg(data_type) %>%
     purrr::when(. ==  "structural_variant" ~ "fusion",
                 TRUE ~ .)

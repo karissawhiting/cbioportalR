@@ -19,7 +19,7 @@ on molecular_profile_id.}
 \item{molecular_profile_id}{a molecular profile to query mutations.
 If NULL, guesses molecular_profile_id based on study ID.}
 
-\item{data_type}{specify what type of data to return. Options are\code{mutation}, \code{cna}, \code{fusion}, or \code{structural-variant} (same as \code{fusion}).}
+\item{data_type}{specify what type of data to return. Options are\code{mutation}, \code{cna}, \code{fusion}, or \code{structural_variant} (same as \code{fusion}).}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
