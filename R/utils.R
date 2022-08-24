@@ -157,7 +157,7 @@
 
 
   if(length(resolved_profile) == 0) {
-    cli::cli_abort("No molecular profile for {.code data_type = {data_type}} found in {.val {study_id}}.  See {.code available_profiles('{study_id}')}")
+    cli::cli_abort("No molecular profile for `data_type = {data_type}` found in {.val {study_id}}.  See `available_profiles('{study_id}')`")
   }
 
   resolved_profile
