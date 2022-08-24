@@ -63,7 +63,6 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
     <a class="dropdown-item" href="articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
   </div>
 </li>
@@ -125,7 +124,7 @@
 <div class="section level2">
 <h2 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h2>
-<p>If you are using the public domain <a href="https://www.cbioportal.org/" class="external-link uri">https://www.cbioportal.org/</a>, you don’t need a token to start pulling data. If you are using a private instance of cBioPortal (like MSKCC’s institutional database), you will need to acquire a token and save it to your <code>.Renviron</code> file (or wherever you store credentials). Simply log in to your institution’s cBioPortal site, acquire a token (Usually through the ‘Web API’ tab) and save it in your <code>.Renviron</code> file. This will save the token as an environmental variable so you don’t have to hard code the secret key in your scripts.</p>
+<p>If you are using the public domain <a href="https://www.cbioportal.org/" class="external-link uri">https://www.cbioportal.org/</a>, you don’t need a token to start pulling data. If you are using a private instance of cBioPortal (like MSKCC’s institutional database), you will need to acquire a token and save it to your <code>.Renviron</code> file (or wherever you store credentials). Simply log in to your institution’s cBioPortal site, acquire a token (usually through the ‘Data Access Token’ link in your username menu in the upper right) and save it in your <code>.Renviron</code> file. This will save the token as an environmental variable so you don’t have to hard code the secret key in your scripts.</p>
 <p><em>Tip: The following {usethis} function can easily find and open the <code>.Renviron</code> for you:</em></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">edit_r_environ</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -210,7 +209,7 @@
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_genetics_by_study.html">get_genetics_by_study</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study</span></span>
-<span><span class="co">#&gt; ! No "fusion" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``</span></span></code></pre></div>
+<span><span class="co">#&gt; ! No "structural_variant" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``</span></span></code></pre></div>
 <p>As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion (structural variant) data, but there is no fusion data available for this study, as indicated by the function message.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">mutation</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
