@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="index.html">cbioportalR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,9 +69,9 @@
 <li>
 <input type="checkbox" disabled>If a bug was fixed, a unit test was added for the bug check</li>
 <li>
-<input type="checkbox" disabled>Run <code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code>. Check the R console for errors, and review the rendered website.</li>
+<input type="checkbox" disabled>Run <code>pkgdown::build_site(run_dont_run = TRUE)</code>. Check the R console for errors, and review the rendered website.</li>
 <li>
-<input type="checkbox" disabled>Code coverage is suitable for any new functions/features. Review coverage with <code><a href="http://covr.r-lib.org/reference/report.html" class="external-link">covr::report()</a></code>. Begin in a fresh R session without any packages loaded.</li>
+<input type="checkbox" disabled>Code coverage is suitable for any new functions/features. Review coverage with <code>withr::with_envvar(new = c("NOT_CRAN" = "true")</code>. Begin in a fresh R session without any packages loaded.</li>
 <li>
 <input type="checkbox" disabled>R CMD Check runs without errors, warnings, and notes</li>
 <li>

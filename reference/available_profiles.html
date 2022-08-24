@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,12 +89,13 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span><span class="st">"public"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span><span class="st">"public"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> You are successfully connected!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #00BB00;">base_url</span> for this R session is now set to <span style="color: #0000BB;">"www.cbioportal.org/api"</span> </span>
 <span class="r-in"><span><span class="fu">available_profiles</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No `study_id` provided. Returning all available genomic profiles for <span style="color: #0000BB; font-style: italic;">&lt;www.cbioportal.org/api&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,662 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,667 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    molec…¹ datat…² name  descr…³ showP…⁴ patie…⁵ molec…⁶ studyId gener…⁷ pivot…⁸</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> PROTEI… LOG2-V… Prot… Protei… FALSE   FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span></span>
@@ -106,12 +107,11 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MRNA_E… CONTIN… mRNA… mRNA g… FALSE   FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MRNA_E… Z-SCORE mRNA… mRNA e… TRUE    FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MRNA_E… Z-SCORE mRNA… Log-tr… TRUE    FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> COPY_N… DISCRE… Copy… Putati… TRUE    FALSE   blca_p… blca_p… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,652 more rows, 1 more variable: sortOrder &lt;chr&gt;, and abbreviated</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MUTATI… MAF     Muta… Somati… TRUE    FALSE   bcc_un… bcc_un… <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,657 more rows, 1 more variable: sortOrder &lt;chr&gt;, and abbreviated</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variable names ¹​molecularAlterationType, ²​datatype, ³​description,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁴​showProfileInAnalysisTab, ⁵​patientLevel, ⁶​molecularProfileId,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁷​genericAssayType, ⁸​pivotThreshold</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-in"><span><span class="fu">available_profiles</span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   molecularAlterationType datatype name  descr…¹ showP…² patie…³ molec…⁴ studyId</span>
@@ -127,6 +127,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> MRNA_EXPRESSION         Z-SCORE  mRNA… Log-tr… TRUE    FALSE   acc_tc… acc_tc…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​description, ²​showProfileInAnalysisTab,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​patientLevel, ⁴​molecularProfileId</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

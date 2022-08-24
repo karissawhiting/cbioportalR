@@ -48,7 +48,7 @@
     
     <a class="navbar-brand me-2" href="index.html">cbioportalR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@
 </h2>
 <p>{cbioportalR} allows you to access <a href="https://www.cbioportal.org/" class="external-link">cBioPortal’s</a> genomic and clinical data sets directly through R. The package wraps cBioPortal’s API endpoints so R users can easily leverage the <a href="https://www.cbioportal.org/api/swagger-ui/index.html" class="external-link">existing API</a> to access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study).</p>
 <p>This package was created to work with both the public <a href="https://www.cbioportal.org/" class="external-link">cBioPortal website</a>, as well as private institutional cBioPortal instances (e.g. MSKCC, GENIE) with appropriate credentials and <a href="#authentication">authentication</a>.</p>
-<p>For more information on cBioPortal, see the following publications:</p>
+<p>This package is compatible with cBioPortal v5.0, but is subject to change as <a href="https://github.com/cBioPortal/cbioportal/releases" class="external-link">cBioPortal updates are released</a>. For more information on cBioPortal, see the following publications:</p>
 <ul>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/23550210/" class="external-link">Gao et al. Sci. Signal. 2013</a></li>
 <li><a href="https://aacrjournals.org/cancerdiscovery/article/2/5/401/3246/The-cBio-Cancer-Genomics-Portal-An-Open-Platform" class="external-link">Cerami et al. Cancer Discov. 2012</a></li>
@@ -159,20 +159,21 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/available_studies.html">available_studies</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 10 × 13</span></span>
-<span><span class="co">#&gt;    studyId name  description publicStudy groups status importDate allSampleCount</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;               &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1 acc_tc… Adre… "TCGA Adre… TRUE        "PUBL…      0 2022-03-0…             92</span></span>
-<span><span class="co">#&gt;  2 blca_p… Blad… "Whole exo… TRUE        ""          0 2022-03-0…             34</span></span>
-<span><span class="co">#&gt;  3 bcc_un… Basa… "Whole-exo… TRUE        "PUBL…      0 2022-03-0…            293</span></span>
-<span><span class="co">#&gt;  4 all_st… Acut… "Comprehen… TRUE        "PUBL…      0 2022-03-0…             93</span></span>
-<span><span class="co">#&gt;  5 ampca_… Ampu… "Exome seq… TRUE        "PUBL…      0 2022-03-0…            160</span></span>
-<span><span class="co">#&gt;  6 blca_d… Blad… "Whole exo… TRUE        "PUBL…      0 2022-03-0…             50</span></span>
-<span><span class="co">#&gt;  7 blca_m… Blad… "Comprehen… TRUE        "PUBL…      0 2022-03-0…             97</span></span>
-<span><span class="co">#&gt;  8 blca_b… Blad… "Whole-exo… TRUE        "PUBL…      0 2022-03-0…             99</span></span>
-<span><span class="co">#&gt;  9 blca_m… Blad… "Genomic P… TRUE        "PUBL…      0 2022-03-0…            109</span></span>
-<span><span class="co">#&gt; 10 all_st… Hypo… "Whole gen… TRUE        ""          0 2022-03-0…             44</span></span>
-<span><span class="co">#&gt; # … with 5 more variables: readPermission &lt;lgl&gt;, cancerTypeId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;    studyId   name  descr…¹ publi…² groups status impor…³ allSa…⁴ readP…⁵ cance…⁶</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;     &lt;int&gt; &lt;lgl&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 acc_tcga  Adre… "TCGA … TRUE    "PUBL…      0 2022-0…      92 TRUE    acc    </span></span>
+<span><span class="co">#&gt;  2 bcc_unig… Basa… "Whole… TRUE    "PUBL…      0 2022-0…     293 TRUE    bcc    </span></span>
+<span><span class="co">#&gt;  3 ampca_bc… Ampu… "Exome… TRUE    "PUBL…      0 2022-0…     160 TRUE    ampca  </span></span>
+<span><span class="co">#&gt;  4 blca_dfa… Blad… "Whole… TRUE    "PUBL…      0 2022-0…      50 TRUE    blca   </span></span>
+<span><span class="co">#&gt;  5 blca_msk… Blad… "Compr… TRUE    "PUBL…      0 2022-0…      97 TRUE    blca   </span></span>
+<span><span class="co">#&gt;  6 blca_bgi  Blad… "Whole… TRUE    "PUBL…      0 2022-0…      99 TRUE    blca   </span></span>
+<span><span class="co">#&gt;  7 blca_msk… Blad… "Genom… TRUE    "PUBL…      0 2022-0…     109 TRUE    blca   </span></span>
+<span><span class="co">#&gt;  8 all_stju… Hypo… "Whole… TRUE    ""          0 2022-0…      44 TRUE    myeloid</span></span>
+<span><span class="co">#&gt;  9 acyc_fmi… Aden… "Targe… TRUE    "ACYC…      0 2022-0…      28 TRUE    acyc   </span></span>
+<span><span class="co">#&gt; 10 acyc_san… Aden… "Whole… TRUE    "ACYC…      0 2022-0…      24 TRUE    acyc   </span></span>
+<span><span class="co">#&gt; # … with 3 more variables: referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, citation &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   and abbreviated variable names ¹​description, ²​publicStudy, ³​importDate,</span></span>
+<span><span class="co">#&gt; #   ⁴​allSampleCount, ⁵​readPermission, ⁶​cancerTypeId</span></span></code></pre></div>
 <p>To view study metadata on a particular study you can use:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_study_info.html">get_study_info</a></span><span class="op">(</span><span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -210,40 +211,40 @@
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ! No "fusion" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``</span></span></code></pre></div>
-<p>As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion data, but there is no fusion data available for this study, as indicated by the function message.</p>
+<p>As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion (structural variant) data, but there is no fusion data available for this study, as indicated by the function message.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">mutation</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 33</span></span>
-<span><span class="co">#&gt;   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
-<span><span class="co">#&gt; 1 KRT8                   3856 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 2 LCE1B                353132 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 3 SLC9C2               284525 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 4 DNAH14               127602 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 5 OPN4                  94233 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 6 DNAJC4                 3338 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; # … with 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   normalRefCount &lt;int&gt;, startPosition &lt;int&gt;, endPosition &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></span>
+<span><span class="co">#&gt;   hugoG…¹ entre…² uniqu…³ uniqu…⁴ molec…⁵ sampl…⁶ patie…⁷ studyId center mutat…⁸</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt; 1 KRT8       3856 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic</span></span>
+<span><span class="co">#&gt; 2 LCE1B    353132 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic</span></span>
+<span><span class="co">#&gt; 3 SLC9C2   284525 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic</span></span>
+<span><span class="co">#&gt; 4 DNAH14   127602 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic</span></span>
+<span><span class="co">#&gt; 5 OPN4      94233 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic</span></span>
+<span><span class="co">#&gt; 6 DNAJC4     3338 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic</span></span>
+<span><span class="co">#&gt; # … with 23 more variables: validationStatus &lt;chr&gt;, tumorAltCount &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;, normalRefCount &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   startPosition &lt;int&gt;, endPosition &lt;int&gt;, referenceAllele &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;, functionalImpactScore &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;, linkMsa &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, chr &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   variantAllele &lt;chr&gt;, refseqMrnaId &lt;chr&gt;, proteinPosStart &lt;int&gt;, …</span></span>
 <span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">cna</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
-<span><span class="co">#&gt;   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
-<span><span class="co">#&gt; 1 MEOX1                  4222 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic </span></span>
-<span><span class="co">#&gt; 2 NUFIP2                57532 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic </span></span>
-<span><span class="co">#&gt; 3 OSBPL7               114881 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic </span></span>
-<span><span class="co">#&gt; 4 TP53I13               90313 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic </span></span>
-<span><span class="co">#&gt; 5 TAOK1                 57551 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic </span></span>
-<span><span class="co">#&gt; 6 SPOP                   8405 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_gistic </span></span>
-<span><span class="co">#&gt; # … with 4 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   alteration &lt;int&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   hugoGeneSymbol entre…¹ uniqu…² uniqu…³ molec…⁴ sampl…⁵ patie…⁶ studyId alter…⁷</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 MEOX1             4222 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2</span></span>
+<span><span class="co">#&gt; 2 NUFIP2           57532 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2</span></span>
+<span><span class="co">#&gt; 3 OSBPL7          114881 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2</span></span>
+<span><span class="co">#&gt; 4 TP53I13          90313 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2</span></span>
+<span><span class="co">#&gt; 5 TAOK1            57551 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2</span></span>
+<span><span class="co">#&gt; 6 SPOP              8405 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​entrezGeneId, ²​uniqueSampleKey,</span></span>
+<span><span class="co">#&gt; #   ³​uniquePatientKey, ⁴​molecularProfileId, ⁵​sampleId, ⁶​patientId, ⁷​alteration</span></span></code></pre></div>
 <p>You can also pull data by specific sample IDs but the API requires a bit more information from you (unlike pulling by study ID which returns everything available for that study). This can be useful when working within a very large database or working across samples housed in multiple different studies. When querying by <code>sample_id</code> you must also specify the corresponding <code>study_id</code> in which the samples are housed. When these pieces of information are not provided, {cbioportalR} makes an informed guess based on your connection and will throw an informative message to clarify exactly what is being queried. In the example below, the function defaults to the public version of the IMPACT database (<code>study_id = "msk_impact_2017"</code>).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/available_samples.html">available_samples</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -271,72 +272,75 @@
 <span><span class="va">mutations</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 33</span></span>
-<span><span class="co">#&gt;   hugoGeneSymbol entrezGeneId uniqueSampleKey  uniquePatientKey molecularProfil…</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           </span></span>
-<span><span class="co">#&gt; 1 KRT8                   3856 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 2 LCE1B                353132 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 3 SLC9C2               284525 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 4 DNAH14               127602 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 5 OPN4                  94233 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; 6 DNAJC4                 3338 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… acc_tcga_mutati…</span></span>
-<span><span class="co">#&gt; # … with 28 more variables: sampleId &lt;chr&gt;, patientId &lt;chr&gt;, studyId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   normalRefCount &lt;int&gt;, startPosition &lt;int&gt;, endPosition &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   functionalImpactScore &lt;chr&gt;, fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   linkMsa &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, …</span></span></code></pre></div>
+<span><span class="co">#&gt;   hugoG…¹ entre…² uniqu…³ uniqu…⁴ molec…⁵ sampl…⁶ patie…⁷ studyId center mutat…⁸</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt; 1 KRT8       3856 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic</span></span>
+<span><span class="co">#&gt; 2 LCE1B    353132 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic</span></span>
+<span><span class="co">#&gt; 3 SLC9C2   284525 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic</span></span>
+<span><span class="co">#&gt; 4 DNAH14   127602 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic</span></span>
+<span><span class="co">#&gt; 5 OPN4      94233 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic</span></span>
+<span><span class="co">#&gt; 6 DNAJC4     3338 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic</span></span>
+<span><span class="co">#&gt; # … with 23 more variables: validationStatus &lt;chr&gt;, tumorAltCount &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;, normalRefCount &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   startPosition &lt;int&gt;, endPosition &lt;int&gt;, referenceAllele &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   proteinChange &lt;chr&gt;, mutationType &lt;chr&gt;, functionalImpactScore &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   fisValue &lt;dbl&gt;, linkXvar &lt;chr&gt;, linkPdb &lt;chr&gt;, linkMsa &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, keyword &lt;chr&gt;, chr &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   variantAllele &lt;chr&gt;, refseqMrnaId &lt;chr&gt;, proteinPosStart &lt;int&gt;, …</span></span></code></pre></div>
 <p>Lastly, you can also pull clinical data or sample metadata (e.g. tumor sample site) by study ID, sample ID or patient ID. To see what data is available, you can use:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/available_clinical_attributes.html">available_clinical_attributes</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span><span class="co">#&gt;   displayName    description datatype patientAttribute priority clinicalAttribu…</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt;    &lt;lgl&gt;            &lt;chr&gt;    &lt;chr&gt;           </span></span>
-<span><span class="co">#&gt; 1 Diagnosis Age  Age at whi… NUMBER   TRUE             1        AGE             </span></span>
-<span><span class="co">#&gt; 2 Neoplasm Dise… The extent… STRING   TRUE             1        AJCC_PATHOLOGIC…</span></span>
-<span><span class="co">#&gt; 3 American Join… The versio… STRING   TRUE             1        AJCC_STAGING_ED…</span></span>
-<span><span class="co">#&gt; 4 Atypical Mito… Atypical M… STRING   TRUE             1        ATYPICAL_MITOTI…</span></span>
-<span><span class="co">#&gt; 5 Cancer Type    Cancer type STRING   FALSE            1        CANCER_TYPE     </span></span>
-<span><span class="co">#&gt; 6 Cancer Type D… Cancer typ… STRING   FALSE            1        CANCER_TYPE_DET…</span></span>
-<span><span class="co">#&gt; # … with 1 more variable: studyId &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   displayName                    descr…¹ datat…² patie…³ prior…⁴ clini…⁵ studyId</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                          &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt; 1 Diagnosis Age                  Age at… NUMBER  TRUE    1       AGE     acc_tc…</span></span>
+<span><span class="co">#&gt; 2 Neoplasm Disease Stage Americ… The ex… STRING  TRUE    1       AJCC_P… acc_tc…</span></span>
+<span><span class="co">#&gt; 3 American Joint Committee on C… The ve… STRING  TRUE    1       AJCC_S… acc_tc…</span></span>
+<span><span class="co">#&gt; 4 Atypical Mitotic Figures       Atypic… STRING  TRUE    1       ATYPIC… acc_tc…</span></span>
+<span><span class="co">#&gt; 5 Cancer Type                    Cancer… STRING  FALSE   1       CANCER… acc_tc…</span></span>
+<span><span class="co">#&gt; 6 Cancer Type Detailed           Cancer… STRING  FALSE   1       CANCER… acc_tc…</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​description, ²​datatype, ³​patientAttribute,</span></span>
+<span><span class="co">#&gt; #   ⁴​priority, ⁵​clinicalAttributeId</span></span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_clinical_by_study.html">get_clinical_by_study</a></span><span class="op">(</span><span class="st">"acc_tcga"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ! Sample Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ! Patient Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study</span></span>
 <span><span class="co">#&gt; # A tibble: 6,292 × 6</span></span>
-<span><span class="co">#&gt;    uniquePatientKey           patientId studyId clinicalAttribu… value dataLevel</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                      &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;    </span></span>
-<span><span class="co">#&gt;  1 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… AGE              58    PATIENT  </span></span>
-<span><span class="co">#&gt;  2 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… AJCC_PATHOLOGIC… Stag… PATIENT  </span></span>
-<span><span class="co">#&gt;  3 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… ATYPICAL_MITOTI… Atyp… PATIENT  </span></span>
-<span><span class="co">#&gt;  4 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CAPSULAR_INVASI… Inva… PATIENT  </span></span>
-<span><span class="co">#&gt;  5 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CLIN_M_STAGE     M0    PATIENT  </span></span>
-<span><span class="co">#&gt;  6 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CT_SCAN_PREOP_R… [Unk… PATIENT  </span></span>
-<span><span class="co">#&gt;  7 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… CYTOPLASM_PRESE… Cyto… PATIENT  </span></span>
-<span><span class="co">#&gt;  8 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DAYS_TO_INITIAL… 0     PATIENT  </span></span>
-<span><span class="co">#&gt;  9 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DFS_MONTHS       24.77 PATIENT  </span></span>
-<span><span class="co">#&gt; 10 VENHQS1PUi1BNUoxOmFjY190Y… TCGA-OR-… acc_tc… DFS_STATUS       1:Re… PATIENT  </span></span>
-<span><span class="co">#&gt; # … with 6,282 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt;    uniquePatientKey             patientId    studyId  clinicalAt…¹ value dataL…²</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                        &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga AGE          58    PATIENT</span></span>
+<span><span class="co">#&gt;  2 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga AJCC_PATHOL… Stag… PATIENT</span></span>
+<span><span class="co">#&gt;  3 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga ATYPICAL_MI… Atyp… PATIENT</span></span>
+<span><span class="co">#&gt;  4 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CAPSULAR_IN… Inva… PATIENT</span></span>
+<span><span class="co">#&gt;  5 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CLIN_M_STAGE M0    PATIENT</span></span>
+<span><span class="co">#&gt;  6 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CT_SCAN_PRE… [Unk… PATIENT</span></span>
+<span><span class="co">#&gt;  7 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CYTOPLASM_P… Cyto… PATIENT</span></span>
+<span><span class="co">#&gt;  8 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DAYS_TO_INI… 0     PATIENT</span></span>
+<span><span class="co">#&gt;  9 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DFS_MONTHS   24.77 PATIENT</span></span>
+<span><span class="co">#&gt; 10 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DFS_STATUS   1:Re… PATIENT</span></span>
+<span><span class="co">#&gt; # … with 6,282 more rows, and abbreviated variable names ¹​clinicalAttributeId,</span></span>
+<span><span class="co">#&gt; #   ²​dataLevel</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_clinical_by_sample.html">get_clinical_by_sample</a></span><span class="op">(</span>sample_id <span class="op">=</span> <span class="va">samples</span>, study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ! No `clinical_attribute` passed. Defaulting to returning</span></span>
 <span><span class="co">#&gt; all clinical attributes in "acc_tcga" study</span></span>
 <span><span class="co">#&gt; # A tibble: 10 × 7</span></span>
-<span><span class="co">#&gt;    uniqueSampleKey  uniquePatientKey sampleId patientId studyId clinicalAttribu…</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;           </span></span>
-<span><span class="co">#&gt;  1 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE     </span></span>
-<span><span class="co">#&gt;  2 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… CANCER_TYPE_DET…</span></span>
-<span><span class="co">#&gt;  3 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… DAYS_TO_COLLECT…</span></span>
-<span><span class="co">#&gt;  4 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… FRACTION_GENOME…</span></span>
-<span><span class="co">#&gt;  5 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… IS_FFPE         </span></span>
-<span><span class="co">#&gt;  6 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… MUTATION_COUNT  </span></span>
-<span><span class="co">#&gt;  7 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OCT_EMBEDDED    </span></span>
-<span><span class="co">#&gt;  8 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… ONCOTREE_CODE   </span></span>
-<span><span class="co">#&gt;  9 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… OTHER_SAMPLE_ID </span></span>
-<span><span class="co">#&gt; 10 VENHQS1PUi1BNUo… VENHQS1PUi1BNUo… TCGA-OR… TCGA-OR-… acc_tc… PATHOLOGY_REPOR…</span></span>
-<span><span class="co">#&gt; # … with 1 more variable: value &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;    uniqueSampleKey                 uniqu…¹ sampl…² patie…³ studyId clini…⁴ value</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                           &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… CANCER… Adre…</span></span>
+<span><span class="co">#&gt;  2 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… CANCER… Adre…</span></span>
+<span><span class="co">#&gt;  3 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… DAYS_T… 4691 </span></span>
+<span><span class="co">#&gt;  4 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… FRACTI… 0.05…</span></span>
+<span><span class="co">#&gt;  5 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… IS_FFPE NO   </span></span>
+<span><span class="co">#&gt;  6 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… MUTATI… 39   </span></span>
+<span><span class="co">#&gt;  7 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… OCT_EM… TRUE </span></span>
+<span><span class="co">#&gt;  8 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… ONCOTR… ACC  </span></span>
+<span><span class="co">#&gt;  9 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… OTHER_… E403…</span></span>
+<span><span class="co">#&gt; 10 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… PATHOL… TCGA…</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​uniquePatientKey, ²​sampleId, ³​patientId,</span></span>
+<span><span class="co">#&gt; #   ⁴​clinicalAttributeId</span></span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">patients</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/available_patients.html">available_patients</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">pull</span><span class="op">(</span><span class="va">patientId</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -396,14 +400,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/karissawhiting/cbioportalR/actions" class="external-link"><img src="https://github.com/karissawhiting/cbioportalR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master" class="external-link"><img src="https://codecov.io/gh/karissawhiting/cbioportalR/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://CRAN.R-project.org/package=cbioportalR" class="external-link"><img src="https://www.r-pkg.org/badges/version/cbioportalR" alt="CRAN status"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
