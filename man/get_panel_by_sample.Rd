@@ -32,9 +32,10 @@ a dataframe of a specific clinical attribute
 Get Gene Panel by study ID and sample ID
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_panel_by_sample(study_id = "blca_plasmacytoid_mskcc_2016",
  sample_id = "DS-sig-010-P2",
  base_url = 'www.cbioportal.org/api')
-\dontshow{\}) # examplesIf}
+ }
+
 }

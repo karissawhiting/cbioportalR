@@ -89,7 +89,7 @@ available_profiles(study_id = "blca_nmibc_2017")
 available_profiles(study_id = "prad_msk_2019")
 ```
 
-Luckily, in this example our studies have mutation, copy number alteration and fusion data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_fusion`, `<study_id>_cna`.
+Luckily, in this example our studies have mutation, copy number alteration and fusion (structural variant) data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_structural_variants`, `<study_id>_cna`.
 
 ```{r}
 available_profiles(study_id = "blca_nmibc_2017") %>%

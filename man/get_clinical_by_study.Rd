@@ -27,12 +27,11 @@ a dataframe of all available clinical attributes and their values
 Returns all sample-level and patient-level clinical data for a given study
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_clinical_by_study(study_id = "acc_tcga",
  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 
-\donttest{
 get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')
 }
-\dontshow{\}) # examplesIf}
+
 }

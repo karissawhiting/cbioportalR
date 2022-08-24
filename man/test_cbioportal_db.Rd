@@ -15,11 +15,12 @@ to cBioPortal
 Helps troubleshoot API issues during an R session
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 set_cbioportal_db("public")
 test_cbioportal_db()
+}
 
-\dontshow{\}) # examplesIf}
+
 }
 \author{
 Karissa Whiting, Daniel D. Sjoberg

@@ -18,9 +18,8 @@ A dataframe with Entrez Gene IDs and Hugo Symbols
 Get Entrez Gene ID for a given set of Hugo Symbols
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
+\dontrun{
 get_entrez_id(hugo_symbol = "TAP1", base_url = 'www.cbioportal.org/api')
 get_entrez_id(hugo_symbol = c("FGFR1", "TP53") , base_url = 'www.cbioportal.org/api')
-\dontshow{\}) # examplesIf}
+}
 }

@@ -4,10 +4,11 @@
 #' @param base_url The database URL to query
 #' @return A dataframe with Entrez Gene IDs and Hugo Symbols
 #' @export
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
-#'
+#' @examples
+#' \dontrun{
 #' get_hugo_symbol(entrez_id = 2261, base_url = 'www.cbioportal.org/api')
 #' get_hugo_symbol(entrez_id = c(2261, 7157) , base_url = 'www.cbioportal.org/api')
+#' }
 
 
 get_hugo_symbol <- function(entrez_id = NULL,
@@ -38,10 +39,11 @@ get_hugo_symbol <- function(entrez_id = NULL,
 #' @param base_url The database URL to query
 #' @return A dataframe with Entrez Gene IDs and Hugo Symbols
 #' @export
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
-#'
+#' @examples
+#' \dontrun{
 #' get_entrez_id(hugo_symbol = "TAP1", base_url = 'www.cbioportal.org/api')
 #' get_entrez_id(hugo_symbol = c("FGFR1", "TP53") , base_url = 'www.cbioportal.org/api')
+#' }
 
 
 get_entrez_id <- function(hugo_symbol = NULL,
@@ -80,10 +82,12 @@ get_entrez_id <- function(hugo_symbol = NULL,
 #' @param base_url The database URL to query
 #' @return A character string with all aliases
 #' @export
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #'
 #' get_alias(hugo_symbol = "FGFR3", base_url = 'www.cbioportal.org/api')
 #' get_alias(hugo_symbol = c("FGFR3", "TP53"), base_url = 'www.cbioportal.org/api')
+#' }
 #'
 get_alias <- function(hugo_symbol = NULL,
                       base_url = NULL) {
@@ -110,8 +114,10 @@ get_alias <- function(hugo_symbol = NULL,
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #' @return A dataframe of genes in a specified panel
 #' @export
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' get_gene_panel(panel_id = "IMPACT468", base_url = 'www.cbioportal.org/api')
+#' }
 #'
 get_gene_panel <- function(panel_id = NULL, base_url = NULL) {
 

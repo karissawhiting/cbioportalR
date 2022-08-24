@@ -36,9 +36,9 @@ A parsed API response
 Core function to retrieve data from cBioPortal API.
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
+\dontrun{
 cbp_api(url_path = "genes/TP53", base_url = "public")
-\dontshow{\}) # examplesIf}
+}
+
 }
 \keyword{internal}

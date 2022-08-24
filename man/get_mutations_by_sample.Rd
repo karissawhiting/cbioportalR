@@ -46,9 +46,9 @@ A data frame of mutations (maf file format)
 Get Mutations By Sample ID
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_mutations_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
 study_id = "acc_tcga",
 base_url = "public")
-\dontshow{\}) # examplesIf}
+}
 }

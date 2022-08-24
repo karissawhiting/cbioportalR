@@ -12,8 +12,10 @@ cbioportal_env <- rlang::new_environment()
 #' to cBioPortal.
 #' @export
 #' @author Karissa Whiting, Daniel D. Sjoberg
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db(db = "public")
+#' }
 #'
 set_cbioportal_db <- function(db = NULL) {
 
@@ -45,8 +47,10 @@ set_cbioportal_db <- function(db = NULL) {
 #' @return Returns a string with cBioPortal token if successfully authenticated, or
 #' a warning that token could not be found.
 #' @author Karissa Whiting, Daniel D. Sjoberg
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' get_cbioportal_token()
+#' }
 #'
 get_cbioportal_token <- function() {
   x <- Sys.getenv("CBIOPORTAL_TOKEN")
@@ -66,9 +70,11 @@ get_cbioportal_token <- function() {
 #' Will display an alert notifying if the user has successfully authenticated
 #' to cBioPortal
 #' @author Karissa Whiting, Daniel D. Sjoberg
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' test_cbioportal_db()
+#' }
 #'
 #'
 test_cbioportal_db <- function() {
@@ -99,8 +105,10 @@ test_cbioportal_db <- function() {
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @keywords internal
 #' @noRd
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' .get_cbioportal_url()
+#' }
 #'
 .get_cbioportal_url <- function() {
 

@@ -2,6 +2,7 @@
 
 
 test_that("set url- public", {
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
@@ -13,6 +14,7 @@ test_that("set url- public", {
 })
 
 test_that("set url-  add api", {
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <-"www.cbioportal.org"
@@ -25,6 +27,7 @@ test_that("set url-  add api", {
 
 
 test_that("set url-nothing passed", {
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <-NULL

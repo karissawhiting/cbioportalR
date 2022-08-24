@@ -11,17 +11,17 @@
 #' on molecular_profile_id.
 #' @param molecular_profile_id a molecular profile to query mutations.
 #' If NULL, guesses molecular_profile_id based on study ID.
-#' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`.
+#' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`, or `structural-variant` (same as `fusion`).
 #' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
-#' @return a dataframe of mutations or CNAs
+#' @return a dataframe of mutations, CNAs or structural variants
 #' @export
 #' @keywords internal
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' .get_data_by_study(study_id = "prad_msk_2019", data_type = "cna")
 #' .get_data_by_study(study_id = "prad_msk_2019", data_type = "mutation")
@@ -29,12 +29,12 @@
 #'
 #' .get_data_by_study(molecular_profile_id = "prad_msk_2019_cna", data_type = "cna")
 #' .get_data_by_study(molecular_profile_id = "prad_msk_2019_mutations", data_type = "mutation")
-#' .get_data_by_study(molecular_profile_id = "prad_msk_2019_fusion", data_type = "fusion")
+#' .get_data_by_study(molecular_profile_id = "prad_msk_2019_structural_variants", data_type = "fusion")
 #' }
 #'
 .get_data_by_study <- function(study_id = NULL,
                               molecular_profile_id = NULL,
-                              data_type = c("mutation", "cna", "fusion"),
+                              data_type = c("mutation", "cna", "fusion", "structural_variant"),
                               base_url = NULL,
                               add_hugo = TRUE) {
 
@@ -49,8 +49,10 @@
     cli::cli_abort("You must provide a {.code study_id} or a {.code molecular_profile_id}. See {.code available_profiles(<study_id>)} to view available profiles for a study")
   }
 
-
-  data_type <- match.arg(data_type)
+  # fusions and structural-variants are the same. fusion is older nomenclature.
+  data_type <- match.arg(data_type) %>%
+    purrr::when(. ==  "structural_variant" ~ "fusion",
+                TRUE ~ .)
 
   # study ID provided and profile is NULL
   # If study ID is not correct, informative error thrown
@@ -68,7 +70,7 @@
   url_data_type <- switch(
     data_type,
     "mutation" = "mutations",
-    "fusion" = "fusion",
+    "fusion" = "structural-variant",
     "cna" = "discrete-copy-number")
 
   # Some API endpoints require that you pass a sample list ID. All studies should have an "all" list which is the default for this function
@@ -96,7 +98,7 @@
 
   # FUSIONS query ----------------------------------------------------------------------
 
-  # Fusions endpoint works a little differently than Mut and CNA
+  # Fusions endpoint works a little differently than Mutation and CNA
   # Instead of passing a sample list, you pass individual sample IDs (retrieved using list)
   # Main Goal in this function is to return all results without specifying specific genes to query (as is needed in other endpoints).
 
@@ -115,7 +117,6 @@
     fus_imp <- purrr::map(all_samples_in_study, function(x) {
 
       body <- list(
-   #     entrezGeneIds = c(2078, 7113),
         sampleMolecularIdentifiers = as.data.frame(list(
           molecularProfileId = jsonlite::unbox(molecular_profile_id),
           sampleId = x
@@ -124,14 +125,14 @@
 
 
       fus <- cbp_api(
-        url_path = "structural-variant/fetch?",
+        url_path = paste0(url_data_type, "/fetch?"),
         method = "post",
         body = body,
         base_url = base_url
       )
 
       fus$content
-   #
+
     })
 
     df <- bind_rows(fus_imp)
@@ -166,10 +167,11 @@
 #'
 #' @return A dataframe of mutations (maf file format)
 #' @export
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' get_mutations_by_study(study_id = "prad_msk_2019")
 #' get_mutations_by_study(molecular_profile_id = "prad_msk_2019_mutations")
-#'
+#' }
 #'
 get_mutations_by_study <- function(study_id = NULL,
                                   molecular_profile_id = NULL,
@@ -187,11 +189,11 @@ get_mutations_by_study <- function(study_id = NULL,
 #' @inheritParams .get_data_by_study
 #' @return A dataframe of CNAs
 #' @export
-#'
-#'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' get_cna_by_study(study_id = "prad_msk_2019")
 #' get_cna_by_study(molecular_profile_id = "prad_msk_2019_cna")
+#' }
 
 get_cna_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
@@ -210,11 +212,15 @@ get_cna_by_study <- function(study_id = NULL,
 #' @inheritParams .get_data_by_study
 #' @return A dataframe of fusions
 #' @export
+#' @aliases get_structural_variants_by_study
+#' @examples
+#' \dontrun{
+#' # These return the same results
+#' get_fusions_by_study(molecular_profile_id = "prad_msk_2019_structural_variants")
 #'
-#'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
-#' get_fusions_by_study(molecular_profile_id = "prad_msk_2019_fusion")
-#'
+#' get_structural_variants_by_study(molecular_profile_id =
+#'        "prad_msk_2019_structural_variants")
+#'        }
 
 get_fusions_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
@@ -227,16 +233,19 @@ get_fusions_by_study <- function(study_id = NULL,
                     base_url = base_url)
 }
 
+#' @rdname get_fusions_by_study
+#' @export
+get_structural_variants_by_study <- get_fusions_by_study
+
 #' Get All Genomic Information By Study
 #'
 #' @inheritParams .get_data_by_study
 #' @return A list of mutations, cna and fusions (if available)
 #' @export
-#'
-#'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' get_genetics_by_study(study_id = "prad_msk_2019")
-#'
+#' }
 #
 get_genetics_by_study <- function(study_id = NULL,
                                   add_hugo = TRUE,

@@ -9,10 +9,10 @@
 #' has multiple samples, there will be multiple rows per patient.
 #'
 #' @export
-#'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' get_samples_by_patient(patient_id = c("P-0000034", "P-0000036"))
-#'
+#' }
 #'
 get_samples_by_patient <- function(patient_id = NULL,
                                   study_id = NULL,
@@ -67,7 +67,8 @@ get_samples_by_patient <- function(patient_id = NULL,
 #' @return a dataframe of a specific clinical attribute
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #'
 #' ex <- tibble::tribble(
 #' ~patientID, ~study_id,
@@ -79,6 +80,7 @@ get_samples_by_patient <- function(patient_id = NULL,
 #'
 #' x <- get_clinical_by_patient(patient_study_pairs = ex,
 #'  clinical_attribute = NULL, base_url = 'www.cbioportal.org/api')
+#'  }
 #'
 
 get_clinical_by_patient <- function(study_id = NULL,
@@ -144,10 +146,12 @@ get_clinical_by_patient <- function(study_id = NULL,
 #' @keywords internal
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' .get_clinical_pat_by_list_item(study_id = "msk_impact_2017",
 #'  patient_id = "P-0001453",
 #'   base_url = 'www.cbioportal.org/api')
+#'   }
 #'
 .get_clinical_pat_by_list_item <- function(study_id = NULL,
                                        patient_id = NULL,

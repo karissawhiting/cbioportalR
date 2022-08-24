@@ -19,7 +19,8 @@ a data frame of available clinical attributes for that study
 Get all available clinical attribute IDs for a study
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 available_clinical_attributes("acc_tcga", base_url = 'www.cbioportal.org/api')
-\dontshow{\}) # examplesIf}
+}
+
 }

@@ -5,9 +5,11 @@
 #' @return A dataframe of available studies and their metadata
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' available_studies()
+#' }
 
 available_studies <- function(base_url =  NULL) {
 
@@ -29,9 +31,11 @@ available_studies <- function(base_url =  NULL) {
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' available_gene_panels()
+#' }
 #'
 available_gene_panels <- function(base_url = NULL) {
 
@@ -51,7 +55,7 @@ available_gene_panels <- function(base_url = NULL) {
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' get_genes(base_url = 'www.cbioportal.org/api')
 #' }
 get_genes <- function(base_url  =  NULL) {
@@ -74,10 +78,12 @@ get_genes <- function(base_url  =  NULL) {
 #' @return A dataframe of available genetic profiles and their profile ids
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' available_profiles()
 #' available_profiles(study_id = "acc_tcga")
+#' }
 
 available_profiles <- function(study_id = NULL,
                                base_url =  NULL) {

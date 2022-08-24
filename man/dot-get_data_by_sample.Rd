@@ -9,7 +9,7 @@
   study_id = NULL,
   molecular_profile_id = NULL,
   sample_study_pairs = NULL,
-  data_type = c("mutation", "cna", "fusion"),
+  data_type = c("mutation", "cna", "fusion", "structural_variant"),
   genes = NULL,
   panel = NULL,
   add_hugo = TRUE,
@@ -31,7 +31,7 @@ more than 1 study needed, see \code{sample_study_pairs}}
 This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
 
-\item{data_type}{specify what type of data to return. Options are\code{mutations}, \code{cna}, \code{fusion}}
+\item{data_type}{specify what type of data to return. Options are\code{mutations}, \code{cna}, \code{fusion} or \code{structural-variant} (same as \code{fusion}).}
 
 \item{genes}{A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function.  If \code{panel} and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
 
@@ -43,13 +43,13 @@ need to pull samples from several different studies at once. If passed this will
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
-A dataframe of mutations or CNAs
+A dataframe of mutations, CNAs or fusions.
 }
 \description{
 Internal Function to Get Mutations/CNA/Fusion By Sample ID
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 set_cbioportal_db("public")
 .get_data_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
  study_id = "acc_tcga", data_type = "mutation")
@@ -61,7 +61,6 @@ set_cbioportal_db("public")
 .get_data_by_sample(sample_id = c("P-0002146-T01-IM3"),
  study_id = "blca_plasmacytoid_mskcc_2016", data_type = "fusion")
 
-\donttest{
 df_pairs <- data.frame(
 "sample_id" = c("s_C_36924L_P001_d",
 "s_C_03LNU8_P001_d"),
@@ -81,6 +80,6 @@ df_pairs2 <- data.frame(
 .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "cna")
 .get_data_by_sample(sample_study_pairs = df_pairs2, data_type = "fusion")
 }
-\dontshow{\}) # examplesIf}
+
 }
 \keyword{internal}
