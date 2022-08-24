@@ -3,10 +3,11 @@
 This version makes the package compatible with [cBioPortal v5.0](https://github.com/cBioPortal/cbioportal/releases/tag/v5.0.0). Main updates include:
 
 * Fusion API endpoint URLs updated to use `structural-variant` instead of `fusion` in specification.
-* `get_structural_variants_by_sample()` and `get_structural_variants_by_study()` added as aliases for `get_fusions_by_sample()` and `get_fusions_by_study()`. These functions return the same results and both will be supported in the future.
-* When functions include `data_type` argument, `structural_variant` now available as option. This will return the same results as `fusion`.
+* `get_structural_variants_by_sample()` and `get_structural_variants_by_study()` added as aliases for `get_fusions_by_sample()` and `get_fusions_by_study()`. These functions return the same results as their fusion counterparts and both names will be supported.
+* When functions include the `data_type` argument, `structural_variant` is now available as option. This will return the same results as `fusion`.
+* Output of `get_genetics_by_sample()` and `get_genetics_by_study()` functions are now named lists with names: `mutation`, `cna`, and `structural_variant` (changed from `fusion`) to be consistent with cBioPortal v5.0 naming conventions. 
 * Tests and examples are no longer run on CRAN to protect from future changes to internal database. They are still run in Github Actions and examples are run on website.
-* Some examples adjusted to use new profile name as needed (e.g. `prad_msk_2019_structural_variants` ->  `prad_msk_2019_structural_variants`)
+* Some examples adjusted to use a new cBioPortal profile name, as needed (e.g. `prad_msk_2019_structural_variants` ->  `prad_msk_2019_structural_variants`)
 
 
 # cbioportalR 1.0.0

@@ -405,7 +405,7 @@ get_structural_variants_by_sample <- get_fusions_by_sample
 #' Get All Genomic Information By Sample IDs
 #'
 #' @inheritParams .get_data_by_sample
-#' @return A list of mutations, cna and fusions (if available)
+#' @return A list of mutations, cna and structural variants (including fusions), if available.
 #' @export
 #'
 #'
@@ -425,7 +425,7 @@ get_genetics_by_sample <- function(sample_id = NULL,
 
   safe_get_data <- purrr::safely(.get_data_by_sample, quiet = TRUE)
 
-  res <-  c("mutation", "cna", "fusion") %>%
+  res <-  c("mutation", "cna", "structural_variant") %>%
     purrr::set_names() %>%
     purrr::map(., function(x) {
       safe_get_data(sample_id = sample_id,

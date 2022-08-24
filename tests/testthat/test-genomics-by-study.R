@@ -41,7 +41,7 @@ test_that("get mutations by molecular profile/ study id/ get_genetics all the sa
 
   by_study <- get_mutations_by_study(study = study_id)
   by_prof <- get_mutations_by_study(molecular_profile_id = molecular_profile_id)
-  get_gen <- get_genetics_by_study(study = study_id)$mut
+  get_gen <- get_genetics_by_study(study = study_id)$mutation
   expect_identical(by_study, by_prof, get_gen)
 
 })
@@ -167,7 +167,7 @@ test_that("data is same regardless of function", {
 
   by_study <- get_mutations_by_study(study = study_id)
   by_prof <- get_mutations_by_study(molecular_profile_id = molecular_profile_id)
-  expect_identical(by_study, by_prof, get_gen$mut)
+  expect_identical(by_study, by_prof, get_gen$mutation)
 
   # CNA ----
   molecular_profile_id = "mpnst_mskcc_cna"
@@ -181,7 +181,7 @@ test_that("data is same regardless of function", {
   by_study2 <- get_structural_variants_by_study(study = study_id)
   by_prof <- get_fusions_by_study(molecular_profile_id = molecular_profile_id)
   by_prof2<- get_structural_variants_by_study(molecular_profile_id = molecular_profile_id)
-  expect_identical(by_study, by_study2, by_prof, by_prof2, get_gen$fusion)
+  expect_identical(by_study, by_study2, by_prof, by_prof2, get_gen$structural_variant)
 
 })
 

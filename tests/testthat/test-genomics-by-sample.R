@@ -217,7 +217,7 @@ skip_on_cran()
 
   by_study <- get_mutations_by_sample(sample_id = sample_id, study_id = study_id)
   by_prof <- get_mutations_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
-  expect_identical(by_study, by_prof, get_gen$mut)
+  expect_identical(by_study, by_prof, get_gen$mutation)
 
   # CNA ---
   molecular_profile_id = "prad_msk_2019_cna"
@@ -231,7 +231,7 @@ skip_on_cran()
   by_study2 <- get_structural_variants_by_sample(sample_id = sample_id, study_id = study_id)
   by_prof <- get_fusions_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
   by_prof2 <- get_structural_variants_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
-  expect_identical(by_study, by_study2, by_prof, by_prof2, get_gen$fusion)
+  expect_identical(by_study, by_study2, by_prof, by_prof2, get_gen$structural_variant)
 
 })
 
@@ -325,7 +325,7 @@ skip_on_cran()
 
   expect_equal(all_genomic_entrez$mutation, all_genomic_hugo$mutation)
   expect_equal(all_genomic_entrez$cna, all_genomic_hugo$cna)
-  expect_equal(all_genomic_entrez$fusion, all_genomic_hugo$fusion)
+  expect_equal(all_genomic_entrez$structural_variant, all_genomic_hugo$structural_variant)
 })
 
 
@@ -351,7 +351,7 @@ skip_on_cran()
 
   expect_true(identical(gen_by_entrez$mutation, gen_by_hugo$mutation))
   expect_true(identical(gen_by_entrez$cna, gen_by_hugo$cna))
-  expect_true(identical(gen_by_entrez$fusion, gen_by_hugo$fusion))
+  expect_true(identical(gen_by_entrez$structural_variant, gen_by_hugo$structural_variant))
 
 })
 
@@ -376,7 +376,7 @@ skip_on_cran()
 
   expect_true(identical(gen_by_panel$mutation, gen_by_entrez$mutation))
   expect_true(identical(gen_by_panel$cna, gen_by_entrez$cna))
-  expect_true(identical(gen_by_panel$fusion, gen_by_entrez$fusion))
+  expect_true(identical(gen_by_panel$structural_variant, gen_by_entrez$structural_variant))
 
 })
 
@@ -406,7 +406,7 @@ skip_on_cran()
 
   expect_true(identical(gen_by_panel$mutation, gen_by_entrez$mutation))
   expect_true(identical(gen_by_panel$cna, gen_by_entrez$cna))
-  expect_true(identical(gen_by_panel$fusion, gen_by_entrez$fusion))
+  expect_true(identical(gen_by_panel$structural_variant, gen_by_entrez$structural_variant))
 
 })
 
@@ -434,7 +434,7 @@ skip_on_cran()
 
   expect_true(identical(gen_by_panel$mutation, gen_by_panel2$mutation))
   expect_true(identical(gen_by_panel$cna, gen_by_panel2$cna))
-  expect_true(identical(gen_by_panel$fusion, gen_by_panel2$fusion))
+  expect_true(identical(gen_by_panel$structural_variant, gen_by_panel2$structural_variant))
 
   expect_equal(setdiff(gen_by_panel$mutation$hugoGeneSymbol,
           gen_by_panel3$mutation$hugoGeneSymbol), plus_gene)

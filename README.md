@@ -206,9 +206,9 @@ df <- get_genetics_by_study(study_id = "acc_tcga")
 ```
 
 As a result, you will get a list of data frames with mutation and CNA
-data respectively. The function will also try to pull fusion data, but
-there is no fusion data available for this study, as indicated by the
-function message.
+data respectively. The function will also try to pull fusion (structural
+variant) data, but there is no fusion data available for this study, as
+indicated by the function message.
 
 ``` r
 df$mutation %>% 

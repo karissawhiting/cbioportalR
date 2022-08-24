@@ -240,7 +240,7 @@ get_structural_variants_by_study <- get_fusions_by_study
 #' Get All Genomic Information By Study
 #'
 #' @inheritParams .get_data_by_study
-#' @return A list of mutations, cna and fusions (if available)
+#' @return A list of mutations, cna and structural variants (including fusions), if available.
 #' @export
 #' @examples
 #' \dontrun{
@@ -260,7 +260,7 @@ get_genetics_by_study <- function(study_id = NULL,
 
   safe_get_data <- purrr::safely(.get_data_by_study, quiet = TRUE)
 
- res <-  c("mutation", "cna", "fusion") %>%
+ res <-  c("mutation", "cna", "structural_variant") %>%
    purrr::set_names() %>%
    purrr::map(., function(x) {
                        safe_get_data(study_id = study_id,

@@ -77,7 +77,7 @@ get_study_info("prad_msk_2019") %>%
 
 ```
 
-Lastly, it is important to know what genomic data is available for our studies. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions.
+Lastly, it is important to know what genomic data is available for our studies. Not all studies in your database will have data available on all types of genomic information. For example, it is common for studies not to provide data on fusions/structural variants.
 
 We can check available genomic data with `available_profiles()`.
 
@@ -129,14 +129,14 @@ Or we can pull all genomic data at the same time with `get_genetics_by_study()`
 
 ```{r}
 all_genomic_blca <- get_genetics_by_study("blca_nmibc_2017")
-all_genomic_prad<- get_genetics_by_study("prad_msk_2019")
+all_genomic_prad <- get_genetics_by_study("prad_msk_2019")
 
 ```
 
 ```{r}
 all_equal(mut_blca, all_genomic_blca$mutation)
 all_equal(cna_blca, all_genomic_blca$cna)
-all_equal(fus_blca, all_genomic_blca$fusion)
+all_equal(fus_blca, all_genomic_blca$structural_variant)
 ```
 
 Finally, we can join the two studies together
