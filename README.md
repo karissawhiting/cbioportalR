@@ -77,10 +77,10 @@ don’t need a token to start pulling data. If you are using a private
 instance of cBioPortal (like MSKCC’s institutional database), you will
 need to acquire a token and save it to your `.Renviron` file (or
 wherever you store credentials). Simply log in to your institution’s
-cBioPortal site, acquire a token (Usually through the ‘Web API’ tab) and
-save it in your `.Renviron` file. This will save the token as an
-environmental variable so you don’t have to hard code the secret key in
-your scripts.
+cBioPortal site, acquire a token (usually through the ‘Data Access
+Token’ link in your username menu in the upper right) and save it in
+your `.Renviron` file. This will save the token as an environmental
+variable so you don’t have to hard code the secret key in your scripts.
 
 *Tip: The following {usethis} function can easily find and open the
 `.Renviron` for you:*
@@ -202,7 +202,7 @@ To pull all genomic data for a particular study you can use:
 df <- get_genetics_by_study(study_id = "acc_tcga")
 #> ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study
 #> ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study
-#> ! No "fusion" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``
+#> ! No "structural_variant" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``
 ```
 
 As a result, you will get a list of data frames with mutation and CNA

@@ -14,6 +14,14 @@ authors:
   Karissa Whiting:
     href: "https://www.karissawhiting.com/"
 
+navbar:
+ components:
+   articles:
+    text: Articles
+    menu:
+    - text: "Overview of Data Retrieval Workflow"
+      href: articles/overview-of-workflow.html
+
 reference:
   - subtitle: Authentication
   - contents:
