@@ -18,9 +18,10 @@ to cBioPortal.
 This function sets a base cBioPortal URL
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 set_cbioportal_db(db = "public")
-\dontshow{\}) # examplesIf}
+}
+
 }
 \author{
 Karissa Whiting, Daniel D. Sjoberg

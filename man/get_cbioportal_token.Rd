@@ -14,9 +14,10 @@ a warning that token could not be found.
 Convenience function that retrieves cBioPortal token System Environment variable "CBIOPORTAL_TOKEN"
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_cbioportal_token()
-\dontshow{\}) # examplesIf}
+}
+
 }
 \author{
 Karissa Whiting, Daniel D. Sjoberg

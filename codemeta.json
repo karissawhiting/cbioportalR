@@ -4,17 +4,23 @@
   "identifier": "cbioportalR",
   "description": "Provides R users with direct access to genomic and clinical data from the 'cBioPortal' web resource via user-friendly functions that wrap 'cBioPortal's' existing API endpoints <https://www.cbioportal.org/api/swagger-ui/index.html>. Users can browse and query genomic data on mutations, copy number alterations and fusions, as well as data on tumor mutational burden ('TMB'), microsatellite instability status ('MSI'), 'FACETS' and select clinical data points (depending on the study). See <https://www.cbioportal.org/> and Gao et al., (2013) <doi:10.1126/scisignal.2004088> for more information on the cBioPortal web resource.",
   "name": "cbioportalR: Browse and Query Clinical and Genomic Data from cBioPortal",
-  "relatedLink": "https://www.karissawhiting.com/cbioportalR/",
+  "relatedLink": ["https://www.karissawhiting.com/cbioportalR/", "https://CRAN.R-project.org/package=cbioportalR"],
   "codeRepository": "https://github.com/karissawhiting/cbioportalR",
   "issueTracker": "https://github.com/karissawhiting/cbioportalR/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
+  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -252,7 +258,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1954.139KB",
+  "fileSize": "1957.017KB",
   "releaseNotes": "https://github.com/karissawhiting/cbioportalR/blob/master/NEWS.md",
   "readme": "https://github.com/karissawhiting/cbioportalR/blob/main/README.md",
   "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"]

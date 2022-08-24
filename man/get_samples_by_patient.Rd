@@ -23,8 +23,8 @@ has multiple samples, there will be multiple rows per patient.
 Get sample IDs for a given set of patient IDs
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_samples_by_patient(patient_id = c("P-0000034", "P-0000036"))
+}
 
-\dontshow{\}) # examplesIf}
 }

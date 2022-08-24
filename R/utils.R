@@ -129,8 +129,8 @@
 
 #' Get Molecular Profile Name for Data Type
 #'
-#'@description See: https://docs.cbioportal.org/5.1-data-loading/data-loading/file-formats#discrete-copy-number-data
-# for definition of molecular profiles. CNA can have _cna, _gistic, _rae molecular profile names
+#' @description See: https://docs.cbioportal.org/5.1-data-loading/data-loading/file-formats#discrete-copy-number-data
+#  for definition of molecular profiles. CNA can have _cna, _gistic, _rae molecular profile names
 
 #' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`.
 #' @param study_id study id for which to lookup profiles
@@ -182,7 +182,7 @@
   quiet_available_profiles <- purrr::quietly(available_profiles)
   profs <- tryCatch(
 
-    # ** Maybe there can be a better API fail message that propogates thorughout because base_url should  always be checked/throw error before
+    # ** Maybe there can be a better API fail message that propagates throughout because base_url should  always be checked/throw error before
     #  any parameter issues.
     quiet_available_profiles(study_id = study_id, base_url = base_url),
                      error = function(e) cli::cli_abort("API Failed, check your database connection ({.code test_cbioportal_db()}) and make sure {.val study_id:}{.code {study_id}} exists ({.code available_studies()})"))

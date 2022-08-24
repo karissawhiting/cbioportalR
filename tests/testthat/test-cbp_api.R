@@ -3,6 +3,7 @@
 # No Parameter Endpoints -------------------------------------------------------
 test_that("test main API function", {
 
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
@@ -18,6 +19,7 @@ test_that("test main API function", {
 
 test_that("test quiet arg", {
 
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
@@ -32,6 +34,7 @@ test_that("test quiet arg", {
 
 test_that("test extra_box arg", {
 
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"

@@ -7,7 +7,7 @@
 .get_data_by_study(
   study_id = NULL,
   molecular_profile_id = NULL,
-  data_type = c("mutation", "cna", "fusion"),
+  data_type = c("mutation", "cna", "fusion", "structural_variant"),
   base_url = NULL,
   add_hugo = TRUE
 )
@@ -19,7 +19,7 @@ on molecular_profile_id.}
 \item{molecular_profile_id}{a molecular profile to query mutations.
 If NULL, guesses molecular_profile_id based on study ID.}
 
-\item{data_type}{specify what type of data to return. Options are\code{mutation}, \code{cna}, \code{fusion}.}
+\item{data_type}{specify what type of data to return. Options are\code{mutation}, \code{cna}, \code{fusion}, or \code{structural_variant} (same as \code{fusion}).}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
@@ -27,7 +27,7 @@ If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 \item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is \code{TRUE} and adds this by default.}
 }
 \value{
-a dataframe of mutations or CNAs
+a dataframe of mutations, CNAs or structural variants
 }
 \description{
 Endpoints for retrieving mutation and cna data are structurally similar.
@@ -35,7 +35,7 @@ This internal function allows you to pull data from either endpoint. It has
 logic for sensible default guesses at \code{study_id} and \code{molecular_profile_id} when those are \code{NULL}
 }
 \examples{
-\donttest{
+\dontrun{
 set_cbioportal_db("public")
 .get_data_by_study(study_id = "prad_msk_2019", data_type = "cna")
 .get_data_by_study(study_id = "prad_msk_2019", data_type = "mutation")
@@ -43,7 +43,7 @@ set_cbioportal_db("public")
 
 .get_data_by_study(molecular_profile_id = "prad_msk_2019_cna", data_type = "cna")
 .get_data_by_study(molecular_profile_id = "prad_msk_2019_mutations", data_type = "mutation")
-.get_data_by_study(molecular_profile_id = "prad_msk_2019_fusion", data_type = "fusion")
+.get_data_by_study(molecular_profile_id = "prad_msk_2019_structural_variants", data_type = "fusion")
 }
 
 }

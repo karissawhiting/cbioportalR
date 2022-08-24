@@ -19,7 +19,8 @@ A dataframe of genes in a specified panel
 Retrieve Genes Included For a Specified Panel ID
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_gene_panel(panel_id = "IMPACT468", base_url = 'www.cbioportal.org/api')
-\dontshow{\}) # examplesIf}
+}
+
 }

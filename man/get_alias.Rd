@@ -23,9 +23,10 @@ of aliases. Therefore, this is a convenience function but
 you may want to consider a more carefully curated alias list like \code{cbioportalR::impact_gene_info}
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 
 get_alias(hugo_symbol = "FGFR3", base_url = 'www.cbioportal.org/api')
 get_alias(hugo_symbol = c("FGFR3", "TP53"), base_url = 'www.cbioportal.org/api')
-\dontshow{\}) # examplesIf}
+}
+
 }

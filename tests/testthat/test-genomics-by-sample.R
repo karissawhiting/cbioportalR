@@ -2,6 +2,8 @@
 
 test_that("Test study_id and Profile Param", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   # > expand.grid(study_id = c("correct", "incorrect", "NULL"),
@@ -124,13 +126,15 @@ test_that("Test study_id and Profile Param", {
   expect_error(.get_data_by_sample(
     study_id = "acc_tcga",
     sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
-    molecular_profile_id = "acc_tcga_fusions", data_type = "fusion"), "Molecular profile*")
+    molecular_profile_id = "acc_tcga_structural_variants", data_type = "fusion"), "Molecular profile*")
 })
 
 
 
 test_that("Test sample-study pairs df", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
@@ -195,6 +199,8 @@ test_that("Test sample-study pairs df", {
 
 test_that("data is same regardless of function", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   db_test <- "public"
@@ -211,7 +217,7 @@ test_that("data is same regardless of function", {
 
   by_study <- get_mutations_by_sample(sample_id = sample_id, study_id = study_id)
   by_prof <- get_mutations_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
-  expect_identical(by_study, by_prof, get_gen$mut)
+  expect_identical(by_study, by_prof, get_gen$mutation)
 
   # CNA ---
   molecular_profile_id = "prad_msk_2019_cna"
@@ -220,16 +226,20 @@ test_that("data is same regardless of function", {
   expect_identical(by_study, by_prof, get_gen$cna)
 
   # Fusions ---
-  molecular_profile_id = "prad_msk_2019_fusion"
+  molecular_profile_id = "prad_msk_2019_structural_variants"
   by_study <- get_fusions_by_sample(sample_id = sample_id, study_id = study_id)
+  by_study2 <- get_structural_variants_by_sample(sample_id = sample_id, study_id = study_id)
   by_prof <- get_fusions_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
-  expect_identical(by_study, by_prof, get_gen$fusion)
+  by_prof2 <- get_structural_variants_by_sample(sample_id = sample_id, molecular_profile_id = molecular_profile_id)
+  expect_identical(by_study, by_study2, by_prof, by_prof2, get_gen$structural_variant)
 
 })
 
 
 test_that("Unknown Hugo Symbol returns Unk ", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
@@ -248,6 +258,8 @@ test_that("Unknown Hugo Symbol returns Unk ", {
 
 test_that("Hugo Symbol is added by default ", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
@@ -262,6 +274,8 @@ test_that("Hugo Symbol is added by default ", {
 
 test_that("Returns same results as pulling by study ID ", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
@@ -286,6 +300,8 @@ test_that("Returns same results as pulling by study ID ", {
 
 test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
@@ -309,12 +325,14 @@ test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
 
   expect_equal(all_genomic_entrez$mutation, all_genomic_hugo$mutation)
   expect_equal(all_genomic_entrez$cna, all_genomic_hugo$cna)
-  expect_equal(all_genomic_entrez$fusion, all_genomic_hugo$fusion)
+  expect_equal(all_genomic_entrez$structural_variant, all_genomic_hugo$structural_variant)
 })
 
 
 test_that("pulling with gene ID (entrez or hugo) works with no error", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
@@ -333,12 +351,14 @@ test_that("pulling with gene ID (entrez or hugo) works with no error", {
 
   expect_true(identical(gen_by_entrez$mutation, gen_by_hugo$mutation))
   expect_true(identical(gen_by_entrez$cna, gen_by_hugo$cna))
-  expect_true(identical(gen_by_entrez$fusion, gen_by_hugo$fusion))
+  expect_true(identical(gen_by_entrez$structural_variant, gen_by_hugo$structural_variant))
 
 })
 
 test_that("pulling with panel ID works with no error and matches pull by gene", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
@@ -356,12 +376,14 @@ test_that("pulling with panel ID works with no error and matches pull by gene", 
 
   expect_true(identical(gen_by_panel$mutation, gen_by_entrez$mutation))
   expect_true(identical(gen_by_panel$cna, gen_by_entrez$cna))
-  expect_true(identical(gen_by_panel$fusion, gen_by_entrez$fusion))
+  expect_true(identical(gen_by_panel$structural_variant, gen_by_entrez$structural_variant))
 
 })
 
 test_that("pulling with panel ID works with no error and matches pull by gene", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
@@ -384,12 +406,14 @@ test_that("pulling with panel ID works with no error and matches pull by gene", 
 
   expect_true(identical(gen_by_panel$mutation, gen_by_entrez$mutation))
   expect_true(identical(gen_by_panel$cna, gen_by_entrez$cna))
-  expect_true(identical(gen_by_panel$fusion, gen_by_entrez$fusion))
+  expect_true(identical(gen_by_panel$structural_variant, gen_by_entrez$structural_variant))
 
 })
 
 test_that("pull by panel ID + gene IDs", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
@@ -410,7 +434,7 @@ test_that("pull by panel ID + gene IDs", {
 
   expect_true(identical(gen_by_panel$mutation, gen_by_panel2$mutation))
   expect_true(identical(gen_by_panel$cna, gen_by_panel2$cna))
-  expect_true(identical(gen_by_panel$fusion, gen_by_panel2$fusion))
+  expect_true(identical(gen_by_panel$structural_variant, gen_by_panel2$structural_variant))
 
   expect_equal(setdiff(gen_by_panel$mutation$hugoGeneSymbol,
           gen_by_panel3$mutation$hugoGeneSymbol), plus_gene)
@@ -420,6 +444,8 @@ test_that("pull by panel ID + gene IDs", {
 
 test_that("pull by two panel IDs", {
 
+skip_on_cran()
+  skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
 

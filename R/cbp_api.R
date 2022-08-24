@@ -13,9 +13,10 @@
 #' @export
 #' @import httr
 #' @keywords internal
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
-#'
+#' @examples
+#' \dontrun{
 #' cbp_api(url_path = "genes/TP53", base_url = "public")
+#' }
 #'
 cbp_api <- function(url_path,
                     method = NULL,

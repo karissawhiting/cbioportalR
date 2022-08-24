@@ -32,9 +32,9 @@ A dataframe of mutations (maf file format)
 Get Mutations By Study ID
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_mutations_by_study(study_id = "prad_msk_2019")
 get_mutations_by_study(molecular_profile_id = "prad_msk_2019_mutations")
+}
 
-\dontshow{\}) # examplesIf}
 }

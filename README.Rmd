@@ -30,9 +30,9 @@ library(tidyverse)
 
 {cbioportalR} allows you to access [cBioPortal's](https://www.cbioportal.org/) genomic and clinical data sets directly through R. The package wraps cBioPortal's API endpoints so R users can easily leverage the [existing API](https://www.cbioportal.org/api/swagger-ui/index.html) to access genomic data on mutations, copy number alterations and fusions as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI) and select clinical data points (depending on the study). 
 
-This package was created to work with both the public [cBioPortal website](https://www.cbioportal.org/), as well as private institutional cBioPortal instances (e.g. MSKCC, GENIE) with appropriate credentials and [authentication].
+This package was created to work with both the public [cBioPortal website](https://www.cbioportal.org/), as well as private institutional cBioPortal instances (e.g. MSKCC, GENIE) with appropriate credentials and [authentication]. 
 
-For more information on cBioPortal, see the following publications:
+This package is compatible with cBioPortal v5.0, but is subject to change as [cBioPortal updates are released](https://github.com/cBioPortal/cbioportal/releases). For more information on cBioPortal, see the following publications:
 
 - [Gao et al. Sci. Signal. 2013](https://pubmed.ncbi.nlm.nih.gov/23550210/)
 - [ Cerami et al. Cancer Discov. 2012](https://aacrjournals.org/cancerdiscovery/article/2/5/401/3246/The-cBio-Cancer-Genomics-Portal-An-Open-Platform)
@@ -214,7 +214,7 @@ To pull all genomic data for a particular study you can use:
 df <- get_genetics_by_study(study_id = "acc_tcga")
 ```
 
-As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion data, but there is no fusion data available for this study, as indicated by the function message. 
+As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion (structural variant) data, but there is no fusion data available for this study, as indicated by the function message. 
 
 
 ```{r}

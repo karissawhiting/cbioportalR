@@ -6,9 +6,11 @@
 #' @return A dataframe of study metadata
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' get_study_info("acc_tcga")
+#' }
 
 get_study_info <- function(study_id = NULL, base_url = NULL) {
 
@@ -37,8 +39,10 @@ get_study_info <- function(study_id = NULL, base_url = NULL) {
 #' @return a data frame of available clinical attributes for that study
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' available_clinical_attributes("acc_tcga", base_url = 'www.cbioportal.org/api')
+#' }
 #'
 available_clinical_attributes <- function(study_id = NULL, base_url = NULL) {
 
@@ -69,11 +73,11 @@ available_clinical_attributes <- function(study_id = NULL, base_url = NULL) {
 #' @return a dataframe of all available clinical attributes and their values
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
+#' @examples
+#' \dontrun{
 #' get_clinical_by_study(study_id = "acc_tcga",
 #'  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
 #'
-#' \donttest{
 #' get_clinical_by_study(study_id = "acc_tcga", base_url = 'www.cbioportal.org/api')
 #' }
 #'
@@ -150,8 +154,8 @@ get_clinical_by_study <- function(study_id = NULL,
 #'
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
-#' \donttest{
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' available_samples(study_id = "acc_tcga")
 #' }
@@ -191,8 +195,8 @@ available_samples <- function(study_id = NULL,
 #'
 #' @export
 #'
-#' @examplesIf !httr::http_error("www.cbioportal.org/api")
-#' \donttest{
+#' @examples
+#' \dontrun{
 #' set_cbioportal_db("public")
 #' available_samples(study_id = "acc_tcga")
 #' }

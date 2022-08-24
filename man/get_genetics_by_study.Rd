@@ -16,13 +16,13 @@ on molecular_profile_id.}
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
-A list of mutations, cna and fusions (if available)
+A list of mutations, cna and structural variants (including fusions), if available.
 }
 \description{
 Get All Genomic Information By Study
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 get_genetics_by_study(study_id = "prad_msk_2019")
-\dontshow{\}) # examplesIf}
+}
 }

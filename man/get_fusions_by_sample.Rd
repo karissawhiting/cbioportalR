@@ -2,9 +2,21 @@
 % Please edit documentation in R/genomics_by_sample.R
 \name{get_fusions_by_sample}
 \alias{get_fusions_by_sample}
+\alias{get_structural_variants_by_sample}
 \title{Get Fusions By Sample ID}
 \usage{
 get_fusions_by_sample(
+  sample_id = NULL,
+  study_id = NULL,
+  molecular_profile_id = NULL,
+  sample_study_pairs = NULL,
+  genes = NULL,
+  panel = NULL,
+  add_hugo = NULL,
+  base_url = NULL
+)
+
+get_structural_variants_by_sample(
   sample_id = NULL,
   study_id = NULL,
   molecular_profile_id = NULL,
@@ -46,9 +58,13 @@ A data frame of Fusions
 Get Fusions By Sample ID
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 set_cbioportal_db("public")
+
+#' # These return the same results
 get_fusions_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
                  study_id = "prad_msk_2019")
-\dontshow{\}) # examplesIf}
+get_structural_variants_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
+                 study_id = "prad_msk_2019")
+                 }
 }

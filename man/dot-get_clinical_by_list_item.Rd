@@ -31,9 +31,10 @@ a dataframe of a specific clinical attribute
 Get clinical data by attribute, study ID and sample ID
 }
 \examples{
-\dontshow{if (!httr::http_error("www.cbioportal.org/api")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 .get_clinical_by_list_item(study_id = "acc_tcga", sample_id = "TCGA-OR-A5J2-01",
  clinical_attribute = "CANCER_TYPE", base_url = 'www.cbioportal.org/api')
-\dontshow{\}) # examplesIf}
+ }
+
 }
 \keyword{internal}
