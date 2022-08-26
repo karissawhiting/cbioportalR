@@ -291,5 +291,6 @@ Thank you to contributors!
 [&#x0040;jalavery](https://github.com/jalavery), 
 [&#x0040;ddsjoberg](https://github.com/ddsjoberg)
 [&#x0040;karomanchuk](https://github.com/karomanchuk)
+[&#x0040;hfuchs5](https://github.com/hfuchs5)
 
 Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!
