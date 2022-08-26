@@ -282,7 +282,7 @@ clinical_blca <- get_clinical_by_patient(patient_id = s1$patientId,
                        study_id = "blca_nmibc_2017",
                        clinical_attribute = in_both)
 
-clinical_prad <- get_clinical_by_sample(sample_id = s2$patientId,
+clinical_prad <- get_clinical_by_patient(sample_id = s2$patientId,
                        study_id = "prad_msk_2019",
                        clinical_attribute = in_both)
 
@@ -293,7 +293,9 @@ all_clinical %>%
   head()
 ```
 
-Like with the genomic data pull functions, you can also pull clinical data by study ID - sample ID, or ID study ID - patient ID pairs:
+Like with the genomic data pull functions, you can also pull clinical data by a data frame of sample ID - study ID pairs, or a data frame of patient ID - study ID pairs. Below, we will pull by patient ID - study ID pairs.
+
+First, we construct the data frame of pairs to pass:
 
 ```{r }
 df_pairs <- bind_rows(s1, s2) %>%
@@ -303,7 +305,7 @@ df_pairs <- df_pairs %>%
   select(patientId, studyId)
 ```
 
-Now we pass this to `get_genetics_by_sample()`
+Now we pass this data frame to `get_genetics_by_patient()`
 
 ```{r}
 all_patient_clinical <- get_clinical_by_patient(patient_study_pairs = df_pairs,
