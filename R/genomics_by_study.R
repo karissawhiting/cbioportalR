@@ -12,7 +12,10 @@
 #' @param molecular_profile_id a molecular profile to query mutations.
 #' If NULL, guesses molecular_profile_id based on study ID.
 #' @param data_type specify what type of data to return. Options are`mutation`, `cna`, `fusion`, or `structural_variant` (same as `fusion`).
-#' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is `TRUE` and adds this by default.
+#' @param add_hugo Logical indicating whether `HugoGeneSymbol` should be added to your resulting data frame, if not already present in raw API results.
+#' For certain molecular profiles, the cBioPortal API does not return Hugo Symbol by default (only EntrezId).
+#' Argument is `TRUE` by default, and will add this information.
+#' If `FALSE`, results will be returned as is from API, meaning if there is a column with Hugo Symbol information it will not be removed.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
@@ -181,6 +184,7 @@ get_mutations_by_study <- function(study_id = NULL,
   .get_data_by_study(study_id = study_id,
                     molecular_profile_id = molecular_profile_id,
                     data_type = c("mutation"),
+                    add_hugo = add_hugo,
                     base_url = base_url)
 }
 
@@ -203,6 +207,7 @@ get_cna_by_study <- function(study_id = NULL,
   .get_data_by_study(study_id = study_id,
                     molecular_profile_id = molecular_profile_id,
                     data_type = c("cna"),
+                    add_hugo = add_hugo,
                     base_url = base_url)
 }
 
@@ -224,12 +229,13 @@ get_cna_by_study <- function(study_id = NULL,
 
 get_fusions_by_study <- function(study_id = NULL,
                              molecular_profile_id = NULL,
-                             add_hugo = TRUE,
                              base_url = NULL) {
 
   .get_data_by_study(study_id = study_id,
                     molecular_profile_id = molecular_profile_id,
                     data_type = c("fusion"),
+                    # this doesn't matter. `add_hugo` doesn't do anything for fusion data
+                    add_hugo = TRUE,
                     base_url = base_url)
 }
 
@@ -265,7 +271,9 @@ get_genetics_by_study <- function(study_id = NULL,
    purrr::map(., function(x) {
                        safe_get_data(study_id = study_id,
                                           molecular_profile_id = NULL,
-                                          data_type = x, base_url = base_url)
+                                          data_type = x,
+                                     add_hugo = add_hugo,
+                                     base_url = base_url)
                        })
 
  genetics <- purrr::compact(purrr::map(res, "result"))

@@ -12,7 +12,6 @@ get_fusions_by_sample(
   sample_study_pairs = NULL,
   genes = NULL,
   panel = NULL,
-  add_hugo = NULL,
   base_url = NULL
 )
 
@@ -23,7 +22,6 @@ get_structural_variants_by_sample(
   sample_study_pairs = NULL,
   genes = NULL,
   panel = NULL,
-  add_hugo = NULL,
   base_url = NULL
 )
 }
@@ -45,8 +43,6 @@ need to pull samples from several different studies at once. If passed this will
 \item{genes}{A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function.  If \code{panel} and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
 
 \item{panel}{One or more panel IDs to query (e.g. 'IMPACT468'). If \code{panel}  and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
-
-\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is \code{TRUE} and adds this by default.}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

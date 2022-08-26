@@ -149,6 +149,35 @@ test_that("Test study_id and Profile Param", {
 
 })
 
+test_that("Hugo Symbol is added by default", {
+
+  skip_on_cran()
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+  df <- get_genetics_by_study(study_id = "acc_tcga")
+
+  expect_true(length(df$mutation$hugoGeneSymbol) > 1)
+  expect_true(length(df$cna$hugoGeneSymbol) > 1)
+
+
+})
+
+test_that("`add_hugo` = FALSE doesn't add column if it's not there", {
+
+  skip_on_cran()
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+  df_hugo_false <- get_genetics_by_study(study_id = "prad_msk_2019", add_hugo = FALSE)
+
+  df_hugo_true <- get_genetics_by_study(study_id = "prad_msk_2019", add_hugo = TRUE)
+
+  expect_true(setdiff(names(df_hugo_true$mutation), names(df_hugo_false$mutation)) == "hugoGeneSymbol")
+  expect_true(setdiff(names(df_hugo_true$cna), names(df_hugo_false$cna)) == "hugoGeneSymbol")
+  expect_true(length(setdiff(names(df_hugo_true$structural_variant), names(df_hugo_false$structural_variant))) == 0)
+
+})
 
 test_that("data is same regardless of function", {
 

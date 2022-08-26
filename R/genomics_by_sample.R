@@ -303,7 +303,7 @@ get_mutations_by_sample <- function(sample_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
                                    panel = NULL,
-                                   add_hugo = NULL,
+                                   add_hugo = TRUE,
                                    base_url = NULL) {
 
 
@@ -314,6 +314,7 @@ get_mutations_by_sample <- function(sample_id = NULL,
                     data_type = c("mutation"),
                     genes = genes,
                     panel = panel,
+                    add_hugo = add_hugo,
                     base_url = base_url)
 
 
@@ -341,7 +342,7 @@ get_cna_by_sample <- function(sample_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
                                    panel = NULL,
-                                   add_hugo = NULL,
+                                   add_hugo = TRUE,
                                    base_url = NULL) {
 
   .get_data_by_sample(sample_id = sample_id,
@@ -351,6 +352,7 @@ get_cna_by_sample <- function(sample_id = NULL,
                      data_type = c("cna"),
                      genes = genes,
                      panel = panel,
+                     add_hugo = add_hugo,
                      base_url = base_url)
 
 
@@ -382,7 +384,6 @@ get_fusions_by_sample <- function(sample_id = NULL,
                               sample_study_pairs = NULL,
                               genes = NULL,
                               panel = NULL,
-                              add_hugo = NULL,
                               base_url = NULL) {
 
   .get_data_by_sample(sample_id = sample_id,
@@ -392,6 +393,7 @@ get_fusions_by_sample <- function(sample_id = NULL,
                      data_type = c("fusion"),
                      genes = genes,
                      panel = panel,
+                     add_hugo = TRUE,
                      base_url = base_url)
 
 
@@ -420,7 +422,7 @@ get_genetics_by_sample <- function(sample_id = NULL,
                                    sample_study_pairs = NULL,
                                    genes = NULL,
                                    panel = NULL,
-                                   add_hugo = NULL,
+                                   add_hugo = TRUE,
                                    base_url = NULL) {
 
   safe_get_data <- purrr::safely(.get_data_by_sample, quiet = TRUE)
@@ -430,11 +432,11 @@ get_genetics_by_sample <- function(sample_id = NULL,
     purrr::map(., function(x) {
       safe_get_data(sample_id = sample_id,
                     study_id = study_id,
-
                     molecular_profile_id = NULL,
                     sample_study_pairs = sample_study_pairs,
                     genes = genes,
                     panel = panel,
+                    add_hugo = add_hugo,
                     base_url = base_url,
                     data_type = x)
     })

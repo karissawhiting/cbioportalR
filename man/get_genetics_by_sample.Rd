@@ -10,7 +10,7 @@ get_genetics_by_sample(
   sample_study_pairs = NULL,
   genes = NULL,
   panel = NULL,
-  add_hugo = NULL,
+  add_hugo = TRUE,
   base_url = NULL
 )
 }
