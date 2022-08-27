@@ -33,9 +33,11 @@ need to pull samples from several different studies at once. If passed this will
 
 \item{data_type}{specify what type of data to return. Options are\code{mutations}, \code{cna}, \code{fusion} or \code{structural_variant} (same as \code{fusion}).}
 
-\item{genes}{A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function.  If \code{panel} and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
+\item{genes}{A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function.
+If \code{panel} and \code{genes} are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.}
 
-\item{panel}{One or more panel IDs to query (e.g. 'IMPACT468'). If \code{panel}  and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
+\item{panel}{One or more panel IDs to query (e.g. 'IMPACT468').
+If \code{panel} and \code{genes} are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.}
 
 \item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is \code{TRUE} and adds this by default.}
 

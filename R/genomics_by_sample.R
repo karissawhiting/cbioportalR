@@ -14,8 +14,10 @@
 #' This can be used in place of `sample_id`, `study_id`, `molecular_profile_id` arguments above if you
 #' need to pull samples from several different studies at once. If passed this will take overwrite `sample_id`, `study_id`, `molecular_profile_id` if also passed.
 #' @param data_type specify what type of data to return. Options are`mutations`, `cna`, `fusion` or `structural_variant` (same as `fusion`).
-#' @param genes A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the `get_entrez_id()` function.  If `panel` and `genes` are both NULL (default), it will return gene results for all available genomic data for that sample.
-#' @param panel One or more panel IDs to query (e.g. 'IMPACT468'). If `panel`  and `genes` are both NULL (default), it will return gene results for all available genomic data for that sample.
+#' @param genes A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the `get_entrez_id()` function.
+#' If `panel` and `genes` are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.
+#' @param panel One or more panel IDs to query (e.g. 'IMPACT468').
+#' If `panel` and `genes` are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.
 #' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is `TRUE` and adds this by default.
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
