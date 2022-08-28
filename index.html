@@ -209,7 +209,7 @@
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_genetics_by_study.html">get_genetics_by_study</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study</span></span>
 <span><span class="co">#&gt; ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study</span></span>
-<span><span class="co">#&gt; ! No "structural_variant" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``</span></span></code></pre></div>
+<span><span class="co">#&gt; ! No "structural_variant" data returned. Error:  No molecular profile for `data_type = fusion` found in "acc_tcga".  See `available_profiles('acc_tcga')`</span></span></code></pre></div>
 <p>As a result, you will get a list of data frames with mutation and CNA data respectively. The function will also try to pull fusion (structural variant) data, but there is no fusion data available for this study, as indicated by the function message.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">mutation</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -355,7 +355,7 @@
 </h2>
 <p>Please note that {cbioportalR} is released with a <a href="https://www.karissawhiting.com/cbioportalR/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 <p>Thank you to contributors!</p>
-<p><a href="https://github.com/arorarshi" class="external-link">@arorarshi</a>, <a href="https://github.com/AxelitoMartin" class="external-link">@AxelitoMartin</a>, <a href="https://github.com/edrill" class="external-link">@edrill</a>, <a href="https://github.com/jalavery" class="external-link">@jalavery</a>, <a href="https://github.com/ddsjoberg" class="external-link">@ddsjoberg</a> <a href="https://github.com/karomanchuk" class="external-link">@karomanchuk</a></p>
+<p><a href="https://github.com/arorarshi" class="external-link">@arorarshi</a>, <a href="https://github.com/AxelitoMartin" class="external-link">@AxelitoMartin</a>, <a href="https://github.com/edrill" class="external-link">@edrill</a>, <a href="https://github.com/jalavery" class="external-link">@jalavery</a>, <a href="https://github.com/ddsjoberg" class="external-link">@ddsjoberg</a> <a href="https://github.com/karomanchuk" class="external-link">@karomanchuk</a> <a href="https://github.com/hfuchs5" class="external-link">@hfuchs5</a></p>
 <p>Thank you <a href="https://awenfilms.net/" class="external-link">Isaak Liptzin</a> for the hex sticker!</p>
 </div>
 

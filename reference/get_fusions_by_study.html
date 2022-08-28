@@ -66,14 +66,12 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_fusions_by_study</span><span class="op">(</span></span>
 <span>  study_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  molecular_profile_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  add_hugo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  base_url <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">get_structural_variants_by_study</span><span class="op">(</span></span>
 <span>  study_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  molecular_profile_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  add_hugo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  base_url <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -88,10 +86,6 @@ on molecular_profile_id.</p></dd>
 <dt>molecular_profile_id</dt>
 <dd><p>a molecular profile to query mutations.
 If NULL, guesses molecular_profile_id based on study ID.</p></dd>
-
-
-<dt>add_hugo</dt>
-<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this functions default is <code>TRUE</code> and adds this by default.</p></dd>
 
 
 <dt>base_url</dt>
