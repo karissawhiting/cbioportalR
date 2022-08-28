@@ -215,6 +215,12 @@
 #'
 .lookup_hugo <- function(df, base_url) {
 
+  if(any(stringr::str_detect(names(df), "hugoGeneSymbol"))) {
+    cli::cli_warn("{.field 'hugoGeneSymbol'} column already exists. Overwriting this column. Please set {.code add_hugo = FALSE} to supress this}")
+    df <- df %>%
+      select(-all_of('hugoGeneSymbol'))
+  }
+
   hugo <- get_hugo_symbol(unique(df$entrezGeneId)) %>%
     select(-.data$type)
 

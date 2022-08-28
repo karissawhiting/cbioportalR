@@ -2,7 +2,6 @@
 
 test_that("Test study_id and Profile Param", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
@@ -133,7 +132,6 @@ skip_on_cran()
 
 test_that("Test sample-study pairs df", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
@@ -199,7 +197,6 @@ skip_on_cran()
 
 test_that("data is same regardless of function", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
@@ -238,7 +235,6 @@ skip_on_cran()
 
 test_that("Unknown Hugo Symbol returns Unk ", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
@@ -256,9 +252,8 @@ skip_on_cran()
 
 })
 
-test_that("Hugo Symbol is added by default ", {
+test_that("Hugo Symbol is added by default", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
@@ -272,9 +267,47 @@ skip_on_cran()
 
 })
 
+test_that("`add_hugo` = FALSE doesn't add column if it's not there", {
+
+  skip_on_cran()
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+  df_hugo_false <- get_genetics_by_sample(sample_id =c("s_C_CAUWT7_P001_d",
+                                                       "s_C_DU6ECC_P002_d",
+                                                       "s_C_M8X42T_P002_d",
+                                                       "s_C_36924L_P001_d"),
+                               study_id = "prad_msk_2019", add_hugo = FALSE)
+
+  df_hugo_true <- get_genetics_by_sample(sample_id =c("s_C_CAUWT7_P001_d",
+                                                      "s_C_DU6ECC_P002_d",
+                                                      "s_C_M8X42T_P002_d",
+                                                      "s_C_36924L_P001_d"),
+                                          study_id = "prad_msk_2019", add_hugo = TRUE)
+
+  expect_true(setdiff(names(df_hugo_true$mutation), names(df_hugo_false$mutation)) == "hugoGeneSymbol")
+  expect_true(setdiff(names(df_hugo_true$cna), names(df_hugo_false$cna)) == "hugoGeneSymbol")
+  expect_true(length(setdiff(names(df_hugo_true$structural_variant), names(df_hugo_false$structural_variant))) == 0)
+
+})
+
+test_that("`add_hugo= TRUE` warns if column already exists", {
+
+  skip_on_cran()
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+  df <- get_genetics_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
+                               study_id = "acc_tcga")
+
+  expect_warning(.lookup_hugo(df$mutation), "*")
+
+
+})
+
+
 test_that("Returns same results as pulling by study ID ", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
 
@@ -300,7 +333,6 @@ skip_on_cran()
 
 test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
@@ -331,7 +363,6 @@ skip_on_cran()
 
 test_that("pulling with gene ID (entrez or hugo) works with no error", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
@@ -357,7 +388,6 @@ skip_on_cran()
 
 test_that("pulling with panel ID works with no error and matches pull by gene", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
@@ -382,7 +412,6 @@ skip_on_cran()
 
 test_that("pulling with panel ID works with no error and matches pull by gene", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
@@ -412,7 +441,6 @@ skip_on_cran()
 
 test_that("pull by panel ID + gene IDs", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")
@@ -444,7 +472,6 @@ skip_on_cran()
 
 test_that("pull by two panel IDs", {
 
-skip_on_cran()
   skip_on_cran()
   skip_if(httr::http_error("www.cbioportal.org/api"))
   set_cbioportal_db("public")

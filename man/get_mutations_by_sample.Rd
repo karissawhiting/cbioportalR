@@ -11,7 +11,7 @@ get_mutations_by_sample(
   sample_study_pairs = NULL,
   genes = NULL,
   panel = NULL,
-  add_hugo = NULL,
+  add_hugo = TRUE,
   base_url = NULL
 )
 }
@@ -30,9 +30,11 @@ more than 1 study needed, see \code{sample_study_pairs}}
 This can be used in place of \code{sample_id}, \code{study_id}, \code{molecular_profile_id} arguments above if you
 need to pull samples from several different studies at once. If passed this will take overwrite \code{sample_id}, \code{study_id}, \code{molecular_profile_id} if also passed.}
 
-\item{genes}{A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function.  If \code{panel} and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
+\item{genes}{A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the \code{get_entrez_id()} function.
+If \code{panel} and \code{genes} are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.}
 
-\item{panel}{One or more panel IDs to query (e.g. 'IMPACT468'). If \code{panel}  and \code{genes} are both NULL (default), it will return gene results for all available genomic data for that sample.}
+\item{panel}{One or more panel IDs to query (e.g. 'IMPACT468').
+If \code{panel} and \code{genes} are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.}
 
 \item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is \code{TRUE} and adds this by default.}
 

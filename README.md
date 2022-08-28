@@ -202,7 +202,7 @@ To pull all genomic data for a particular study you can use:
 df <- get_genetics_by_study(study_id = "acc_tcga")
 #> ℹ Returning all data for the "acc_tcga_mutations" molecular profile in the "acc_tcga" study
 #> ℹ Returning all data for the "acc_tcga_gistic" molecular profile in the "acc_tcga" study
-#> ! No "structural_variant" data returned. Error:  No molecular profile for `` data_type = `fusion` `` found in "acc_tcga".  See `` available_profiles('`acc_tcga`') ``
+#> ! No "structural_variant" data returned. Error:  No molecular profile for `data_type = fusion` found in "acc_tcga".  See `available_profiles('acc_tcga')`
 ```
 
 As a result, you will get a list of data frames with mutation and CNA
@@ -401,5 +401,6 @@ Thank you to contributors!
 [@jalavery](https://github.com/jalavery),
 [@ddsjoberg](https://github.com/ddsjoberg)
 [@karomanchuk](https://github.com/karomanchuk)
+[@hfuchs5](https://github.com/hfuchs5)
 
 Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!
