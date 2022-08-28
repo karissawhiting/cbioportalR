@@ -31,7 +31,8 @@ If \code{panel} and \code{genes} are both supplied, genes from both arguments wi
 \item{panel}{One or more panel IDs to query (e.g. 'IMPACT468').
 If \code{panel} and \code{genes} are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.}
 
-\item{add_hugo}{Logical indicating whether \code{HugoSymbol} should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is \code{TRUE} and adds this by default.}
+\item{add_hugo}{Logical indicating whether \code{HugoGeneSymbol} should be added to your resulting data frame, if not already present in raw API results.
+Argument is \code{TRUE} by default. If \code{FALSE}, results will be returned as is (i.e. any existing Hugo Symbol columns in raw results will not be removed).}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

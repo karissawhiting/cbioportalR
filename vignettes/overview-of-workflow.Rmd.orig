@@ -220,7 +220,7 @@ Both results are equal.
 
 #### Limit Results to Specified Genes or Panels
 
-We can also limit our results to a specific set of genes by passing a vector of Entrez Gene IDs or Hugo Symbols to the `gene` argument, or a specified panel by passing a panel ID to the `panel` argument (see `available_gene_panels()` for supported panels). This can be useful if, for example, we want to pull all IMPACT gene results for two studies but one of the two uses a much larger panel. In that case, we can limit our query to just the genes for which we want results:
+When pulling by sample IDs, we can also limit our results to a specific set of genes by passing a vector of Entrez Gene IDs or Hugo Symbols to the `gene` argument, or a specified panel by passing a panel ID to the `panel` argument (see `available_gene_panels()` for supported panels). This can be useful if, for example, we want to pull all IMPACT gene results for two studies but one of the two uses a much larger panel. In that case, we can limit our query to just the genes for which we want results:
 
 ```{r}
 by_hugo <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = "TP53")

@@ -44,6 +44,7 @@ reference:
     - get_mutations_by_study
     - get_cna_by_study
     - get_fusions_by_study
+    - get_structural_variants_by_study
     - available_samples
     - available_patients
     - get_genetics_by_study
@@ -53,6 +54,7 @@ reference:
     - get_mutations_by_sample
     - get_cna_by_sample
     - get_fusions_by_sample
+    - get_structural_variants_by_sample
     - get_genetics_by_sample
     - get_panel_by_sample
   - subtitle: Gene & Gene Panel Level

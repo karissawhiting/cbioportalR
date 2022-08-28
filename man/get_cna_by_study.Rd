@@ -19,9 +19,7 @@ on molecular_profile_id.}
 If NULL, guesses molecular_profile_id based on study ID.}
 
 \item{add_hugo}{Logical indicating whether \code{HugoGeneSymbol} should be added to your resulting data frame, if not already present in raw API results.
-For certain molecular profiles, the cBioPortal API does not return Hugo Symbol by default (only EntrezId).
-Argument is \code{TRUE} by default, and will add this information.
-If \code{FALSE}, results will be returned as is from API, meaning if there is a column with Hugo Symbol information it will not be removed.}
+Argument is \code{TRUE} by default. If \code{FALSE}, results will be returned as is (i.e. any existing Hugo Symbol columns in raw results will not be removed).}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

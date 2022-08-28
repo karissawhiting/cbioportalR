@@ -18,7 +18,8 @@
 #' If `panel` and `genes` are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.
 #' @param panel One or more panel IDs to query (e.g. 'IMPACT468').
 #' If `panel` and `genes` are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.
-#' @param add_hugo Logical indicating whether `HugoSymbol` should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is `TRUE` and adds this by default.
+#' @param add_hugo Logical indicating whether `HugoGeneSymbol` should be added to your resulting data frame, if not already present in raw API results.
+#' Argument is `TRUE` by default. If `FALSE`, results will be returned as is (i.e. any existing Hugo Symbol columns in raw results will not be removed).
 #' @param base_url The database URL to query
 #' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
 #'
@@ -248,7 +249,7 @@
 
     df <- df_fus %>%
       purrr::when(
-        (nrow(.) > 0 & !is.null(resolved_genes)) ~ filter(., .data$site1EntrezGeneId %in% resolved_genes),
+        (nrow(.) > 0 & !is.null(resolved_genes)) ~ filter(., (.data$site1EntrezGeneId %in% resolved_genes) | (.data$site2EntrezGeneId %in% resolved_genes)),
         TRUE ~ .)
 
     # Since you don't query by genes, filter genes at end so behaviour is consistent
