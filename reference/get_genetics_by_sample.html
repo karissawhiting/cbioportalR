@@ -103,7 +103,8 @@ If <code>panel</code> and <code>genes</code> are both supplied, genes from both 
 
 
 <dt>add_hugo</dt>
-<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is <code>TRUE</code> and adds this by default.</p></dd>
+<dd><p>Logical indicating whether <code>HugoGeneSymbol</code> should be added to your resulting data frame, if not already present in raw API results.
+Argument is <code>TRUE</code> by default. If <code>FALSE</code>, results will be returned as is (i.e. any existing Hugo Symbol columns in raw results will not be removed).</p></dd>
 
 
 <dt>base_url</dt>
