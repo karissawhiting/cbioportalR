@@ -282,7 +282,7 @@ clinical_blca <- get_clinical_by_patient(patient_id = s1$patientId,
                        study_id = "blca_nmibc_2017",
                        clinical_attribute = in_both)
 
-clinical_prad <- get_clinical_by_patient(sample_id = s2$patientId,
+clinical_prad <- get_clinical_by_patient(patient_id = s2$patientId,
                        study_id = "prad_msk_2019",
                        clinical_attribute = in_both)
 
