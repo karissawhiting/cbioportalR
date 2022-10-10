@@ -448,9 +448,9 @@ get_genetics_by_sample <- function(sample_id = NULL,
   errors <- purrr::compact(purrr::map(res, "error"))
 
   switch(!purrr::is_empty(errors),
-         purrr::imap(errors, ~cli_alert_warning(c("No {.val {.y}} data returned. Error:  ",
+         purrr::imap(errors, ~cli_alert_warning(c("No {.val { .y}} data returned. Error:  ",
                                                   # why no red :(
-                                                  cli::col_red('{.x$message}'))))
+                                                  cli::col_red('{ .x$message}'))))
   )
 
   genetics

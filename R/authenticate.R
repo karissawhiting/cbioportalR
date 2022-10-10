@@ -36,7 +36,7 @@ set_cbioportal_db <- function(db = NULL) {
 
   test_cbioportal_db()
 
-  cli_alert_success("{.field {'base_url'}} for this R session is now set to {.val {.get_cbioportal_url()}} ")
+  cli_alert_success("{.field {'base_url'}} for this R session is now set to {.val { .get_cbioportal_url()}} ")
 }
 
 # ------------------------------------------------------------------------------
