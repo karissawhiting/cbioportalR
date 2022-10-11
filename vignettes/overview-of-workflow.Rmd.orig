@@ -153,7 +153,7 @@ When we pull by sample IDs, we can pull specific samples across multiple studies
 
 Let's pull data for the first 10 samples in each study. We first need to construct our dataframe to pass to the function:
 
-*Note: you can also run `available_patients()` to only pull patient IDs*
+*Note: you can also run `available_samples(sample_list_id = <sample list ID>)` to pull sample IDs by a specific sample list ID (see `available_sample_lists()`), or `available_patients()` to pull patient IDs*
 
 ```{r}
 s1 <- available_samples("blca_nmibc_2017") %>%
