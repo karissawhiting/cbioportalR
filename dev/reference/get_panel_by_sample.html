@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,6 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
     <a class="dropdown-item" href="../articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
   </div>
 </li>
@@ -104,13 +103,16 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_panel_by_sample</span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"blca_plasmacytoid_mskcc_2016"</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="fu">get_panel_by_sample</span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"blca_plasmacytoid_mskcc_2016"</span>,</span></span>
 <span class="r-in"><span> sample_id <span class="op">=</span> <span class="st">"DS-sig-010-P2"</span>,</span></span>
 <span class="r-in"><span> base_url <span class="op">=</span> <span class="st">'www.cbioportal.org/api'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   sampleId      studyId                      genePanel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DS-sig-010-P2 blca_plasmacytoid_mskcc_2016 IMPACT410</span>
+<span class="r-in"><span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

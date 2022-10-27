@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,6 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
     <a class="dropdown-item" href="../articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
   </div>
 </li>
@@ -57,7 +56,24 @@
       <small>Source: <a href="https://github.com/karissawhiting/cbioportalR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="section level2"><h2 class="pkg-version" data-toc-text="development version" id="cbioportalr-development-version">cbioportalR (development version)<a class="anchor" aria-label="anchor" href="#cbioportalr-development-version"></a></h2></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="cbioportalr-development-version">cbioportalR (development version)<a class="anchor" aria-label="anchor" href="#cbioportalr-development-version"></a></h2>
+<ul><li>Added <code><a href="../reference/available_sample_lists.html">available_sample_lists()</a></code> function which returns all available sample list IDs for a given study ID</li>
+<li>Added <code>sample_list_id</code> argument to <code><a href="../reference/available_samples.html">available_samples()</a></code> which returns all samples IDs in specific sample list within a study (<a href="https://github.com/karissawhiting/cbioportalR/issues/53" class="external-link">#53</a>).</li>
+<li>Fixed {cli} errors to make package compatible with {cli} v3.4.1.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="cbioportalr-101">cbioportalR 1.0.1<a class="anchor" aria-label="anchor" href="#cbioportalr-101"></a></h2><p class="text-muted">CRAN release: 2022-08-29</p>
+<p>This version makes the package compatible with <a href="https://github.com/cBioPortal/cbioportal/releases/tag/v5.0.0" class="external-link">cBioPortal v5.0</a>. Main updates include:</p>
+<ul><li>Fusion API endpoint URLs updated to use <code>structural-variant</code> instead of <code>fusion</code> in specification.</li>
+<li>
+<code><a href="../reference/get_fusions_by_sample.html">get_structural_variants_by_sample()</a></code> and <code><a href="../reference/get_fusions_by_study.html">get_structural_variants_by_study()</a></code> added as aliases for <code><a href="../reference/get_fusions_by_sample.html">get_fusions_by_sample()</a></code> and <code><a href="../reference/get_fusions_by_study.html">get_fusions_by_study()</a></code>. These functions return the same results as their fusion counterparts and both names will be supported.</li>
+<li>When functions include the <code>data_type</code> argument, <code>structural_variant</code> is now available as option. This will return the same results as <code>fusion</code>.</li>
+<li>Output of <code><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample()</a></code> and <code><a href="../reference/get_genetics_by_study.html">get_genetics_by_study()</a></code> functions are now named lists with names: <code>mutation</code>, <code>cna</code>, and <code>structural_variant</code> (changed from <code>fusion</code>) to be consistent with cBioPortal v5.0 naming conventions.</li>
+<li>Tests and examples are no longer run on CRAN to protect from future changes to internal database. They are still run in Github Actions and examples are run on website.</li>
+<li>Some examples adjusted to use a new cBioPortal profile name, as needed (e.g. <code>prad_msk_2019_structural_variants</code> -&gt; <code>prad_msk_2019_structural_variants</code>)</li>
+<li>bug fix in <code>add_hugo</code> argument of <code>get_*_by_sample()</code> functions.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="cbioportalr-100">cbioportalR 1.0.0<a class="anchor" aria-label="anchor" href="#cbioportalr-100"></a></h2><p class="text-muted">CRAN release: 2022-08-10</p>
 <p>This is the first release submitted to CRAN, and includes all updates (listed below under versions 0.2.0 and 0.2.1) made since last Github release (0.1.0). Package has been overhauled since first release (0.1.0), and code will not be backwards compatible with that version.</p>

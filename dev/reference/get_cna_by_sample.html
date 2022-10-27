@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,6 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
     <a class="dropdown-item" href="../articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
   </div>
 </li>
@@ -71,7 +70,7 @@
 <span>  sample_study_pairs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  genes <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  panel <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  add_hugo <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_hugo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  base_url <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -101,15 +100,18 @@ need to pull samples from several different studies at once. If passed this will
 
 
 <dt>genes</dt>
-<dd><p>A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function.  If <code>panel</code> and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
+<dd><p>A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function.
+If <code>panel</code> and <code>genes</code> are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
 
 
 <dt>panel</dt>
-<dd><p>One or more panel IDs to query (e.g. 'IMPACT468'). If <code>panel</code>  and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
+<dd><p>One or more panel IDs to query (e.g. 'IMPACT468').
+If <code>panel</code> and <code>genes</code> are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
 
 
 <dt>add_hugo</dt>
-<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is <code>TRUE</code> and adds this by default.</p></dd>
+<dd><p>Logical indicating whether <code>HugoGeneSymbol</code> should be added to your resulting data frame, if not already present in raw API results.
+Argument is <code>TRUE</code> by default. If <code>FALSE</code>, results will be returned as is (i.e. any existing Hugo Symbol columns in raw results will not be removed).</p></dd>
 
 
 <dt>base_url</dt>
@@ -126,7 +128,8 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span><span class="st">"public"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span><span class="st">"public"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> You are successfully connected!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #00BB00;">base_url</span> for this R session is now set to <span style="color: #0000BB;">"www.cbioportal.org/api"</span> </span>
 <span class="r-in"><span><span class="fu">get_cna_by_sample</span><span class="op">(</span>sample_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"s_C_36924L_P001_d"</span><span class="op">)</span>,</span></span>
@@ -141,6 +144,7 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> PTEN              <span style="text-decoration: underline;">5</span>728 c19DXz… cF9DXz… prad_m… s_C_36… p_C_36… prad_m…      -<span style="color: #BB0000;">2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​entrezGeneId, ²​uniqueSampleKey,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​uniquePatientKey, ⁴​molecularProfileId, ⁵​sampleId, ⁶​patientId, ⁷​alteration</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

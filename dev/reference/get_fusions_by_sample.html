@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,6 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/internal-structure.html">Internal Structure &amp; Guiding Principles</a>
     <a class="dropdown-item" href="../articles/overview-of-workflow.html">Overview of Data Retrieval Workflow</a>
   </div>
 </li>
@@ -71,7 +70,16 @@
 <span>  sample_study_pairs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  genes <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  panel <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  add_hugo <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  base_url <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_structural_variants_by_sample</span><span class="op">(</span></span>
+<span>  sample_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  study_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  molecular_profile_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sample_study_pairs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  genes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  panel <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_url <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -101,15 +109,13 @@ need to pull samples from several different studies at once. If passed this will
 
 
 <dt>genes</dt>
-<dd><p>A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function.  If <code>panel</code> and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
+<dd><p>A vector of Entrez ids or Hugo symbols. If Hugo symbols are supplied, they will be converted to entrez ids using the <code><a href="get_entrez_id.html">get_entrez_id()</a></code> function.
+If <code>panel</code> and <code>genes</code> are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
 
 
 <dt>panel</dt>
-<dd><p>One or more panel IDs to query (e.g. 'IMPACT468'). If <code>panel</code>  and <code>genes</code> are both NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
-
-
-<dt>add_hugo</dt>
-<dd><p>Logical indicating whether <code>HugoSymbol</code> should be added to your results. cBioPortal API does not return this by default (only EntrezId) but this function's default is <code>TRUE</code> and adds this by default.</p></dd>
+<dd><p>One or more panel IDs to query (e.g. 'IMPACT468').
+If <code>panel</code> and <code>genes</code> are both supplied, genes from both arguments will be returned. If both are NULL (default), it will return gene results for all available genomic data for that sample.</p></dd>
 
 
 <dt>base_url</dt>
@@ -126,25 +132,47 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span><span class="st">"public"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="set_cbioportal_db.html">set_cbioportal_db</a></span><span class="op">(</span><span class="st">"public"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> You are successfully connected!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #00BB00;">base_url</span> for this R session is now set to <span style="color: #0000BB;">"www.cbioportal.org/api"</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#' # These return the same results</span></span></span>
 <span class="r-in"><span><span class="fu">get_fusions_by_sample</span><span class="op">(</span>sample_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"s_C_CAUWT7_P001_d"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 study_id <span class="op">=</span> <span class="st">"prad_msk_2019"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"prad_msk_2019"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"prad_msk_2019_fusion"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"prad_msk_2019_structural_variants"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 44</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSample…¹ uniqu…² molec…³ sampl…⁴ patie…⁵ studyId site1…⁶ site1…⁷ site1…⁸</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> c19DX0NBVVdUN… cF9DX0… prad_m… s_C_CA… p_C_CA… prad_m…    <span style="text-decoration: underline;">7</span>113 TMPRSS2 NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 8 more variables: site1Position &lt;int&gt;, site2EntrezGeneId &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2HugoSymbol &lt;chr&gt;, ncbiBuild &lt;chr&gt;, center &lt;chr&gt;, eventInfo &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variantClass &lt;chr&gt;, comments &lt;chr&gt;, and abbreviated variable names</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​uniqueSampleKey, ²​uniquePatientKey, ³​molecularProfileId, ⁴​sampleId,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​patientId, ⁶​site1EntrezGeneId, ⁷​site1HugoSymbol, ⁸​site1Chromosome</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> c19DX0NBVVdUN… cF9DX0… prad_m… s_C_CA… p_C_CA… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 35 more variables: site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Contig &lt;chr&gt;, site1Region &lt;chr&gt;, site1RegionNumber &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Description &lt;chr&gt;, site2EntrezGeneId &lt;int&gt;, site2HugoSymbol &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2EnsemblTranscriptId &lt;chr&gt;, site2Chromosome &lt;chr&gt;, site2Position &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Contig &lt;chr&gt;, site2Region &lt;chr&gt;, site2RegionNumber &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Description &lt;chr&gt;, site2EffectOnFrame &lt;chr&gt;, ncbiBuild &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dnaSupport &lt;chr&gt;, rnaSupport &lt;chr&gt;, normalReadCount &lt;int&gt;, …</span></span>
+<span class="r-in"><span><span class="fu">get_structural_variants_by_sample</span><span class="op">(</span>sample_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"s_C_CAUWT7_P001_d"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 study_id <span class="op">=</span> <span class="st">"prad_msk_2019"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following parameters were used in query:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Study ID</span>: <span style="color: #0000BB;">"prad_msk_2019"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Molecular Profile ID</span>: <span style="color: #0000BB;">"prad_msk_2019_structural_variants"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Genes</span>: <span style="color: #0000BB;">"All available genes"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 44</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSample…¹ uniqu…² molec…³ sampl…⁴ patie…⁵ studyId site1…⁶ site1…⁷ site1…⁸</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> c19DX0NBVVdUN… cF9DX0… prad_m… s_C_CA… p_C_CA… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 35 more variables: site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Contig &lt;chr&gt;, site1Region &lt;chr&gt;, site1RegionNumber &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Description &lt;chr&gt;, site2EntrezGeneId &lt;int&gt;, site2HugoSymbol &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2EnsemblTranscriptId &lt;chr&gt;, site2Chromosome &lt;chr&gt;, site2Position &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Contig &lt;chr&gt;, site2Region &lt;chr&gt;, site2RegionNumber &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Description &lt;chr&gt;, site2EffectOnFrame &lt;chr&gt;, ncbiBuild &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dnaSupport &lt;chr&gt;, rnaSupport &lt;chr&gt;, normalReadCount &lt;int&gt;, …</span></span>
+<span class="r-in"><span>                 <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
