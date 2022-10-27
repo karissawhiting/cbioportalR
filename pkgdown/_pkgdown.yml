@@ -47,6 +47,7 @@ reference:
     - get_structural_variants_by_study
     - available_samples
     - available_patients
+    - available_sample_lists
     - get_genetics_by_study
   - subtitle: Sample Level
   - contents:

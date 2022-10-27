@@ -122,7 +122,8 @@ x <- tibble::tibble(
       "`get_fusions_by_study()`", 
       "`get_clinical_by_study()`", 
       "`available_samples()`", 
-      "available_patients()"),
+      "available_patients()", 
+      "available_sample_lists()"),
     
     c("`get_genetics_by_study()`",
       "`get_mutations_by_study()`",
@@ -181,10 +182,8 @@ raw_html_table <- table_funs %>%
 # 	</tr>
 # </tbody>
 # </table>
-  
+
 ```
-
-
 
 ```{r, echo=FALSE}
 

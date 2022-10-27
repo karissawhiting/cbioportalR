@@ -1,5 +1,9 @@
 # cbioportalR (development version)
 
+* Added `available_sample_lists()` function which returns all available sample list IDs for a given study ID
+* Added `sample_list_id` argument to `available_samples()` which returns all samples IDs in specific sample list within a study (#53).
+* Fixed {cli} errors to make package compatible with {cli} v3.4.1.
+
 # cbioportalR 1.0.1
 
 This version makes the package compatible with [cBioPortal v5.0](https://github.com/cBioPortal/cbioportal/releases/tag/v5.0.0). Main updates include:
