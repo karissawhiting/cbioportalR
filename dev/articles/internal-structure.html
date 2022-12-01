@@ -83,7 +83,8 @@
 
 
 
-<script src="internal-structure_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Internal Structure &amp; Guiding Principles</h1>
             
@@ -94,24 +95,52 @@
 
     
     
-<p>This vignette is meant for those who wish to contribute to {cbioportalR}, or users who wish to gain an understanding of the inner-workings of {cbioportalR}.</p>
+<p>This vignette is meant for those who wish to contribute to
+{cbioportalR}, or users who wish to gain an understanding of the
+inner-workings of {cbioportalR}.</p>
 <div class="section level2">
 <h2 id="guiding-principles">Guiding Principles<a class="anchor" aria-label="anchor" href="#guiding-principles"></a>
 </h2>
 <ul>
-<li><p>We aim to keep returned data as close to raw API results as possible and avoid additional transformations/formatting. Because of this, data is not returned in tidy format. In the future we may consider removing non informative columns from results and returning everything as tibbles with clean names, but for now keeping data in raw format helps us be flexible to future cBioPortal API changes.</p></li>
-<li><p>We try to limit internal API calls within functions that the user did not explicitly ask for. In some places we deem it necessary to break this (for example in <code><a href="../reference/dot-get_data_by_study.html">.get_data_by_study()</a></code> if a user passes a <code>study_id</code> we look up the <code>molecular_profile_id</code>), but we largely default to having slightly less informative messages/checks in favor of fewer hidden calls, as these can be problematic with slow internet or large data sets.</p></li>
+<li><p>We aim to keep returned data as close to raw API results as
+possible and avoid additional transformations/formatting. Because of
+this, data is not returned in tidy format. In the future we may consider
+removing non informative columns from results and returning everything
+as tibbles with clean names, but for now keeping data in raw format
+helps us be flexible to future cBioPortal API changes.</p></li>
+<li><p>We try to limit internal API calls within functions that the user
+did not explicitly ask for. In some places we deem it necessary to break
+this (for example in <code><a href="../reference/dot-get_data_by_study.html">.get_data_by_study()</a></code> if a user passes
+a <code>study_id</code> we look up the
+<code>molecular_profile_id</code>), but we largely default to having
+slightly less informative messages/checks in favor of fewer hidden
+calls, as these can be problematic with slow internet or large data
+sets.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="general-structure">General Structure<a class="anchor" aria-label="anchor" href="#general-structure"></a>
 </h2>
 <ul>
-<li>The <code><a href="../reference/cbp_api.html">cbp_api()</a></code> internal function makes all api calls (<code>GET</code> and <code>POST</code> using {httr} package). All other user-facing or internal functions paste together necessary URLs and query parameters based on the function and its arguments and pass to this.</li>
+<li>The <code><a href="../reference/cbp_api.html">cbp_api()</a></code> internal function makes all api calls
+(<code>GET</code> and <code>POST</code> using {httr} package). All other
+user-facing or internal functions paste together necessary URLs and
+query parameters based on the function and its arguments and pass to
+this.</li>
 <li>
-<code><a href="../reference/dot-get_data_by_study.html">.get_data_by_study()</a></code> and <code><a href="../reference/dot-get_data_by_sample.html">.get_data_by_sample()</a></code> are internal utility functions that work for mutation/cna/fusion data pulls.</li>
-<li>Functions ending in <code>*_by_study()</code> query by study_id, functions ending in <code>*_by_sample()</code> query by sample ID, and functions ending in <code>*_by_patient()</code> query by patient ID.</li>
-<li>There are no specific differences between functions starting with <code>available_*()</code> and those starting with <code>get_*()</code>. These are named according to how you may use them in your workflow. For example, you would check the <code><a href="../reference/available_profiles.html">available_profiles()</a></code> for your <code>study_id</code> in order to <code><a href="../reference/get_fusions_by_study.html">get_fusions_by_study()</a></code>
+<code><a href="../reference/dot-get_data_by_study.html">.get_data_by_study()</a></code> and
+<code><a href="../reference/dot-get_data_by_sample.html">.get_data_by_sample()</a></code> are internal utility functions that
+work for mutation/cna/fusion data pulls.</li>
+<li>Functions ending in <code>*_by_study()</code> query by study_id,
+functions ending in <code>*_by_sample()</code> query by sample ID, and
+functions ending in <code>*_by_patient()</code> query by patient
+ID.</li>
+<li>There are no specific differences between functions starting with
+<code>available_*()</code> and those starting with <code>get_*()</code>.
+These are named according to how you may use them in your workflow. For
+example, you would check the <code><a href="../reference/available_profiles.html">available_profiles()</a></code> for your
+<code>study_id</code> in order to
+<code><a href="../reference/get_fusions_by_study.html">get_fusions_by_study()</a></code>
 </li>
 </ul>
 </div>

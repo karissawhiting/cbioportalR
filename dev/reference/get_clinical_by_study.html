@@ -118,21 +118,21 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-in"><span><span class="fu">get_clinical_by_study</span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span>, base_url <span class="op">=</span> <span class="st">'www.cbioportal.org/api'</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Sample Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in <span style="color: #0000BB;">"acc_tcga"</span> study</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Patient Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in <span style="color: #0000BB;">"acc_tcga"</span> study</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6,292 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    uniquePatientKey             patientId    studyId  clinicalAt…¹ value dataL…²</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga AGE          58    PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga AJCC_PATHOL… Stag… PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga ATYPICAL_MI… Atyp… PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CAPSULAR_IN… Inva… PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CLIN_M_STAGE M0    PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CT_SCAN_PRE… [Unk… PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CYTOPLASM_P… Cyto… PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DAYS_TO_INI… 0     PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DFS_MONTHS   24.77 PATIENT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DFS_STATUS   1:Re… PATIENT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6,292 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    uniquePatientKey             patientId  studyId clini…¹ value dataL…² sampl…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… AGE     58    PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… AJCC_P… Stag… PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… ATYPIC… Atyp… PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… CAPSUL… Inva… PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… CLIN_M… M0    PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… CT_SCA… [Unk… PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… CYTOPL… Cyto… PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… DAYS_T… 0     PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… DFS_MO… 24.77 PATIENT <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A… acc_tc… DFS_ST… 1:Re… PATIENT <span style="color: #BB0000;">NA</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6,282 more rows, and abbreviated variable names ¹​clinicalAttributeId,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​dataLevel</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​dataLevel, ³​sampleId</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
