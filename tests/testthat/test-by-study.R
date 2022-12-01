@@ -220,3 +220,23 @@ test_that("Clinical data by study- 2 attributes ", {
   expect_equal(sort(unique(res$clinicalAttributeId)), sort(clinical_attribute))
 })
 
+test_that("Clinical data by study- returns patient and sample level ", {
+
+  skip_on_cran()
+  skip_if(httr::http_error("www.cbioportal.org/api"))
+
+  db_test <- "public"
+  set_cbioportal_db(db = db_test)
+  study_id = "acc_tcga"
+  clinical_attribute = c("CANCER_TYPE", "SAMPLE_TYPE", "AGE")
+
+  expect_no_error(
+    res <- get_clinical_by_study(study_id = study_id,
+                          clinical_attribute))
+
+
+  expect_equal(sort(unique(res$clinicalAttributeId)), sort(clinical_attribute))
+  expect_equal(sum(is.na(res$sampleId)), sum(res$dataLevel == "PATIENT"))
+
+})
+

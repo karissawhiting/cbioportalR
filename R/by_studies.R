@@ -122,7 +122,9 @@ get_clinical_by_study <- function(study_id = NULL,
       nrow(df_pat) > 0 & !is.null(clinical_attribute) ~ filter(., clinicalAttributeId %in% clinical_attribute),
       ~{cli_alert_warning("Patient Level Clinical Data: No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
         .})%>%
-    mutate(dataLevel = "PATIENT")
+    mutate(dataLevel = "PATIENT",
+           sampleId = NA_character_)
+
 
   # put together  ---------------------------------------------------------
 
