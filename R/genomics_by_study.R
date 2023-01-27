@@ -115,7 +115,7 @@
       unlist() %>% unique()
 
 
-    fus_imp <- purrr::map(all_samples_in_study, function(x) {
+    fus_imp <- purrr::map_dfr(all_samples_in_study, function(x) {
 
       body <- list(
         sampleMolecularIdentifiers = as.data.frame(list(
@@ -132,11 +132,15 @@
         base_url = base_url
       )
 
-      fus$content
+      if(length(fus$content) > 0) {
+        result <- map_dfr(fus$content, ~list_flatten(.x))
+      } else {
+        result <- NULL
+      }
 
     })
 
-    df <- bind_rows(fus_imp)
+    df <- fus_imp
 
   }
 
