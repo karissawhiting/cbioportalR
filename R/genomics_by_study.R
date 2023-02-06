@@ -133,7 +133,7 @@
       )
 
       if(length(fus$content) > 0) {
-        result <- map_dfr(fus$content, ~list_flatten(.x))
+        result <- purrr::map_dfr(fus$content, ~purrr::list_flatten(.x))
       } else {
         result <- NULL
       }
