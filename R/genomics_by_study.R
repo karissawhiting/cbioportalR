@@ -90,12 +90,17 @@
       sample_list_id
     )
 
-    df <- purrr::map_df(url_list, function(x) {
+    df <- purrr::map_dfr(url_list, function(x) {
       res <- cbp_api(x, base_url = base_url)
-      df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
-    })
 
-  }
+      if (length(res$content) > 0) {
+          result <- purrr::map_dfr(res$content, ~ purrr::list_flatten(.x))
+        } else {
+          result <- NULL
+        }
+        result
+      })
+    })
 
   # FUSIONS query ----------------------------------------------------------------------
 
