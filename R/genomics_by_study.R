@@ -90,12 +90,17 @@
       sample_list_id
     )
 
-    df <- purrr::map_df(url_list, function(x) {
+    df <- purrr::map_dfr(url_list, function(x) {
       res <- cbp_api(x, base_url = base_url)
-      df <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
-    })
 
-  }
+      if (length(res$content) > 0) {
+          result <- purrr::map_dfr(res$content, ~ purrr::list_flatten(.x))
+        } else {
+          result <- NULL
+        }
+        result
+      })
+    }
 
   # FUSIONS query ----------------------------------------------------------------------
 
@@ -115,7 +120,7 @@
       unlist() %>% unique()
 
 
-    fus_imp <- purrr::map(all_samples_in_study, function(x) {
+    fus_imp <- purrr::map_dfr(all_samples_in_study, function(x) {
 
       body <- list(
         sampleMolecularIdentifiers = as.data.frame(list(
@@ -132,11 +137,15 @@
         base_url = base_url
       )
 
-      fus$content
+      if(length(fus$content) > 0) {
+        result <- purrr::map_dfr(fus$content, ~purrr::list_flatten(.x))
+      } else {
+        result <- NULL
+      }
 
     })
 
-    df <- bind_rows(fus_imp)
+    df <- fus_imp
 
   }
 

@@ -189,7 +189,7 @@
       ungroup() %>%
       select(.data$url_path, .data$sample_id_nest)
 
-    quer_res <- purrr::map2(
+    quer_res <- purrr::map2_dfr(
       sample_study_pairs_nest$url_path,
       sample_study_pairs_nest$sample_id_nest,
 
@@ -205,11 +205,16 @@
                        body = body_n, base_url = base_url)
 
 
-        bind_rows(res$content)
+        # if embedded list in API response (e.g. namespace columns)
+        if(length(res$content) > 0) {
+          result <- purrr::map_dfr(res$content, ~purrr::list_flatten(.x))
+        } else {
+          result <- NULL
+        }
 
       })
 
-    df <- quer_res %>% bind_rows()
+    df <- quer_res
 
   }
 
@@ -221,7 +226,7 @@
 
   if(data_type == "fusion") {
 
-    quer_res <- purrr::map2(
+    quer_res <- purrr::map2_dfr(
       sample_study_pairs$sample_id,
       sample_study_pairs$molecular_profile_id,
 
@@ -241,19 +246,23 @@
                        body = body_n,
                        base_url = base_url)
 
-        res$content
+        # if embedded list in API response (e.g. namespace columns)
+        if(length(res$content) > 0) {
+          result <- purrr::map_dfr(res$content, ~purrr::list_flatten(.x))
+        } else {
+          result <- NULL
+        }
 
       })
 
-    df_fus <- quer_res %>% bind_rows()
+    df_fus <- quer_res
 
+    # Since you don't query by genes, filter genes at end so behaviour is consistent
+    # with mutation/cna endpoints where you have to specify genes to query
     df <- df_fus %>%
       purrr::when(
         (nrow(.) > 0 & !is.null(resolved_genes)) ~ filter(., (.data$site1EntrezGeneId %in% resolved_genes) | (.data$site2EntrezGeneId %in% resolved_genes)),
         TRUE ~ .)
-
-    # Since you don't query by genes, filter genes at end so behaviour is consistent
-    # with mutation/cna endpoints where you have to specify genes to query
 
 
   }
