@@ -153,7 +153,8 @@
                                pull(.data$molecularProfileId),
                              cna = filter(profs, .data$molecularAlterationType == "COPY_NUMBER_ALTERATION" &
                                             .data$datatype == "DISCRETE") %>%
-                               pull(.data$molecularProfileId))
+                               pull(.data$molecularProfileId),
+                             segment = "Not Applicable")
 
 
   if(length(resolved_profile) == 0) {
@@ -180,6 +181,7 @@
   # study_id = NULL- will return all studies quietly
   # If study ID is supplied but wrong (doesn't exist in database) this will fail
   quiet_available_profiles <- purrr::quietly(available_profiles)
+
   profs <- tryCatch(
 
     # ** Maybe there can be a better API fail message that propagates throughout because base_url should  always be checked/throw error before
