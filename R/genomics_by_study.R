@@ -281,11 +281,11 @@ get_structural_variants_by_study <- get_fusions_by_study
 #' @export
 #' @examples
 #' \dontrun{
-#' get_seg_by_study(study_id = "prad_msk_2019")
-#' get_seg_by_study(molecular_profile_id = "prad_msk_2019_cna")
+#' get_segments_by_study(study_id = "prad_msk_2019")
+#' get_segments_by_study(molecular_profile_id = "prad_msk_2019_cna")
 #' }
 
-get_seg_by_study <- function(study_id = NULL,
+get_segments_by_study <- function(study_id = NULL,
                              add_hugo = TRUE,
                              base_url = NULL) {
 

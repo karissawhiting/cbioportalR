@@ -212,6 +212,12 @@ test_that("data is same regardless of function", {
   by_prof2<- get_structural_variants_by_study(molecular_profile_id = molecular_profile_id)
   expect_identical(by_study, by_study2, by_prof, by_prof2, get_gen$structural_variant)
 
+  # Segmentation ----
+  study_id = "acc_tcga"
+  get_gen2 <- get_genetics_by_study(study_id)
+  by_study <- get_seg_by_study(study = study_id)
+  expect_identical(by_study,  get_gen2$segment)
+
 })
 
 test_that("get_genetics- one data type non existant", {
