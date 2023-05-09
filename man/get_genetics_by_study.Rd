@@ -4,7 +4,12 @@
 \alias{get_genetics_by_study}
 \title{Get All Genomic Information By Study}
 \usage{
-get_genetics_by_study(study_id = NULL, add_hugo = TRUE, base_url = NULL)
+get_genetics_by_study(
+  study_id = NULL,
+  add_hugo = TRUE,
+  base_url = NULL,
+  return_segments = FALSE
+)
 }
 \arguments{
 \item{study_id}{A study ID to query mutations. If NULL, guesses study ID based
@@ -17,7 +22,10 @@ Argument is \code{TRUE} by default. If \code{FALSE}, results will be returned as
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
-A list of mutations, cnas, structural variants (including fusions), and copy number segments (if available).
+_segments Default is \code{FALSE} where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
+\code{TRUE} will return any available segmentation data with results.
+
+A list of mutations, cna and structural variants (including fusions), if available. Will also return copy number segmentation data if \code{return_segments = TRUE}.
 }
 \description{
 Get All Genomic Information By Study

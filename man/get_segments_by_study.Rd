@@ -17,7 +17,7 @@ Argument is \code{TRUE} by default. If \code{FALSE}, results will be returned as
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
 }
 \value{
-A dataframe of CNAs
+A dataframe of CNA segments
 }
 \description{
 Get Copy Number Segmentation Data By Study

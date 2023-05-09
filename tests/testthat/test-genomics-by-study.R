@@ -215,7 +215,7 @@ test_that("data is same regardless of function", {
   # Segmentation ----
   study_id = "acc_tcga"
   get_gen2 <- get_genetics_by_study(study_id)
-  by_study <- get_seg_by_study(study = study_id)
+  by_study <- get_segments_by_study(study = study_id)
   expect_identical(by_study,  get_gen2$segment)
 
 })

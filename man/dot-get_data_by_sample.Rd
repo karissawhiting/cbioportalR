@@ -9,7 +9,7 @@
   study_id = NULL,
   molecular_profile_id = NULL,
   sample_study_pairs = NULL,
-  data_type = c("mutation", "cna", "fusion", "structural_variant"),
+  data_type = c("mutation", "cna", "fusion", "structural_variant", "segment"),
   genes = NULL,
   panel = NULL,
   add_hugo = TRUE,

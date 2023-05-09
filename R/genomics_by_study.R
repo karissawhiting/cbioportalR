@@ -111,7 +111,7 @@
   # FUSIONS/SEGMENTS query ----------------------------------------------------------------------
 
   # POST: /structural-variant/fetch ---
-  # BODY: sampleMolecularIdentifiers, molecularProfileId, sampleId
+  # BODY: sampleMolecularIdentifiers: molecularProfileId, sampleId
 
   # Fusions endpoint works a little differently than Mutation and CNA
   # Instead of passing a sample list, you pass individual sample IDs (retrieved using list)
@@ -277,7 +277,7 @@ get_structural_variants_by_study <- get_fusions_by_study
 #' Get Copy Number Segmentation Data By Study
 #'
 #' @inheritParams .get_data_by_study
-#' @return A dataframe of CNAs
+#' @return A dataframe of CNA segments
 #' @export
 #' @examples
 #' \dontrun{
@@ -301,7 +301,9 @@ get_segments_by_study <- function(study_id = NULL,
 #' Get All Genomic Information By Study
 #'
 #' @inheritParams .get_data_by_study
-#' @return A list of mutations, cnas, structural variants (including fusions), and copy number segments (if available).
+#' @return_segments Default is `FALSE` where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
+#' `TRUE` will return any available segmentation data with results.
+#' @return A list of mutations, cna and structural variants (including fusions), if available. Will also return copy number segmentation data if `return_segments = TRUE`.
 #' @export
 #' @examples
 #' \dontrun{
@@ -310,7 +312,8 @@ get_segments_by_study <- function(study_id = NULL,
 #
 get_genetics_by_study <- function(study_id = NULL,
                                   add_hugo = TRUE,
-                                  base_url = NULL) {
+                                  base_url = NULL,
+                                  return_segments = FALSE) {
 
   # ** Not using `.check_for_study_id()` here because we allow no study ID to be passed,
   # but still don't allow study_id > 1. Maybe generalized that check function to
@@ -318,17 +321,23 @@ get_genetics_by_study <- function(study_id = NULL,
   if(length(study_id) > 1) {
     cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time"))}
 
+  data_types <- c("mutation", "cna", "structural_variant")
+
+  if(return_segments) {
+    data_types <- c(data_types, "segment")
+  }
 
   safe_get_data <- purrr::safely(.get_data_by_study, quiet = TRUE)
 
- res <-  c("mutation", "cna", "structural_variant", "segment") %>%
+ res <-  data_types %>%
    purrr::set_names() %>%
    purrr::map(., function(x) {
                        safe_get_data(study_id = study_id,
                                           molecular_profile_id = NULL,
                                           data_type = x,
                                      add_hugo = add_hugo,
-                                     base_url = base_url)
+                                     base_url = base_url,
+                                     return_segments = FALSE)
                        })
 
  genetics <- purrr::compact(purrr::map(res, "result"))

@@ -64,7 +64,7 @@
                                 study_id = NULL,
                                 molecular_profile_id = NULL,
                                 sample_study_pairs = NULL,
-                                data_type = c("mutation", "cna", "fusion", "structural_variant"),
+                                data_type = c("mutation", "cna", "fusion", "structural_variant", "segment"),
 
                                 genes = NULL,
                                 panel = NULL,
@@ -96,7 +96,8 @@
     data_type,
     "mutation" = "mutations",
     "fusion" = "structural-variant",
-    "cna" = "discrete-copy-number")
+    "cna" = "discrete-copy-number",
+    "segment" = "copy-number-segments")
 
   # Make Informed guesses on parameters ---------------------------------------
 
@@ -121,10 +122,8 @@
 
 
     # Get molecular profile ID ---------
-    resolved_molecular_profile_id <- molecular_profile_id %>%
-      purrr::when(
-        !is.null(.) ~ .,
-        ~ .lookup_profile_name(data_type, study_id = resolved_study_id, base_url))
+    resolved_molecular_profile_id <- molecular_profile_id %||%
+      .lookup_profile_name(data_type, resolved_study_id, base_url = base_url)
 
 
 
@@ -218,28 +217,36 @@
 
   }
 
-  # * FUSIONS query ----------------------------------------------------------------------
+  # * FUSIONS/SEGMENTS query ----------------------------------------------------------------------
+
+  # POST: /structural-variant/fetch ---
+  # BODY: sampleMolecularIdentifiers: molecularProfileId, sampleId
 
   # Fusions endpoint works a little differently than Mut and CNA
   # Instead of passing a sample list, you pass individual sample IDs (retrieved using list)
   # Main Goal in this function is to return all results without specifying specific genes to query (as is needed in other endpoints).
 
-  if(data_type == "fusion") {
+  if(data_type %in% c("fusion", "segment")) {
 
-    quer_res <- purrr::map2_dfr(
-      sample_study_pairs$sample_id,
-      sample_study_pairs$molecular_profile_id,
+    quer_res <- purrr::pmap_dfr(
+      sample_study_pairs,
 
-      function(x, y) {
+      function(sample_id, molecular_profile_id, study_id) {
 
-
-        body_n <- list(
-          sampleMolecularIdentifiers = as.data.frame(list(
-            molecularProfileId = jsonlite::unbox(y),
-            sampleId = x
-          ))
-        )
-
+        body_n <- switch(data_type,
+                       fusion = {
+                         list(
+                           sampleMolecularIdentifiers = as.data.frame(list(
+                             molecularProfileId = jsonlite::unbox(molecular_profile_id),
+                             sampleId = sample_id
+                           ))
+                         )
+                       },
+                       segment = {
+                         data.frame(
+                           "sampleId" = sample_id,
+                           "studyId" = study_id)
+                       })
 
         res <- cbp_api(url_path = paste0(url_data_type, "/fetch?"),
                        method = "post",
@@ -259,11 +266,16 @@
 
     # Since you don't query by genes, filter genes at end so behaviour is consistent
     # with mutation/cna endpoints where you have to specify genes to query
-    df <- df_fus %>%
-      purrr::when(
-        (nrow(.) > 0 & !is.null(resolved_genes)) ~ filter(., (.data$site1EntrezGeneId %in% resolved_genes) | (.data$site2EntrezGeneId %in% resolved_genes)),
-        TRUE ~ .)
-
+    df <- switch(data_type,
+      fusion = {
+        if (nrow(.) > 0 & !is.null(resolved_genes)) {
+          filter(df_fus, (.data$site1EntrezGeneId %in% resolved_genes) | (.data$site2EntrezGeneId %in% resolved_genes))
+        } else {
+          df_fus
+        }
+      },
+      segment = df_fus
+    )
 
   }
 
@@ -275,6 +287,7 @@
     # Fusions already has hugo by default from API
     df <- switch(data_type,
                  "fusion" = df,
+                 "segment" = df,
                  "mutation" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url),
                  "cna" = if(nrow(df) > 0) .lookup_hugo(df, base_url = base_url))
 
@@ -416,17 +429,55 @@ get_fusions_by_sample <- function(sample_id = NULL,
 get_structural_variants_by_sample <- get_fusions_by_sample
 
 
+
+#' Get Copy Number Segmentation Data By Sample ID
+#'
+#' @inheritParams .get_data_by_sample
+#' @return A dataframe of CNA segments
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' set_cbioportal_db("public")
+#'
+#' get_segments_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
+#'                  study_id = "prad_msk_2019")
+#'                  }
+
+
+get_segments_by_sample <- function(sample_id = NULL,
+                                  study_id = NULL,
+                                  sample_study_pairs = NULL,
+                                  base_url = NULL) {
+
+  .get_data_by_sample(sample_id = sample_id,
+                      study_id = study_id,
+                      molecular_profile_id = NULL,
+                      sample_study_pairs = sample_study_pairs,
+                      data_type = c("segment"),
+                      genes = NULL,
+                      panel = NULL,
+                      # this shouldn't matter for seg data
+                      add_hugo = TRUE,
+                      base_url = base_url)
+
+
+}
+
 #' Get All Genomic Information By Sample IDs
 #'
 #' @inheritParams .get_data_by_sample
-#' @return A list of mutations, cna and structural variants (including fusions), if available.
+#' @return_segments Default is `FALSE` where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
+#' `TRUE` will return any available segmentation data with results.
+#' @return A list of mutations, cna and structural variants (including fusions), if available. Will also return copy number segmentation data if `return_segments = TRUE`.
 #' @export
 #'
 #'
 #' @examples
 #' \dontrun{
 #' get_genetics_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
-#'  study_id = "acc_tcga")
+#'  study_id = "acc_tcga",
+#'  return_segments = TRUE)
 #' }
 #
 get_genetics_by_sample <- function(sample_id = NULL,
@@ -435,11 +486,18 @@ get_genetics_by_sample <- function(sample_id = NULL,
                                    genes = NULL,
                                    panel = NULL,
                                    add_hugo = TRUE,
-                                   base_url = NULL) {
+                                   base_url = NULL,
+                                   return_segments = FALSE) {
+
+  data_types <- c("mutation", "cna", "structural_variant")
+
+  if(return_segments) {
+    data_types <- c(data_types, "segment")
+  }
 
   safe_get_data <- purrr::safely(.get_data_by_sample, quiet = TRUE)
 
-  res <-  c("mutation", "cna", "structural_variant") %>%
+  res <- data_types %>%
     purrr::set_names() %>%
     purrr::map(., function(x) {
       safe_get_data(sample_id = sample_id,

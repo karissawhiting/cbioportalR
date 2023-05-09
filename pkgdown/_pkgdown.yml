@@ -45,6 +45,7 @@ reference:
     - get_cna_by_study
     - get_fusions_by_study
     - get_structural_variants_by_study
+    - get_segments_by_study
     - available_samples
     - available_patients
     - available_sample_lists
