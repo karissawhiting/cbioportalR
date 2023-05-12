@@ -52,9 +52,11 @@
   }
 
   # fusions and structural_variants are the same. fusion is older nomenclature.
-  data_type <- match.arg(data_type) %>%
-    purrr::when(. ==  "structural_variant" ~ "fusion",
-                TRUE ~ .)
+  data_type <- match.arg(data_type)
+
+  data_type <- dplyr::case_when(
+    data_type == "structural_variant" ~ "fusion",
+    TRUE ~ data_type)
 
   if(data_type != "segment") {
     # study ID provided and profile is NULL

@@ -87,9 +87,12 @@
   if(length(study_id) > 1 | length(molecular_profile_id) > 1) {
      cli::cli_abort("More than 1 {.code study_id} or {.code molecular_profile_id} was passed. Please use the {.code sample_study_pairs} argument instead")
   }
-  data_type <- match.arg(data_type) %>%
-    purrr::when(. ==  "structural_variant" ~ "fusion",
-                TRUE ~ .)
+
+  data_type <- match.arg(data_type)
+
+  data_type <- dplyr::case_when(
+    data_type == "structural_variant" ~ "fusion",
+    TRUE ~ data_type)
 
   # this has to go in query URL
   url_data_type <- switch(

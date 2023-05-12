@@ -9,11 +9,14 @@
 #'
 .check_for_study_id <- function(study_id) {
 
-  study_id %>% purrr::when(
-    is.null(.) ~ cli::cli_abort(c("You must provide a {.code study_id}. See {.code get_studies()} to view available studies on your database")),
-    length(.) > 1 ~ cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time")),
-    ~ NULL
-  )
+  study_id %||%
+    cli::cli_abort(c("You must provide a {.code study_id}. See {.code get_studies()} to view available studies on your database"))
+
+  if(length(study_id) > 1) {
+    cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time"))
+  } else {
+    NULL
+  }
 
 }
 
@@ -148,12 +151,12 @@
 
   resolved_profile <- switch(data_type,
                              mutation = filter(profs, .data$molecularAlterationType == "MUTATION_EXTENDED") %>%
-                               pull(.data$molecularProfileId),
+                               dplyr::pull(.data$molecularProfileId),
                              fusion = filter(profs, .data$molecularAlterationType == "STRUCTURAL_VARIANT") %>%
-                               pull(.data$molecularProfileId),
+                               dplyr::pull(.data$molecularProfileId),
                              cna = filter(profs, .data$molecularAlterationType == "COPY_NUMBER_ALTERATION" &
                                             .data$datatype == "DISCRETE") %>%
-                               pull(.data$molecularProfileId),
+                               dplyr::pull(.data$molecularProfileId),
                              segment = "Not Applicable")
 
 
@@ -192,7 +195,7 @@
 
   resolved_study_id <- profs$result %>%
     filter(.data$molecularProfileId == molecular_profile_id) %>%
-    pull(.data$studyId)
+    dplyr::pull(.data$studyId)
 
   if(length(resolved_study_id) == 0) {
     cli::cli_abort("Molecular profile {.val {molecular_profile_id}} doesn't exist, or molecular profile doesn't match the {.val study_id} you passed. See {.code available_profiles()} or {.code available_studies()}")

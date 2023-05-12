@@ -31,3 +31,11 @@ A dataframe of CNA segments
 \description{
 Get Copy Number Segmentation Data By Sample ID
 }
+\examples{
+\dontrun{
+set_cbioportal_db("public")
+
+get_segments_by_sample(sample_id = c("s_C_CAUWT7_P001_d"),
+                 study_id = "prad_msk_2019")
+                 }
+}

@@ -164,7 +164,7 @@ get_clinical_by_patient <- function(study_id = NULL,
 
   resolved_clinical_attributes <- clinical_attribute %||%
     (available_clinical_attributes(study_id, base_url = base_url) %>%
-       pull(.data$clinicalAttributeId) %>%
+       dplyr::pull(.data$clinicalAttributeId) %>%
        unique())
 
   if(is.null(clinical_attribute)) {
