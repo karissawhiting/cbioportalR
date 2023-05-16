@@ -53,21 +53,21 @@ Now that we are successfully connected, we may want to view all studies availabl
 ```r
 all_studies <- available_studies()
 all_studies
-#> # A tibble: 360 × 13
-#>    studyId                 name                                              descr…¹ publi…² groups status impor…³ allSa…⁴ readP…⁵ cance…⁶ refer…⁷ pmid  citat…⁸
-#>    <chr>                   <chr>                                             <chr>   <lgl>   <chr>   <int> <chr>     <int> <lgl>   <chr>   <chr>   <chr> <chr>  
-#>  1 acc_tcga                Adrenocortical Carcinoma (TCGA, Firehose Legacy)  "TCGA … TRUE    "PUBL…      0 2022-0…      92 TRUE    acc     hg19    <NA>  <NA>   
-#>  2 bcc_unige_2016          Basal Cell Carcinoma (UNIGE, Nat Genet 2016)      "Whole… TRUE    "PUBL…      0 2022-0…     293 TRUE    bcc     hg19    2695… Bonill…
-#>  3 ampca_bcm_2016          Ampullary Carcinoma (Baylor College of Medicine,… "Exome… TRUE    "PUBL…      0 2022-0…     160 TRUE    ampca   hg19    2680… Gingra…
-#>  4 blca_dfarber_mskcc_2014 Bladder Urothelial Carcinoma (DFCI/MSKCC, Cancer… "Whole… TRUE    "PUBL…      0 2022-0…      50 TRUE    blca    hg19    2509… Van Al…
-#>  5 blca_mskcc_solit_2012   Bladder Cancer (MSKCC, J Clin Onco 2013)          "Compr… TRUE    "PUBL…      0 2022-0…      97 TRUE    blca    hg19    2389… Iyer e…
-#>  6 blca_bgi                Bladder Urothelial Carcinoma (BGI, Nat Genet 201… "Whole… TRUE    "PUBL…      0 2022-0…      99 TRUE    blca    hg19    2412… Guo et…
-#>  7 blca_mskcc_solit_2014   Bladder Cancer (MSKCC, Eur Urol 2014)             "Genom… TRUE    "PUBL…      0 2022-0…     109 TRUE    blca    hg19    2509… Kim et…
-#>  8 all_stjude_2013         Hypodiploid Acute Lymphoid Leukemia (St Jude, Na… "Whole… TRUE    ""          0 2022-0…      44 TRUE    myeloid hg19    2333… Holmfe…
-#>  9 acyc_fmi_2014           Adenoid Cystic Carcinoma (FMI, Am J Surg Pathl. … "Targe… TRUE    "ACYC…      0 2022-0…      28 TRUE    acyc    hg19    2441… Ross e…
-#> 10 acyc_sanger_2013        Adenoid Cystic Carcinoma (Sanger/MDA, JCI 2013)   "Whole… TRUE    "ACYC…      0 2022-0…      24 TRUE    acyc    hg19    2377… Stephe…
-#> # … with 350 more rows, and abbreviated variable names ¹​description, ²​publicStudy, ³​importDate, ⁴​allSampleCount, ⁵​readPermission, ⁶​cancerTypeId,
-#> #   ⁷​referenceGenome, ⁸​citation
+#> # A tibble: 375 × 13
+#>    studyId    name  description publicStudy groups status importDate allSampleCount readPermission cancerTypeId
+#>    <chr>      <chr> <chr>       <lgl>       <chr>   <int> <chr>               <int> <lgl>          <chr>       
+#>  1 acc_tcga   Adre… "TCGA Adre… TRUE        "PUBL…      0 2022-10-2…             92 TRUE           acc         
+#>  2 all_stjud… Acut… "Comprehen… TRUE        "PUBL…      0 2022-10-2…             93 TRUE           bll         
+#>  3 all_stjud… Hypo… "Whole gen… TRUE        ""          0 2022-10-2…             44 TRUE           myeloid     
+#>  4 acbc_mskc… Aden… "Whole exo… TRUE        "ACYC…      0 2022-10-2…             12 TRUE           acbc        
+#>  5 acyc_fmi_… Aden… "Targeted … TRUE        "ACYC…      0 2022-10-2…             28 TRUE           acyc        
+#>  6 acyc_jhu_… Aden… "Whole-gen… TRUE        "ACYC…      0 2022-10-2…             25 TRUE           acyc        
+#>  7 acyc_mda_… Aden… "WGS of 21… TRUE        "ACYC…      0 2022-10-2…            102 TRUE           acyc        
+#>  8 acyc_sang… Aden… "Whole exo… TRUE        "ACYC…      0 2022-10-2…             24 TRUE           acyc        
+#>  9 all_stjud… Acut… "Whole-gen… TRUE        "PUBL…      0 2022-10-2…             73 TRUE           bll         
+#> 10 all_phase… Pedi… "Whole gen… TRUE        "NCI-…      0 2022-10-2…           1978 TRUE           bll         
+#> # ℹ 365 more rows
+#> # ℹ 3 more variables: referenceGenome <chr>, pmid <chr>, citation <chr>
 ```
 
 By inspecting this data frame, we see the unique `study_id` for the NMIBC data set is `"blca_nmibc_2017"` and the unique `study_id` for the prostate cancer data set is `"prad_msk_2019"`. To get more information on our studies we can do the following:
@@ -79,11 +79,11 @@ By inspecting this data frame, we see the unique `study_id` for the NMIBC data s
 all_studies %>%
   filter(studyId %in% c("blca_nmibc_2017", "prad_msk_2019"))
 #> # A tibble: 2 × 13
-#>   studyId         name                                                  description  publi…¹ groups status impor…² allSa…³ readP…⁴ cance…⁵ refer…⁶ pmid  citat…⁷
-#>   <chr>           <chr>                                                 <chr>        <lgl>   <chr>   <int> <chr>     <int> <lgl>   <chr>   <chr>   <chr> <chr>  
-#> 1 blca_nmibc_2017 Nonmuscle Invasive Bladder Cancer (MSK Eur Urol 2017) IMPACT sequ… TRUE    PUBLIC      0 2022-0…     105 TRUE    blca    hg19    2858… Pietza…
-#> 2 prad_msk_2019   Prostate Cancer (MSK, Cell Metab 2020)                MSK-IMPACT … TRUE    PUBLIC      0 2022-0…      18 TRUE    prosta… hg19    3156… Granlu…
-#> # … with abbreviated variable names ¹​publicStudy, ²​importDate, ³​allSampleCount, ⁴​readPermission, ⁵​cancerTypeId, ⁶​referenceGenome, ⁷​citation
+#>   studyId     name  description publicStudy groups status importDate allSampleCount readPermission cancerTypeId
+#>   <chr>       <chr> <chr>       <lgl>       <chr>   <int> <chr>               <int> <lgl>          <chr>       
+#> 1 blca_nmibc… Nonm… IMPACT seq… TRUE        PUBLIC      0 2022-10-2…            105 TRUE           blca        
+#> 2 prad_msk_2… Pros… MSK-IMPACT… TRUE        PUBLIC      0 2022-10-2…             18 TRUE           prostate    
+#> # ℹ 3 more variables: referenceGenome <chr>, pmid <chr>, citation <chr>
 ```
 
 More in-depth information about the study can be found with `get_study_info()`
@@ -100,7 +100,7 @@ get_study_info("blca_nmibc_2017") %>%
 #> citation                    "Pietzak et al. Eur Urol 2017"                                                 
 #> groups                      "PUBLIC"                                                                       
 #> status                      "0"                                                                            
-#> importDate                  "2022-08-17 22:59:50"                                                          
+#> importDate                  "2022-10-26 15:22:21"                                                          
 #> allSampleCount              "105"                                                                          
 #> sequencedSampleCount        "105"                                                                          
 #> cnaSampleCount              "105"                                                                          
@@ -113,6 +113,7 @@ get_study_info("blca_nmibc_2017") %>%
 #> massSpectrometrySampleCount "0"                                                                            
 #> completeSampleCount         "0"                                                                            
 #> readPermission              "TRUE"                                                                         
+#> treatmentCount              "0"                                                                            
 #> studyId                     "blca_nmibc_2017"                                                              
 #> cancerTypeId                "blca"                                                                         
 #> cancerType.name             "Bladder Urothelial Carcinoma"                                                 
@@ -135,7 +136,7 @@ get_study_info("prad_msk_2019") %>%
 #> citation                    "Granlund et al. Cell Metab 2020"                                
 #> groups                      "PUBLIC"                                                         
 #> status                      "0"                                                              
-#> importDate                  "2022-08-24 10:29:00"                                            
+#> importDate                  "2022-10-27 16:47:38"                                            
 #> allSampleCount              "18"                                                             
 #> sequencedSampleCount        "18"                                                             
 #> cnaSampleCount              "18"                                                             
@@ -148,6 +149,7 @@ get_study_info("prad_msk_2019") %>%
 #> massSpectrometrySampleCount "0"                                                              
 #> completeSampleCount         "0"                                                              
 #> readPermission              "TRUE"                                                           
+#> treatmentCount              "0"                                                              
 #> studyId                     "prad_msk_2019"                                                  
 #> cancerTypeId                "prostate"                                                       
 #> cancerType.name             "Prostate"                                                       
@@ -166,24 +168,26 @@ We can check available genomic data with `available_profiles()`.
 ```r
 available_profiles(study_id = "blca_nmibc_2017")
 #> # A tibble: 3 × 8
-#>   molecularAlterationType datatype name                             description                             showProfileInAnalysisTab patientLe…¹ molec…² studyId
-#>   <chr>                   <chr>    <chr>                            <chr>                                   <lgl>                    <lgl>       <chr>   <chr>  
-#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putative copy-number alterations Copy Number data                        TRUE                     FALSE       blca_n… blca_n…
-#> 2 MUTATION_EXTENDED       MAF      Mutations                        Mutation data from next-gen sequencing. TRUE                     FALSE       blca_n… blca_n…
-#> 3 STRUCTURAL_VARIANT      SV       Structural variants              Structural Variant Data.                TRUE                     FALSE       blca_n… blca_n…
-#> # … with abbreviated variable names ¹​patientLevel, ²​molecularProfileId
+#>   molecularAlterationType datatype name      description showProfileInAnalysi…¹ patientLevel molecularProfileId
+#>   <chr>                   <chr>    <chr>     <chr>       <lgl>                  <lgl>        <chr>             
+#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putative… Copy Numbe… TRUE                   FALSE        blca_nmibc_2017_c…
+#> 2 MUTATION_EXTENDED       MAF      Mutations Mutation d… TRUE                   FALSE        blca_nmibc_2017_m…
+#> 3 STRUCTURAL_VARIANT      SV       Structur… Structural… TRUE                   FALSE        blca_nmibc_2017_s…
+#> # ℹ abbreviated name: ¹​showProfileInAnalysisTab
+#> # ℹ 1 more variable: studyId <chr>
 ```
 
 
 ```r
 available_profiles(study_id = "prad_msk_2019")
 #> # A tibble: 3 × 8
-#>   molecularAlterationType datatype name                                         description                                      showP…¹ patie…² molec…³ studyId
-#>   <chr>                   <chr>    <chr>                                        <chr>                                            <lgl>   <lgl>   <chr>   <chr>  
-#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putative copy-number alterations (IMPACT468) Putative copy-number calls derived from IMPACT4… TRUE    FALSE   prad_m… prad_m…
-#> 2 MUTATION_EXTENDED       MAF      Mutations                                    IMPACT468 sequencing of tumor/normal samples     TRUE    FALSE   prad_m… prad_m…
-#> 3 STRUCTURAL_VARIANT      SV       Structural variants                          Structural Variant Data.                         TRUE    FALSE   prad_m… prad_m…
-#> # … with abbreviated variable names ¹​showProfileInAnalysisTab, ²​patientLevel, ³​molecularProfileId
+#>   molecularAlterationType datatype name      description showProfileInAnalysi…¹ patientLevel molecularProfileId
+#>   <chr>                   <chr>    <chr>     <chr>       <lgl>                  <lgl>        <chr>             
+#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putative… Putative c… TRUE                   FALSE        prad_msk_2019_cna 
+#> 2 MUTATION_EXTENDED       MAF      Mutations IMPACT468 … TRUE                   FALSE        prad_msk_2019_mut…
+#> 3 STRUCTURAL_VARIANT      SV       Structur… Structural… TRUE                   FALSE        prad_msk_2019_str…
+#> # ℹ abbreviated name: ¹​showProfileInAnalysisTab
+#> # ℹ 1 more variable: studyId <chr>
 ```
 
 Luckily, in this example our studies have mutation, copy number alteration and fusion (structural variant) data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_structural_variants`, `<study_id>_cna`.
@@ -192,7 +196,8 @@ Luckily, in this example our studies have mutation, copy number alteration and f
 ```r
 available_profiles(study_id = "blca_nmibc_2017") %>%
   pull(molecularProfileId)
-#> [1] "blca_nmibc_2017_cna"                 "blca_nmibc_2017_mutations"           "blca_nmibc_2017_structural_variants"
+#> [1] "blca_nmibc_2017_cna"                 "blca_nmibc_2017_mutations"          
+#> [3] "blca_nmibc_2017_structural_variants"
 ```
 
 ## Pulling Genomic Data
@@ -298,17 +303,17 @@ Now we pass this to `get_genetics_by_sample()`
 
 ```r
 all_genomic <- get_genetics_by_sample(sample_study_pairs = df_pairs)
-#> Joining, by = "study_id"
+#> Joining with `by = join_by(study_id)`
 #> The following parameters were used in query:
 #> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
 #> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
 #> Genes: "All available genes"
-#> Joining, by = "study_id"
+#> Joining with `by = join_by(study_id)`
 #> The following parameters were used in query:
 #> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
 #> Molecular Profile ID: blca_nmibc_2017_cna and prad_msk_2019_cna
 #> Genes: "All available genes"
-#> Joining, by = "study_id"
+#> Joining with `by = join_by(study_id)`
 #> The following parameters were used in query:
 #> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
 #> Molecular Profile ID: blca_nmibc_2017_structural_variants and prad_msk_2019_structural_variants
@@ -322,7 +327,7 @@ Like with querying by study ID, you can also pull data individually by genomic d
 
 ```r
 mut_only <- get_mutations_by_sample(sample_study_pairs = df_pairs)
-#> Joining, by = "study_id"
+#> Joining with `by = join_by(study_id)`
 #> The following parameters were used in query:
 #> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
 #> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
@@ -366,13 +371,13 @@ When pulling by sample IDs, we can also limit our results to a specific set of g
 
 ```r
 by_hugo <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = "TP53")
-#> Joining, by = "study_id"
+#> Joining with `by = join_by(study_id)`
 #> The following parameters were used in query:
 #> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
 #> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
 #> Genes: "TP53"
 by_gene_id <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = 7157)
-#> Joining, by = "study_id"
+#> Joining with `by = join_by(study_id)`
 #> The following parameters were used in query:
 #> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
 #> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
@@ -388,24 +393,25 @@ get_mutations_by_sample(
   sample_study_pairs = df_pairs,
   panel = "IMPACT468") %>%
   head()
-#> Joining, by = "study_id"
+#> Joining with `by = join_by(study_id)`
 #> The following parameters were used in query:
 #> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
 #> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
 #> Genes: "IMPACT468"
-#> # A tibble: 6 × 33
-#>   hugoG…¹ entre…² uniqu…³ uniqu…⁴ molec…⁵ sampl…⁶ patie…⁷ studyId center mutat…⁸ valid…⁹ tumor…˟ tumor…˟ norma…˟ norma…˟ start…˟ endPo…˟ refer…˟ prote…˟ mutat…˟
-#>   <chr>     <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <chr>   <chr>     <int>   <int>   <int>   <int>   <int>   <int> <chr>   <chr>   <chr>  
-#> 1 TERT       7015 UC0wMD… UC0wMD… blca_n… P-0001… P-0001… blca_n… MSKCC  SOMATIC Unknown     130      87       0      72  1.30e6  1.30e6 G       Promot… 5'Flank
-#> 2 SMAD4      4089 UC0wMD… UC0wMD… blca_n… P-0001… P-0001… blca_n… MSKCC  SOMATIC Unknown      43     757       0     314  4.86e7  4.86e7 G       D424N   Missen…
-#> 3 ERBB4      2066 UC0wMD… UC0wMD… blca_n… P-0001… P-0001… blca_n… MSKCC  SOMATIC Unknown     182     500       0     402  2.12e8  2.12e8 C       D1131N  Missen…
-#> 4 CUL3       8452 UC0wMD… UC0wMD… blca_n… P-0001… P-0001… blca_n… MSKCC  SOMATIC Unknown     160     598       0     450  2.25e8  2.25e8 C       Q222H   Missen…
-#> 5 PBRM1     55193 UC0wMD… UC0wMD… blca_n… P-0001… P-0001… blca_n… MSKCC  SOMATIC Unknown      69     778       0     269  5.26e7  5.26e7 C       A1526P  Missen…
-#> 6 APC         324 UC0wMD… UC0wMD… blca_n… P-0001… P-0001… blca_n… MSKCC  SOMATIC Unknown     249     373       0     415  1.12e8  1.12e8 T       I169T   Missen…
-#> # … with 13 more variables: functionalImpactScore <chr>, fisValue <dbl>, linkXvar <chr>, linkPdb <chr>, linkMsa <chr>, ncbiBuild <chr>, variantType <chr>,
-#> #   chr <chr>, variantAllele <chr>, refseqMrnaId <chr>, proteinPosStart <int>, proteinPosEnd <int>, keyword <chr>, and abbreviated variable names
-#> #   ¹​hugoGeneSymbol, ²​entrezGeneId, ³​uniqueSampleKey, ⁴​uniquePatientKey, ⁵​molecularProfileId, ⁶​sampleId, ⁷​patientId, ⁸​mutationStatus, ⁹​validationStatus,
-#> #   ˟​tumorAltCount, ˟​tumorRefCount, ˟​normalAltCount, ˟​normalRefCount, ˟​startPosition, ˟​endPosition, ˟​referenceAllele, ˟​proteinChange, ˟​mutationType
+#> # A tibble: 6 × 28
+#>   hugoGeneSymbol entrezGeneId uniqueSampleKey    uniquePatientKey molecularProfileId sampleId patientId studyId
+#>   <chr>                 <int> <chr>              <chr>            <chr>              <chr>    <chr>     <chr>  
+#> 1 TERT                   7015 UC0wMDAxNDUzLVQwM… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n…
+#> 2 SMAD4                  4089 UC0wMDAxNDUzLVQwM… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n…
+#> 3 ERBB4                  2066 UC0wMDAxNDUzLVQwM… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n…
+#> 4 CUL3                   8452 UC0wMDAxNDUzLVQwM… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n…
+#> 5 PBRM1                 55193 UC0wMDAxNDUzLVQwM… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n…
+#> 6 APC                     324 UC0wMDAxNDUzLVQwM… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n…
+#> # ℹ 20 more variables: center <chr>, mutationStatus <chr>, validationStatus <chr>, tumorAltCount <int>,
+#> #   tumorRefCount <int>, normalAltCount <int>, normalRefCount <int>, startPosition <int>, endPosition <int>,
+#> #   referenceAllele <chr>, proteinChange <chr>, mutationType <chr>, ncbiBuild <chr>, variantType <chr>,
+#> #   chr <chr>, variantAllele <chr>, refseqMrnaId <chr>, proteinPosStart <int>, proteinPosEnd <int>,
+#> #   keyword <chr>
 ```
 
 ## Pulling Clinical Data & Sample Metadata
@@ -421,22 +427,21 @@ attr_prad <- available_clinical_attributes("prad_msk_2019")
 
 attr_prad
 #> # A tibble: 13 × 7
-#>    displayName                   description                                                         datatype patientAttribute priority clinicalAttrib…¹ studyId
-#>    <chr>                         <chr>                                                               <chr>    <lgl>            <chr>    <chr>            <chr>  
-#>  1 Cancer Type                   Cancer Type                                                         STRING   FALSE            1        CANCER_TYPE      prad_m…
-#>  2 Cancer Type Detailed          Cancer Type Detailed                                                STRING   FALSE            1        CANCER_TYPE_DET… prad_m…
-#>  3 Fraction Genome Altered       Fraction Genome Altered                                             NUMBER   FALSE            20       FRACTION_GENOME… prad_m…
-#>  4 Gene Panel                    Gene Panel.                                                         STRING   FALSE            1        GENE_PANEL       prad_m…
-#>  5 Mutation Count                Mutation Count                                                      NUMBER   FALSE            30       MUTATION_COUNT   prad_m…
-#>  6 Oncotree Code                 Oncotree Code                                                       STRING   FALSE            1        ONCOTREE_CODE    prad_m…
-#>  7 Sample Class                  The sample classification (i.e., tumor, cellline, xenograph).       STRING   FALSE            1        SAMPLE_CLASS     prad_m…
-#>  8 Number of Samples Per Patient Number of Samples Per Patient                                       STRING   TRUE             1        SAMPLE_COUNT     prad_m…
-#>  9 Sample Type                   The type of sample (i.e., normal, primary, met, recurrence).        STRING   FALSE            1        SAMPLE_TYPE      prad_m…
-#> 10 Sex                           Sex                                                                 STRING   TRUE             1        SEX              prad_m…
-#> 11 Somatic Status                Somatic Status                                                      STRING   FALSE            1        SOMATIC_STATUS   prad_m…
-#> 12 Specimen Preservation Type    The method used for preparing the tissue for examination and study. STRING   FALSE            1        SPECIMEN_PRESER… prad_m…
-#> 13 TMB (nonsynonymous)           TMB (nonsynonymous)                                                 NUMBER   FALSE            1        TMB_NONSYNONYMO… prad_m…
-#> # … with abbreviated variable name ¹​clinicalAttributeId
+#>    displayName                   description     datatype patientAttribute priority clinicalAttributeId studyId
+#>    <chr>                         <chr>           <chr>    <lgl>            <chr>    <chr>               <chr>  
+#>  1 Cancer Type                   Cancer Type     STRING   FALSE            1        CANCER_TYPE         prad_m…
+#>  2 Cancer Type Detailed          Cancer Type De… STRING   FALSE            1        CANCER_TYPE_DETAIL… prad_m…
+#>  3 Fraction Genome Altered       Fraction Genom… NUMBER   FALSE            20       FRACTION_GENOME_AL… prad_m…
+#>  4 Gene Panel                    Gene Panel.     STRING   FALSE            1        GENE_PANEL          prad_m…
+#>  5 Mutation Count                Mutation Count  NUMBER   FALSE            30       MUTATION_COUNT      prad_m…
+#>  6 Oncotree Code                 Oncotree Code   STRING   FALSE            1        ONCOTREE_CODE       prad_m…
+#>  7 Sample Class                  The sample cla… STRING   FALSE            1        SAMPLE_CLASS        prad_m…
+#>  8 Number of Samples Per Patient Number of Samp… STRING   TRUE             1        SAMPLE_COUNT        prad_m…
+#>  9 Sample Type                   The type of sa… STRING   FALSE            1        SAMPLE_TYPE         prad_m…
+#> 10 Sex                           Sex             STRING   TRUE             1        SEX                 prad_m…
+#> 11 Somatic Status                Somatic Status  STRING   FALSE            1        SOMATIC_STATUS      prad_m…
+#> 12 Specimen Preservation Type    The method use… STRING   FALSE            1        SPECIMEN_PRESERVAT… prad_m…
+#> 13 TMB (nonsynonymous)           TMB (nonsynony… NUMBER   FALSE            1        TMB_NONSYNONYMOUS   prad_m…
 ```
 
 There are a select set available for both studies:
@@ -539,5 +544,5 @@ all_patient_clinical %>%
 #>  8 P-0003257 blca_nmibc_2017 SEX                 Female
 #>  9 P-0003261 blca_nmibc_2017 SAMPLE_COUNT        1     
 #> 10 P-0003261 blca_nmibc_2017 SEX                 Male  
-#> # … with 24 more rows
+#> # ℹ 24 more rows
 ```
