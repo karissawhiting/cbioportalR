@@ -214,10 +214,13 @@ test_that("data is same regardless of function", {
 
   # Segmentation ----
   study_id = "acc_tcga"
-  get_gen2 <- get_genetics_by_study(study_id)
+  get_gen2 <- get_genetics_by_study(study_id, return_segments = TRUE)
   by_study <- get_segments_by_study(study = study_id)
   expect_identical(by_study,  get_gen2$segment)
 
+  # test return_segments
+  get_gen3 <- get_genetics_by_study(study_id, return_segments = FALSE)
+  expect_gt(length(get_gen2), length(get_gen3))
 })
 
 test_that("get_genetics- one data type non existant", {

@@ -115,14 +115,15 @@
 
 
     # Get study ID ---------
-    resolved_study_id <- study_id %>%
-      purrr::when(!is.null(.) ~ .,
-                  !is.null(molecular_profile_id) ~ .lookup_study_name(molecular_profile_id = molecular_profile_id,
-                                                                      study_id = .,
-                                                                      base_url = base_url),
-                  # if both NULL
-                  ~ suppressMessages(.guess_study_id(study_id, resolved_url)))
-
+    resolved_study_id <- study_id %||% {
+      if(is_not_null(molecular_profile_id)) {
+        .lookup_study_name(molecular_profile_id = molecular_profile_id,
+                           study_id = study_id,
+                           base_url = base_url)
+      } else {
+        suppressMessages(.guess_study_id(study_id, resolved_url))
+      }
+    }
 
     # Get molecular profile ID ---------
     resolved_molecular_profile_id <- molecular_profile_id %||%
@@ -147,13 +148,12 @@
   panel_genes <- .get_panel_entrez(panel_id = panel, base_url = base_url)
 
   # if genes arg passed, get gene IDs if panel, or entrez IDs if hugo
-  resolved_genes <- genes %>%
-    purrr::when(
-      is.character(.) ~ {
-#        cli::cli_inform("Hugo symbols were converted to entrez IDs in order to query the cBioPortal API (see {.code ?get_entrez_id} for more info)")
-        get_entrez_id(., base_url = base_url)$entrezGeneId
-      },
-      TRUE ~ .)
+  resolved_genes <-
+    if(is.character(genes)) {
+      get_entrez_id(genes, base_url = base_url)$entrezGeneId
+    } else {
+      genes
+    }
 
   resolved_genes <- c(panel_genes, resolved_genes) %>%
     unique()
@@ -271,7 +271,7 @@
     # with mutation/cna endpoints where you have to specify genes to query
     df <- switch(data_type,
       fusion = {
-        if (nrow(.) > 0 & !is.null(resolved_genes)) {
+        if (nrow(df_fus) > 0 & !is.null(resolved_genes)) {
           filter(df_fus, (.data$site1EntrezGeneId %in% resolved_genes) | (.data$site2EntrezGeneId %in% resolved_genes))
         } else {
           df_fus

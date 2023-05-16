@@ -102,7 +102,7 @@ get_alias <- function(hugo_symbol = NULL,
                    ~cbp_api(.x, base_url = base_url)$content)) %>%
     mutate(alias = purrr::simplify_all(.data$alias)) %>%
     tidyr::unnest("alias") %>%
-    select("url_path")
+    select(-"url_path")
 
   return(res)
 }

@@ -51,9 +51,8 @@ get_clinical_by_sample <- function(study_id = NULL,
 
 
     # get study ID
-    resolved_study_id <- study_id %>%
-      purrr::when(!is.null(.) ~ .,
-                  ~ suppressMessages(.guess_study_id(study_id, resolved_url)))
+    resolved_study_id <- study_id %||%
+      suppressMessages(.guess_study_id(study_id, resolved_url))
 
 
 

@@ -338,8 +338,7 @@ get_genetics_by_study <- function(study_id = NULL,
                                           molecular_profile_id = NULL,
                                           data_type = x,
                                      add_hugo = add_hugo,
-                                     base_url = base_url,
-                                     return_segments = FALSE)
+                                     base_url = base_url)
                        })
 
  genetics <- purrr::compact(purrr::map(res, "result"))

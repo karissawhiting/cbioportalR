@@ -76,17 +76,18 @@
 
   accepted_names <- c(final_names, stringr::str_remove_all(final_names, "_"))
 
-  output_df <- input_df %>%
-    purrr::when(
-      !(any(stringr::str_detect(names(.), paste0(accepted_names[c(1, 3)], collapse = "|"))) &
-        any(stringr::str_detect(names(.), paste0(accepted_names[c(2, 4)], collapse = "|")))) ~
-        cli::cli_abort("{arg_name} must have the following columns: {final_names}"),
-      TRUE ~ select(
-        ., (contains("sample") | contains("patient")),
-        contains("study")
-      ) %>%
+  output_df <-
+    if(!(any(stringr::str_detect(names(input_df), paste0(accepted_names[c(1, 3)], collapse = "|"))) &
+               any(stringr::str_detect(names(input_df), paste0(accepted_names[c(2, 4)], collapse = "|"))))) {
+
+      cli::cli_abort("{arg_name} must have the following columns: {final_names}")
+    } else {
+      select(input_df, (contains("sample") |
+                          contains("patient")),
+             contains("study")) %>%
         purrr::set_names(final_names)
-    )
+    }
+
 
   # if molecular_profile_id passed, keep it
   optional_molec <- c("molecular_profile_id",
@@ -281,3 +282,16 @@
 
     }
 
+
+#' Check if NULL
+#'
+#' @param x any R object or expression
+#'
+#' @noRd
+#' @keywords internal
+#'
+#' @examples
+#' is_not_null(NULL)
+is_not_null <- function(x) {
+  !is.null(x)
+}
