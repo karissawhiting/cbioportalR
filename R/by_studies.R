@@ -213,8 +213,8 @@ available_samples <- function(study_id = NULL, sample_list_id = NULL,
       res$content
       df <- bind_rows(res$content) %>%
         select(
-          .data$patientId, .data$sampleId,
-          .data$sampleType, .data$studyId
+          "patientId", "sampleId",
+          "sampleType", "studyId"
         )
       df
     })
@@ -254,7 +254,7 @@ available_patients <- function(study_id = NULL,
     res <- cbp_api(url_path = x, base_url = base_url)
     res$content
     df <- bind_rows(res$content) %>%
-      select(.data$patientId, .data$studyId)
+      select("patientId", "studyId")
     df
   })
 

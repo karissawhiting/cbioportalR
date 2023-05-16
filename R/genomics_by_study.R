@@ -303,7 +303,7 @@ get_segments_by_study <- function(study_id = NULL,
 #' Get All Genomic Information By Study
 #'
 #' @inheritParams .get_data_by_study
-#' @return_segments Default is `FALSE` where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
+#' @param return_segments Default is `FALSE` where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
 #' `TRUE` will return any available segmentation data with results.
 #' @return A list of mutations, cna and structural variants (including fusions), if available. Will also return copy number segmentation data if `return_segments = TRUE`.
 #' @export

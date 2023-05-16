@@ -164,7 +164,7 @@
   # If user passes study_id and data_type we can pull the correct molecular ID
   if(!("molecular_profile_id" %in% colnames(sample_study_pairs))) {
 
-    unique_study_id <- distinct(select(sample_study_pairs, .data$study_id)) %>%
+    unique_study_id <- distinct(select(sample_study_pairs, "study_id")) %>%
       mutate(molecular_profile_id =
                purrr::map(.data$study_id,
                            ~.lookup_profile_name(.x,
@@ -184,12 +184,12 @@
 
     sample_study_pairs_nest <- sample_study_pairs %>%
       group_by(.data$study_id, .data$molecular_profile_id) %>%
-      tidyr::nest(sample_id_nest = .data$sample_id) %>%
+      tidyr::nest(sample_id_nest = "sample_id") %>%
       mutate(url_path = paste0("molecular-profiles/",
                                .data$molecular_profile_id,
                                "/", url_data_type, "/fetch?")) %>%
       ungroup() %>%
-      select(.data$url_path, .data$sample_id_nest)
+      select("url_path", "sample_id_nest")
 
     quer_res <- purrr::map2_dfr(
       sample_study_pairs_nest$url_path,
@@ -470,7 +470,7 @@ get_segments_by_sample <- function(sample_id = NULL,
 #' Get All Genomic Information By Sample IDs
 #'
 #' @inheritParams .get_data_by_sample
-#' @return_segments Default is `FALSE` where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
+#' @param return_segments Default is `FALSE` where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
 #' `TRUE` will return any available segmentation data with results.
 #' @return A list of mutations, cna and structural variants (including fusions), if available. Will also return copy number segmentation data if `return_segments = TRUE`.
 #' @export

@@ -69,7 +69,7 @@ get_clinical_by_sample <- function(study_id = NULL,
   # Prep data frame for Query ------------------------------------------------
   sample_study_pairs_nest <- sample_study_pairs %>%
     group_by(.data$study_id) %>%
-    tidyr::nest(sample_id_nest = .data$sample_id)
+    tidyr::nest(sample_id_nest = "sample_id")
 
   # Query --------------------------------------------------------------------
   df <- purrr::map2_dfr(sample_study_pairs_nest$study_id, sample_study_pairs_nest$sample_id_nest,

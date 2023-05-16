@@ -40,8 +40,8 @@ get_samples_by_patient <- function(patient_id = NULL,
     res <- cbp_api(url_path = x, base_url = base_url)
     res$content
     df <- as.data.frame(res$content) %>%
-      select(.data$patientId, .data$sampleId,
-             .data$sampleType, .data$studyId)
+      select("patientId", "sampleId",
+             "sampleType", "studyId")
     df
   })
 
@@ -127,7 +127,7 @@ get_clinical_by_patient <- function(study_id = NULL,
   # Prep data frame for Query ------------------------------------------------
   patient_study_pairs_nest <- patient_study_pairs %>%
     group_by(.data$study_id) %>%
-    tidyr::nest(sample_id_nest = .data$patient_id)
+    tidyr::nest(sample_id_nest = "patient_id")
 
   # Query --------------------------------------------------------------------
   df <- purrr::map2_dfr(patient_study_pairs_nest$study_id, patient_study_pairs_nest$sample_id_nest,

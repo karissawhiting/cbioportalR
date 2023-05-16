@@ -227,10 +227,10 @@
   }
 
   hugo <- get_hugo_symbol(unique(df$entrezGeneId)) %>%
-    select(-.data$type)
+    select(-"type")
 
   df_with_hugo <- left_join(df, hugo, by = "entrezGeneId" ) %>%
-    select(.data$hugoGeneSymbol, .data$entrezGeneId, everything())
+    select("hugoGeneSymbol", "entrezGeneId", everything())
 
   # If there happens to be more than 1 hugo per entrez
   if(!(nrow(df_with_hugo) == nrow(df))) {

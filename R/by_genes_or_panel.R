@@ -101,8 +101,8 @@ get_alias <- function(hugo_symbol = NULL,
     mutate(alias = purrr::map(.data$url_path,
                    ~cbp_api(.x, base_url = base_url)$content)) %>%
     mutate(alias = purrr::simplify_all(.data$alias)) %>%
-    tidyr::unnest(.data$alias) %>%
-    select(-.data$url_path)
+    tidyr::unnest("alias") %>%
+    select("url_path")
 
   return(res)
 }
@@ -133,8 +133,8 @@ get_gene_panel <- function(panel_id = NULL, base_url = NULL) {
 
     tib %>%
       mutate(data = purrr::map(.data$genes, ~as_tibble(.x))) %>%
-      select(.data$genePanelId, .data$data, .data$description) %>%
-      tidyr::unnest(cols = .data$data)
+      select("genePanelId", "data", "description") %>%
+      tidyr::unnest(cols = "data")
 
   })
 
