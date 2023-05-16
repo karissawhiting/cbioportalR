@@ -218,6 +218,18 @@ all.equal(mut_study_subset, mut_sample)
 
 Both results are equal.
 
+
+Note: some studies also have copy number segments data available that can be pulled by study ID or sample ID:
+
+
+```{r}
+seg_blca <- get_segments_by_study("blca_nmibc_2017")
+
+# To pull alongside other genomic data types, use the `return_segments` argument
+all_genomic_blca <- get_genetics_by_study("blca_nmibc_2017", return_segments = TRUE)
+
+```
+
 #### Limit Results to Specified Genes or Panels
 
 When pulling by sample IDs, we can also limit our results to a specific set of genes by passing a vector of Entrez Gene IDs or Hugo Symbols to the `gene` argument, or a specified panel by passing a panel ID to the `panel` argument (see `available_gene_panels()` for supported panels). This can be useful if, for example, we want to pull all IMPACT gene results for two studies but one of the two uses a much larger panel. In that case, we can limit our query to just the genes for which we want results:
