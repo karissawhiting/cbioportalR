@@ -166,3 +166,54 @@ lookup_id <- function(lookup_id = NULL,
   return(res)
 }
 
+
+
+#' General on what studies a sample ID or patient ID belongs to
+#'
+#' This is a general look up function that can take a study ID or patient ID and return what samples
+#' exist across entire cBioPortal website (depends on your base URL) that match that ID.
+#' It will return which studies include that sample or patient.
+#'
+#' This can also be useful to see all samples a particular patient has available across all studies on
+#' cBioPortal.
+#'
+#'
+#' @param lookup_id a sample ID or patient ID
+#' @param base_url The database URL to query
+#' If `NULL` will default to URL set with `set_cbioportal_db(<your_db>)`
+#' @return A dataframe of general info for sample of patient IDs given
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' virtual_study_id <- c("6269715f04dc353874696f2a")
+#' x <- lookup_id(lookup_id = lookup_id,  base_url = 'www.cbioportal.org/api')
+#' x
+#'  }
+
+get_virtual_study_info <- function(virtual_study_id = NULL,
+                      base_url = NULL) {
+
+  # * checks ---------------------------------------------------------
+
+  virtual_study_id %||% cli::cli_abort("You must pass at least one {.code virtual_study_id}")
+
+
+  # get sample level --------------------------------------------------------
+  url_path <- paste0(
+    "session/virtual_study/",
+    virtual_study_id)
+
+  res <- cbp_api(url_path, base_url = base_url)$content
+  res$data$studies
+  df <- res$data
+
+  df$studies %>% unlist()
+
+  res %>% purrr::pluck("studies")
+  z <- res %>%
+    purrr::simplify_all(.data) %>%
+    bind_rows() %>%
+    tidyr::unnest(data) %>%
+  bind_rows(res) %>% tidyr::unnest(cols  = data)
+}
