@@ -57,6 +57,7 @@ reference:
     - get_cna_by_sample
     - get_fusions_by_sample
     - get_structural_variants_by_sample
+    - get_segments_by_sample
     - get_genetics_by_sample
     - get_panel_by_sample
   - subtitle: Gene & Gene Panel Level
