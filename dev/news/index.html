@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,6 +61,7 @@
 <ul><li>Added <code><a href="../reference/available_sample_lists.html">available_sample_lists()</a></code> function which returns all available sample list IDs for a given study ID</li>
 <li>Added <code>sample_list_id</code> argument to <code><a href="../reference/available_samples.html">available_samples()</a></code> which returns all samples IDs in specific sample list within a study (<a href="https://github.com/karissawhiting/cbioportalR/issues/53" class="external-link">#53</a>).</li>
 <li>Fixed {cli} errors to make package compatible with {cli} v3.4.1.</li>
+<li>Added CNA segmentation retrieval endpoint accessible via <code><a href="../reference/get_segments_by_sample.html">get_segments_by_sample()</a></code> and <code><a href="../reference/get_segments_by_study.html">get_segments_by_study()</a></code>). You can use <code>get_genomics_by_*(return_segments = TRUE)</code> as well to access this data.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.1" id="cbioportalr-101">cbioportalR 1.0.1<a class="anchor" aria-label="anchor" href="#cbioportalr-101"></a></h2><p class="text-muted">CRAN release: 2022-08-29</p>

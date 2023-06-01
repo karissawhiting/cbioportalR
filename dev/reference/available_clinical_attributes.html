@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,20 +89,20 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="fu">available_clinical_attributes</span><span class="op">(</span><span class="st">"acc_tcga"</span>, base_url <span class="op">=</span> <span class="st">'www.cbioportal.org/api'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 109 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    displayName                   descr…¹ datat…² patie…³ prior…⁴ clini…⁵ studyId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Diagnosis Age                 Age at… NUMBER  TRUE    1       AGE     acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Neoplasm Disease Stage Ameri… The ex… STRING  TRUE    1       AJCC_P… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> American Joint Committee on … The ve… STRING  TRUE    1       AJCC_S… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Atypical Mitotic Figures      Atypic… STRING  TRUE    1       ATYPIC… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Cancer Type                   Cancer… STRING  FALSE   1       CANCER… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Cancer Type Detailed          Cancer… STRING  FALSE   1       CANCER… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> CAPSULAR INVASION             CAPSUL… STRING  TRUE    1       CAPSUL… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Neoplasm American Joint Comm… Stage … STRING  TRUE    1       CLINIC… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Clinical Status Within 3 Mth… Clinic… STRING  TRUE    1       CLINIC… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Neoplasm American Joint Comm… Extent… STRING  TRUE    1       CLIN_M… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 99 more rows, and abbreviated variable names ¹​description, ²​datatype,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​patientAttribute, ⁴​priority, ⁵​clinicalAttributeId</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    displayName                    description datatype patientAttribute priority</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Diagnosis Age                  Age at whi… NUMBER   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Neoplasm Disease Stage Americ… The extent… STRING   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> American Joint Committee on C… The versio… STRING   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Atypical Mitotic Figures       Atypical M… STRING   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Cancer Type                    Cancer type STRING   FALSE            1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Cancer Type Detailed           Cancer typ… STRING   FALSE            1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> CAPSULAR INVASION              CAPSULAR I… STRING   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Neoplasm American Joint Commi… Stage grou… STRING   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Clinical Status Within 3 Mths… Clinical S… STRING   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Neoplasm American Joint Commi… Extent of … STRING   TRUE             1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 99 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: clinicalAttributeId &lt;chr&gt;, studyId &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

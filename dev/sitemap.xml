@@ -133,6 +133,12 @@
     <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_samples_by_patient.html</loc>
   </url>
   <url>
+    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_segments_by_sample.html</loc>
+  </url>
+  <url>
+    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_segments_by_study.html</loc>
+  </url>
+  <url>
     <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_study_info.html</loc>
   </url>
   <url>

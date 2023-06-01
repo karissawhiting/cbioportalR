@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,19 +88,19 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #00BB00;">base_url</span> for this R session is now set to <span style="color: #0000BB;">"www.cbioportal.org/api"</span> </span>
 <span class="r-in"><span><span class="fu">available_gene_panels</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 55 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    description                                                           geneP…¹</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Targeted (27 cancer genes) sequencing of adenoid cystic carcinomas o… ACYC_F…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Targeted panel of 232 genes.                                          Agilent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Targeted panel of 8 genes.                                            AmpliS…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ARCHER-HEME gene panel (199 genes)                                    ARCHER…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ARCHER-SOLID Gene Panel (62 genes)                                    ARCHER…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Targeted sequencing of various tumor types via bait v3.               bait_v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Targeted sequencing of various tumor types via bait v4.               bait_v4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Targeted sequencing of various tumor types via bait v5.               bait_v5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Targeted panel of 387 cancer-related genes.                           bcc_un…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Research (CMO) IMPACT-Heme gene panel version 3.                      HemePA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 45 more rows, and abbreviated variable name ¹​genePanelId</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    description                                                       genePanelId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Targeted (27 cancer genes) sequencing of adenoid cystic carcinom… ACYC_FMI_27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Targeted panel of 232 genes.                                      Agilent    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Targeted panel of 8 genes.                                        AmpliSeq   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ARCHER-HEME gene panel (199 genes)                                ARCHER-HEM…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ARCHER-SOLID Gene Panel (62 genes)                                ARCHER-SOL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Targeted sequencing of various tumor types via bait v3.           bait_v3    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Targeted sequencing of various tumor types via bait v4.           bait_v4    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Targeted sequencing of various tumor types via bait v5.           bait_v5    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Targeted panel of 387 cancer-related genes.                       bcc_unige_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Research (CMO) IMPACT-Heme gene panel version 3.                  HemePACT_v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 45 more rows</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

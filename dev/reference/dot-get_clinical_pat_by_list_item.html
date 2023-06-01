@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,15 +109,14 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> No `clinical_attribute` passed. Defaulting to returning</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> all clinical attributes in <span style="color: #0000BB;">"msk_impact_2017"</span> study</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   uniquePatientKey                   patientId studyId         clinicalA…¹ value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_impact_2017 OS_MONTHS   30.47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_impact_2017 OS_STATUS   0:LI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_impact_2017 SAMPLE_COU… 1    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_impact_2017 SEX         Male </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_impact_2017 SMOKING_HI… Prev…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_impact_2017 VITAL_STAT… ALIVE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​clinicalAttributeId</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   uniquePatientKey                   patientId studyId clinicalAttributeId value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_im… OS_MONTHS           30.47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_im… OS_STATUS           0:LI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_im… SAMPLE_COUNT        1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_im… SEX                 Male </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_im… SMOKING_HISTORY     Prev…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> UC0wMDAxNDUzOm1za19pbXBhY3RfMjAxNw P-0001453 msk_im… VITAL_STATUS        ALIVE</span>
 <span class="r-in"><span>  <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,38 +94,40 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="color: #00BB00;">base_url</span> for this R session is now set to <span style="color: #0000BB;">"www.cbioportal.org/api"</span> </span>
 <span class="r-in"><span><span class="fu">available_profiles</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> No `study_id` provided. Returning all available genomic profiles for <span style="color: #0000BB; font-style: italic;">&lt;www.cbioportal.org/api&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,715 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    molec…¹ datat…² name  descr…³ showP…⁴ patie…⁵ molec…⁶ studyId gener…⁷ sortO…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> PROTEI… LOG2-V… Prot… Protei… FALSE   FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> PROTEI… Z-SCORE Prot… Protei… TRUE    FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> COPY_N… DISCRE… Puta… Putati… TRUE    FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> COPY_N… CONTIN… Capp… Capped… FALSE   FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MUTATI… MAF     Muta… Mutati… TRUE    FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> METHYL… CONTIN… Meth… Methyl… FALSE   FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MRNA_E… CONTIN… mRNA… mRNA g… FALSE   FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MRNA_E… Z-SCORE mRNA… mRNA e… TRUE    FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MRNA_E… Z-SCORE mRNA… Log-tr… TRUE    FALSE   acc_tc… acc_tc… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MUTATI… MAF     Muta… Mutati… TRUE    FALSE   all_st… all_st… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,705 more rows, 1 more variable: pivotThreshold &lt;dbl&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​molecularAlterationType, ²​datatype,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​description, ⁴​showProfileInAnalysisTab, ⁵​patientLevel,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁶​molecularProfileId, ⁷​genericAssayType, ⁸​sortOrder</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,751 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    molecularAlterationType datatype   name    description showProfileInAnalysi…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> PROTEIN_LEVEL           LOG2-VALUE Protei… Protein ex… FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> PROTEIN_LEVEL           Z-SCORE    Protei… Protein ex… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> COPY_NUMBER_ALTERATION  DISCRETE   Putati… Putative c… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> COPY_NUMBER_ALTERATION  CONTINUOUS Capped… Capped rel… FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> MUTATION_EXTENDED       MAF        Mutati… Mutation d… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> METHYLATION             CONTINUOUS Methyl… Methylatio… FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MRNA_EXPRESSION         CONTINUOUS mRNA e… mRNA gene … FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MRNA_EXPRESSION         Z-SCORE    mRNA e… mRNA expre… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> MRNA_EXPRESSION         Z-SCORE    mRNA e… Log-transf… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MUTATION_EXTENDED       MAF        Mutati… Mutation d… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,741 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​showProfileInAnalysisTab</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: patientLevel &lt;lgl&gt;, molecularProfileId &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;, genericAssayType &lt;chr&gt;, sortOrder &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pivotThreshold &lt;dbl&gt;</span></span>
 <span class="r-in"><span><span class="fu">available_profiles</span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"acc_tcga"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   molecularAlterationType datatype name  descr…¹ showP…² patie…³ molec…⁴ studyId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> PROTEIN_LEVEL           LOG2-VA… Prot… Protei… FALSE   FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> PROTEIN_LEVEL           Z-SCORE  Prot… Protei… TRUE    FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> COPY_NUMBER_ALTERATION  DISCRETE Puta… Putati… TRUE    FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> COPY_NUMBER_ALTERATION  CONTINU… Capp… Capped… FALSE   FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> MUTATION_EXTENDED       MAF      Muta… Mutati… TRUE    FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> METHYLATION             CONTINU… Meth… Methyl… FALSE   FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> MRNA_EXPRESSION         CONTINU… mRNA… mRNA g… FALSE   FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> MRNA_EXPRESSION         Z-SCORE  mRNA… mRNA e… TRUE    FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> MRNA_EXPRESSION         Z-SCORE  mRNA… Log-tr… TRUE    FALSE   acc_tc… acc_tc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​description, ²​showProfileInAnalysisTab,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​patientLevel, ⁴​molecularProfileId</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   molecularAlterationType datatype   name     description showProfileInAnalysi…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> PROTEIN_LEVEL           LOG2-VALUE Protein… Protein ex… FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> PROTEIN_LEVEL           Z-SCORE    Protein… Protein ex… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> COPY_NUMBER_ALTERATION  DISCRETE   Putativ… Putative c… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> COPY_NUMBER_ALTERATION  CONTINUOUS Capped … Capped rel… FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> MUTATION_EXTENDED       MAF        Mutatio… Mutation d… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> METHYLATION             CONTINUOUS Methyla… Methylatio… FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> MRNA_EXPRESSION         CONTINUOUS mRNA ex… mRNA gene … FALSE                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> MRNA_EXPRESSION         Z-SCORE    mRNA ex… mRNA expre… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> MRNA_EXPRESSION         Z-SCORE    mRNA ex… Log-transf… TRUE                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​showProfileInAnalysisTab</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: patientLevel &lt;lgl&gt;, molecularProfileId &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   studyId &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

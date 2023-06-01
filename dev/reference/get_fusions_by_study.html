@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cbioportalR</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,37 +107,37 @@ If <code>NULL</code> will default to URL set with <code>set_cbioportal_db(&lt;yo
 <span class="r-in"><span><span class="fu">get_fusions_by_study</span><span class="op">(</span>molecular_profile_id <span class="op">=</span> <span class="st">"prad_msk_2019_structural_variants"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning all data for the <span style="color: #0000BB;">"prad_msk_2019_structural_variants"</span> molecular profile in the <span style="color: #0000BB;">"prad_msk_2019"</span> study</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 44</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSample…¹ uniqu…² molec…³ sampl…⁴ patie…⁵ studyId site1…⁶ site1…⁷ site1…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> c19DX0NBVVdUN… cF9DX0… prad_m… s_C_CA… p_C_CA… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> c19DX0RVNkVDQ… cF9DX0… prad_m… s_C_DU… p_C_DU… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> c19DX1ZDNlA5Q… cF9DX1… prad_m… s_C_VC… p_C_VC… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> c19DX1ZDNlA5Q… cF9DX1… prad_m… s_C_VC… p_C_VC… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 35 more variables: site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSampleKey uniquePatientKey molecularProfileId sampleId patientId studyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> c19DX0NBVVdUN1… cF9DX0NBVVdUNzp… prad_msk_2019_str… s_C_CAU… p_C_CAUW… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> c19DX0RVNkVDQ1… cF9DX0RVNkVDQzp… prad_msk_2019_str… s_C_DU6… p_C_DU6E… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> c19DX1ZDNlA5QV… cF9DX1ZDNlA5QTp… prad_msk_2019_str… s_C_VC6… p_C_VC6P… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> c19DX1ZDNlA5QV… cF9DX1ZDNlA5QTp… prad_msk_2019_str… s_C_VC6… p_C_VC6P… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 38 more variables: site1EntrezGeneId &lt;int&gt;, site1HugoSymbol &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1EnsemblTranscriptId &lt;chr&gt;, site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Contig &lt;chr&gt;, site1Region &lt;chr&gt;, site1RegionNumber &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Description &lt;chr&gt;, site2EntrezGeneId &lt;int&gt;, site2HugoSymbol &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2EnsemblTranscriptId &lt;chr&gt;, site2Chromosome &lt;chr&gt;, site2Position &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Contig &lt;chr&gt;, site2Region &lt;chr&gt;, site2RegionNumber &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Description &lt;chr&gt;, site2EffectOnFrame &lt;chr&gt;, ncbiBuild &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dnaSupport &lt;chr&gt;, rnaSupport &lt;chr&gt;, normalReadCount &lt;int&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Description &lt;chr&gt;, site2EffectOnFrame &lt;chr&gt;, ncbiBuild &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_structural_variants_by_study</span><span class="op">(</span>molecular_profile_id <span class="op">=</span></span></span>
 <span class="r-in"><span>       <span class="st">"prad_msk_2019_structural_variants"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning all data for the <span style="color: #0000BB;">"prad_msk_2019_structural_variants"</span> molecular profile in the <span style="color: #0000BB;">"prad_msk_2019"</span> study</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 44</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSample…¹ uniqu…² molec…³ sampl…⁴ patie…⁵ studyId site1…⁶ site1…⁷ site1…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> c19DX0NBVVdUN… cF9DX0… prad_m… s_C_CA… p_C_CA… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> c19DX0RVNkVDQ… cF9DX0… prad_m… s_C_DU… p_C_DU… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> c19DX1ZDNlA5Q… cF9DX1… prad_m… s_C_VC… p_C_VC… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> c19DX1ZDNlA5Q… cF9DX1… prad_m… s_C_VC… p_C_VC… prad_m…    <span style="text-decoration: underline;">2</span>078 ERG     NA     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 35 more variables: site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   uniqueSampleKey uniquePatientKey molecularProfileId sampleId patientId studyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> c19DX0NBVVdUN1… cF9DX0NBVVdUNzp… prad_msk_2019_str… s_C_CAU… p_C_CAUW… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> c19DX0RVNkVDQ1… cF9DX0RVNkVDQzp… prad_msk_2019_str… s_C_DU6… p_C_DU6E… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> c19DX1ZDNlA5QV… cF9DX1ZDNlA5QTp… prad_msk_2019_str… s_C_VC6… p_C_VC6P… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> c19DX1ZDNlA5QV… cF9DX1ZDNlA5QTp… prad_msk_2019_str… s_C_VC6… p_C_VC6P… prad_m…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 38 more variables: site1EntrezGeneId &lt;int&gt;, site1HugoSymbol &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1EnsemblTranscriptId &lt;chr&gt;, site1Chromosome &lt;chr&gt;, site1Position &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Contig &lt;chr&gt;, site1Region &lt;chr&gt;, site1RegionNumber &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site1Description &lt;chr&gt;, site2EntrezGeneId &lt;int&gt;, site2HugoSymbol &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2EnsemblTranscriptId &lt;chr&gt;, site2Chromosome &lt;chr&gt;, site2Position &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Contig &lt;chr&gt;, site2Region &lt;chr&gt;, site2RegionNumber &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Description &lt;chr&gt;, site2EffectOnFrame &lt;chr&gt;, ncbiBuild &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dnaSupport &lt;chr&gt;, rnaSupport &lt;chr&gt;, normalReadCount &lt;int&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   site2Description &lt;chr&gt;, site2EffectOnFrame &lt;chr&gt;, ncbiBuild &lt;chr&gt;, …</span></span>
 <span class="r-in"><span>       <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
