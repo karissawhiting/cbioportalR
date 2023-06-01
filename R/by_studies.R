@@ -98,11 +98,17 @@ get_clinical_by_study <- function(study_id = NULL,
   df_samp <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
 
   # filter selected clinical attributes if not NULL
+  df_samp <-
+    if(nrow(df_samp) > 0 & is_not_null(clinical_attribute)) {
+    filter(df_samp, .data$clinicalAttributeId %in% clinical_attribute)
+
+  } else {
+    cli_alert_warning("Sample Level Clinical Data: No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
+    df_samp
+
+  }
+
   df_samp <- df_samp %>%
-    purrr::when(
-      nrow(df_samp) > 0 & !is.null(clinical_attribute) ~ filter(., clinicalAttributeId %in% clinical_attribute),
-      ~{cli_alert_warning("Sample Level Clinical Data: No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
-      .}) %>%
     mutate(dataLevel = "SAMPLE")
 
 
@@ -117,11 +123,15 @@ get_clinical_by_study <- function(study_id = NULL,
   df_pat <- purrr::map_df(res$content, ~ tibble::as_tibble(.x))
 
   # filter selected clinical attributes if not NULL
+  df_pat <-
+    if(nrow(df_pat) > 0 & !is.null(clinical_attribute)) {
+      filter(df_pat, .data$clinicalAttributeId %in% clinical_attribute)
+    } else {
+      cli_alert_warning("Patient Level Clinical Data: No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
+      df_pat
+    }
+
   df_pat <- df_pat %>%
-    purrr::when(
-      nrow(df_pat) > 0 & !is.null(clinical_attribute) ~ filter(., clinicalAttributeId %in% clinical_attribute),
-      ~{cli_alert_warning("Patient Level Clinical Data: No {.var clinical_attribute} passed. Defaulting to returning all clinical attributes in {.val {study_id}} study")
-        .})%>%
     mutate(dataLevel = "PATIENT",
            sampleId = NA_character_)
 
@@ -213,8 +223,8 @@ available_samples <- function(study_id = NULL, sample_list_id = NULL,
       res$content
       df <- bind_rows(res$content) %>%
         select(
-          .data$patientId, .data$sampleId,
-          .data$sampleType, .data$studyId
+          "patientId", "sampleId",
+          "sampleType", "studyId"
         )
       df
     })
@@ -254,7 +264,7 @@ available_patients <- function(study_id = NULL,
     res <- cbp_api(url_path = x, base_url = base_url)
     res$content
     df <- bind_rows(res$content) %>%
-      select(.data$patientId, .data$studyId)
+      select("patientId", "studyId")
     df
   })
 

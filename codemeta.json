@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/karissawhiting/cbioportalR",
   "issueTracker": "https://github.com/karissawhiting/cbioportalR/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.1.9000",
+  "version": "1.0.1.9002",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.2.2 (2022-10-31)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -258,7 +258,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1961.656KB",
+  "fileSize": "2286.409KB",
   "releaseNotes": "https://github.com/karissawhiting/cbioportalR/blob/master/NEWS.md",
   "readme": "https://github.com/karissawhiting/cbioportalR/blob/main/README.md",
   "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"]

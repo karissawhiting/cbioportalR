@@ -7,7 +7,7 @@
 .get_data_by_study(
   study_id = NULL,
   molecular_profile_id = NULL,
-  data_type = c("mutation", "cna", "fusion", "structural_variant"),
+  data_type = c("mutation", "cna", "fusion", "structural_variant", "segment"),
   base_url = NULL,
   add_hugo = TRUE
 )
@@ -19,7 +19,8 @@ on molecular_profile_id.}
 \item{molecular_profile_id}{a molecular profile to query mutations.
 If NULL, guesses molecular_profile_id based on study ID.}
 
-\item{data_type}{specify what type of data to return. Options are\code{mutation}, \code{cna}, \code{fusion}, or \code{structural_variant} (same as \code{fusion}).}
+\item{data_type}{specify what type of data to return. Options are\code{mutation}, \code{cna}, \code{fusion}, or\code{structural_variant} (same as \code{fusion}),
+and \code{segment} (copy number segmentation data)..}
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}

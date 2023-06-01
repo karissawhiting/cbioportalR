@@ -51,9 +51,8 @@ get_clinical_by_sample <- function(study_id = NULL,
 
 
     # get study ID
-    resolved_study_id <- study_id %>%
-      purrr::when(!is.null(.) ~ .,
-                  ~ suppressMessages(.guess_study_id(study_id, resolved_url)))
+    resolved_study_id <- study_id %||%
+      suppressMessages(.guess_study_id(study_id, resolved_url))
 
 
 
@@ -69,7 +68,7 @@ get_clinical_by_sample <- function(study_id = NULL,
   # Prep data frame for Query ------------------------------------------------
   sample_study_pairs_nest <- sample_study_pairs %>%
     group_by(.data$study_id) %>%
-    tidyr::nest(sample_id_nest = .data$sample_id)
+    tidyr::nest(sample_id_nest = "sample_id")
 
   # Query --------------------------------------------------------------------
   df <- purrr::map2_dfr(sample_study_pairs_nest$study_id, sample_study_pairs_nest$sample_id_nest,
@@ -102,7 +101,7 @@ get_clinical_by_sample <- function(study_id = NULL,
 
   resolved_clinical_attributes <- clinical_attribute %||%
     (available_clinical_attributes(study_id, base_url = base_url) %>%
-    pull(.data$clinicalAttributeId) %>%
+    dplyr::pull(.data$clinicalAttributeId) %>%
     unique())
 
   if(is.null(clinical_attribute)) {
@@ -159,13 +158,13 @@ get_panel_by_sample <- function(study_id = NULL,
                          base_url = base_url)
 
 
-  res %>%
-    purrr::when(nrow(.) < 1 ~ cli::cli_abort("No gene panel data found. Did you specify the correct {.code study_id} for your {.code sample_id}?
-                                        Is {.val GENE_PANEL} an available clinical attribute in your queried studies?"),
+  if(nrow(res) < 1) {
+    cli::cli_abort(c("No gene panel data found. Did you specify the correct {.code study_id} for your {.code sample_id}? ,",
+                   "Is {.val GENE_PANEL} an available clinical attribute in your queried studies?"))
+  }
 
-              TRUE ~ transmute(.,  .data$sampleId, .data$studyId, genePanel = .data$value))
-
-
+  res <- transmute(res,  .data$sampleId, .data$studyId, genePanel = .data$value)
+  return(res)
 
 }
 
