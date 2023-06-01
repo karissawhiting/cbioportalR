@@ -11,7 +11,8 @@ get_genetics_by_sample(
   genes = NULL,
   panel = NULL,
   add_hugo = TRUE,
-  base_url = NULL
+  base_url = NULL,
+  return_segments = FALSE
 )
 }
 \arguments{
@@ -36,9 +37,12 @@ Argument is \code{TRUE} by default. If \code{FALSE}, results will be returned as
 
 \item{base_url}{The database URL to query
 If \code{NULL} will default to URL set with \verb{set_cbioportal_db(<your_db>)}}
+
+\item{return_segments}{Default is \code{FALSE} where copy number segmentation data won't be returned in addition to the mutation, cna and structural variant data.
+\code{TRUE} will return any available segmentation data with results.}
 }
 \value{
-A list of mutations, cna and structural variants (including fusions), if available.
+A list of mutations, cna and structural variants (including fusions), if available. Will also return copy number segmentation data if \code{return_segments = TRUE}.
 }
 \description{
 Get All Genomic Information By Sample IDs
@@ -46,6 +50,7 @@ Get All Genomic Information By Sample IDs
 \examples{
 \dontrun{
 get_genetics_by_sample(sample_id = c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
- study_id = "acc_tcga")
+ study_id = "acc_tcga",
+ return_segments = TRUE)
 }
 }

@@ -244,7 +244,7 @@ test_that("Unknown Hugo Symbol returns Unk ", {
   df[16, ] <- df[15,]
   df[16, 'entrezGeneId'] <- 1000000
 
-  df <- df %>% select(-.data$hugoGeneSymbol)
+  df <- df %>% select(-"hugoGeneSymbol")
   df2 <- .lookup_hugo(df)
 
   expect_true(any(stringr::str_detect(df2$hugoGeneSymbol, "unk")))

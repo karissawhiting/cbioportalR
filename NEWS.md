@@ -3,6 +3,7 @@
 * Added `available_sample_lists()` function which returns all available sample list IDs for a given study ID
 * Added `sample_list_id` argument to `available_samples()` which returns all samples IDs in specific sample list within a study (#53).
 * Fixed {cli} errors to make package compatible with {cli} v3.4.1.
+* Added CNA segmentation retrieval endpoint accessible via `get_segments_by_sample()` and `get_segments_by_study()`). You can use `get_genomics_by_*(return_segments = TRUE)` as well to access this data.
 
 # cbioportalR 1.0.1
 

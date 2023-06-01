@@ -9,11 +9,14 @@
 #'
 .check_for_study_id <- function(study_id) {
 
-  study_id %>% purrr::when(
-    is.null(.) ~ cli::cli_abort(c("You must provide a {.code study_id}. See {.code get_studies()} to view available studies on your database")),
-    length(.) > 1 ~ cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time")),
-    ~ NULL
-  )
+  study_id %||%
+    cli::cli_abort(c("You must provide a {.code study_id}. See {.code get_studies()} to view available studies on your database"))
+
+  if(length(study_id) > 1) {
+    cli::cli_abort(c("{.code length(study_id)} must be 1. You can only pass one {.code study_id} at a time"))
+  } else {
+    NULL
+  }
 
 }
 
@@ -73,17 +76,18 @@
 
   accepted_names <- c(final_names, stringr::str_remove_all(final_names, "_"))
 
-  output_df <- input_df %>%
-    purrr::when(
-      !(any(stringr::str_detect(names(.), paste0(accepted_names[c(1, 3)], collapse = "|"))) &
-        any(stringr::str_detect(names(.), paste0(accepted_names[c(2, 4)], collapse = "|")))) ~
-        cli::cli_abort("{arg_name} must have the following columns: {final_names}"),
-      TRUE ~ select(
-        ., (contains("sample") | contains("patient")),
-        contains("study")
-      ) %>%
+  output_df <-
+    if(!(any(stringr::str_detect(names(input_df), paste0(accepted_names[c(1, 3)], collapse = "|"))) &
+               any(stringr::str_detect(names(input_df), paste0(accepted_names[c(2, 4)], collapse = "|"))))) {
+
+      cli::cli_abort("{arg_name} must have the following columns: {final_names}")
+    } else {
+      select(input_df, (contains("sample") |
+                          contains("patient")),
+             contains("study")) %>%
         purrr::set_names(final_names)
-    )
+    }
+
 
   # if molecular_profile_id passed, keep it
   optional_molec <- c("molecular_profile_id",
@@ -148,12 +152,13 @@
 
   resolved_profile <- switch(data_type,
                              mutation = filter(profs, .data$molecularAlterationType == "MUTATION_EXTENDED") %>%
-                               pull(.data$molecularProfileId),
+                               dplyr::pull(.data$molecularProfileId),
                              fusion = filter(profs, .data$molecularAlterationType == "STRUCTURAL_VARIANT") %>%
-                               pull(.data$molecularProfileId),
+                               dplyr::pull(.data$molecularProfileId),
                              cna = filter(profs, .data$molecularAlterationType == "COPY_NUMBER_ALTERATION" &
                                             .data$datatype == "DISCRETE") %>%
-                               pull(.data$molecularProfileId))
+                               dplyr::pull(.data$molecularProfileId),
+                             segment = "Not Applicable")
 
 
   if(length(resolved_profile) == 0) {
@@ -180,6 +185,7 @@
   # study_id = NULL- will return all studies quietly
   # If study ID is supplied but wrong (doesn't exist in database) this will fail
   quiet_available_profiles <- purrr::quietly(available_profiles)
+
   profs <- tryCatch(
 
     # ** Maybe there can be a better API fail message that propagates throughout because base_url should  always be checked/throw error before
@@ -190,7 +196,7 @@
 
   resolved_study_id <- profs$result %>%
     filter(.data$molecularProfileId == molecular_profile_id) %>%
-    pull(.data$studyId)
+    dplyr::pull(.data$studyId)
 
   if(length(resolved_study_id) == 0) {
     cli::cli_abort("Molecular profile {.val {molecular_profile_id}} doesn't exist, or molecular profile doesn't match the {.val study_id} you passed. See {.code available_profiles()} or {.code available_studies()}")
@@ -222,10 +228,10 @@
   }
 
   hugo <- get_hugo_symbol(unique(df$entrezGeneId)) %>%
-    select(-.data$type)
+    select(-"type")
 
   df_with_hugo <- left_join(df, hugo, by = "entrezGeneId" ) %>%
-    select(.data$hugoGeneSymbol, .data$entrezGeneId, everything())
+    select("hugoGeneSymbol", "entrezGeneId", everything())
 
   # If there happens to be more than 1 hugo per entrez
   if(!(nrow(df_with_hugo) == nrow(df))) {
@@ -276,3 +282,16 @@
 
     }
 
+
+#' Check if NULL
+#'
+#' @param x any R object or expression
+#'
+#' @noRd
+#' @keywords internal
+#'
+#' @examples
+#' is_not_null(NULL)
+is_not_null <- function(x) {
+  !is.null(x)
+}
