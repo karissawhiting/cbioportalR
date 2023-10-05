@@ -1,5 +1,3 @@
-# cbioportalR (development version)
-
 # cbioportalR 1.1.0
 
 * Added `available_sample_lists()` function which returns all available sample list IDs for a given study ID
