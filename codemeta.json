@@ -258,8 +258,9 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2286.409KB",
+  "fileSize": "2281.863KB",
   "releaseNotes": "https://github.com/karissawhiting/cbioportalR/blob/master/NEWS.md",
   "readme": "https://github.com/karissawhiting/cbioportalR/blob/main/README.md",
-  "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"]
+  "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"],
+  "keywords": "r-package"
 }

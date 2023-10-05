@@ -53,21 +53,26 @@ Now that we are successfully connected, we may want to view all studies availabl
 ```r
 all_studies <- available_studies()
 all_studies
-#> # A tibble: 377 × 13
-#>    studyId  name  description publicStudy groups status importDate allSampleCount readPermission cancerTypeId referenceGenome
-#>    <chr>    <chr> <chr>       <lgl>       <chr>   <int> <chr>               <int> <lgl>          <chr>        <chr>          
-#>  1 acc_tcga Adre… "TCGA Adre… TRUE        "PUBL…      0 2022-10-2…             92 TRUE           acc          hg19           
-#>  2 all_stj… Acut… "Comprehen… TRUE        "PUBL…      0 2022-10-2…             93 TRUE           bll          hg19           
-#>  3 all_stj… Hypo… "Whole gen… TRUE        ""          0 2022-10-2…             44 TRUE           myeloid      hg19           
-#>  4 acbc_ms… Aden… "Whole exo… TRUE        "ACYC…      0 2022-10-2…             12 TRUE           acbc         hg19           
-#>  5 acyc_fm… Aden… "Targeted … TRUE        "ACYC…      0 2022-10-2…             28 TRUE           acyc         hg19           
-#>  6 acyc_jh… Aden… "Whole-gen… TRUE        "ACYC…      0 2022-10-2…             25 TRUE           acyc         hg19           
-#>  7 acyc_md… Aden… "WGS of 21… TRUE        "ACYC…      0 2022-10-2…            102 TRUE           acyc         hg19           
-#>  8 acyc_sa… Aden… "Whole exo… TRUE        "ACYC…      0 2022-10-2…             24 TRUE           acyc         hg19           
-#>  9 all_stj… Acut… "Whole-gen… TRUE        "PUBL…      0 2022-10-2…             73 TRUE           bll          hg19           
-#> 10 all_pha… Pedi… "Whole gen… TRUE        "NCI-…      0 2022-10-2…           1978 TRUE           bll          hg19           
-#> # ℹ 367 more rows
-#> # ℹ 2 more variables: pmid <chr>, citation <chr>
+#> # A tibble: 391 × 13
+#>    studyId   name  description publicStudy
+#>    <chr>     <chr> <chr>       <lgl>      
+#>  1 acc_tcga  Adre… "TCGA Adre… TRUE       
+#>  2 laml_tcga Acut… "TCGA Acut… TRUE       
+#>  3 blca_tcga Blad… "TCGA Blad… TRUE       
+#>  4 brca_tcga Brea… "TCGA Brea… TRUE       
+#>  5 kirc_tcga Kidn… "TCGA Kidn… TRUE       
+#>  6 cesc_tcga Cerv… "TCGA Cerv… TRUE       
+#>  7 chol_tcga Chol… "TCGA Chol… TRUE       
+#>  8 kich_tcga Kidn… "TCGA Kidn… TRUE       
+#>  9 coadread… Colo… "TCGA Colo… TRUE       
+#> 10 dlbc_tcga Lymp… "TCGA Lymp… TRUE       
+#> # ℹ 381 more rows
+#> # ℹ 9 more variables: groups <chr>,
+#> #   status <int>, importDate <chr>,
+#> #   allSampleCount <int>,
+#> #   readPermission <lgl>,
+#> #   cancerTypeId <chr>,
+#> #   referenceGenome <chr>, pmid <chr>, …
 ```
 
 By inspecting this data frame, we see the unique `study_id` for the NMIBC data set is `"blca_nmibc_2017"` and the unique `study_id` for the prostate cancer data set is `"prad_msk_2019"`. To get more information on our studies we can do the following:
@@ -79,11 +84,17 @@ By inspecting this data frame, we see the unique `study_id` for the NMIBC data s
 all_studies %>%
   filter(studyId %in% c("blca_nmibc_2017", "prad_msk_2019"))
 #> # A tibble: 2 × 13
-#>   studyId   name  description publicStudy groups status importDate allSampleCount readPermission cancerTypeId referenceGenome
-#>   <chr>     <chr> <chr>       <lgl>       <chr>   <int> <chr>               <int> <lgl>          <chr>        <chr>          
-#> 1 blca_nmi… Nonm… IMPACT seq… TRUE        PUBLIC      0 2022-10-2…            105 TRUE           blca         hg19           
-#> 2 prad_msk… Pros… MSK-IMPACT… TRUE        PUBLIC      0 2022-10-2…             18 TRUE           prostate     hg19           
-#> # ℹ 2 more variables: pmid <chr>, citation <chr>
+#>   studyId    name  description publicStudy
+#>   <chr>      <chr> <chr>       <lgl>      
+#> 1 prad_msk_… Pros… MSK-IMPACT… TRUE       
+#> 2 blca_nmib… Nonm… IMPACT seq… TRUE       
+#> # ℹ 9 more variables: groups <chr>,
+#> #   status <int>, importDate <chr>,
+#> #   allSampleCount <int>,
+#> #   readPermission <lgl>,
+#> #   cancerTypeId <chr>,
+#> #   referenceGenome <chr>, pmid <chr>,
+#> #   citation <chr>
 ```
 
 More in-depth information about the study can be found with `get_study_info()`
@@ -100,7 +111,7 @@ get_study_info("blca_nmibc_2017") %>%
 #> citation                    "Pietzak et al. Eur Urol 2017"                                                 
 #> groups                      "PUBLIC"                                                                       
 #> status                      "0"                                                                            
-#> importDate                  "2022-10-26 15:22:21"                                                          
+#> importDate                  "2023-07-19 17:59:06"                                                          
 #> allSampleCount              "105"                                                                          
 #> sequencedSampleCount        "105"                                                                          
 #> cnaSampleCount              "105"                                                                          
@@ -136,7 +147,7 @@ get_study_info("prad_msk_2019") %>%
 #> citation                    "Granlund et al. Cell Metab 2020"                                
 #> groups                      "PUBLIC"                                                         
 #> status                      "0"                                                              
-#> importDate                  "2022-10-27 16:47:38"                                            
+#> importDate                  "2023-06-20 12:45:47"                                            
 #> allSampleCount              "18"                                                             
 #> sequencedSampleCount        "18"                                                             
 #> cnaSampleCount              "18"                                                             
@@ -168,24 +179,32 @@ We can check available genomic data with `available_profiles()`.
 ```r
 available_profiles(study_id = "blca_nmibc_2017")
 #> # A tibble: 3 × 8
-#>   molecularAlterationType datatype name            description showProfileInAnalysi…¹ patientLevel molecularProfileId studyId
-#>   <chr>                   <chr>    <chr>           <chr>       <lgl>                  <lgl>        <chr>              <chr>  
-#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putative copy-… Copy Numbe… TRUE                   FALSE        blca_nmibc_2017_c… blca_n…
-#> 2 MUTATION_EXTENDED       MAF      Mutations       Mutation d… TRUE                   FALSE        blca_nmibc_2017_m… blca_n…
-#> 3 STRUCTURAL_VARIANT      SV       Structural var… Structural… TRUE                   FALSE        blca_nmibc_2017_s… blca_n…
-#> # ℹ abbreviated name: ¹​showProfileInAnalysisTab
+#>   molecularAlterationType datatype name   
+#>   <chr>                   <chr>    <chr>  
+#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putati…
+#> 2 MUTATION_EXTENDED       MAF      Mutati…
+#> 3 STRUCTURAL_VARIANT      SV       Struct…
+#> # ℹ 5 more variables: description <chr>,
+#> #   showProfileInAnalysisTab <lgl>,
+#> #   patientLevel <lgl>,
+#> #   molecularProfileId <chr>,
+#> #   studyId <chr>
 ```
 
 
 ```r
 available_profiles(study_id = "prad_msk_2019")
 #> # A tibble: 3 × 8
-#>   molecularAlterationType datatype name            description showProfileInAnalysi…¹ patientLevel molecularProfileId studyId
-#>   <chr>                   <chr>    <chr>           <chr>       <lgl>                  <lgl>        <chr>              <chr>  
-#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putative copy-… Putative c… TRUE                   FALSE        prad_msk_2019_cna  prad_m…
-#> 2 MUTATION_EXTENDED       MAF      Mutations       IMPACT468 … TRUE                   FALSE        prad_msk_2019_mut… prad_m…
-#> 3 STRUCTURAL_VARIANT      SV       Structural var… Structural… TRUE                   FALSE        prad_msk_2019_str… prad_m…
-#> # ℹ abbreviated name: ¹​showProfileInAnalysisTab
+#>   molecularAlterationType datatype name   
+#>   <chr>                   <chr>    <chr>  
+#> 1 COPY_NUMBER_ALTERATION  DISCRETE Putati…
+#> 2 MUTATION_EXTENDED       MAF      Mutati…
+#> 3 STRUCTURAL_VARIANT      SV       Struct…
+#> # ℹ 5 more variables: description <chr>,
+#> #   showProfileInAnalysisTab <lgl>,
+#> #   patientLevel <lgl>,
+#> #   molecularProfileId <chr>,
+#> #   studyId <chr>
 ```
 
 Luckily, in this example our studies have mutation, copy number alteration and fusion (structural variant) data available. Each of these data types has a unique molecular profile ID. The molecular profile ID usually takes the form of `<study_id>_mutations`, `<study_id>_structural_variants`, `<study_id>_cna`.
@@ -194,7 +213,9 @@ Luckily, in this example our studies have mutation, copy number alteration and f
 ```r
 available_profiles(study_id = "blca_nmibc_2017") %>%
   pull(molecularProfileId)
-#> [1] "blca_nmibc_2017_cna"                 "blca_nmibc_2017_mutations"           "blca_nmibc_2017_structural_variants"
+#> [1] "blca_nmibc_2017_cna"                
+#> [2] "blca_nmibc_2017_mutations"          
+#> [3] "blca_nmibc_2017_structural_variants"
 ```
 
 ## Pulling Genomic Data
@@ -301,19 +322,30 @@ Now we pass this to `get_genetics_by_sample()`
 ```r
 all_genomic <- get_genetics_by_sample(sample_study_pairs = df_pairs)
 #> Joining with `by = join_by(study_id)`
-#> The following parameters were used in query:
-#> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
-#> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
+#> The following parameters were used in
+#> query:
+#> Study ID: "blca_nmibc_2017" and
+#> "prad_msk_2019"
+#> Molecular Profile ID:
+#> blca_nmibc_2017_mutations and
+#> prad_msk_2019_mutations
 #> Genes: "All available genes"
 #> Joining with `by = join_by(study_id)`
-#> The following parameters were used in query:
-#> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
-#> Molecular Profile ID: blca_nmibc_2017_cna and prad_msk_2019_cna
+#> The following parameters were used in
+#> query:
+#> Study ID: "blca_nmibc_2017" and
+#> "prad_msk_2019"
+#> Molecular Profile ID: blca_nmibc_2017_cna
+#> and prad_msk_2019_cna
 #> Genes: "All available genes"
 #> Joining with `by = join_by(study_id)`
-#> The following parameters were used in query:
-#> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
-#> Molecular Profile ID: blca_nmibc_2017_structural_variants and prad_msk_2019_structural_variants
+#> The following parameters were used in
+#> query:
+#> Study ID: "blca_nmibc_2017" and
+#> "prad_msk_2019"
+#> Molecular Profile ID:
+#> blca_nmibc_2017_structural_variants and
+#> prad_msk_2019_structural_variants
 #> Genes: "All available genes"
 
 mut_sample <- all_genomic$mutation
@@ -325,9 +357,13 @@ Like with querying by study ID, you can also pull data individually by genomic d
 ```r
 mut_only <- get_mutations_by_sample(sample_study_pairs = df_pairs)
 #> Joining with `by = join_by(study_id)`
-#> The following parameters were used in query:
-#> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
-#> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
+#> The following parameters were used in
+#> query:
+#> Study ID: "blca_nmibc_2017" and
+#> "prad_msk_2019"
+#> Molecular Profile ID:
+#> blca_nmibc_2017_mutations and
+#> prad_msk_2019_mutations
 #> Genes: "All available genes"
 
 identical(mut_only, mut_sample)
@@ -386,15 +422,23 @@ When pulling by sample IDs, we can also limit our results to a specific set of g
 ```r
 by_hugo <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = "TP53")
 #> Joining with `by = join_by(study_id)`
-#> The following parameters were used in query:
-#> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
-#> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
+#> The following parameters were used in
+#> query:
+#> Study ID: "blca_nmibc_2017" and
+#> "prad_msk_2019"
+#> Molecular Profile ID:
+#> blca_nmibc_2017_mutations and
+#> prad_msk_2019_mutations
 #> Genes: "TP53"
 by_gene_id <- get_mutations_by_sample(sample_study_pairs = df_pairs, genes = 7157)
 #> Joining with `by = join_by(study_id)`
-#> The following parameters were used in query:
-#> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
-#> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
+#> The following parameters were used in
+#> query:
+#> Study ID: "blca_nmibc_2017" and
+#> "prad_msk_2019"
+#> Molecular Profile ID:
+#> blca_nmibc_2017_mutations and
+#> prad_msk_2019_mutations
 #> Genes: 7157
 
 identical(by_hugo, by_gene_id)
@@ -408,23 +452,30 @@ get_mutations_by_sample(
   panel = "IMPACT468") %>%
   head()
 #> Joining with `by = join_by(study_id)`
-#> The following parameters were used in query:
-#> Study ID: "blca_nmibc_2017" and "prad_msk_2019"
-#> Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations
+#> The following parameters were used in
+#> query:
+#> Study ID: "blca_nmibc_2017" and
+#> "prad_msk_2019"
+#> Molecular Profile ID:
+#> blca_nmibc_2017_mutations and
+#> prad_msk_2019_mutations
 #> Genes: "IMPACT468"
 #> # A tibble: 6 × 28
-#>   hugoGeneSymbol entrezGeneId uniqueSampleKey           uniquePatientKey molecularProfileId sampleId patientId studyId center
-#>   <chr>                 <int> <chr>                     <chr>            <chr>              <chr>    <chr>     <chr>   <chr> 
-#> 1 TERT                   7015 UC0wMDAxNDUzLVQwMS1JTTM6… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n… MSKCC 
-#> 2 SMAD4                  4089 UC0wMDAxNDUzLVQwMS1JTTM6… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n… MSKCC 
-#> 3 ERBB4                  2066 UC0wMDAxNDUzLVQwMS1JTTM6… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n… MSKCC 
-#> 4 CUL3                   8452 UC0wMDAxNDUzLVQwMS1JTTM6… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n… MSKCC 
-#> 5 PBRM1                 55193 UC0wMDAxNDUzLVQwMS1JTTM6… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n… MSKCC 
-#> 6 APC                     324 UC0wMDAxNDUzLVQwMS1JTTM6… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453 blca_n… MSKCC 
-#> # ℹ 19 more variables: mutationStatus <chr>, validationStatus <chr>, tumorAltCount <int>, tumorRefCount <int>,
-#> #   normalAltCount <int>, normalRefCount <int>, startPosition <int>, endPosition <int>, referenceAllele <chr>,
-#> #   proteinChange <chr>, mutationType <chr>, ncbiBuild <chr>, variantType <chr>, chr <chr>, variantAllele <chr>,
-#> #   refseqMrnaId <chr>, proteinPosStart <int>, proteinPosEnd <int>, keyword <chr>
+#>   hugoGeneSymbol entrezGeneId
+#>   <chr>                 <int>
+#> 1 SMAD4                  4089
+#> 2 TERT                   7015
+#> 3 ERBB4                  2066
+#> 4 CUL3                   8452
+#> 5 PBRM1                 55193
+#> 6 APC                     324
+#> # ℹ 26 more variables:
+#> #   uniqueSampleKey <chr>,
+#> #   uniquePatientKey <chr>,
+#> #   molecularProfileId <chr>,
+#> #   sampleId <chr>, patientId <chr>,
+#> #   studyId <chr>, center <chr>,
+#> #   mutationStatus <chr>, …
 ```
 
 ## Pulling Clinical Data & Sample Metadata
@@ -440,21 +491,26 @@ attr_prad <- available_clinical_attributes("prad_msk_2019")
 
 attr_prad
 #> # A tibble: 13 × 7
-#>    displayName                   description                   datatype patientAttribute priority clinicalAttributeId studyId
-#>    <chr>                         <chr>                         <chr>    <lgl>            <chr>    <chr>               <chr>  
-#>  1 Cancer Type                   Cancer Type                   STRING   FALSE            1        CANCER_TYPE         prad_m…
-#>  2 Cancer Type Detailed          Cancer Type Detailed          STRING   FALSE            1        CANCER_TYPE_DETAIL… prad_m…
-#>  3 Fraction Genome Altered       Fraction Genome Altered       NUMBER   FALSE            20       FRACTION_GENOME_AL… prad_m…
-#>  4 Gene Panel                    Gene Panel.                   STRING   FALSE            1        GENE_PANEL          prad_m…
-#>  5 Mutation Count                Mutation Count                NUMBER   FALSE            30       MUTATION_COUNT      prad_m…
-#>  6 Oncotree Code                 Oncotree Code                 STRING   FALSE            1        ONCOTREE_CODE       prad_m…
-#>  7 Sample Class                  The sample classification (i… STRING   FALSE            1        SAMPLE_CLASS        prad_m…
-#>  8 Number of Samples Per Patient Number of Samples Per Patient STRING   TRUE             1        SAMPLE_COUNT        prad_m…
-#>  9 Sample Type                   The type of sample (i.e., no… STRING   FALSE            1        SAMPLE_TYPE         prad_m…
-#> 10 Sex                           Sex                           STRING   TRUE             1        SEX                 prad_m…
-#> 11 Somatic Status                Somatic Status                STRING   FALSE            1        SOMATIC_STATUS      prad_m…
-#> 12 Specimen Preservation Type    The method used for preparin… STRING   FALSE            1        SPECIMEN_PRESERVAT… prad_m…
-#> 13 TMB (nonsynonymous)           TMB (nonsynonymous)           NUMBER   FALSE            1        TMB_NONSYNONYMOUS   prad_m…
+#>    displayName        description datatype
+#>    <chr>              <chr>       <chr>   
+#>  1 Cancer Type        Cancer Type STRING  
+#>  2 Cancer Type Detai… Cancer Typ… STRING  
+#>  3 Fraction Genome A… Fraction G… NUMBER  
+#>  4 Gene Panel         Gene Panel. STRING  
+#>  5 Mutation Count     Mutation C… NUMBER  
+#>  6 Oncotree Code      Oncotree C… STRING  
+#>  7 Sample Class       The sample… STRING  
+#>  8 Number of Samples… Number of … STRING  
+#>  9 Sample Type        The type o… STRING  
+#> 10 Sex                Sex         STRING  
+#> 11 Somatic Status     Somatic St… STRING  
+#> 12 Specimen Preserva… The method… STRING  
+#> 13 TMB (nonsynonymou… TMB (nonsy… NUMBER  
+#> # ℹ 4 more variables:
+#> #   patientAttribute <lgl>,
+#> #   priority <chr>,
+#> #   clinicalAttributeId <chr>,
+#> #   studyId <chr>
 ```
 
 There are a select set available for both studies:
@@ -482,14 +538,17 @@ all_clinical %>%
   select(-contains("unique")) %>%
   head()
 #> # A tibble: 6 × 5
-#>   sampleId          patientId studyId         clinicalAttributeId     value                       
-#>   <chr>             <chr>     <chr>           <chr>                   <chr>                       
-#> 1 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 CANCER_TYPE             Bladder Cancer              
-#> 2 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 CANCER_TYPE_DETAILED    Bladder Urothelial Carcinoma
-#> 3 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 FRACTION_GENOME_ALTERED 0.4448                      
-#> 4 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 MUTATION_COUNT          11                          
-#> 5 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 ONCOTREE_CODE           BLCA                        
-#> 6 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 SOMATIC_STATUS          Matched
+#>   sampleId          patientId studyId     
+#>   <chr>             <chr>     <chr>       
+#> 1 P-0001453-T01-IM3 P-0001453 blca_nmibc_…
+#> 2 P-0001453-T01-IM3 P-0001453 blca_nmibc_…
+#> 3 P-0001453-T01-IM3 P-0001453 blca_nmibc_…
+#> 4 P-0001453-T01-IM3 P-0001453 blca_nmibc_…
+#> 5 P-0001453-T01-IM3 P-0001453 blca_nmibc_…
+#> 6 P-0001453-T01-IM3 P-0001453 blca_nmibc_…
+#> # ℹ 2 more variables:
+#> #   clinicalAttributeId <chr>,
+#> #   value <chr>
 ```
 
 The below pulls data at the patient level:
@@ -512,14 +571,15 @@ all_clinical %>%
   select(-contains("unique")) %>%
   head()
 #> # A tibble: 6 × 4
-#>   patientId studyId         clinicalAttributeId value
-#>   <chr>     <chr>           <chr>               <chr>
-#> 1 P-0001453 blca_nmibc_2017 SAMPLE_COUNT        1    
-#> 2 P-0001453 blca_nmibc_2017 SEX                 Male 
-#> 3 P-0002166 blca_nmibc_2017 SAMPLE_COUNT        1    
-#> 4 P-0002166 blca_nmibc_2017 SEX                 Male 
-#> 5 P-0003238 blca_nmibc_2017 SAMPLE_COUNT        1    
-#> 6 P-0003238 blca_nmibc_2017 SEX                 Male
+#>   patientId studyId    clinicalAttributeId
+#>   <chr>     <chr>      <chr>              
+#> 1 P-0001453 blca_nmib… SAMPLE_COUNT       
+#> 2 P-0001453 blca_nmib… SEX                
+#> 3 P-0002166 blca_nmib… SAMPLE_COUNT       
+#> 4 P-0002166 blca_nmib… SEX                
+#> 5 P-0003238 blca_nmib… SAMPLE_COUNT       
+#> 6 P-0003238 blca_nmib… SEX                
+#> # ℹ 1 more variable: value <chr>
 ```
 
 Like with the genomic data pull functions, you can also pull clinical data by a data frame of sample ID - study ID pairs, or a data frame of patient ID - study ID pairs. Below, we will pull by patient ID - study ID pairs.
@@ -545,17 +605,18 @@ all_patient_clinical <- get_clinical_by_patient(patient_study_pairs = df_pairs,
 all_patient_clinical %>%
   select(-contains("unique"))
 #> # A tibble: 34 × 4
-#>    patientId studyId         clinicalAttributeId value 
-#>    <chr>     <chr>           <chr>               <chr> 
-#>  1 P-0001453 blca_nmibc_2017 SAMPLE_COUNT        1     
-#>  2 P-0001453 blca_nmibc_2017 SEX                 Male  
-#>  3 P-0002166 blca_nmibc_2017 SAMPLE_COUNT        1     
-#>  4 P-0002166 blca_nmibc_2017 SEX                 Male  
-#>  5 P-0003238 blca_nmibc_2017 SAMPLE_COUNT        1     
-#>  6 P-0003238 blca_nmibc_2017 SEX                 Male  
-#>  7 P-0003257 blca_nmibc_2017 SAMPLE_COUNT        1     
-#>  8 P-0003257 blca_nmibc_2017 SEX                 Female
-#>  9 P-0003261 blca_nmibc_2017 SAMPLE_COUNT        1     
-#> 10 P-0003261 blca_nmibc_2017 SEX                 Male  
+#>    patientId studyId   clinicalAttributeId
+#>    <chr>     <chr>     <chr>              
+#>  1 P-0001453 blca_nmi… SAMPLE_COUNT       
+#>  2 P-0001453 blca_nmi… SEX                
+#>  3 P-0002166 blca_nmi… SAMPLE_COUNT       
+#>  4 P-0002166 blca_nmi… SEX                
+#>  5 P-0003238 blca_nmi… SAMPLE_COUNT       
+#>  6 P-0003238 blca_nmi… SEX                
+#>  7 P-0003257 blca_nmi… SAMPLE_COUNT       
+#>  8 P-0003257 blca_nmi… SEX                
+#>  9 P-0003261 blca_nmi… SAMPLE_COUNT       
+#> 10 P-0003261 blca_nmi… SEX                
 #> # ℹ 24 more rows
+#> # ℹ 1 more variable: value <chr>
 ```

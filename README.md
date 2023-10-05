@@ -150,16 +150,16 @@ available_studies() %>%
 #> # A tibble: 10 × 13
 #>    studyId name  description publicStudy groups status importDate allSampleCount
 #>    <chr>   <chr> <chr>       <lgl>       <chr>   <int> <chr>               <int>
-#>  1 acc_tc… Adre… "TCGA Adre… TRUE        "PUBL…      0 2022-10-2…             92
-#>  2 all_st… Acut… "Comprehen… TRUE        "PUBL…      0 2022-10-2…             93
-#>  3 all_st… Hypo… "Whole gen… TRUE        ""          0 2022-10-2…             44
-#>  4 acbc_m… Aden… "Whole exo… TRUE        "ACYC…      0 2022-10-2…             12
-#>  5 acyc_f… Aden… "Targeted … TRUE        "ACYC…      0 2022-10-2…             28
-#>  6 acyc_j… Aden… "Whole-gen… TRUE        "ACYC…      0 2022-10-2…             25
-#>  7 acyc_m… Aden… "WGS of 21… TRUE        "ACYC…      0 2022-10-2…            102
-#>  8 acyc_s… Aden… "Whole exo… TRUE        "ACYC…      0 2022-10-2…             24
-#>  9 all_st… Acut… "Whole-gen… TRUE        "PUBL…      0 2022-10-2…             73
-#> 10 all_ph… Pedi… "Whole gen… TRUE        "NCI-…      0 2022-10-2…           1978
+#>  1 acc_tc… Adre… "TCGA Adre… TRUE        PUBLIC      0 2023-06-1…             92
+#>  2 laml_t… Acut… "TCGA Acut… TRUE        PUBLIC      0 2023-06-1…            200
+#>  3 blca_t… Blad… "TCGA Blad… TRUE        PUBLIC      0 2023-06-1…            413
+#>  4 brca_t… Brea… "TCGA Brea… TRUE        PUBLIC      0 2023-06-1…           1108
+#>  5 kirc_t… Kidn… "TCGA Kidn… TRUE        PUBLIC      0 2023-06-1…            538
+#>  6 cesc_t… Cerv… "TCGA Cerv… TRUE        PUBLIC      0 2023-06-1…            310
+#>  7 chol_t… Chol… "TCGA Chol… TRUE        PUBLIC      0 2023-06-1…             51
+#>  8 kich_t… Kidn… "TCGA Kidn… TRUE        PUBLIC      0 2023-06-1…            113
+#>  9 coadre… Colo… "TCGA Colo… TRUE        PUBLIC      0 2023-06-1…            640
+#> 10 dlbc_t… Lymp… "TCGA Lymp… TRUE        PUBLIC      0 2023-06-1…             48
 #> # ℹ 5 more variables: readPermission <lgl>, cancerTypeId <chr>,
 #> #   referenceGenome <chr>, pmid <chr>, citation <chr>
 ```
@@ -175,7 +175,7 @@ get_study_info("acc_tcga") %>%
 #> publicStudy                 "TRUE"                                                                                                                                                                                           
 #> groups                      "PUBLIC"                                                                                                                                                                                         
 #> status                      "0"                                                                                                                                                                                              
-#> importDate                  "2022-10-26 14:56:04"                                                                                                                                                                            
+#> importDate                  "2023-06-19 09:42:47"                                                                                                                                                                            
 #> allSampleCount              "92"                                                                                                                                                                                             
 #> sequencedSampleCount        "90"                                                                                                                                                                                             
 #> cnaSampleCount              "90"                                                                                                                                                                                             
