@@ -121,7 +121,7 @@
   study_id_guess %||% cli::cli_abort("Unable to guess a {.code study_id} for your database.
                                    Please provide a {.code study_id}.")
 
-  cli::cli_alert_info("No {.code study_id} provided. Using {.val {study_id_guess}} as default study")
+  study_id %||% cli::cli_alert_info("No {.code study_id} provided. Using {.val {study_id_guess}} as default study")
 
   return(study_id_guess)
 }
