@@ -5,7 +5,6 @@
 #' @return stop if no arg
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .check_for_study_id <- function(study_id) {
 
@@ -27,7 +26,6 @@
 #' @return stop if no sample_id arg
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .check_for_patient_id <- function(patient_id) {
   if (is.null(patient_id)) {
@@ -43,7 +41,6 @@
 #' @return A valid `sample_study_pairs` or `patient_study_pairs` data frame. If `input_df` is NULL, it will return NULL.
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .check_input_pair_df <- function(input_df) {
 
@@ -113,7 +110,6 @@
 #' @return a guess at which study_id a user may want to use
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .guess_study_id <- function(study_id, resolved_url) {
 
@@ -125,7 +121,7 @@
   study_id_guess %||% cli::cli_abort("Unable to guess a {.code study_id} for your database.
                                    Please provide a {.code study_id}.")
 
-  cli::cli_alert_info("No {.code study_id} provided. Using {.val {study_id_guess}} as default study")
+  study_id %||% cli::cli_alert_info("No {.code study_id} provided. Using {.val {study_id_guess}} as default study")
 
   return(study_id_guess)
 }
@@ -144,7 +140,6 @@
 #' @return find molecular profile name for a specified data type
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .lookup_profile_name <- function(data_type, study_id, base_url) {
 
@@ -178,7 +173,6 @@
 #' @return find study ID for a specified molecular profile
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .lookup_study_name <- function(molecular_profile_id, study_id, base_url) {
 
@@ -217,7 +211,6 @@
 #' @return a dataframe that matches input data frame but with hugoGeneSymbol column
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .lookup_hugo <- function(df, base_url) {
 
@@ -262,7 +255,6 @@
 #' @return a vector of Entrez Gene IDs
 #' @keywords internal
 #' @noRd
-#' @export
 #'
 .get_panel_entrez <- function(panel_id, base_url) {
 
@@ -286,7 +278,6 @@
 #' Check if NULL
 #'
 #' @param x any R object or expression
-#'
 #' @noRd
 #' @keywords internal
 #'

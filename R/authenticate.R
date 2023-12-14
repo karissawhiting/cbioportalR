@@ -101,7 +101,6 @@ test_cbioportal_db <- function() {
 #' Pulls the set URL from the internal package environment
 #'
 #' @return a string indicating the saved URL in the `cbioportal_env` environment or an error if no URL found.
-#' @export
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @keywords internal
 #' @noRd
@@ -126,9 +125,7 @@ test_cbioportal_db <- function() {
 #' Process and make a best guess of URL string passed to authentication functions
 #'
 #' @param raw_url The URL passed to a function by a user
-#'
 #' @return A string with a final URL to be used in the given query.
-#' @export
 #' @author Karissa Whiting, Daniel D. Sjoberg
 #' @keywords internal
 #' @noRd

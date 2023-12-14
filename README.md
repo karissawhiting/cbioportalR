@@ -27,10 +27,13 @@ website](https://www.cbioportal.org/), as well as private institutional
 cBioPortal instances (e.g. MSKCC, GENIE) with appropriate credentials
 and [authentication](#authentication).
 
-This package is compatible with cBioPortal v5.0, but is subject to
-change as [cBioPortal updates are
-released](https://github.com/cBioPortal/cbioportal/releases). For more
-information on cBioPortal, see the following publications:
+This package is compatible with cBioPortal v5, but is subject to change
+as [cBioPortal updates are
+released](https://github.com/cBioPortal/cbioportal/releases). To see if
+your cBioPortal instance is compatible, look for its version in the
+footer of the homepage or check `portalVersion` in the output of
+`YOUR_CBIOPORTAL_INSTANCE/api/info`. For more information on cBioPortal,
+see the following publications:
 
 - [Gao et al. Sci. Signal.
   2013](https://pubmed.ncbi.nlm.nih.gov/23550210/)
@@ -145,21 +148,20 @@ To see available studies in your database you can use:
 available_studies() %>% 
   head(n = 10)
 #> # A tibble: 10 × 13
-#>    studyId   name  descr…¹ publi…² groups status impor…³ allSa…⁴ readP…⁵ cance…⁶
-#>    <chr>     <chr> <chr>   <lgl>   <chr>   <int> <chr>     <int> <lgl>   <chr>  
-#>  1 acc_tcga  Adre… "TCGA … TRUE    "PUBL…      0 2022-0…      92 TRUE    acc    
-#>  2 bcc_unig… Basa… "Whole… TRUE    "PUBL…      0 2022-0…     293 TRUE    bcc    
-#>  3 ampca_bc… Ampu… "Exome… TRUE    "PUBL…      0 2022-0…     160 TRUE    ampca  
-#>  4 blca_dfa… Blad… "Whole… TRUE    "PUBL…      0 2022-0…      50 TRUE    blca   
-#>  5 blca_msk… Blad… "Compr… TRUE    "PUBL…      0 2022-0…      97 TRUE    blca   
-#>  6 blca_bgi  Blad… "Whole… TRUE    "PUBL…      0 2022-0…      99 TRUE    blca   
-#>  7 blca_msk… Blad… "Genom… TRUE    "PUBL…      0 2022-0…     109 TRUE    blca   
-#>  8 all_stju… Hypo… "Whole… TRUE    ""          0 2022-0…      44 TRUE    myeloid
-#>  9 acyc_fmi… Aden… "Targe… TRUE    "ACYC…      0 2022-0…      28 TRUE    acyc   
-#> 10 acyc_san… Aden… "Whole… TRUE    "ACYC…      0 2022-0…      24 TRUE    acyc   
-#> # … with 3 more variables: referenceGenome <chr>, pmid <chr>, citation <chr>,
-#> #   and abbreviated variable names ¹​description, ²​publicStudy, ³​importDate,
-#> #   ⁴​allSampleCount, ⁵​readPermission, ⁶​cancerTypeId
+#>    studyId name  description publicStudy groups status importDate allSampleCount
+#>    <chr>   <chr> <chr>       <lgl>       <chr>   <int> <chr>               <int>
+#>  1 acc_tc… Adre… "TCGA Adre… TRUE        PUBLIC      0 2023-06-1…             92
+#>  2 laml_t… Acut… "TCGA Acut… TRUE        PUBLIC      0 2023-06-1…            200
+#>  3 blca_t… Blad… "TCGA Blad… TRUE        PUBLIC      0 2023-06-1…            413
+#>  4 brca_t… Brea… "TCGA Brea… TRUE        PUBLIC      0 2023-06-1…           1108
+#>  5 kirc_t… Kidn… "TCGA Kidn… TRUE        PUBLIC      0 2023-06-1…            538
+#>  6 cesc_t… Cerv… "TCGA Cerv… TRUE        PUBLIC      0 2023-06-1…            310
+#>  7 chol_t… Chol… "TCGA Chol… TRUE        PUBLIC      0 2023-06-1…             51
+#>  8 kich_t… Kidn… "TCGA Kidn… TRUE        PUBLIC      0 2023-06-1…            113
+#>  9 coadre… Colo… "TCGA Colo… TRUE        PUBLIC      0 2023-06-1…            640
+#> 10 dlbc_t… Lymp… "TCGA Lymp… TRUE        PUBLIC      0 2023-06-1…             48
+#> # ℹ 5 more variables: readPermission <lgl>, cancerTypeId <chr>,
+#> #   referenceGenome <chr>, pmid <chr>, citation <chr>
 ```
 
 To view study metadata on a particular study you can use:
@@ -173,7 +175,7 @@ get_study_info("acc_tcga") %>%
 #> publicStudy                 "TRUE"                                                                                                                                                                                           
 #> groups                      "PUBLIC"                                                                                                                                                                                         
 #> status                      "0"                                                                                                                                                                                              
-#> importDate                  "2022-03-04 17:47:56"                                                                                                                                                                            
+#> importDate                  "2023-06-19 09:42:47"                                                                                                                                                                            
 #> allSampleCount              "92"                                                                                                                                                                                             
 #> sequencedSampleCount        "90"                                                                                                                                                                                             
 #> cnaSampleCount              "90"                                                                                                                                                                                             
@@ -186,6 +188,7 @@ get_study_info("acc_tcga") %>%
 #> massSpectrometrySampleCount "0"                                                                                                                                                                                              
 #> completeSampleCount         "75"                                                                                                                                                                                             
 #> readPermission              "TRUE"                                                                                                                                                                                           
+#> treatmentCount              "0"                                                                                                                                                                                              
 #> studyId                     "acc_tcga"                                                                                                                                                                                       
 #> cancerTypeId                "acc"                                                                                                                                                                                            
 #> cancerType.name             "Adrenocortical Carcinoma"                                                                                                                                                                       
@@ -213,36 +216,36 @@ indicated by the function message.
 ``` r
 df$mutation %>% 
   head()
-#> # A tibble: 6 × 33
-#>   hugoG…¹ entre…² uniqu…³ uniqu…⁴ molec…⁵ sampl…⁶ patie…⁷ studyId center mutat…⁸
-#>   <chr>     <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <chr>  
-#> 1 KRT8       3856 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic
-#> 2 LCE1B    353132 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic
-#> 3 SLC9C2   284525 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic
-#> 4 DNAH14   127602 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic
-#> 5 OPN4      94233 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic
-#> 6 DNAJC4     3338 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic
-#> # … with 23 more variables: validationStatus <chr>, tumorAltCount <int>,
-#> #   tumorRefCount <int>, normalAltCount <int>, normalRefCount <int>,
-#> #   startPosition <int>, endPosition <int>, referenceAllele <chr>,
-#> #   proteinChange <chr>, mutationType <chr>, functionalImpactScore <chr>,
-#> #   fisValue <dbl>, linkXvar <chr>, linkPdb <chr>, linkMsa <chr>,
-#> #   ncbiBuild <chr>, variantType <chr>, keyword <chr>, chr <chr>,
-#> #   variantAllele <chr>, refseqMrnaId <chr>, proteinPosStart <int>, …
+#> # A tibble: 6 × 28
+#>   hugoGeneSymbol entrezGeneId uniqueSampleKey                  uniquePatientKey 
+#>   <chr>                 <int> <chr>                            <chr>            
+#> 1 KRT8                   3856 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 2 LCE1B                353132 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 3 SLC9C2               284525 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 4 DNAH14               127602 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 5 OPN4                  94233 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 6 DNAJC4                 3338 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> # ℹ 24 more variables: molecularProfileId <chr>, sampleId <chr>,
+#> #   patientId <chr>, studyId <chr>, center <chr>, mutationStatus <chr>,
+#> #   validationStatus <chr>, tumorAltCount <int>, tumorRefCount <int>,
+#> #   normalAltCount <int>, normalRefCount <int>, startPosition <int>,
+#> #   endPosition <int>, referenceAllele <chr>, proteinChange <chr>,
+#> #   mutationType <chr>, ncbiBuild <chr>, variantType <chr>, keyword <chr>,
+#> #   chr <chr>, variantAllele <chr>, refseqMrnaId <chr>, …
 
 df$cna %>% 
   head()
 #> # A tibble: 6 × 9
-#>   hugoGeneSymbol entre…¹ uniqu…² uniqu…³ molec…⁴ sampl…⁵ patie…⁶ studyId alter…⁷
-#>   <chr>            <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <int>
-#> 1 MEOX1             4222 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2
-#> 2 NUFIP2           57532 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2
-#> 3 OSBPL7          114881 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2
-#> 4 TP53I13          90313 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2
-#> 5 TAOK1            57551 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2
-#> 6 SPOP              8405 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc…       2
-#> # … with abbreviated variable names ¹​entrezGeneId, ²​uniqueSampleKey,
-#> #   ³​uniquePatientKey, ⁴​molecularProfileId, ⁵​sampleId, ⁶​patientId, ⁷​alteration
+#>   hugoGeneSymbol entrezGeneId uniqueSampleKey                  uniquePatientKey 
+#>   <chr>                 <int> <chr>                            <chr>            
+#> 1 RERE                    473 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 2 ENO1                   2023 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 3 CA6                     765 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 4 RN7SL451P         106480377 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 5 SLC2A7               155184 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 6 SLC2A5                 6518 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> # ℹ 5 more variables: molecularProfileId <chr>, sampleId <chr>,
+#> #   patientId <chr>, studyId <chr>, alteration <int>
 ```
 
 You can also pull data by specific sample IDs but the API requires a bit
@@ -288,22 +291,22 @@ mutations <- get_mutations_by_sample(sample_id =  samples,
 
 mutations %>%
   head()
-#> # A tibble: 6 × 33
-#>   hugoG…¹ entre…² uniqu…³ uniqu…⁴ molec…⁵ sampl…⁶ patie…⁷ studyId center mutat…⁸
-#>   <chr>     <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <chr>  
-#> 1 KRT8       3856 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic
-#> 2 LCE1B    353132 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic
-#> 3 SLC9C2   284525 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic
-#> 4 DNAH14   127602 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… broad… Somatic
-#> 5 OPN4      94233 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic
-#> 6 DNAJC4     3338 VENHQS… VENHQS… acc_tc… TCGA-O… TCGA-O… acc_tc… hgsc.… Somatic
-#> # … with 23 more variables: validationStatus <chr>, tumorAltCount <int>,
-#> #   tumorRefCount <int>, normalAltCount <int>, normalRefCount <int>,
-#> #   startPosition <int>, endPosition <int>, referenceAllele <chr>,
-#> #   proteinChange <chr>, mutationType <chr>, functionalImpactScore <chr>,
-#> #   fisValue <dbl>, linkXvar <chr>, linkPdb <chr>, linkMsa <chr>,
-#> #   ncbiBuild <chr>, variantType <chr>, keyword <chr>, chr <chr>,
-#> #   variantAllele <chr>, refseqMrnaId <chr>, proteinPosStart <int>, …
+#> # A tibble: 6 × 28
+#>   hugoGeneSymbol entrezGeneId uniqueSampleKey                  uniquePatientKey 
+#>   <chr>                 <int> <chr>                            <chr>            
+#> 1 KRT8                   3856 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 2 LCE1B                353132 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 3 SLC9C2               284525 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 4 DNAH14               127602 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 5 OPN4                  94233 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> 6 DNAJC4                 3338 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox…
+#> # ℹ 24 more variables: molecularProfileId <chr>, sampleId <chr>,
+#> #   patientId <chr>, studyId <chr>, center <chr>, mutationStatus <chr>,
+#> #   validationStatus <chr>, tumorAltCount <int>, tumorRefCount <int>,
+#> #   normalAltCount <int>, normalRefCount <int>, startPosition <int>,
+#> #   endPosition <int>, referenceAllele <chr>, proteinChange <chr>,
+#> #   mutationType <chr>, ncbiBuild <chr>, variantType <chr>, keyword <chr>,
+#> #   chr <chr>, variantAllele <chr>, refseqMrnaId <chr>, …
 ```
 
 Lastly, you can also pull clinical data or sample metadata (e.g. tumor
@@ -314,37 +317,36 @@ available, you can use:
 available_clinical_attributes(study_id = "acc_tcga") %>%
   head()
 #> # A tibble: 6 × 7
-#>   displayName                    descr…¹ datat…² patie…³ prior…⁴ clini…⁵ studyId
-#>   <chr>                          <chr>   <chr>   <lgl>   <chr>   <chr>   <chr>  
-#> 1 Diagnosis Age                  Age at… NUMBER  TRUE    1       AGE     acc_tc…
-#> 2 Neoplasm Disease Stage Americ… The ex… STRING  TRUE    1       AJCC_P… acc_tc…
-#> 3 American Joint Committee on C… The ve… STRING  TRUE    1       AJCC_S… acc_tc…
-#> 4 Atypical Mitotic Figures       Atypic… STRING  TRUE    1       ATYPIC… acc_tc…
-#> 5 Cancer Type                    Cancer… STRING  FALSE   1       CANCER… acc_tc…
-#> 6 Cancer Type Detailed           Cancer… STRING  FALSE   1       CANCER… acc_tc…
-#> # … with abbreviated variable names ¹​description, ²​datatype, ³​patientAttribute,
-#> #   ⁴​priority, ⁵​clinicalAttributeId
+#>   displayName description datatype patientAttribute priority clinicalAttributeId
+#>   <chr>       <chr>       <chr>    <lgl>            <chr>    <chr>              
+#> 1 Diagnosis … Age at whi… NUMBER   TRUE             1        AGE                
+#> 2 Neoplasm D… The extent… STRING   TRUE             1        AJCC_PATHOLOGIC_TU…
+#> 3 American J… The versio… STRING   TRUE             1        AJCC_STAGING_EDITI…
+#> 4 Atypical M… Atypical M… STRING   TRUE             1        ATYPICAL_MITOTIC_F…
+#> 5 Cancer Type Cancer type STRING   FALSE            1        CANCER_TYPE        
+#> 6 Cancer Typ… Cancer typ… STRING   FALSE            1        CANCER_TYPE_DETAIL…
+#> # ℹ 1 more variable: studyId <chr>
 ```
 
 ``` r
 get_clinical_by_study("acc_tcga")
 #> ! Sample Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study
 #> ! Patient Level Clinical Data: No `clinical_attribute` passed. Defaulting to returning all clinical attributes in "acc_tcga" study
-#> # A tibble: 6,292 × 6
-#>    uniquePatientKey             patientId    studyId  clinicalAt…¹ value dataL…²
-#>    <chr>                        <chr>        <chr>    <chr>        <chr> <chr>  
-#>  1 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga AGE          58    PATIENT
-#>  2 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga AJCC_PATHOL… Stag… PATIENT
-#>  3 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga ATYPICAL_MI… Atyp… PATIENT
-#>  4 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CAPSULAR_IN… Inva… PATIENT
-#>  5 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CLIN_M_STAGE M0    PATIENT
-#>  6 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CT_SCAN_PRE… [Unk… PATIENT
-#>  7 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga CYTOPLASM_P… Cyto… PATIENT
-#>  8 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DAYS_TO_INI… 0     PATIENT
-#>  9 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DFS_MONTHS   24.77 PATIENT
-#> 10 VENHQS1PUi1BNUoxOmFjY190Y2dh TCGA-OR-A5J1 acc_tcga DFS_STATUS   1:Re… PATIENT
-#> # … with 6,282 more rows, and abbreviated variable names ¹​clinicalAttributeId,
-#> #   ²​dataLevel
+#> # A tibble: 6,292 × 7
+#>    uniquePatientKey        patientId studyId clinicalAttributeId value dataLevel
+#>    <chr>                   <chr>     <chr>   <chr>               <chr> <chr>    
+#>  1 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… AGE                 58    PATIENT  
+#>  2 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… AJCC_PATHOLOGIC_TU… Stag… PATIENT  
+#>  3 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… ATYPICAL_MITOTIC_F… Atyp… PATIENT  
+#>  4 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… CAPSULAR_INVASION   Inva… PATIENT  
+#>  5 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… CLIN_M_STAGE        M0    PATIENT  
+#>  6 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… CT_SCAN_PREOP_RESU… [Unk… PATIENT  
+#>  7 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… CYTOPLASM_PRESENCE… Cyto… PATIENT  
+#>  8 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… DAYS_TO_INITIAL_PA… 0     PATIENT  
+#>  9 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… DFS_MONTHS          24.77 PATIENT  
+#> 10 VENHQS1PUi1BNUoxOmFjY1… TCGA-OR-… acc_tc… DFS_STATUS          1:Re… PATIENT  
+#> # ℹ 6,282 more rows
+#> # ℹ 1 more variable: sampleId <chr>
 ```
 
 ``` r
@@ -353,20 +355,19 @@ get_clinical_by_sample(sample_id = samples, study_id = "acc_tcga") %>%
 #> ! No `clinical_attribute` passed. Defaulting to returning
 #> all clinical attributes in "acc_tcga" study
 #> # A tibble: 10 × 7
-#>    uniqueSampleKey                 uniqu…¹ sampl…² patie…³ studyId clini…⁴ value
-#>    <chr>                           <chr>   <chr>   <chr>   <chr>   <chr>   <chr>
-#>  1 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… CANCER… Adre…
-#>  2 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… CANCER… Adre…
-#>  3 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… DAYS_T… 4691 
-#>  4 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… FRACTI… 0.05…
-#>  5 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… IS_FFPE NO   
-#>  6 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… MUTATI… 39   
-#>  7 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… OCT_EM… TRUE 
-#>  8 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… ONCOTR… ACC  
-#>  9 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… OTHER_… E403…
-#> 10 VENHQS1PUi1BNUoxLTAxOmFjY190Y2… VENHQS… TCGA-O… TCGA-O… acc_tc… PATHOL… TCGA…
-#> # … with abbreviated variable names ¹​uniquePatientKey, ²​sampleId, ³​patientId,
-#> #   ⁴​clinicalAttributeId
+#>    uniqueSampleKey                  uniquePatientKey  sampleId patientId studyId
+#>    <chr>                            <chr>             <chr>    <chr>     <chr>  
+#>  1 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  2 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  3 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  4 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  5 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  6 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  7 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  8 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#>  9 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#> 10 VENHQS1PUi1BNUoxLTAxOmFjY190Y2dh VENHQS1PUi1BNUox… TCGA-OR… TCGA-OR-… acc_tc…
+#> # ℹ 2 more variables: clinicalAttributeId <chr>, value <chr>
 ```
 
 ``` r
