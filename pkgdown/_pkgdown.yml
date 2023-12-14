@@ -33,6 +33,7 @@ reference:
     - available_gene_panels
     - available_studies
     - get_genes
+    - lookup_id
   - subtitle: Database or Study Level
   - contents:
     - available_profiles
