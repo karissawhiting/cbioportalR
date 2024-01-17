@@ -1,5 +1,8 @@
 # cbioportalR (development version)
 
+* Fixed bug in `available_studies()` that arose with underlying API change from V2 to V3.
+
+
 # cbioportalR 1.1.0
 
 * Added `available_sample_lists()` function which returns all available sample list IDs for a given study ID
