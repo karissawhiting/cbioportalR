@@ -1,162 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/articles/internal-structure.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/articles/overview-of-workflow.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/pull_request_template.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_clinical_attributes.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_gene_panels.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_patients.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_profiles.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_sample_lists.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_samples.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_studies.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/cbioportalR-package.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/cbp_api.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_clinical_by_list_item.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_clinical_pat_by_list_item.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_data_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_data_by_study.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/figures/html_object.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_alias.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_cbioportal_token.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_clinical_by_patient.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_clinical_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_clinical_by_study.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_cna_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_cna_by_study.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_entrez_id.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_fusions_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_fusions_by_study.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_gene_panel.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_genes.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_genetics_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_genetics_by_study.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_hugo_symbol.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_mutations_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_mutations_by_study.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_panel_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_samples_by_patient.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_segments_by_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_segments_by_study.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_study_info.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/impact_gene_info.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/null-default.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/set_cbioportal_db.html</loc>
-  </url>
-  <url>
-    <loc>https://karissawhiting.github.io/cbioportalR/dev/reference/test_cbioportal_db.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/CONTRIBUTING.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/LICENSE-text.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/LICENSE.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/articles/index.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/articles/internal-structure.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/articles/overview-of-workflow.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/authors.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/index.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/news/index.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_clinical_attributes.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_gene_panels.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_patients.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_profiles.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_sample_lists.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_samples.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/available_studies.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/cbioportalR-package.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/cbp_api.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_clinical_by_list_item.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_clinical_pat_by_list_item.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_data_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/dot-get_data_by_study.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/figures/html_object.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_alias.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_cbioportal_token.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_clinical_by_patient.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_clinical_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_clinical_by_study.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_cna_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_cna_by_study.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_entrez_id.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_fusions_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_fusions_by_study.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_gene_panel.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_genes.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_genetics_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_genetics_by_study.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_hugo_symbol.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_mutations_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_mutations_by_study.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_panel_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_samples_by_patient.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_segments_by_sample.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_segments_by_study.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/get_study_info.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/impact_gene_info.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/index.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/null-default.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/pipe.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/set_cbioportal_db.html</loc></url>
+<url><loc>https://karissawhiting.github.io/cbioportalR/dev/reference/test_cbioportal_db.html</loc></url>
 </urlset>
+
