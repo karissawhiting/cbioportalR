@@ -53,10 +53,10 @@ connect to MSK’s cBioPortal instance to get the most up to date IMPACT
 data, and you must follow the MSK-IMPACT publication guidelines when
 using this data*
 
-{cbioportalR} is now also apart of the
-[gnomeverse](https://mskcc-epi-bio.github.io/genomeverse/), which is a
-collection of R packages that are designed to work together seamlessly
-to create reproducible clinico-genomic analysis pipelines.
+{cbioportalR} is part of the
+[gnomeverse](https://mskcc-epi-bio.github.io/genomeverse/), a collection
+of R packages designed to work together seamlessly to create
+reproducible clinico-genomic analysis pipelines.
 
 ## Installation
 
