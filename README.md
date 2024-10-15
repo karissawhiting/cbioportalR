@@ -410,5 +410,6 @@ Thank you to contributors!
 [@karomanchuk](https://github.com/karomanchuk)
 [@hfuchs5](https://github.com/hfuchs5)
 [@alrein-05](https://github.com/alrein-05)
+[@stl2137](https://github.com/stl2137)
 
 Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!
