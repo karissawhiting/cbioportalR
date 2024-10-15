@@ -44,6 +44,8 @@ For full documentation on the cBioPortal API, please see the following links:
 
 *Note: If you are a MSK researcher working on IMPACT data, you should connect to MSK's cBioPortal instance to get the most up to date IMPACT data, and you must follow the MSK-IMPACT publication guidelines when using this data*
 
+{cbioportalR} is part of the [gnomeverse](https://mskcc-epi-bio.github.io/genomeverse/), a collection of R packages designed to work together seamlessly to create reproducible clinico-genomic analysis pipelines.
+
 ## Installation
 
 You can install {cbioportalR} with the following code:
@@ -292,5 +294,6 @@ Thank you to contributors!
 [&#x0040;karomanchuk](https://github.com/karomanchuk)
 [&#x0040;hfuchs5](https://github.com/hfuchs5)
 [&#x0040;alrein-05](https://github.com/alrein-05)
+[&#x0040;stl2137](https://github.com/stl2137)
 
 Thank you [Isaak Liptzin](https://awenfilms.net/) for the hex sticker!
