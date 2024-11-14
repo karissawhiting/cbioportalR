@@ -15,7 +15,7 @@ available_studies <- function(base_url =  NULL) {
 
   # query ---------------------------------------------------------------------
 
-  url_path <- paste0("studies/")
+  url_path <- paste0("studies")
   res <- cbp_api(url_path, base_url = base_url)$content %>%
     dplyr::bind_rows(.) %>%
     select("studyId", everything())
