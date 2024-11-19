@@ -38,7 +38,7 @@ see the following publications:
 - [Gao et al. Sci. Signal.
   2013](https://pubmed.ncbi.nlm.nih.gov/23550210/)
 - [Cerami et al. Cancer Discov.
-  2012](https://aacrjournals.org/cancerdiscovery/article/2/5/401/3246/The-cBio-Cancer-Genomics-Portal-An-Open-Platform/)
+  2012](https://pubmed.ncbi.nlm.nih.gov/22588877/)
 
 For full documentation on the cBioPortal API, please see the following
 links:
