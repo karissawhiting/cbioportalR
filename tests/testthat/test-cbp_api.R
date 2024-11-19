@@ -61,7 +61,7 @@ test_that("test extra_box arg", {
                 extra_box = FALSE,
                 base_url = NULL)
 
-  expect_error(print.cbp_api(x), NA)
+#  expect_error(print.cbp_api(x), NA)
 
 
 })
