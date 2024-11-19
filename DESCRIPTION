@@ -20,7 +20,7 @@ Suggests:
     knitr (>= 1.39),
     rmarkdown (>= 2.14),
     covr (>= 3.5.1),
-    spelling (>= 2.2)
+    spelling
 Depends: 
     R (>= 2.10)
 Imports: 
