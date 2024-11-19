@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Overview of Data Retrieval Workflow">
 <meta name="robots" content="noindex">
@@ -138,26 +138,21 @@ studies available in your database with the following:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_studies</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_studies.html">available_studies</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">all_studies</span></span>
-<span><span class="co">#&gt; # A tibble: 391 × 13</span></span>
-<span><span class="co">#&gt;    studyId   name  description publicStudy</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;      </span></span>
-<span><span class="co">#&gt;  1 acc_tcga  Adre… "TCGA Adre… TRUE       </span></span>
-<span><span class="co">#&gt;  2 laml_tcga Acut… "TCGA Acut… TRUE       </span></span>
-<span><span class="co">#&gt;  3 blca_tcga Blad… "TCGA Blad… TRUE       </span></span>
-<span><span class="co">#&gt;  4 brca_tcga Brea… "TCGA Brea… TRUE       </span></span>
-<span><span class="co">#&gt;  5 kirc_tcga Kidn… "TCGA Kidn… TRUE       </span></span>
-<span><span class="co">#&gt;  6 cesc_tcga Cerv… "TCGA Cerv… TRUE       </span></span>
-<span><span class="co">#&gt;  7 chol_tcga Chol… "TCGA Chol… TRUE       </span></span>
-<span><span class="co">#&gt;  8 kich_tcga Kidn… "TCGA Kidn… TRUE       </span></span>
-<span><span class="co">#&gt;  9 coadread… Colo… "TCGA Colo… TRUE       </span></span>
-<span><span class="co">#&gt; 10 dlbc_tcga Lymp… "TCGA Lymp… TRUE       </span></span>
-<span><span class="co">#&gt; # ℹ 381 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 9 more variables: groups &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   status &lt;int&gt;, importDate &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   allSampleCount &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   readPermission &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   cancerTypeId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;, …</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 468 × 13</span></span>
+<span><span class="co">#&gt;    studyId          name    description publicStudy pmid  citation groups status importDate allSampleCount</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;               &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 acyc_mskcc_2013  Adenoi… Whole-exom… TRUE        2368… Ho et a… "ACYC…      0 2023-12-0…             60</span></span>
+<span><span class="co">#&gt;  2 acyc_fmi_2014    Adenoi… Targeted S… TRUE        2441… Ross et… "ACYC…      0 2023-12-0…             28</span></span>
+<span><span class="co">#&gt;  3 acyc_jhu_2016    Adenoi… Whole-geno… TRUE        2686… Rettig … "ACYC…      0 2023-12-0…             25</span></span>
+<span><span class="co">#&gt;  4 acyc_mda_2015    Adenoi… WGS of 21 … TRUE        2663… Mitani … "ACYC…      0 2023-12-0…            102</span></span>
+<span><span class="co">#&gt;  5 acyc_mgh_2016    Adenoi… Whole-geno… TRUE        2682… Drier e… "ACYC"      0 2023-12-0…             10</span></span>
+<span><span class="co">#&gt;  6 acyc_sanger_2013 Adenoi… Whole exom… TRUE        2377… Stephen… "ACYC…      0 2023-12-0…             24</span></span>
+<span><span class="co">#&gt;  7 bcc_unige_2016   Basal … Whole-exom… TRUE        2695… Bonilla… "PUBL…      0 2023-12-0…            293</span></span>
+<span><span class="co">#&gt;  8 all_stjude_2015  Acute … Comprehens… TRUE        2573… Anderss… "PUBL…      0 2023-12-0…             93</span></span>
+<span><span class="co">#&gt;  9 ampca_bcm_2016   Ampull… Exome sequ… TRUE        2680… Gingras… "PUBL…      0 2023-12-0…            160</span></span>
+<span><span class="co">#&gt; 10 all_stjude_2013  Hypodi… Whole geno… TRUE        2333… Holmfel… ""          0 2023-12-0…             44</span></span>
+<span><span class="co">#&gt; # ℹ 458 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 3 more variables: readPermission &lt;lgl&gt;, cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></span></code></pre></div>
 <p>By inspecting this data frame, we see the unique
 <code>study_id</code> for the NMIBC data set is
 <code>"blca_nmibc_2017"</code> and the unique <code>study_id</code> for
@@ -169,17 +164,11 @@ to better view results</em></p>
 <code class="sourceCode R"><span><span class="va">all_studies</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">studyId</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span>, <span class="st">"prad_msk_2019"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 13</span></span>
-<span><span class="co">#&gt;   studyId    name  description publicStudy</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;      </span></span>
-<span><span class="co">#&gt; 1 prad_msk_… Pros… MSK-IMPACT… TRUE       </span></span>
-<span><span class="co">#&gt; 2 blca_nmib… Nonm… IMPACT seq… TRUE       </span></span>
-<span><span class="co">#&gt; # ℹ 9 more variables: groups &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   status &lt;int&gt;, importDate &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   allSampleCount &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   readPermission &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   cancerTypeId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   referenceGenome &lt;chr&gt;, pmid &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   citation &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   studyId         name      description publicStudy pmid  citation groups status importDate allSampleCount</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;               &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 blca_nmibc_2017 Nonmuscl… IMPACT seq… TRUE        2858… Pietzak… PUBLIC      0 2023-12-0…            105</span></span>
+<span><span class="co">#&gt; 2 prad_msk_2019   Prostate… MSK-IMPACT… TRUE        3156… Granlun… PUBLIC      0 2023-12-1…             18</span></span>
+<span><span class="co">#&gt; # ℹ 3 more variables: readPermission &lt;lgl&gt;, cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></span></code></pre></div>
 <p>More in-depth information about the study can be found with
 <code><a href="../reference/get_study_info.html">get_study_info()</a></code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -193,7 +182,7 @@ to better view results</em></p>
 <span><span class="co">#&gt; citation                    "Pietzak et al. Eur Urol 2017"                                                 </span></span>
 <span><span class="co">#&gt; groups                      "PUBLIC"                                                                       </span></span>
 <span><span class="co">#&gt; status                      "0"                                                                            </span></span>
-<span><span class="co">#&gt; importDate                  "2023-07-19 17:59:06"                                                          </span></span>
+<span><span class="co">#&gt; importDate                  "2023-12-07 10:15:31"                                                          </span></span>
 <span><span class="co">#&gt; allSampleCount              "105"                                                                          </span></span>
 <span><span class="co">#&gt; sequencedSampleCount        "105"                                                                          </span></span>
 <span><span class="co">#&gt; cnaSampleCount              "105"                                                                          </span></span>
@@ -207,6 +196,7 @@ to better view results</em></p>
 <span><span class="co">#&gt; completeSampleCount         "0"                                                                            </span></span>
 <span><span class="co">#&gt; readPermission              "TRUE"                                                                         </span></span>
 <span><span class="co">#&gt; treatmentCount              "0"                                                                            </span></span>
+<span><span class="co">#&gt; structuralVariantCount      "11"                                                                           </span></span>
 <span><span class="co">#&gt; studyId                     "blca_nmibc_2017"                                                              </span></span>
 <span><span class="co">#&gt; cancerTypeId                "blca"                                                                         </span></span>
 <span><span class="co">#&gt; cancerType.name             "Bladder Urothelial Carcinoma"                                                 </span></span>
@@ -226,7 +216,7 @@ to better view results</em></p>
 <span><span class="co">#&gt; citation                    "Granlund et al. Cell Metab 2020"                                </span></span>
 <span><span class="co">#&gt; groups                      "PUBLIC"                                                         </span></span>
 <span><span class="co">#&gt; status                      "0"                                                              </span></span>
-<span><span class="co">#&gt; importDate                  "2023-06-20 12:45:47"                                            </span></span>
+<span><span class="co">#&gt; importDate                  "2023-12-11 10:54:56"                                            </span></span>
 <span><span class="co">#&gt; allSampleCount              "18"                                                             </span></span>
 <span><span class="co">#&gt; sequencedSampleCount        "18"                                                             </span></span>
 <span><span class="co">#&gt; cnaSampleCount              "18"                                                             </span></span>
@@ -240,6 +230,7 @@ to better view results</em></p>
 <span><span class="co">#&gt; completeSampleCount         "0"                                                              </span></span>
 <span><span class="co">#&gt; readPermission              "TRUE"                                                           </span></span>
 <span><span class="co">#&gt; treatmentCount              "0"                                                              </span></span>
+<span><span class="co">#&gt; structuralVariantCount      "4"                                                              </span></span>
 <span><span class="co">#&gt; studyId                     "prad_msk_2019"                                                  </span></span>
 <span><span class="co">#&gt; cancerTypeId                "prostate"                                                       </span></span>
 <span><span class="co">#&gt; cancerType.name             "Prostate"                                                       </span></span>
@@ -257,29 +248,23 @@ studies not to provide data on fusions/structural variants.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_profiles.html">available_profiles</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 8</span></span>
-<span><span class="co">#&gt;   molecularAlterationType datatype name   </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                   &lt;chr&gt;    &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 COPY_NUMBER_ALTERATION  DISCRETE Putati…</span></span>
-<span><span class="co">#&gt; 2 MUTATION_EXTENDED       MAF      Mutati…</span></span>
-<span><span class="co">#&gt; 3 STRUCTURAL_VARIANT      SV       Struct…</span></span>
-<span><span class="co">#&gt; # ℹ 5 more variables: description &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   showProfileInAnalysisTab &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   patientLevel &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   molecularProfileId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   studyId &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   molecularAlterationT…¹ datatype name  description showProfileInAnalysi…² patientLevel molecularProfileId</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;                  &lt;lgl&gt;        &lt;chr&gt;             </span></span>
+<span><span class="co">#&gt; 1 COPY_NUMBER_ALTERATION DISCRETE Puta… Copy Numbe… TRUE                   FALSE        blca_nmibc_2017_c…</span></span>
+<span><span class="co">#&gt; 2 MUTATION_EXTENDED      MAF      Muta… Mutation d… TRUE                   FALSE        blca_nmibc_2017_m…</span></span>
+<span><span class="co">#&gt; 3 STRUCTURAL_VARIANT     SV       Stru… Structural… TRUE                   FALSE        blca_nmibc_2017_s…</span></span>
+<span><span class="co">#&gt; # ℹ abbreviated names: ¹​molecularAlterationType, ²​showProfileInAnalysisTab</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: studyId &lt;chr&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_profiles.html">available_profiles</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"prad_msk_2019"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 8</span></span>
-<span><span class="co">#&gt;   molecularAlterationType datatype name   </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                   &lt;chr&gt;    &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1 COPY_NUMBER_ALTERATION  DISCRETE Putati…</span></span>
-<span><span class="co">#&gt; 2 MUTATION_EXTENDED       MAF      Mutati…</span></span>
-<span><span class="co">#&gt; 3 STRUCTURAL_VARIANT      SV       Struct…</span></span>
-<span><span class="co">#&gt; # ℹ 5 more variables: description &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   showProfileInAnalysisTab &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   patientLevel &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   molecularProfileId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   studyId &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   molecularAlterationT…¹ datatype name  description showProfileInAnalysi…² patientLevel molecularProfileId</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;                  &lt;lgl&gt;        &lt;chr&gt;             </span></span>
+<span><span class="co">#&gt; 1 COPY_NUMBER_ALTERATION DISCRETE Puta… Putative c… TRUE                   FALSE        prad_msk_2019_cna </span></span>
+<span><span class="co">#&gt; 2 MUTATION_EXTENDED      MAF      Muta… IMPACT468 … TRUE                   FALSE        prad_msk_2019_mut…</span></span>
+<span><span class="co">#&gt; 3 STRUCTURAL_VARIANT     SV       Stru… Structural… TRUE                   FALSE        prad_msk_2019_str…</span></span>
+<span><span class="co">#&gt; # ℹ abbreviated names: ¹​molecularAlterationType, ²​showProfileInAnalysisTab</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: studyId &lt;chr&gt;</span></span></code></pre></div>
 <p>Luckily, in this example our studies have mutation, copy number
 alteration and fusion (structural variant) data available. Each of these
 data types has a unique molecular profile ID. The molecular profile ID
@@ -289,8 +274,7 @@ usually takes the form of <code>&lt;study_id&gt;_mutations</code>,
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/available_profiles.html">available_profiles</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"blca_nmibc_2017"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">molecularProfileId</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "blca_nmibc_2017_cna"                </span></span>
-<span><span class="co">#&gt; [2] "blca_nmibc_2017_mutations"          </span></span>
+<span><span class="co">#&gt; [1] "blca_nmibc_2017_cna"                 "blca_nmibc_2017_mutations"          </span></span>
 <span><span class="co">#&gt; [3] "blca_nmibc_2017_structural_variants"</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -397,30 +381,19 @@ to pull sample IDs by a specific sample list ID (see
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_genomic</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_genetics_by_sample.html">get_genetics_by_sample</a></span><span class="op">(</span>sample_study_pairs <span class="op">=</span> <span class="va">df_pairs</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(study_id)`</span></span>
-<span><span class="co">#&gt; The following parameters were used in</span></span>
-<span><span class="co">#&gt; query:</span></span>
-<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and</span></span>
-<span><span class="co">#&gt; "prad_msk_2019"</span></span>
-<span><span class="co">#&gt; Molecular Profile ID:</span></span>
-<span><span class="co">#&gt; blca_nmibc_2017_mutations and</span></span>
-<span><span class="co">#&gt; prad_msk_2019_mutations</span></span>
+<span><span class="co">#&gt; The following parameters were used in query:</span></span>
+<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and "prad_msk_2019"</span></span>
+<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations</span></span>
 <span><span class="co">#&gt; Genes: "All available genes"</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(study_id)`</span></span>
-<span><span class="co">#&gt; The following parameters were used in</span></span>
-<span><span class="co">#&gt; query:</span></span>
-<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and</span></span>
-<span><span class="co">#&gt; "prad_msk_2019"</span></span>
-<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_cna</span></span>
-<span><span class="co">#&gt; and prad_msk_2019_cna</span></span>
+<span><span class="co">#&gt; The following parameters were used in query:</span></span>
+<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and "prad_msk_2019"</span></span>
+<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_cna and prad_msk_2019_cna</span></span>
 <span><span class="co">#&gt; Genes: "All available genes"</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(study_id)`</span></span>
-<span><span class="co">#&gt; The following parameters were used in</span></span>
-<span><span class="co">#&gt; query:</span></span>
-<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and</span></span>
-<span><span class="co">#&gt; "prad_msk_2019"</span></span>
-<span><span class="co">#&gt; Molecular Profile ID:</span></span>
-<span><span class="co">#&gt; blca_nmibc_2017_structural_variants and</span></span>
-<span><span class="co">#&gt; prad_msk_2019_structural_variants</span></span>
+<span><span class="co">#&gt; The following parameters were used in query:</span></span>
+<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and "prad_msk_2019"</span></span>
+<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_structural_variants and prad_msk_2019_structural_variants</span></span>
 <span><span class="co">#&gt; Genes: "All available genes"</span></span>
 <span></span>
 <span><span class="va">mut_sample</span> <span class="op">&lt;-</span> <span class="va">all_genomic</span><span class="op">$</span><span class="va">mutation</span></span></code></pre></div>
@@ -429,13 +402,9 @@ by genomic data type:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mut_only</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_study_pairs <span class="op">=</span> <span class="va">df_pairs</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(study_id)`</span></span>
-<span><span class="co">#&gt; The following parameters were used in</span></span>
-<span><span class="co">#&gt; query:</span></span>
-<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and</span></span>
-<span><span class="co">#&gt; "prad_msk_2019"</span></span>
-<span><span class="co">#&gt; Molecular Profile ID:</span></span>
-<span><span class="co">#&gt; blca_nmibc_2017_mutations and</span></span>
-<span><span class="co">#&gt; prad_msk_2019_mutations</span></span>
+<span><span class="co">#&gt; The following parameters were used in query:</span></span>
+<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and "prad_msk_2019"</span></span>
+<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations</span></span>
 <span><span class="co">#&gt; Genes: "All available genes"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">mut_only</span>, <span class="va">mut_sample</span><span class="op">)</span></span>
@@ -489,23 +458,15 @@ can limit our query to just the genes for which we want results:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">by_hugo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_study_pairs <span class="op">=</span> <span class="va">df_pairs</span>, genes <span class="op">=</span> <span class="st">"TP53"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(study_id)`</span></span>
-<span><span class="co">#&gt; The following parameters were used in</span></span>
-<span><span class="co">#&gt; query:</span></span>
-<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and</span></span>
-<span><span class="co">#&gt; "prad_msk_2019"</span></span>
-<span><span class="co">#&gt; Molecular Profile ID:</span></span>
-<span><span class="co">#&gt; blca_nmibc_2017_mutations and</span></span>
-<span><span class="co">#&gt; prad_msk_2019_mutations</span></span>
+<span><span class="co">#&gt; The following parameters were used in query:</span></span>
+<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and "prad_msk_2019"</span></span>
+<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations</span></span>
 <span><span class="co">#&gt; Genes: "TP53"</span></span>
 <span><span class="va">by_gene_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mutations_by_sample.html">get_mutations_by_sample</a></span><span class="op">(</span>sample_study_pairs <span class="op">=</span> <span class="va">df_pairs</span>, genes <span class="op">=</span> <span class="fl">7157</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(study_id)`</span></span>
-<span><span class="co">#&gt; The following parameters were used in</span></span>
-<span><span class="co">#&gt; query:</span></span>
-<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and</span></span>
-<span><span class="co">#&gt; "prad_msk_2019"</span></span>
-<span><span class="co">#&gt; Molecular Profile ID:</span></span>
-<span><span class="co">#&gt; blca_nmibc_2017_mutations and</span></span>
-<span><span class="co">#&gt; prad_msk_2019_mutations</span></span>
+<span><span class="co">#&gt; The following parameters were used in query:</span></span>
+<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and "prad_msk_2019"</span></span>
+<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations</span></span>
 <span><span class="co">#&gt; Genes: 7157</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">by_hugo</span>, <span class="va">by_gene_id</span><span class="op">)</span></span>
@@ -516,30 +477,24 @@ can limit our query to just the genes for which we want results:</p>
 <span>  panel <span class="op">=</span> <span class="st">"IMPACT468"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(study_id)`</span></span>
-<span><span class="co">#&gt; The following parameters were used in</span></span>
-<span><span class="co">#&gt; query:</span></span>
-<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and</span></span>
-<span><span class="co">#&gt; "prad_msk_2019"</span></span>
-<span><span class="co">#&gt; Molecular Profile ID:</span></span>
-<span><span class="co">#&gt; blca_nmibc_2017_mutations and</span></span>
-<span><span class="co">#&gt; prad_msk_2019_mutations</span></span>
+<span><span class="co">#&gt; The following parameters were used in query:</span></span>
+<span><span class="co">#&gt; Study ID: "blca_nmibc_2017" and "prad_msk_2019"</span></span>
+<span><span class="co">#&gt; Molecular Profile ID: blca_nmibc_2017_mutations and prad_msk_2019_mutations</span></span>
 <span><span class="co">#&gt; Genes: "IMPACT468"</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 28</span></span>
-<span><span class="co">#&gt;   hugoGeneSymbol entrezGeneId</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 SMAD4                  4089</span></span>
-<span><span class="co">#&gt; 2 TERT                   7015</span></span>
-<span><span class="co">#&gt; 3 ERBB4                  2066</span></span>
-<span><span class="co">#&gt; 4 CUL3                   8452</span></span>
-<span><span class="co">#&gt; 5 PBRM1                 55193</span></span>
-<span><span class="co">#&gt; 6 APC                     324</span></span>
-<span><span class="co">#&gt; # ℹ 26 more variables:</span></span>
-<span><span class="co">#&gt; #   uniqueSampleKey &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   uniquePatientKey &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   molecularProfileId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   sampleId &lt;chr&gt;, patientId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   studyId &lt;chr&gt;, center &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   mutationStatus &lt;chr&gt;, …</span></span></code></pre></div>
+<span><span class="co">#&gt;   hugoGeneSymbol entrezGeneId uniqueSampleKey       uniquePatientKey molecularProfileId sampleId patientId</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;                 &lt;chr&gt;            &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt; 1 TERT                   7015 UC0wMDAxNDUzLVQwMS1J… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453</span></span>
+<span><span class="co">#&gt; 2 SMAD4                  4089 UC0wMDAxNDUzLVQwMS1J… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453</span></span>
+<span><span class="co">#&gt; 3 ERBB4                  2066 UC0wMDAxNDUzLVQwMS1J… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453</span></span>
+<span><span class="co">#&gt; 4 CUL3                   8452 UC0wMDAxNDUzLVQwMS1J… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453</span></span>
+<span><span class="co">#&gt; 5 PBRM1                 55193 UC0wMDAxNDUzLVQwMS1J… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453</span></span>
+<span><span class="co">#&gt; 6 APC                     324 UC0wMDAxNDUzLVQwMS1J… UC0wMDAxNDUzOmJ… blca_nmibc_2017_m… P-00014… P-0001453</span></span>
+<span><span class="co">#&gt; # ℹ 21 more variables: studyId &lt;chr&gt;, center &lt;chr&gt;, mutationStatus &lt;chr&gt;, validationStatus &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   tumorAltCount &lt;int&gt;, tumorRefCount &lt;int&gt;, normalAltCount &lt;int&gt;, normalRefCount &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   startPosition &lt;int&gt;, endPosition &lt;int&gt;, referenceAllele &lt;chr&gt;, proteinChange &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   mutationType &lt;chr&gt;, ncbiBuild &lt;chr&gt;, variantType &lt;chr&gt;, chr &lt;chr&gt;, variantAllele &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   refseqMrnaId &lt;chr&gt;, proteinPosStart &lt;int&gt;, proteinPosEnd &lt;int&gt;, keyword &lt;chr&gt;</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -560,26 +515,21 @@ characteristics at once.</p>
 <span></span>
 <span><span class="va">attr_prad</span></span>
 <span><span class="co">#&gt; # A tibble: 13 × 7</span></span>
-<span><span class="co">#&gt;    displayName        description datatype</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;       &lt;chr&gt;   </span></span>
-<span><span class="co">#&gt;  1 Cancer Type        Cancer Type STRING  </span></span>
-<span><span class="co">#&gt;  2 Cancer Type Detai… Cancer Typ… STRING  </span></span>
-<span><span class="co">#&gt;  3 Fraction Genome A… Fraction G… NUMBER  </span></span>
-<span><span class="co">#&gt;  4 Gene Panel         Gene Panel. STRING  </span></span>
-<span><span class="co">#&gt;  5 Mutation Count     Mutation C… NUMBER  </span></span>
-<span><span class="co">#&gt;  6 Oncotree Code      Oncotree C… STRING  </span></span>
-<span><span class="co">#&gt;  7 Sample Class       The sample… STRING  </span></span>
-<span><span class="co">#&gt;  8 Number of Samples… Number of … STRING  </span></span>
-<span><span class="co">#&gt;  9 Sample Type        The type o… STRING  </span></span>
-<span><span class="co">#&gt; 10 Sex                Sex         STRING  </span></span>
-<span><span class="co">#&gt; 11 Somatic Status     Somatic St… STRING  </span></span>
-<span><span class="co">#&gt; 12 Specimen Preserva… The method… STRING  </span></span>
-<span><span class="co">#&gt; 13 TMB (nonsynonymou… TMB (nonsy… NUMBER  </span></span>
-<span><span class="co">#&gt; # ℹ 4 more variables:</span></span>
-<span><span class="co">#&gt; #   patientAttribute &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   priority &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   clinicalAttributeId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   studyId &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;    displayName                  description datatype patientAttribute priority clinicalAttributeId studyId</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                        &lt;chr&gt;       &lt;chr&gt;    &lt;lgl&gt;            &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt;  1 Cancer Type                  Cancer Type STRING   FALSE            1        CANCER_TYPE         prad_m…</span></span>
+<span><span class="co">#&gt;  2 Cancer Type Detailed         Cancer Typ… STRING   FALSE            1        CANCER_TYPE_DETAIL… prad_m…</span></span>
+<span><span class="co">#&gt;  3 Fraction Genome Altered      Fraction G… NUMBER   FALSE            20       FRACTION_GENOME_AL… prad_m…</span></span>
+<span><span class="co">#&gt;  4 Gene Panel                   Gene Panel. STRING   FALSE            1        GENE_PANEL          prad_m…</span></span>
+<span><span class="co">#&gt;  5 Mutation Count               Mutation C… NUMBER   FALSE            30       MUTATION_COUNT      prad_m…</span></span>
+<span><span class="co">#&gt;  6 Oncotree Code                Oncotree C… STRING   FALSE            1        ONCOTREE_CODE       prad_m…</span></span>
+<span><span class="co">#&gt;  7 Sample Class                 The sample… STRING   FALSE            1        SAMPLE_CLASS        prad_m…</span></span>
+<span><span class="co">#&gt;  8 Number of Samples Per Patie… Number of … STRING   TRUE             1        SAMPLE_COUNT        prad_m…</span></span>
+<span><span class="co">#&gt;  9 Sample Type                  The type o… STRING   FALSE            1        SAMPLE_TYPE         prad_m…</span></span>
+<span><span class="co">#&gt; 10 Sex                          Sex         STRING   TRUE             1        SEX                 prad_m…</span></span>
+<span><span class="co">#&gt; 11 Somatic Status               Somatic St… STRING   FALSE            1        SOMATIC_STATUS      prad_m…</span></span>
+<span><span class="co">#&gt; 12 Specimen Preservation Type   The method… STRING   FALSE            1        SPECIMEN_PRESERVAT… prad_m…</span></span>
+<span><span class="co">#&gt; 13 TMB (nonsynonymous)          TMB (nonsy… NUMBER   FALSE            1        TMB_NONSYNONYMOUS   prad_m…</span></span></code></pre></div>
 <p>There are a select set available for both studies:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">in_both</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">intersect</a></span><span class="op">(</span><span class="va">attr_blca</span><span class="op">$</span><span class="va">clinicalAttributeId</span>, <span class="va">attr_prad</span><span class="op">$</span><span class="va">clinicalAttributeId</span><span class="op">)</span></span></code></pre></div>
@@ -599,17 +549,14 @@ characteristics at once.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"unique"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
-<span><span class="co">#&gt;   sampleId          patientId studyId     </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;       </span></span>
-<span><span class="co">#&gt; 1 P-0001453-T01-IM3 P-0001453 blca_nmibc_…</span></span>
-<span><span class="co">#&gt; 2 P-0001453-T01-IM3 P-0001453 blca_nmibc_…</span></span>
-<span><span class="co">#&gt; 3 P-0001453-T01-IM3 P-0001453 blca_nmibc_…</span></span>
-<span><span class="co">#&gt; 4 P-0001453-T01-IM3 P-0001453 blca_nmibc_…</span></span>
-<span><span class="co">#&gt; 5 P-0001453-T01-IM3 P-0001453 blca_nmibc_…</span></span>
-<span><span class="co">#&gt; 6 P-0001453-T01-IM3 P-0001453 blca_nmibc_…</span></span>
-<span><span class="co">#&gt; # ℹ 2 more variables:</span></span>
-<span><span class="co">#&gt; #   clinicalAttributeId &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   value &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   sampleId          patientId studyId         clinicalAttributeId     value                       </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;                   &lt;chr&gt;                       </span></span>
+<span><span class="co">#&gt; 1 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 CANCER_TYPE             Bladder Cancer              </span></span>
+<span><span class="co">#&gt; 2 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 CANCER_TYPE_DETAILED    Bladder Urothelial Carcinoma</span></span>
+<span><span class="co">#&gt; 3 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 FRACTION_GENOME_ALTERED 0.4448                      </span></span>
+<span><span class="co">#&gt; 4 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 MUTATION_COUNT          11                          </span></span>
+<span><span class="co">#&gt; 5 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 ONCOTREE_CODE           BLCA                        </span></span>
+<span><span class="co">#&gt; 6 P-0001453-T01-IM3 P-0001453 blca_nmibc_2017 SOMATIC_STATUS          Matched</span></span></code></pre></div>
 <p>The below pulls data at the patient level:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/available_patients.html">available_patients</a></span><span class="op">(</span><span class="st">"blca_nmibc_2017"</span><span class="op">)</span></span>
@@ -628,15 +575,14 @@ characteristics at once.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"unique"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 4</span></span>
-<span><span class="co">#&gt;   patientId studyId    clinicalAttributeId</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;              </span></span>
-<span><span class="co">#&gt; 1 P-0001453 blca_nmib… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt; 2 P-0001453 blca_nmib… SEX                </span></span>
-<span><span class="co">#&gt; 3 P-0002166 blca_nmib… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt; 4 P-0002166 blca_nmib… SEX                </span></span>
-<span><span class="co">#&gt; 5 P-0003238 blca_nmib… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt; 6 P-0003238 blca_nmib… SEX                </span></span>
-<span><span class="co">#&gt; # ℹ 1 more variable: value &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;   patientId studyId         clinicalAttributeId value</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;               &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 P-0001453 blca_nmibc_2017 SAMPLE_COUNT        1    </span></span>
+<span><span class="co">#&gt; 2 P-0001453 blca_nmibc_2017 SEX                 Male </span></span>
+<span><span class="co">#&gt; 3 P-0002166 blca_nmibc_2017 SAMPLE_COUNT        1    </span></span>
+<span><span class="co">#&gt; 4 P-0002166 blca_nmibc_2017 SEX                 Male </span></span>
+<span><span class="co">#&gt; 5 P-0003238 blca_nmibc_2017 SAMPLE_COUNT        1    </span></span>
+<span><span class="co">#&gt; 6 P-0003238 blca_nmibc_2017 SEX                 Male</span></span></code></pre></div>
 <p>Like with the genomic data pull functions, you can also pull clinical
 data by a data frame of sample ID - study ID pairs, or a data frame of
 patient ID - study ID pairs. Below, we will pull by patient ID - study
@@ -657,20 +603,19 @@ ID pairs.</p>
 <span><span class="va">all_patient_clinical</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"unique"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 34 × 4</span></span>
-<span><span class="co">#&gt;    patientId studyId   clinicalAttributeId</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;              </span></span>
-<span><span class="co">#&gt;  1 P-0001453 blca_nmi… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt;  2 P-0001453 blca_nmi… SEX                </span></span>
-<span><span class="co">#&gt;  3 P-0002166 blca_nmi… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt;  4 P-0002166 blca_nmi… SEX                </span></span>
-<span><span class="co">#&gt;  5 P-0003238 blca_nmi… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt;  6 P-0003238 blca_nmi… SEX                </span></span>
-<span><span class="co">#&gt;  7 P-0003257 blca_nmi… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt;  8 P-0003257 blca_nmi… SEX                </span></span>
-<span><span class="co">#&gt;  9 P-0003261 blca_nmi… SAMPLE_COUNT       </span></span>
-<span><span class="co">#&gt; 10 P-0003261 blca_nmi… SEX                </span></span>
-<span><span class="co">#&gt; # ℹ 24 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 1 more variable: value &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt;    patientId studyId         clinicalAttributeId value </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;               &lt;chr&gt; </span></span>
+<span><span class="co">#&gt;  1 P-0001453 blca_nmibc_2017 SAMPLE_COUNT        1     </span></span>
+<span><span class="co">#&gt;  2 P-0001453 blca_nmibc_2017 SEX                 Male  </span></span>
+<span><span class="co">#&gt;  3 P-0002166 blca_nmibc_2017 SAMPLE_COUNT        1     </span></span>
+<span><span class="co">#&gt;  4 P-0002166 blca_nmibc_2017 SEX                 Male  </span></span>
+<span><span class="co">#&gt;  5 P-0003238 blca_nmibc_2017 SAMPLE_COUNT        1     </span></span>
+<span><span class="co">#&gt;  6 P-0003238 blca_nmibc_2017 SEX                 Male  </span></span>
+<span><span class="co">#&gt;  7 P-0003257 blca_nmibc_2017 SAMPLE_COUNT        1     </span></span>
+<span><span class="co">#&gt;  8 P-0003257 blca_nmibc_2017 SEX                 Female</span></span>
+<span><span class="co">#&gt;  9 P-0003261 blca_nmibc_2017 SAMPLE_COUNT        1     </span></span>
+<span><span class="co">#&gt; 10 P-0003261 blca_nmibc_2017 SEX                 Male  </span></span>
+<span><span class="co">#&gt; # ℹ 24 more rows</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

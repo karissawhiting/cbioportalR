@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Browse and Query Clinical and Genomic Data from cBioPortal">
 <meta name="description" content="Provides R users with direct access to genomic and clinical data from the cBioPortal web resource via user-friendly functions that wrap cBioPortals existing API endpoints &lt;https://www.cbioportal.org/api/swagger-ui/index.html&gt;. Users can browse and query genomic data on mutations, copy number alterations and fusions, as well as data on tumor mutational burden (TMB), microsatellite instability status (MSI), FACETS' and select clinical data points (depending on the study). See &lt;https://www.cbioportal.org/&gt; and Gao et al., (2013) &lt;doi:10.1126/scisignal.2004088&gt; for more information on the cBioPortal web resource.">
@@ -87,7 +87,7 @@
 <li><a href="https://www.cbioportal.org/api/swagger-ui/index.html" class="external-link">Full reference documentation for API</a></li>
 </ul>
 <p><em>Note: If you are a MSK researcher working on IMPACT data, you should connect to MSK’s cBioPortal instance to get the most up to date IMPACT data, and you must follow the MSK-IMPACT publication guidelines when using this data</em></p>
-<p>{cbioportalR} is part of the <a href="https://mskcc-epi-bio.github.io/genomeverse/" class="external-link">gnomeverse</a>, a collection of R packages designed to work together seamlessly to create reproducible clinico-genomic analysis pipelines.</p>
+<p>{cbioportalR} is part of the <a href="https://mskcc-epi-bio.github.io/genomeverse/" class="external-link">genomeverse</a>, a collection of R packages designed to work together seamlessly to create reproducible clinico-genomic analysis pipelines.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -141,16 +141,16 @@
 <span><span class="co">#&gt; # A tibble: 10 × 13</span></span>
 <span><span class="co">#&gt;    studyId name  description publicStudy pmid  citation groups status importDate</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;     </span></span>
-<span><span class="co">#&gt;  1 acyc_m… Aden… Whole-exom… TRUE        2368… Ho et a… ACYC;…      0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  2 acyc_f… Aden… Targeted S… TRUE        2441… Ross et… ACYC;…      0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  3 acyc_j… Aden… Whole-geno… TRUE        2686… Rettig … ACYC;…      0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  4 acyc_m… Aden… WGS of 21 … TRUE        2663… Mitani … ACYC;…      0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  5 acyc_m… Aden… Whole-geno… TRUE        2682… Drier e… ACYC        0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  6 acyc_s… Aden… Whole exom… TRUE        2377… Stephen… ACYC;…      0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  7 acc_20… Aden… Multi-Inst… TRUE        3148… Allen e… ACYC;…      0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  8 bcc_un… Basa… Whole-exom… TRUE        2695… Bonilla… PUBLIC      0 2023-12-0…</span></span>
-<span><span class="co">#&gt;  9 all_st… Acut… Comprehens… TRUE        2573… Anderss… PUBLIC      0 2023-12-0…</span></span>
-<span><span class="co">#&gt; 10 ampca_… Ampu… Exome sequ… TRUE        2680… Gingras… PUBLIC      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  1 acyc_m… Aden… Whole-exom… TRUE        2368… Ho et a… "ACYC…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  2 acyc_f… Aden… Targeted S… TRUE        2441… Ross et… "ACYC…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  3 acyc_j… Aden… Whole-geno… TRUE        2686… Rettig … "ACYC…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  4 acyc_m… Aden… WGS of 21 … TRUE        2663… Mitani … "ACYC…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  5 acyc_m… Aden… Whole-geno… TRUE        2682… Drier e… "ACYC"      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  6 acyc_s… Aden… Whole exom… TRUE        2377… Stephen… "ACYC…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  7 bcc_un… Basa… Whole-exom… TRUE        2695… Bonilla… "PUBL…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  8 all_st… Acut… Comprehens… TRUE        2573… Anderss… "PUBL…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt;  9 ampca_… Ampu… Exome sequ… TRUE        2680… Gingras… "PUBL…      0 2023-12-0…</span></span>
+<span><span class="co">#&gt; 10 all_st… Hypo… Whole geno… TRUE        2333… Holmfel… ""          0 2023-12-0…</span></span>
 <span><span class="co">#&gt; # ℹ 4 more variables: allSampleCount &lt;int&gt;, readPermission &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   cancerTypeId &lt;chr&gt;, referenceGenome &lt;chr&gt;</span></span></code></pre></div>
 <p>To view study metadata on a particular study you can use:</p>
