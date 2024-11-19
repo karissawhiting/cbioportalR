@@ -1,7 +1,7 @@
 # cbioportalR (development version)
 
 * Fixed bug in `available_studies()` that arose with underlying API change from V2 to V3.
-
+* Added `lookup_id()` function to return all samples that exist across cBioPortal for a given patient ID.
 
 # cbioportalR 1.1.0
 
