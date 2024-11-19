@@ -112,10 +112,9 @@ cbp_api <- function(url_path,
   x
 }
 
-
-print.cbp_api <- function(x, ...) {
-  cat("<GitHub ", x$path, ">\n", sep = "")
-  utils::str(x$content)
-  invisible(x)
-}
+# print.cbp_api <- function(x, ...) {
+#   cat("<GitHub ", x$path, ">\n", sep = "")
+#   utils::str(x$content)
+#   invisible(x)
+# }
 

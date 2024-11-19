@@ -35,7 +35,7 @@ This package was created to work with both the public [cBioPortal website](https
 This package is compatible with cBioPortal v5, but is subject to change as [cBioPortal updates are released](https://github.com/cBioPortal/cbioportal/releases). To see if your cBioPortal instance is compatible, look for its version in the footer of the homepage or check `portalVersion` in the output of `YOUR_CBIOPORTAL_INSTANCE/api/info`. For more information on cBioPortal, see the following publications:
 
 - [Gao et al. Sci. Signal. 2013](https://pubmed.ncbi.nlm.nih.gov/23550210/)
-- [ Cerami et al. Cancer Discov. 2012](https://aacrjournals.org/cancerdiscovery/article/2/5/401/3246/The-cBio-Cancer-Genomics-Portal-An-Open-Platform)
+- [Cerami et al. Cancer Discov. 2012](https://aacrjournals.org/cancerdiscovery/article/2/5/401/3246/The-cBio-Cancer-Genomics-Portal-An-Open-Platform/)
 
 For full documentation on the cBioPortal API, please see the following links:
 
