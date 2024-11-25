@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/karissawhiting/cbioportalR",
   "issueTracker": "https://github.com/karissawhiting/cbioportalR/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -22,6 +22,15 @@
     "url": "https://cran.r-project.org"
   },
   "author": [
+    {
+      "@type": "Person",
+      "givenName": "Karissa",
+      "familyName": "Whiting",
+      "email": "karissa.whiting@gmail.com",
+      "@id": "https://orcid.org/0000-0002-4683-1868"
+    }
+  ],
+  "copyrightHolder": [
     {
       "@type": "Person",
       "givenName": "Karissa",
@@ -96,7 +105,6 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -258,7 +266,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2281.862KB",
+  "fileSize": "2289.853KB",
   "releaseNotes": "https://github.com/karissawhiting/cbioportalR/blob/master/NEWS.md",
   "readme": "https://github.com/karissawhiting/cbioportalR/blob/main/README.md",
   "contIntegration": ["https://github.com/karissawhiting/cbioportalR/actions", "https://app.codecov.io/gh/karissawhiting/cbioportalR?branch=master"],
