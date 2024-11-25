@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   internal-structure: internal-structure.html
   overview-of-workflow: overview-of-workflow.html
-last_built: 2024-11-25T16:38Z
+last_built: 2024-11-25T16:40Z
 urls:
   reference: https://karissawhiting.github.io/cbioportalR/reference
   article: https://karissawhiting.github.io/cbioportalR/articles
