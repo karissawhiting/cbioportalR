@@ -20,7 +20,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Karissa Whiting \email{karissa.whiting@gmail.com} (\href{https://orcid.org/0000-0002-4683-1868}{ORCID})
+\strong{Maintainer}: Karissa Whiting \email{karissa.whiting@gmail.com} (\href{https://orcid.org/0000-0002-4683-1868}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

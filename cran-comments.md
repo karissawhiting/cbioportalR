@@ -20,5 +20,12 @@ There are currently no downstream dependencies for this package
 
 ## Additional Comments
 
-Thank you!
+New submission (This is a re-submission after package was archived on CRAN)
+
+CRAN repository db overrides:
+  X-CRAN-Comment: Archived on 2024-11-04 
+
+Resubmitting this package after it was taken down (< 1 month ago) due to notes on r-devel-linux. These notes have been resolved. 
+
+Thank you! 
 
