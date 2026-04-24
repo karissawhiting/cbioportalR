@@ -16,9 +16,18 @@ available_studies <- function(base_url =  NULL) {
   # query ---------------------------------------------------------------------
 
   url_path <- paste0("studies")
-  res <- cbp_api(url_path, base_url = base_url)$content %>%
+  res <- purrr::map(
+    .x = cbp_api(url_path, base_url = base_url)$content,
+    .f = function(x) {
+      if (any(sapply(x, length) == 0)) {
+        x %>% dplyr::bind_rows(.)
+      } else {
+        x %>% tibble::as_tibble(.)
+      }
+    }
+  ) %>%
     dplyr::bind_rows(.) %>%
-    select("studyId", everything())
+    dplyr::select("studyId", everything())
 
   return(res)
 }
