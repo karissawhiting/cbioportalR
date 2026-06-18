@@ -3,7 +3,7 @@
 
 test_that("set url- public", {
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -15,7 +15,7 @@ test_that("set url- public", {
 
 test_that("set url-  add api", {
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <-"www.cbioportal.org"
   set_cbioportal_db(db = db_test)
@@ -28,7 +28,7 @@ test_that("set url-  add api", {
 
 test_that("set url-nothing passed", {
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <-NULL
   expect_error(set_cbioportal_db(db = db_test), "*")

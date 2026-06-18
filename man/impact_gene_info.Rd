@@ -20,7 +20,7 @@ IMPACT platform 468. Options are \code{included} and \verb{not included}}
 }
 }
 \source{
-\url{http://www.cbioportal.org/}
+\url{https://www.cbioportal.org/}
 }
 \usage{
 impact_gene_info

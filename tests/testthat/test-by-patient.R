@@ -5,7 +5,7 @@
 test_that("test endpoints - with patient ID", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -30,7 +30,7 @@ test_that("test endpoints - with patient ID", {
 test_that("test endpoints - with patient  ID, no study ID", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -54,7 +54,7 @@ test_that("test endpoints - with patient  ID, no study ID", {
 test_that("test endpoints - no patient/ sample_study_pair", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -72,7 +72,7 @@ test_that("test endpoints - no patient/ sample_study_pair", {
 test_that("test endpoints - sample_study_pair", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -110,7 +110,7 @@ test_that("test endpoints - sample_study_pair", {
 test_that("test endpoints - sample_study_pair wrong format", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)

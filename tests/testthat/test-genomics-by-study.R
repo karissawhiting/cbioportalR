@@ -4,7 +4,7 @@
 test_that("get mutations by study id - no error", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -18,7 +18,7 @@ test_that("get mutations by study id - no error", {
 test_that("get mutations by molecular profile - no error", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -32,7 +32,7 @@ test_that("get mutations by molecular profile - no error", {
 test_that("get mutations by molecular profile/ study id/ get_genetics all the same", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -50,7 +50,7 @@ test_that("get mutations by molecular profile/ study id/ get_genetics all the sa
 test_that("Test study_id and Profile Param", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   # > expand.grid(study_id = c("correct", "incorrect", "NULL"),
   # profile = c("correct", "incorrect", "NULL"))
@@ -152,7 +152,7 @@ test_that("Test study_id and Profile Param", {
 test_that("Hugo Symbol is added by default", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
   df <- get_genetics_by_study(study_id = "acc_tcga")
@@ -166,7 +166,7 @@ test_that("Hugo Symbol is added by default", {
 test_that("`add_hugo` = FALSE doesn't add column if it's not there", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
   df_hugo_false <- get_genetics_by_study(study_id = "prad_msk_2019", add_hugo = FALSE)
@@ -182,7 +182,7 @@ test_that("`add_hugo` = FALSE doesn't add column if it's not there", {
 test_that("data is same regardless of function", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -226,7 +226,7 @@ test_that("data is same regardless of function", {
 test_that("get_genetics- one data type non existant", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)

@@ -3,7 +3,7 @@
 test_that("Test study_id and Profile Param", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   # > expand.grid(study_id = c("correct", "incorrect", "NULL"),
   # profile = c("correct", "incorrect", "NULL"))
@@ -133,7 +133,7 @@ test_that("Test study_id and Profile Param", {
 test_that("Test sample-study pairs df", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -198,7 +198,7 @@ test_that("Test sample-study pairs df", {
 test_that("data is same regardless of function", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -236,7 +236,7 @@ test_that("data is same regardless of function", {
 test_that("Unknown Hugo Symbol returns Unk ", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
   df <- get_cna_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
@@ -255,7 +255,7 @@ test_that("Unknown Hugo Symbol returns Unk ", {
 test_that("Hugo Symbol is added by default", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
   df <- get_genetics_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
@@ -270,7 +270,7 @@ test_that("Hugo Symbol is added by default", {
 test_that("`add_hugo` = FALSE doesn't add column if it's not there", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
   df_hugo_false <- get_genetics_by_sample(sample_id =c("s_C_CAUWT7_P001_d",
@@ -294,7 +294,7 @@ test_that("`add_hugo` = FALSE doesn't add column if it's not there", {
 test_that("`add_hugo= TRUE` warns if column already exists", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
   df <- get_genetics_by_sample(sample_id =c("TCGA-OR-A5J2-01","TCGA-OR-A5J6-01"),
@@ -309,7 +309,7 @@ test_that("`add_hugo= TRUE` warns if column already exists", {
 test_that("Returns same results as pulling by study ID ", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   set_cbioportal_db("public")
   all <- available_samples("blca_plasmacytoid_mskcc_2016")
@@ -334,7 +334,7 @@ test_that("Returns same results as pulling by study ID ", {
 test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
   # get all genes returned for this study
@@ -364,7 +364,7 @@ test_that("test entrez ID to hugo symbol in get_xx_by_sample functions", {
 test_that("pulling with gene ID (entrez or hugo) works with no error", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
   genes = get_entrez_id(c("ERBB2", "PIK3C2G",
@@ -389,7 +389,7 @@ test_that("pulling with gene ID (entrez or hugo) works with no error", {
 test_that("pulling with panel ID works with no error and matches pull by gene", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
   s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
@@ -413,7 +413,7 @@ test_that("pulling with panel ID works with no error and matches pull by gene", 
 test_that("pulling with panel ID works with no error and matches pull by gene", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
   s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
@@ -442,7 +442,7 @@ test_that("pulling with panel ID works with no error and matches pull by gene", 
 test_that("pull by panel ID + gene IDs", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
   s1 <- available_samples("blca_plasmacytoid_mskcc_2016") %>%
@@ -473,7 +473,7 @@ test_that("pull by panel ID + gene IDs", {
 test_that("pull by two panel IDs", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
   set_cbioportal_db("public")
 
   s1 <- c("DS-sig-010-P2", "DS-sig-010-P1", "DS-sig-018-P")
