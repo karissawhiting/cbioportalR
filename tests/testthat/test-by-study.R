@@ -6,7 +6,7 @@
 test_that("With study_id-  works fine", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -37,7 +37,7 @@ test_that("With study_id-  works fine", {
 test_that("Missing study_id - arg throws an error", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -70,7 +70,7 @@ test_that("Missing study_id - arg throws an error", {
 test_that("Incorrect study_id - API error", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -101,7 +101,7 @@ test_that("Incorrect study_id - API error", {
 test_that("Missing study_id - arg defaults to sensible database value, no error", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -121,7 +121,7 @@ test_that("Missing study_id - arg defaults to sensible database value, no error"
 test_that("More than 1 study_id - throws an error", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -151,7 +151,7 @@ test_that("More than 1 study_id - throws an error", {
 test_that("available_samples() works with sample_list_id", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -170,7 +170,7 @@ test_that("available_samples() works with sample_list_id", {
 test_that("Clinical data by study- no attribute, defaults to all", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -183,7 +183,7 @@ test_that("Clinical data by study- no attribute, defaults to all", {
 test_that("Clinical data by study- 1 attribute ", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -203,7 +203,7 @@ test_that("Clinical data by study- 1 attribute ", {
 test_that("Clinical data by study- 2 attributes ", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -223,7 +223,7 @@ test_that("Clinical data by study- 2 attributes ", {
 test_that("Clinical data by study- returns patient and sample level ", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
