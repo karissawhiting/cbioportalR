@@ -49,12 +49,15 @@ cbp_api <- function(url_path,
     print(url)
   }
 
+  auth_header <- if (nzchar(token)) {
+    httr::add_headers(Authorization = paste("Bearer", token))
+  } else {
+    NULL
+  }
+
   if(method == "get") {
 
-    resp <- httr::GET(url,
-      httr::add_headers(Authorization = paste("Bearer ",
-        token,
-        sep = "")))
+    resp <- httr::GET(url, auth_header)
 
   } else {
 
@@ -65,16 +68,13 @@ cbp_api <- function(url_path,
     } else {
       body_format = jsonlite::toJSON(body, pretty = T, auto_unbox = F)
     }
- #   print(body_format)
 
     resp <- httr::POST(url = url,
                       body =  body_format,
                       encode = "json",
                       httr::add_headers(`accept` = 'application/json'),
                       httr::content_type('application/json'),
-      httr::add_headers(Authorization = paste("Bearer ",
-        token,
-        sep = "")))
+                      auth_header)
   }
 
 
