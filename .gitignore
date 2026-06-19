@@ -9,3 +9,4 @@ benchmark/lib
 docs
 /doc/
 /Meta/
+.claude/*

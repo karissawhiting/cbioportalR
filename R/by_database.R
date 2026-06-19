@@ -2,6 +2,7 @@
   if (length(entries) == 0) return(stats::setNames(list(NA_character_), field_name))
   sub_keys  <- names(entries[[1]])
   col_names <- stats::setNames(sub_keys, paste0(field_name, ".", sub_keys))
+
   purrr::map(col_names, function(key) {
     values <- vapply(entries, function(e) {
       val <- e[[key]]
@@ -38,7 +39,7 @@ available_studies <- function(base_url =  NULL) {
 
       flat_cols <- purrr::imap(list_fields, .flatten_list_field)
 
-      tibble::as_tibble(c(study, do.call(c, flat_cols)))
+      tibble::as_tibble(c(study, do.call(c, unname(flat_cols))))
   })
   
   res <- res %>%
@@ -48,9 +49,9 @@ available_studies <- function(base_url =  NULL) {
   # remove extra resource counts fields to create cleaner output
   rc_cols <- names(res)[stringr::str_detect(names(res), "resourceCounts")]
   rc_cols_rm <- setdiff(rc_cols,
-    c("resourceCounts.resourceCounts.resourceId", 
-      "resourceCounts.resourceCounts.displayName", 
-      "resourceCounts.resourceCounts.description"))
+    c("resourceCounts.resourceId",
+      "resourceCounts.displayName",
+      "resourceCounts.description"))
   
   res <- res %>%
     select(-all_of(rc_cols_rm))

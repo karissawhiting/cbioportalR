@@ -19,13 +19,11 @@ get_study_info <- function(study_id = NULL, base_url = NULL) {
 
   url_path <- purrr::map(study_id, ~ paste0("studies/", .x))
 
-  # ** This technically works already with multiple studies but limiting to one for consistency
-  # If multiple studies passed (which they can't be as of now):
-  # have to do as.data.frame() with map_df() to return one row
-  # per study (map_df/bind_rows returns multiple rows per study
-  # as.data.frame deals with nested lists better it seems. Is there a better way?
-  res <- purrr::map_df(url_path, ~ cbp_api(.x, base_url = base_url)$content %>%
-    as.data.frame(.))
+  res <- purrr::map_df(url_path, function(path) {
+    study <- cbp_api(path, base_url = base_url)$content
+    study[purrr::map_lgl(study, ~ is.list(.x) && length(.x) == 0)] <- NA_character_
+    tibble::as_tibble(unlist(study, recursive = FALSE))
+  })
 
   res
 }
