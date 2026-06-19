@@ -21,8 +21,17 @@ get_study_info <- function(study_id = NULL, base_url = NULL) {
 
   res <- purrr::map_df(url_path, function(path) {
     study <- cbp_api(path, base_url = base_url)$content
+
+    # empty lists -> NA so unlist() doesn't choke on them
     study[purrr::map_lgl(study, ~ is.list(.x) && length(.x) == 0)] <- NA_character_
-    tibble::as_tibble(unlist(study, recursive = FALSE))
+
+    # list-of-lists (e.g. resourceCounts: [{...}, {...}]) would expand to
+    # multiple rows via unlist(); flatten them to comma-separated strings instead
+    is_lol <- purrr::map_lgl(study, ~ is.list(.x) && length(.x) > 0 && is.list(.x[[1]]))
+    lol_cols <- purrr::imap(study[is_lol], .flatten_list_field)
+    study[is_lol] <- NULL
+
+    tibble::as_tibble(c(unlist(study, recursive = FALSE), do.call(c, unname(lol_cols))))
   })
 
   res

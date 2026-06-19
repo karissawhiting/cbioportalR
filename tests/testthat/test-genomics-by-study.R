@@ -29,6 +29,21 @@ test_that("get mutations by molecular profile - no error", {
 
 })
 
+
+test_that("get cna by study id - no error", {
+
+  skip_on_cran()
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
+
+  db_test <- "public"
+  set_cbioportal_db(db = db_test)
+  study_id = "mpnst_mskcc"
+
+  expect_error(get_cna_by_study(study_id = study_id), NA)
+  expect_message(get_cna_by_study(study_id = study_id), "Returning*")
+
+})
+
 test_that("get mutations by molecular profile/ study id/ get_genetics all the same", {
 
   skip_on_cran()

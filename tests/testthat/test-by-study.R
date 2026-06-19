@@ -240,3 +240,26 @@ test_that("Clinical data by study- returns patient and sample level ", {
 
 })
 
+
+# * get_study_info() -----------------
+
+test_that("get_study_info() returns one row per study regardless of resourceCounts", {
+
+  skip_on_cran()
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+
+  studies <- available_studies()
+
+  study_with_rc    <- studies$studyId[!is.na(studies$resourceCounts.resourceId)][1]
+  study_without_rc <- studies$studyId[is.na(studies$resourceCounts.resourceId)][1]
+
+  res_with    <- get_study_info(study_id = study_with_rc)
+  res_without <- get_study_info(study_id = study_without_rc)
+
+  expect_equal(nrow(res_with), 1)
+  expect_equal(nrow(res_without), 1)
+
+})
+
