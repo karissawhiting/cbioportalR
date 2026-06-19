@@ -84,31 +84,53 @@
   sample_list_id <- paste0(study_id, "_all")
 
 
-  # MUTATION/CNA query ----------------------------------------------------------------------
+  # MUTATION query ----------------------------------------------------------------------
 
-  # GET: /molecular-profiles/{molecularProfileId}/molecular-data?{sample_list_id}
+  # POST: /molecular-profiles/{molecularProfileId}/mutations/fetch
+  # The GET endpoint now requires entrezGeneId (breaking change), so we use POST.
+  # entrezGeneIds is optional in the POST body, so all mutations are returned.
 
-  if(data_type %in% c("mutation", "cna")) {
+  if(data_type == "mutation") {
 
-    url_list <- paste0(
-      "molecular-profiles/", molecular_profile_id,
-      "/",
-      url_data_type,
-      "?sampleListId=",
-      sample_list_id
+    body <- list(sampleListId = jsonlite::unbox(sample_list_id))
+
+    res <- cbp_api(
+      url_path = paste0("molecular-profiles/", molecular_profile_id, "/mutations/fetch"),
+      method = "post",
+      body = body,
+      base_url = base_url
     )
 
-    df <- purrr::map_dfr(url_list, function(x) {
-      res <- cbp_api(x, base_url = base_url)
-
-      if (length(res$content) > 0) {
-          result <- purrr::map_dfr(res$content, ~ purrr::list_flatten(.x))
-        } else {
-          result <- NULL
-        }
-        result
-      })
+    df <- if (length(res$content) > 0) {
+      purrr::map_dfr(res$content, ~ purrr::list_flatten(.x))
+    } else {
+      NULL
     }
+  }
+
+  # CNA query ----------------------------------------------------------------------
+
+  # POST: /molecular-profiles/{molecularProfileId}/discrete-copy-number/fetch
+  # Switched from GET to POST — the GET endpoint now returns only 1 result
+  # (similar breaking API change as the mutations GET endpoint).
+
+  if(data_type == "cna") {
+
+    body <- list(sampleListId = jsonlite::unbox(sample_list_id))
+
+    res <- cbp_api(
+      url_path = paste0("molecular-profiles/", molecular_profile_id, "/discrete-copy-number/fetch"),
+      method = "post",
+      body = body,
+      base_url = base_url
+    )
+
+    df <- if (length(res$content) > 0) {
+      purrr::map_dfr(res$content, ~ purrr::list_flatten(.x))
+    } else {
+      NULL
+    }
+  }
 
   # FUSIONS/SEGMENTS query ----------------------------------------------------------------------
 
