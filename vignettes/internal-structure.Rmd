@@ -30,7 +30,30 @@ This vignette is meant for those who wish to contribute to {cbioportalR}, or use
 
 - The `cbp_api()` internal function makes all api calls (`GET` and `POST` using {httr} package). All other user-facing or internal functions paste together necessary URLs and query parameters based on the function and its arguments and pass to this.
 - `.get_data_by_study()` and `.get_data_by_sample()` are internal utility functions that work for mutation/cna/fusion data pulls.
-- Functions ending in `*_by_study()` query by study_id, functions ending in `*_by_sample()` query by sample ID, and functions ending in `*_by_patient()` query by patient ID. 
+- Functions ending in `*_by_study()` query by study_id, functions ending in `*_by_sample()` query by sample ID, and functions ending in `*_by_patient()` query by patient ID.
 - There are no specific differences between functions starting with `available_*()` and those starting with `get_*()`. These are named according to how you may use them in your workflow. For example, you would check the `available_profiles()` for your `study_id`  in order to `get_fusions_by_study()`
-    
-    
+
+# API Endpoints for Genomic Data Pulls
+
+The table below lists the cBioPortal API endpoints used for each data type, along with the HTTP method and required parameters. These differ across data types due to differences in how the cBioPortal API is structured.
+
+> **Note:** As of 2025, the `GET` mutations endpoint requires `entrezGeneId` as a mandatory query parameter, making it unsuitable for pulling all mutations without a gene filter. `get_mutations_by_study()` therefore uses the `POST` fetch endpoint, where gene IDs are optional.
+
+## By Study (`*_by_study()`)
+
+| Data Type | HTTP Method | Endpoint | Required Parameters | Optional Parameters |
+|-----------|-------------|----------|--------------------|--------------------|
+| Mutations | `POST` | `/molecular-profiles/{molecularProfileId}/mutations/fetch` | `molecularProfileId` (path) | `sampleListId`, `sampleIds`, `entrezGeneIds` (request body) |
+| CNA | `POST` | `/molecular-profiles/{molecularProfileId}/discrete-copy-number/fetch` | `molecularProfileId` (path) | `sampleListId` (request body) |
+| Fusions / Structural Variants | `POST` | `/structural-variant/fetch` | none | `sampleMolecularIdentifiers`, `molecularProfileIds`, `entrezGeneIds` (request body) |
+| Copy Number Segments | `POST` | `/copy-number-segments/fetch` | none | `chromosome`, `projection` (query); sample/study identifiers (body) |
+
+## By Sample (`*_by_sample()`)
+
+| Data Type | HTTP Method | Endpoint | Required Parameters | Optional Parameters |
+|-----------|-------------|----------|--------------------|--------------------|
+| Mutations | `POST` | `/molecular-profiles/{molecularProfileId}/mutations/fetch` | `molecularProfileId` (path) | `sampleIds`, `entrezGeneIds` (request body) |
+| CNA | `POST` | `/molecular-profiles/{molecularProfileId}/discrete-copy-number/fetch` | `molecularProfileId` (path) | `sampleIds`, `entrezGeneIds` (request body) |
+| Fusions / Structural Variants | `POST` | `/structural-variant/fetch` | none | `sampleMolecularIdentifiers`, `entrezGeneIds` (request body) |
+
+

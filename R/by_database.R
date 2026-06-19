@@ -1,3 +1,17 @@
+.flatten_list_field <- function(entries, field_name) {
+  if (length(entries) == 0) return(stats::setNames(list(NA_character_), field_name))
+  sub_keys  <- names(entries[[1]])
+  col_names <- stats::setNames(sub_keys, paste0(field_name, ".", sub_keys))
+
+  purrr::map(col_names, function(key) {
+    values <- vapply(entries, function(e) {
+      val <- e[[key]]
+      if (is.list(val)) jsonlite::toJSON(val, auto_unbox = TRUE) else as.character(val)
+    }, character(1))
+    dplyr::na_if(paste(values, collapse = ","), "")
+  })
+}
+
 #' Get Metadata on All Available Studies in a Database
 #'
 #' @param base_url The database URL to query.
@@ -15,10 +29,32 @@ available_studies <- function(base_url =  NULL) {
 
   # query ---------------------------------------------------------------------
 
-  url_path <- paste0("studies")
-  res <- cbp_api(url_path, base_url = base_url)$content %>%
-    dplyr::bind_rows(.) %>%
-    select("studyId", everything())
+  url_path <- "studies?projection=SUMMARY"
+  raw_studies <- cbp_api(url_path, base_url = base_url)$content
+
+  res <- purrr::map(raw_studies, function(study) {
+      is_list_field <- purrr::map_lgl(study, is.list)
+      list_fields   <- study[is_list_field]
+      study[is_list_field] <- NULL
+
+      flat_cols <- purrr::imap(list_fields, .flatten_list_field)
+
+      tibble::as_tibble(c(study, do.call(c, unname(flat_cols))))
+  })
+  
+  res <- res %>%
+    dplyr::bind_rows() %>%
+    dplyr::select("studyId", everything())
+
+  # remove extra resource counts fields to create cleaner output
+  rc_cols <- names(res)[stringr::str_detect(names(res), "resourceCounts")]
+  rc_cols_rm <- setdiff(rc_cols,
+    c("resourceCounts.resourceId",
+      "resourceCounts.displayName",
+      "resourceCounts.description"))
+  
+  res <- res %>%
+    select(-all_of(rc_cols_rm))
 
   return(res)
 }

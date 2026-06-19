@@ -2,7 +2,7 @@
 # No Parameter Endpoints -------------------------------------------------------
 test_that("test endpoints- no parameters works without error", {
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -20,10 +20,27 @@ test_that("test endpoints- no parameters works without error", {
 })
 
 
+# available_studies - resourceCounts ------------------------------------------
+test_that("available_studies resourceCounts columns match raw API counts", {
+  skip_on_cran()
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
+
+  set_cbioportal_db("public")
+
+  raw_studies <- cbp_api("studies?projection=SUMMARY")$content
+  res <- available_studies()
+
+  n_raw_with_resource_counts <- sum(purrr::map_lgl(raw_studies, ~ length(.x$resourceCounts) > 0))
+
+  expect_equal(n_raw_with_resource_counts, sum(!is.na(res$resourceCounts.resourceId)))
+  expect_equal(n_raw_with_resource_counts, sum(!is.na(res$resourceCounts.displayName)))
+})
+
+
 # Test lookup_id() -------------------------------------------------------
 test_that("test lookup_id- works with sample without error", {
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -40,7 +57,7 @@ test_that("test lookup_id- works with sample without error", {
 
 test_that("test lookup_id- works with sample or patient error", {
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
@@ -55,7 +72,7 @@ test_that("test lookup_id- works with sample or patient error", {
 test_that("test lookup_id- warns when sample/patient not found", {
 
   skip_on_cran()
-  skip_if(httr::http_error("www.cbioportal.org/api"))
+  skip_if(httr::http_error("https://www.cbioportal.org/api"))
 
   db_test <- "public"
   set_cbioportal_db(db = db_test)
