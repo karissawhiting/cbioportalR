@@ -2,7 +2,8 @@
 
 * Fixed `available_studies()` to handle nested list fields (`resourceCounts`, `cancerType`) returned by the cBioPortal API. The function now uses `projection=SUMMARY` and properly flattens nested fields into dot-notation columns (e.g. `resourceCounts.resourceId`).
 * Fixed `get_study_info()` to handle nested list fields (`cancerType`, `resourceCounts`) that caused a "differing number of rows" error when the API returns an empty `resourceCounts`.
-* Fixed `get_mutations_by_study()` to handle a breaking change in the cBioPortal API where the mutations `GET` endpoint now requires `entrezGeneId` as a mandatory parameter (see [cBioPortal API docs](https://www.cbioportal.org/api/swagger-ui/index.html)). The function now uses the mutations `POST` endpoint instead, which returns all mutations without requiring a gene filter. CNA and fusion/structural variant pulls are unaffected.
+* Fixed `get_mutations_by_study()` to handle a breaking change in the cBioPortal API where the mutations `GET` endpoint now requires `entrezGeneId` as a mandatory parameter (see [cBioPortal API docs](https://www.cbioportal.org/api/swagger-ui/index.html)). The function now uses the mutations `POST` endpoint instead, which returns all mutations without requiring a gene filter.
+* Fixed `get_cna_by_study()` to also use `POST` endpoint instead, which correctly returns all CNA data for the study.
   
 # cbioportalR 1.1.1
 
